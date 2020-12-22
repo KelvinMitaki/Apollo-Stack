@@ -43,6 +43,9 @@ const Header = () => {
             >
               <p>For Sale</p>
               <IoIosArrowDown size="2rem" />
+              <div className={styles.dropdown}>
+                <p>For Rent</p>
+              </div>
             </div>
             <input type="text" />
             <div
@@ -52,6 +55,11 @@ const Header = () => {
             >
               <p>Price</p>
               <IoIosArrowDown size="2rem" />
+              <div className={styles.dropdown}>
+                <p>Lorem, ipsum.</p>
+                <p>Lorem, ipsum.</p>
+                <p>Lorem, ipsum.</p>
+              </div>
             </div>
           </div>
           <div className={styles.lower}>
@@ -61,6 +69,15 @@ const Header = () => {
             >
               <p>category</p>
               <IoIosArrowDown size="2rem" />
+              <div className={styles.dropdown}>
+                <p>Apartment</p>
+                <p>House</p>
+                <p>Townhouse</p>
+                <p>Vacant Land</p>
+                <p>Farm</p>
+                <p>Commercial</p>
+                <p>industrial</p>
+              </div>
             </div>
             <div
               ref={searchDiv}
@@ -69,6 +86,13 @@ const Header = () => {
             >
               <p>Bedrooms</p>
               <IoIosArrowDown size="2rem" />
+              <div className={styles.dropdown}>
+                <p>1+ Bedroom</p>
+                <p>2+ Bedrooms</p>
+                <p>3+ Bedrooms</p>
+                <p>4+ Bedrooms</p>
+                <p>5+ Bedrooms</p>
+              </div>
             </div>
             <div
               ref={searchDiv}
@@ -77,6 +101,13 @@ const Header = () => {
             >
               <p>Bathrooms</p>
               <IoIosArrowDown size="2rem" />
+              <div className={styles.dropdown}>
+                <p>1+ bathroom</p>
+                <p>2+ bathrooms</p>
+                <p>3+ bathrooms</p>
+                <p>4+ bathrooms</p>
+                <p>5+ bathrooms</p>
+              </div>
             </div>
             <button>Search</button>
           </div>
