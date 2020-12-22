@@ -71,10 +71,19 @@
   height: 60%;
   padding: 0 1rem;
   color: #707079;
+  cursor: pointer;
 }
 .upper div,
 .lower div {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.open svg {
+  transition: all 0.2s;
+  transform: rotate(180deg);
+}
+.close svg {
+  transition: all 0.2s;
+  transform: rotate(0deg);
 }
