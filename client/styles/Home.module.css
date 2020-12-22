@@ -9,4 +9,37 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search {
+  height: 20rem;
+  width: 70vw;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+}
+.search_head {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+.search_head div {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+.search_head div:first-child {
+  background-color: rgba(1, 2, 78, 0.76);
+}
+.search_head div:last-child {
+  background-color: rgb(41, 40, 40);
+}
+
+.search_head div > * {
+  padding: 0% 0.4rem;
 }
