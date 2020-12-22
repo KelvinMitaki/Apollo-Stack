@@ -43,3 +43,38 @@
 .search_head div > * {
   padding: 0% 0.4rem;
 }
+.search_body {
+  height: 14rem;
+}
+.search_body p {
+  margin: 0%;
+}
+.upper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 50%;
+  align-items: center;
+  justify-items: center;
+}
+.lower {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 50%;
+  align-items: center;
+  justify-items: center;
+}
+.upper > *,
+.lower > * {
+  background-color: #f2f4f5;
+  border: 1px solid #ebebeb;
+  width: 80%;
+  height: 60%;
+  padding: 0 1rem;
+  color: #707079;
+}
+.upper div,
+.lower div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
