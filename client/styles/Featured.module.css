@@ -32,9 +32,11 @@
   height: 40rem;
   width: 30rem;
   background-color: #fff;
+  padding-left: 2rem;
 }
 .card_header {
   position: relative;
+  color: #fff;
 }
 .image {
   height: 20rem;
@@ -44,6 +46,7 @@
 }
 .avatar {
   display: flex;
+  align-items: center;
   position: absolute;
   bottom: 1rem;
   left: 1rem;
@@ -54,11 +57,25 @@
   border-radius: 50%;
   bottom: 1rem;
   left: 1rem;
+  margin-right: 1rem;
 }
 .f_s {
   position: absolute;
   top: 0;
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2rem;
+  text-transform: uppercase;
+}
+.f_s > * {
+  padding: 0.5rem 1rem;
+}
+.f_s > *:first-child {
+  background-color: #e1481f;
+}
+.f_s > *:last-child {
+  background-color: rgba(1, 2, 78, 0.76);
 }
 .card_footer {
   display: flex;
