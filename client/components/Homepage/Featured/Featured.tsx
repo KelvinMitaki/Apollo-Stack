@@ -39,7 +39,7 @@ const Featured = () => {
         </div>
         <div className={styles.card_footer}>
           <div>
-            <BsArrowsMove />
+            <BsArrowsMove size="3rem" />
             <p>780 sqft</p>
           </div>
           <div>

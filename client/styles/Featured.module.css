@@ -78,5 +78,20 @@
   background-color: rgba(1, 2, 78, 0.76);
 }
 .card_footer {
+  display: grid;
+  grid-template-columns: 3fr repeat(3, 1fr);
+  background-color: #1c1c1c;
+  color: #fff;
+}
+.card_footer div {
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.card_footer div:first-child {
+  justify-self: center;
+}
+.card_footer div:first-child > * {
+  padding: 0 0.5rem;
 }
