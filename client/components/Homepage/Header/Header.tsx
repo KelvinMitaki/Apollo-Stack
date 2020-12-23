@@ -49,8 +49,10 @@ const Header = () => {
                 <p>For Rent</p>
               </div>
             </div>
-            <input type="text" />
-
+            <input
+              type="text"
+              placeholder="Search for a City, Town or Surbub"
+            />
             <Slider />
           </div>
           <div className={styles.lower}>
