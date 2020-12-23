@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import styles from "../styles/Head.module.css";
+import styles from "../../styles/Head.module.css";
 
 interface Props {
   title: string;

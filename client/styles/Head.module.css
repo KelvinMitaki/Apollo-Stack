@@ -4,6 +4,10 @@
   font-size: 1.6rem;
   background-color: #1c1c1c;
   color: #fff;
+  position: fixed;
+  height: 6rem;
+  width: 100vw;
+  top: 0%;
 }
 .logo {
   font-family: "Yellowtail", cursive;

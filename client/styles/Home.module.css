@@ -84,7 +84,7 @@
 .upper input {
   background-color: #fff !important;
   border: 2px solid #ebebeb !important;
-  cursor: default !important;
+  cursor: text !important;
 }
 .lower button {
   background-color: rgba(1, 2, 78, 0.76) !important;
