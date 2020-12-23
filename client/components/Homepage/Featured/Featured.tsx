@@ -10,7 +10,12 @@ const Featured = () => {
         <h3>featured properties</h3>
         <div></div>
       </div>
-      <Card />
+      <div className={styles.card_prt}>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </div>
     </div>
   );
 };
