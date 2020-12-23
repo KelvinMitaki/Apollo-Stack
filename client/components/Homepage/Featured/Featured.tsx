@@ -14,11 +14,20 @@ const Featured = () => {
       </div>
       <div className={styles.card}>
         <div className={styles.card_header}>
-          <img src="/image-2.jpg" alt="" />
-          <p>feature</p>
-          <p>for sale</p>
-          <img src="/image-1.jpeg" alt="" />
-          <h5>Kelvin Mitaki</h5>
+          <div
+            style={{
+              backgroundImage: "url(/image-2.jpg)"
+            }}
+            className={styles.image}
+          />
+          <div className={styles.f_s}>
+            <p>feature</p>
+            <p>for sale</p>
+          </div>
+          <div className={styles.avatar}>
+            <img src="/image-1.jpeg" alt="" />
+            <h5>Kelvin Mitaki</h5>
+          </div>
         </div>
         <div className={styles.card_body}>
           <h4>french villa</h4>

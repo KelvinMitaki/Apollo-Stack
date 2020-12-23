@@ -27,3 +27,39 @@
   text-transform: capitalize;
   margin: 2rem;
 }
+
+.card {
+  height: 40rem;
+  width: 30rem;
+  background-color: #fff;
+}
+.card_header {
+  position: relative;
+}
+.image {
+  height: 20rem;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.avatar {
+  display: flex;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+.avatar img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  bottom: 1rem;
+  left: 1rem;
+}
+.f_s {
+  position: absolute;
+  top: 0;
+  display: flex;
+}
+.card_footer {
+  display: flex;
+}
