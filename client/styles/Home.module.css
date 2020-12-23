@@ -1,6 +1,6 @@
-/* .header {
-  position: relative;
-} */
+.container {
+  overflow: hidden;
+}
 .header {
   height: 100vh;
   width: 100vw;

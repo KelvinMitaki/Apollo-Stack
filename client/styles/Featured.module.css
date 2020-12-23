@@ -111,8 +111,3 @@
 .card_footer div:first-child > * {
   padding: 0 0.5rem;
 }
-.card_prt {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 2rem;
-}

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Featured.module.css";
 import Card from "./Card";
+import Slider from "react-slick";
 
 const Featured = () => {
   return (
@@ -10,12 +11,18 @@ const Featured = () => {
         <h3>featured properties</h3>
         <div></div>
       </div>
-      <div className={styles.card_prt}>
+      <Slider
+        slidesToShow={3}
+        slidesToScroll={1}
+        autoplay
+        autoplaySpeed={5000}
+        dots
+      >
         <Card />
         <Card />
         <Card />
         <Card />
-      </div>
+      </Slider>
     </div>
   );
 };
