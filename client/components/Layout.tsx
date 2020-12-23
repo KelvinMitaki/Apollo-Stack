@@ -12,28 +12,37 @@ const Layout: React.FC<Props> = props => {
       <Head>
         <title>{props.title}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <div className={styles.container}>
         <div>
-          <p>yellow market</p>
+          <div className={styles.logo}>
+            <p>yellow market</p>
+          </div>
         </div>
-        <div>
-          <p>for sale</p>
-        </div>
-        <div>
-          <p>to rent</p>
-        </div>
-        <div>
-          <p>developments</p>
-        </div>
-        <div>
-          <p>repossessed</p>
-        </div>
-        <div>
-          <p>login</p>
-        </div>
-        <div>
-          <p>register</p>
+        <div className={styles.opts}>
+          <div className={styles.opts_item}>
+            <p>for sale</p>
+          </div>
+          <div className={styles.opts_item}>
+            <p>to rent</p>
+          </div>
+          <div className={styles.opts_item}>
+            <p>developments</p>
+          </div>
+          <div className={styles.opts_item}>
+            <p>repossessed</p>
+          </div>
+          <div className={styles.opts_item}>
+            <p>login</p>
+          </div>
+          <div className={styles.opts_item}>
+            <p>register</p>
+          </div>
         </div>
       </div>
     </div>
