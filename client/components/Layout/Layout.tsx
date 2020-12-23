@@ -19,7 +19,7 @@ const Layout: React.FC<Props> = props => {
         />
       </Head>
       <div className={styles.container}>
-        <div>
+        <div className={styles.logo_prt}>
           <div className={styles.logo}>
             <p>yellow market</p>
           </div>

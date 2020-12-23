@@ -7,15 +7,17 @@ import { FaBath, FaBed, FaCarAlt } from "react-icons/fa";
 const Featured = () => {
   return (
     <div className={styles.container}>
-      <p>Listing from our agents</p>
-      <h3>featured properties</h3>
-      <div></div>
+      <div className={styles.header}>
+        <span>Listing from our agents</span>
+        <h3>featured properties</h3>
+        <div></div>
+      </div>
       <div className={styles.card}>
         <div className={styles.card_header}>
-          <img src="/image-2" alt="" />
+          <img src="/image-2.jpg" alt="" />
           <p>feature</p>
           <p>for sale</p>
-          <img src="/image-1" alt="" />
+          <img src="/image-1.jpeg" alt="" />
           <h5>Kelvin Mitaki</h5>
         </div>
         <div className={styles.card_body}>
