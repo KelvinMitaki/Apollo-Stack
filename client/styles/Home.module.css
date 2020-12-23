@@ -51,7 +51,7 @@
 }
 .upper {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 1.3fr;
   height: 50%;
   align-items: center;
   justify-items: center;
@@ -63,7 +63,7 @@
   align-items: center;
   justify-items: center;
 }
-.upper > *,
+.upper > *:not(:nth-child(3)),
 .lower > * {
   background-color: #f2f4f5;
   border: 1px solid #ebebeb;
@@ -119,4 +119,9 @@
 }
 .dropdown p:hover {
   background-color: rgb(204, 204, 204);
+}
+.slider {
+  display: flex;
+  flex-direction: column;
+  color: #707079;
 }

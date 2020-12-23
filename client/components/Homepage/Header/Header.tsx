@@ -50,13 +50,8 @@ const Header = () => {
               </div>
             </div>
             <input type="text" />
-            <div
-              ref={searchDiv}
-              className={name === "price" ? styles.open : styles.close}
-              onClick={e => setName("price")}
-            >
-              <Slider />
-            </div>
+
+            <Slider />
           </div>
           <div className={styles.lower}>
             <div

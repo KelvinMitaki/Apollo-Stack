@@ -1,31 +1,32 @@
 import { Range } from "rc-slider";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import styles from "../../../styles/home.module.css";
 
 const Slider = () => {
   const [num, setNum] = useState({
     lowerBound: 20,
-    upperBound: 40,
-    value: [20, 40]
+    upperBound: 18000000,
+    value: [20, 18000000]
   });
-  const onLowerBoundChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNum({ ...num, lowerBound: parseFloat(e.target.value) });
-  };
-  const onUpperBoundChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNum({ ...num, upperBound: parseFloat(e.target.value) });
-  };
-  return (
-    <div>
-      <label>lowerBound</label>
-      <input type="number" onChange={onLowerBoundChange} />
+  useEffect(() => {
+    setNum({ ...num, lowerBound: num.value[0], upperBound: num.value[1] });
+  }, num.value);
 
-      <label>upperBound</label>
-      <input type="number" onChange={onUpperBoundChange} />
+  return (
+    <div className={styles.slider}>
+      <div>
+        <p>Price: </p>[<p>{num.lowerBound.toLocaleString()}</p> -{" "}
+        <p>{num.upperBound.toLocaleString()}</p>
+        ]Ksh
+      </div>
+
       <Range
         min={0}
-        max={20000}
-        defaultValue={[0, 18000]}
+        max={100000000}
+        defaultValue={num.value}
         allowCross={false}
         style={{ alignItems: "baseline" }}
+        onChange={n => setNum({ ...num, value: n })}
       />
     </div>
   );
