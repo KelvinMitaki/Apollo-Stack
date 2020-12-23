@@ -26,6 +26,15 @@ const Slider = () => {
         defaultValue={num.value}
         allowCross={false}
         style={{ alignItems: "baseline" }}
+        trackStyle={[{ backgroundColor: "rgba(1, 2, 78, 0.76)" }]}
+        handleStyle={[
+          {
+            border: "1px solid rgba(1, 2, 78, 0.76)"
+          },
+          {
+            border: "1px solid rgba(1, 2, 78, 0.76)"
+          }
+        ]}
         onChange={n => setNum({ ...num, value: n })}
       />
     </div>
