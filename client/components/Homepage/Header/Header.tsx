@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "../../styles/home.module.css";
+import styles from "../../../styles/home.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsHouseFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
+import Slider from "./Slider";
 
 const Header = () => {
   const [name, setName] = useState<string>("");
+
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -53,13 +55,7 @@ const Header = () => {
               className={name === "price" ? styles.open : styles.close}
               onClick={e => setName("price")}
             >
-              <p>Price</p>
-              <IoIosArrowDown size="2rem" />
-              <div className={styles.dropdown}>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-                <p>Lorem, ipsum.</p>
-              </div>
+              <Slider />
             </div>
           </div>
           <div className={styles.lower}>
