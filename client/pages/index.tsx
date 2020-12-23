@@ -1,4 +1,5 @@
 import Featured from "../components/Homepage/Featured/Featured";
+import Footer from "../components/Homepage/Footer/Footer";
 import Header from "../components/Homepage/Header/Header";
 import Layout from "../components/Layout/Layout";
 import styles from "../styles/home.module.css";
@@ -9,6 +10,7 @@ export default function Home() {
       <Layout title="Home Page" />
       <Header />
       <Featured />
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.container {
+  height: 40rem;
+  font-size: 1.6rem;
+  background: url(../public/image-1.jpeg) rgba(1, 2, 78, 0.904);
+  color: #fff;
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
