@@ -45,13 +45,38 @@
   position: fixed;
   left: 0;
   font-size: 1.6rem;
-  color: #1c1c1c;
+  color: #fff;
   z-index: 10;
-  width: 40vw;
+  width: 35vw;
   height: 100vh;
-  background-color: #fff;
+  background-color: #1c1c1c;
   transform: translateX(-200%);
   transition: all 0.2s;
+}
+.sidebar_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70%;
+}
+
+.sidebar_header {
+  font-family: "Yellowtail", cursive;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.sidebar_header > *:not(h3) {
+  cursor: pointer;
+}
+.sidebar_body > * {
+  justify-content: start;
+  align-content: center;
+  padding-left: 2rem;
 }
 .sidebar_show.sidebar {
   transform: translateX(0);
