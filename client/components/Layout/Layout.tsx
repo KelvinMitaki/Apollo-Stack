@@ -69,6 +69,7 @@ const Layout: React.FC<Props> = props => {
             <div></div>
           </div>
         </div>
+        <div className={` ${toggle ? styles.toggle : ""}`}></div>
         {toggleRef && <Sidebar toggle={toggle} toggleRef={toggleRef} />}
         {props.children}
         <Footer />

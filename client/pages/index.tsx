@@ -25,7 +25,7 @@ export default function Home() {
     setToggle(tgl);
   };
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container}`}>
       <StylingContext.Provider
         value={{ toggle, setToggle: setSidebarToggle, toggleRef }}
       >

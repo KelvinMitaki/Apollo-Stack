@@ -59,6 +59,15 @@
 .sidebar_hide.sidebar {
   transform: translateX(-200%);
 }
+.toggle {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.2s;
+  z-index: 10;
+  position: fixed;
+  top: 0%;
+}
 @media only screen and (max-width: 1000px) {
   .opts {
     display: none;
@@ -72,8 +81,9 @@
     border: 1px solid #fff;
     border-radius: 3px;
     position: absolute;
-    right: 2rem;
+    right: 5rem;
     top: 1rem;
+    cursor: pointer;
   }
   .sidebar_toggle div {
     position: relative;
