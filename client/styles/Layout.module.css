@@ -41,6 +41,18 @@
 .sidebar_toggle {
   display: none;
 }
+.sidebar {
+  position: fixed;
+  left: 0;
+  font-size: 1.6rem;
+  color: #1c1c1c;
+  z-index: 10;
+  width: 40vw;
+  height: 100vh;
+  background-color: #fff;
+}
+.sidebar_show.sidebar {
+}
 @media only screen and (max-width: 1000px) {
   .opts {
     display: none;
