@@ -9,7 +9,9 @@ interface Props {
 const Sidebar: React.FC<Props> = props => {
   return (
     <div
-      className={`${styles.sidebar} ${props.toggle ? styles.sidebar_show : ""}`}
+      className={`${styles.sidebar} ${
+        props.toggle ? styles.sidebar_show : styles.sidebar_hide
+      }`}
       ref={props.toggleRef}
     >
       Sidebar

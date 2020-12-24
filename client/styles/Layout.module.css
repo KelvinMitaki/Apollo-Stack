@@ -50,8 +50,14 @@
   width: 40vw;
   height: 100vh;
   background-color: #fff;
+  transform: translateX(-200%);
+  transition: all 0.2s;
 }
 .sidebar_show.sidebar {
+  transform: translateX(0);
+}
+.sidebar_hide.sidebar {
+  transform: translateX(-200%);
 }
 @media only screen and (max-width: 1000px) {
   .opts {

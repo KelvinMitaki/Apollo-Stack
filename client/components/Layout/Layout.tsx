@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import styles from "../../styles/Layout.module.css";
 import Footer from "../Homepage/Footer/Footer";
 import Sidebar from "../Homepage/Sidebar/Sidebar";
+import { StylingContext } from "../../Context/StylingContext";
 
 interface Props {
   title: string;
@@ -10,20 +11,7 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = props => {
-  const [toggle, setToggle] = useState<boolean>(false);
-  const toggleRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, []);
-  const handleOutsideClick = (e: Event) => {
-    // @ts-ignore
-    if (toggleRef.current && !toggleRef.current.contains(e.target)) {
-      setToggle(false);
-    }
-  };
+  const { setToggle, toggle, toggleRef } = useContext(StylingContext);
   return (
     <div>
       <Head>
@@ -75,13 +63,13 @@ const Layout: React.FC<Props> = props => {
           </div>
           <div
             className={styles.sidebar_toggle}
-            onClick={() => setToggle(t => !t)}
+            onClick={() => setToggle && setToggle(!toggle)}
             ref={toggleRef}
           >
             <div></div>
           </div>
         </div>
-        <Sidebar toggle={toggle} toggleRef={toggleRef} />
+        {toggleRef && <Sidebar toggle={toggle} toggleRef={toggleRef} />}
         {props.children}
         <Footer />
       </main>
