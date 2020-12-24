@@ -94,3 +94,26 @@
   display: flex;
   justify-content: center;
 }
+@media only screen and (max-width: 1125px) {
+  .properties {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .container {
+    height: max-content;
+  }
+  .body {
+    grid-template-columns: 1fr;
+  }
+  .contact_prt {
+    display: flex;
+    justify-content: center;
+  }
+  .contact_prt > * {
+    text-align: center;
+  }
+  .footer {
+    padding: 2rem 0;
+  }
+}

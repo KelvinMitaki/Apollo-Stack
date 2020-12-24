@@ -15,11 +15,13 @@ const Featured = () => {
     }, []);
   }
   const resize = () => {
-    if (window.innerWidth < 1000 && num !== 2) {
+    if (window.innerWidth < 600 && num !== 2) {
+      setNum(1);
+    }
+    if (window.innerWidth < 1000 && window.innerWidth > 600 && num !== 2) {
       setNum(2);
     }
     if (window.innerWidth > 1000 && num !== 3) {
-      console.log(window.innerWidth);
       setNum(3);
     }
   };
