@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import styles from "../../styles/Head.module.css";
+import styles from "../../styles/Layout.module.css";
 import Footer from "../Homepage/Footer/Footer";
 
 interface Props {
@@ -57,6 +57,9 @@ const Layout: React.FC<Props> = props => {
             <div className={styles.opts_item}>
               <p>register</p>
             </div>
+          </div>
+          <div className={styles.sidebar_toggle}>
+            <div></div>
           </div>
         </div>
         {props.children}

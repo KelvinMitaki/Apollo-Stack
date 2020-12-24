@@ -3,7 +3,7 @@
   background-color: #f2f4f5;
 }
 .header {
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
   background: url(../public/image-3.jpg) rgba(1, 2, 78, 0.76);
   background-blend-mode: multiply;
