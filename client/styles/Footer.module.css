@@ -2,16 +2,43 @@
   height: 40rem;
   font-size: 1.6rem;
   background: url(../public/image-1.jpeg) rgba(1, 2, 78, 0.904);
-  color: #fff;
   background-blend-mode: multiply;
+  color: #aaaab3;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
-.container h3 {
+.container h3,
+.container h4 {
   text-transform: capitalize;
+  color: #fff;
+}
+.subscribe {
+  width: 70%;
+}
+.input {
+  position: relative;
+}
+.input > * {
+  position: absolute;
+}
+.input input {
+  height: 4.5rem;
+  width: 100%;
+}
+.TiLocationArrow {
+  background-color: rgba(1, 2, 78, 0.904);
+  height: calc(4.5rem - 6px);
+  width: 4rem;
+  right: 3px;
+  top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
 }
 .p_title {
   text-align: center;

@@ -10,12 +10,14 @@ import { BsFillClockFill } from "react-icons/bs";
 const Footer = () => {
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.subscribe}>
         <h4>yellow market</h4>
-        <p>Subscribe our newsletter gor get notification about new updates.</p>
-        <div>
-          <input type="text" />
-          <TiLocationArrow />
+        <p>Subscribe our newsletter or get notification about new updates.</p>
+        <div className={styles.input}>
+          <input type="text" placeholder="Enter your email" />
+          <div className={styles.TiLocationArrow}>
+            <TiLocationArrow size="2.5rem" />
+          </div>
         </div>
       </div>
       <div>
