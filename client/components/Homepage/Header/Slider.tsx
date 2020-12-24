@@ -36,6 +36,7 @@ const Slider = () => {
           }
         ]}
         onChange={n => setNum({ ...num, value: n })}
+        className={styles.range}
       />
     </div>
   );

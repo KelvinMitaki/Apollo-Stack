@@ -138,3 +138,20 @@
   flex-direction: column;
   color: #707079;
 }
+@media only screen and (max-width: 1000px) {
+  .search {
+    height: 55rem;
+  }
+  .search_body {
+    height: 45rem;
+  }
+  .upper {
+    grid-template-columns: 1fr;
+  }
+  .lower {
+    grid-template-columns: 1fr;
+  }
+  .range {
+    width: 70vw;
+  }
+}
