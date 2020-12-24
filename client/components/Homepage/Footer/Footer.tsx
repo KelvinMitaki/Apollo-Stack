@@ -25,7 +25,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className={styles.properties_prt}>
           <h3 className={styles.p_title}>property places</h3>
           <div className={styles.properties}>
             <div>

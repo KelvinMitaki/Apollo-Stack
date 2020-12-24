@@ -3,7 +3,7 @@
   background-color: #f2f4f5;
 }
 .header {
-  height: 80vh;
+  height: 90vh;
   width: 100vw;
   background: url(../public/image-3.jpg) rgba(1, 2, 78, 0.76);
   background-blend-mode: multiply;
@@ -13,6 +13,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  top: 6rem;
 }
 .search {
   height: 20rem;
@@ -140,7 +142,7 @@
 }
 @media only screen and (max-width: 1000px) {
   .search {
-    height: 55rem;
+    height: max-content;
   }
   .search_body {
     height: 45rem;
@@ -153,5 +155,15 @@
   }
   .range {
     width: 70vw;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .search_head {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .header {
+    height: max-content;
   }
 }
