@@ -7,8 +7,14 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+.body {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+}
+.body > * {
+  height: calc(90 / 100 * 40rem);
+  overflow: hidden;
 }
 .container h3,
 .container h4 {
@@ -16,10 +22,24 @@
   color: #fff;
 }
 .subscribe {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.subscribe h4 {
+  font-family: "Yellowtail", cursive;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0.5rem 0;
+}
+.sub {
   width: 70%;
 }
 .input {
   position: relative;
+  align-self: stretch;
 }
 .input > * {
   position: absolute;
@@ -62,4 +82,15 @@
 }
 .contact div > * {
   padding: 0% 0.5rem;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+}
+.footer div {
+  border-top: 0.5px solid #aaaab3;
+  width: 80%;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
 }
