@@ -1,9 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import styles from "../../styles/Head.module.css";
+import Footer from "../Homepage/Footer/Footer";
 
 interface Props {
   title: string;
+  children: React.ReactNode;
 }
 
 const Layout: React.FC<Props> = props => {
@@ -29,33 +31,37 @@ const Layout: React.FC<Props> = props => {
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
       </Head>
-      <div className={styles.container}>
-        <div className={styles.logo_prt}>
-          <div className={styles.logo}>
-            <p>yellow market</p>
+      <main>
+        <div className={styles.container}>
+          <div className={styles.logo_prt}>
+            <div className={styles.logo}>
+              <p>yellow market</p>
+            </div>
+          </div>
+          <div className={styles.opts}>
+            <div className={styles.opts_item}>
+              <p>for sale</p>
+            </div>
+            <div className={styles.opts_item}>
+              <p>to rent</p>
+            </div>
+            <div className={styles.opts_item}>
+              <p>developments</p>
+            </div>
+            <div className={styles.opts_item}>
+              <p>repossessed</p>
+            </div>
+            <div className={styles.opts_item}>
+              <p>login</p>
+            </div>
+            <div className={styles.opts_item}>
+              <p>register</p>
+            </div>
           </div>
         </div>
-        <div className={styles.opts}>
-          <div className={styles.opts_item}>
-            <p>for sale</p>
-          </div>
-          <div className={styles.opts_item}>
-            <p>to rent</p>
-          </div>
-          <div className={styles.opts_item}>
-            <p>developments</p>
-          </div>
-          <div className={styles.opts_item}>
-            <p>repossessed</p>
-          </div>
-          <div className={styles.opts_item}>
-            <p>login</p>
-          </div>
-          <div className={styles.opts_item}>
-            <p>register</p>
-          </div>
-        </div>
-      </div>
+        {props.children}
+        <Footer />
+      </main>
     </div>
   );
 };

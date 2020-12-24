@@ -7,10 +7,10 @@ import styles from "../styles/home.module.css";
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Layout title="Home Page" />
-      <Header />
-      <Featured />
-      <Footer />
+      <Layout title="Home Page">
+        <Header />
+        <Featured />
+      </Layout>
     </div>
   );
 }
