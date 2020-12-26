@@ -10,9 +10,9 @@ const Header = () => {
 
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    // document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      // document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
   const handleClickOutside = (e: Event) => {
@@ -44,7 +44,7 @@ const Header = () => {
               }
             >
               <p>For Sale</p>
-              <IoIosArrowDown size="2rem" />
+              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
               <div className={styles.dropdown}>
                 <p>For Rent</p>
               </div>
@@ -61,15 +61,50 @@ const Header = () => {
               onClick={e => setName("category")}
             >
               <p>category</p>
-              <IoIosArrowDown size="2rem" />
+              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
               <div className={styles.dropdown}>
-                <p>Apartment</p>
-                <p>House</p>
-                <p>Townhouse</p>
-                <p>Vacant Land</p>
-                <p>Farm</p>
-                <p>Commercial</p>
-                <p>industrial</p>
+                <div className={styles.dropdown_2}>
+                  <div>
+                    <p>Apartment</p>
+                    <IoIosArrowDown size="2rem" />
+                  </div>
+                  <div className={styles.fun_un}>
+                    <p>furnished</p>
+                    <p>unfurnished</p>
+                  </div>
+                </div>
+                <div className={styles.dropdown_2}>
+                  <div>
+                    <p>House</p>
+                    <IoIosArrowDown size="2rem" />
+                  </div>
+                  <div className={styles.fun_un}>
+                    <p>furnished</p>
+                    <p>unfurnished</p>
+                  </div>
+                </div>
+                <div className={styles.dropdown_2}>
+                  <div>
+                    <p>Townhouse</p>
+                    <IoIosArrowDown size="2rem" />
+                  </div>
+                  <div className={styles.fun_un}>
+                    <p>furnished</p>
+                    <p>unfurnished</p>
+                  </div>
+                </div>
+                <div>
+                  <p>Vacant Land</p>
+                </div>
+                <div>
+                  <p>Farm</p>
+                </div>
+                <div>
+                  <p>Commercial</p>
+                </div>
+                <div>
+                  <p>industrial</p>
+                </div>
               </div>
             </div>
             <div
@@ -78,7 +113,7 @@ const Header = () => {
               onClick={e => setName("bedrooms")}
             >
               <p>Bedrooms</p>
-              <IoIosArrowDown size="2rem" />
+              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
               <div className={styles.dropdown}>
                 <p>1+ Bedroom</p>
                 <p>2+ Bedrooms</p>
@@ -93,7 +128,7 @@ const Header = () => {
               onClick={e => setName("bathrooms")}
             >
               <p>Bathrooms</p>
-              <IoIosArrowDown size="2rem" />
+              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
               <div className={styles.dropdown}>
                 <p>1+ bathroom</p>
                 <p>2+ bathrooms</p>
