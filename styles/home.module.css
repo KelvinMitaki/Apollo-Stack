@@ -159,7 +159,7 @@
 }
 .openSub,
 .closeSub {
-  /* transition: all 0.2s; */
+  transition: all 0.2s;
 }
 .openSub svg {
   transform: rotate(180deg);

@@ -38,7 +38,7 @@ const Layout: React.FC<Props> = props => {
         <div className={styles.container}>
           <div className={styles.logo_prt}>
             <div className={styles.logo}>
-              <p>yellow market</p>
+              <p>property domain</p>
             </div>
           </div>
           <div className={styles.opts}>

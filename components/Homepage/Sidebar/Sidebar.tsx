@@ -18,7 +18,7 @@ const Sidebar: React.FC<Props> = props => {
       ref={props.toggleRef}
     >
       <div className={styles.sidebar_header}>
-        <h3>yellow market</h3>
+        <h3>property domain</h3>
         <MdCancel size="3rem" onClick={() => setToggle && setToggle(false)} />
       </div>
       <div className={styles.sidebar_body}>

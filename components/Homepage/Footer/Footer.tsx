@@ -12,7 +12,7 @@ const Footer = () => {
     <div className={styles.container}>
       <div className={styles.body}>
         <div className={styles.subscribe}>
-          <h4>yellow market</h4>
+          <h4>property domain</h4>
           <div className={styles.sub}>
             <p>
               Subscribe our newsletter or get notification about new updates.
