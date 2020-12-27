@@ -19,7 +19,7 @@ const Search = () => {
     }
   };
   return (
-    <div>
+    <div className={styles.search}>
       {" "}
       <div className={styles.upper}>
         <Dropdown
@@ -67,6 +67,7 @@ const Search = () => {
         />
       </div>
       <RangeComponent className="properties" />
+      <button className={styles.property_btn}>Search Property</button>
     </div>
   );
 };
