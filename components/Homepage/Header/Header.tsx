@@ -3,7 +3,7 @@ import styles from "../../../styles/home.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsHouseFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
-import Slider from "./Slider";
+import RangeComponent from "./RangeComponent";
 import Dropdown from "./Dropdown";
 
 const Header = () => {
@@ -49,7 +49,7 @@ const Header = () => {
               type="text"
               placeholder="Search for a City, Town or Surbub"
             />
-            <Slider />
+            <RangeComponent />
           </div>
           <div className={styles.lower}>
             <div

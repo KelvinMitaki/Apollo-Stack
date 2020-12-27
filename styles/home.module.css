@@ -193,6 +193,9 @@
 .d_search .select {
   margin: 0%;
 }
+.properties > * {
+  display: inline;
+}
 @media only screen and (max-width: 1000px) {
   .search {
     height: max-content;

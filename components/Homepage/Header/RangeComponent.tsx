@@ -2,7 +2,11 @@ import { Range } from "rc-slider";
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles/home.module.css";
 
-const Slider = () => {
+interface Props {
+  className?: string;
+}
+
+const RangeComponent: React.FC<Props> = props => {
   const [num, setNum] = useState({
     lowerBound: 20,
     upperBound: 18000000,
@@ -14,7 +18,7 @@ const Slider = () => {
 
   return (
     <div className={styles.slider}>
-      <div>
+      <div className={props.className ? styles[props.className] : ""}>
         <p>Price: </p>[<p>{num.lowerBound.toLocaleString()}</p> -{" "}
         <p>{num.upperBound.toLocaleString()}</p>
         ]Ksh
@@ -25,7 +29,10 @@ const Slider = () => {
         max={100000000}
         defaultValue={num.value}
         allowCross={false}
-        style={{ alignItems: "baseline" }}
+        style={{
+          alignItems: "baseline",
+          ...(props.className && { width: "80%" })
+        }}
         trackStyle={[{ backgroundColor: "rgba(1, 2, 78, 0.76)" }]}
         handleStyle={[
           {
@@ -42,4 +49,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default RangeComponent;
