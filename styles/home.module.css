@@ -78,6 +78,9 @@
   cursor: pointer;
   position: relative;
 }
+.lower > * {
+  height: 80% !important;
+}
 .upper div,
 .lower div {
   display: flex;
@@ -127,24 +130,55 @@
   align-items: flex-start;
 }
 .dropdown div {
-  padding: 0.5rem 1rem;
   cursor: pointer;
   width: 100%;
   text-transform: capitalize;
 }
+.dropdown p {
+  padding: 1rem;
+}
 .dropdown_2 {
   display: flex;
   flex-direction: column;
+  transition: all 0.2s;
 }
-.fun_un {
-  display: block !important;
-  width: 106% !important;
+.subcats {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start !important;
+  transition: all 0.2s;
 }
-.fun_un > * {
+.subcats > * {
   padding: 0.5rem 0 0.5rem 4rem;
+  width: 100%;
 }
-.fun_un > *:hover {
+.openSub .subcats {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+.openSub,
+.closeSub {
+  /* transition: all 0.2s; */
+}
+.openSub svg {
+  transform: rotate(180deg);
+}
+.closeSub svg {
+  transform: rotate(0deg);
+}
+.closeSub .subcats {
+  transform: translateY(-2rem);
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+}
+.subcats > *:hover,
+.select:hover {
   background-color: rgb(204, 204, 204);
+}
+.select {
+  width: 100%;
 }
 .slider {
   display: flex;
