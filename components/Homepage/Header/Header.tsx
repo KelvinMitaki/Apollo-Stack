@@ -37,7 +37,14 @@ const Header = () => {
         </div>
         <div className={styles.search_body}>
           <div className={styles.upper}>
-            <Dropdown name={name} searchDiv={searchDiv} setName={setName} />
+            <Dropdown
+              name={name}
+              searchDiv={searchDiv}
+              setName={setName}
+              determinant="forSale"
+              title="For Sale"
+              selections={["For Rent"]}
+            />
             <input
               type="text"
               placeholder="Search for a City, Town or Surbub"
