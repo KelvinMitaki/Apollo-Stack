@@ -7,3 +7,13 @@
   position: relative;
   top: 6rem;
 }
+.upper {
+  background-color: #f2f4f5;
+  border: 1px solid #ebebeb;
+  width: 80%;
+  height: 6rem;
+  padding: 0 1rem;
+  color: #707079;
+  cursor: pointer;
+  position: relative;
+}

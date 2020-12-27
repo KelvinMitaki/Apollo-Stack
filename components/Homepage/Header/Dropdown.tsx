@@ -9,14 +9,26 @@ interface Props {
   determinant: string;
   title: string;
   selections: string[];
+  className?: string;
 }
 
 const Dropdown: React.FC<Props> = props => {
-  const { searchDiv, setName, name, determinant, title, selections } = props;
+  const {
+    searchDiv,
+    setName,
+    name,
+    determinant,
+    title,
+    selections,
+    className
+  } = props;
+
   return (
     <div
       ref={searchDiv}
-      className={name === determinant ? styles.open : styles.close}
+      className={`${name === determinant ? styles.open : styles.close} ${
+        className ? styles[className] : ""
+      }`}
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
         setName(determinant)
       }
@@ -25,7 +37,9 @@ const Dropdown: React.FC<Props> = props => {
       <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
       <div className={styles.dropdown}>
         {selections.map(slctn => (
-          <p className={styles.select}>{slctn}</p>
+          <p key={slctn} className={styles.select}>
+            {slctn}
+          </p>
         ))}
       </div>
     </div>
