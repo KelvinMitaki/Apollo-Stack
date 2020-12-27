@@ -4,6 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { BsHouseFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import Slider from "./Slider";
+import Dropdown from "./Dropdown";
 
 const Header = () => {
   const [name, setName] = useState<string>("");
@@ -36,19 +37,7 @@ const Header = () => {
         </div>
         <div className={styles.search_body}>
           <div className={styles.upper}>
-            <div
-              ref={searchDiv}
-              className={name === "forSale" ? styles.open : styles.close}
-              onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-                setName("forSale")
-              }
-            >
-              <p>For Sale</p>
-              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
-              <div className={styles.dropdown}>
-                <p className={styles.select}>For Rent</p>
-              </div>
-            </div>
+            <Dropdown name={name} searchDiv={searchDiv} setName={setName} />
             <input
               type="text"
               placeholder="Search for a City, Town or Surbub"

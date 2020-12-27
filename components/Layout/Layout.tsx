@@ -4,6 +4,7 @@ import styles from "../../styles/Layout.module.css";
 import Footer from "../Homepage/Footer/Footer";
 import Sidebar from "../Homepage/Sidebar/Sidebar";
 import { StylingContext } from "../../Context/StylingContext";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -37,9 +38,13 @@ const Layout: React.FC<Props> = props => {
       <main>
         <div className={styles.container}>
           <div className={styles.logo_prt}>
-            <div className={styles.logo}>
-              <p>property domain</p>
-            </div>
+            <Link href="/">
+              <div className={styles.logo}>
+                <a>
+                  <p>property domain</p>
+                </a>
+              </div>
+            </Link>
           </div>
           <div className={styles.opts}>
             <div className={styles.opts_item}>
