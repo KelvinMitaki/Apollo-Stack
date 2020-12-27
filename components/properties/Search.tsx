@@ -5,6 +5,7 @@ import RangeComponent from "../Homepage/Header/RangeComponent";
 
 const Search = () => {
   const [name, setName] = useState<string>("");
+  const [selected, setSelected] = useState<string>("buy");
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -20,7 +21,20 @@ const Search = () => {
   };
   return (
     <div className={styles.search}>
-      {" "}
+      <div className={styles.buyRent}>
+        <p
+          onClick={() => setSelected("buy")}
+          className={selected === "buy" ? styles.selected : ""}
+        >
+          buy
+        </p>
+        <p
+          onClick={() => setSelected("sell")}
+          className={selected === "sell" ? styles.selected : ""}
+        >
+          rent
+        </p>
+      </div>
       <div className={styles.upper}>
         <Dropdown
           selections={["Nairobi", "Mombasa", "Nakuru", "Kisumu", "Eldoret"]}
