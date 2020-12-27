@@ -6,6 +6,7 @@
   top: 6rem;
   display: grid;
   color: #707079;
+  margin-bottom: 10rem;
 }
 .search {
   display: grid;
@@ -13,6 +14,8 @@
   grid-auto-rows: 7rem;
   align-items: center;
   justify-items: center;
+  position: sticky;
+  top: 5rem;
 }
 .upper {
   background-color: #f2f4f5;
@@ -59,7 +62,12 @@
   display: grid;
   grid-template-columns: 3fr 7fr;
   column-gap: 2rem;
+  padding: 2rem 0;
 }
+.property:not(:last-child) {
+  border-bottom: 1px solid #ebebeb;
+}
+
 .property svg {
   color: rgba(1, 2, 78, 0.76);
 }

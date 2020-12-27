@@ -20,69 +20,71 @@ const Search = () => {
     }
   };
   return (
-    <div className={styles.search}>
-      <h4>Search Property</h4>
-      <div className={styles.buyRent}>
-        <p
-          onClick={() => setSelected("buy")}
-          className={selected === "buy" ? styles.selected : ""}
-        >
-          buy
-        </p>
-        <p
-          onClick={() => setSelected("sell")}
-          className={selected === "sell" ? styles.selected : ""}
-        >
-          rent
-        </p>
+    <div>
+      <div className={styles.search}>
+        <h3>Search Property</h3>
+        <div className={styles.buyRent}>
+          <p
+            onClick={() => setSelected("buy")}
+            className={selected === "buy" ? styles.selected : ""}
+          >
+            buy
+          </p>
+          <p
+            onClick={() => setSelected("sell")}
+            className={selected === "sell" ? styles.selected : ""}
+          >
+            rent
+          </p>
+        </div>
+        <div className={styles.upper}>
+          <Dropdown
+            selections={["Nairobi", "Mombasa", "Nakuru", "Kisumu", "Eldoret"]}
+            determinant="location"
+            name={name}
+            searchDiv={searchDiv}
+            title="Location"
+            setName={setName}
+            className="d_search"
+          />
+        </div>
+        <div className={styles.upper}>
+          <Dropdown
+            selections={[
+              "1+ Bedroom",
+              "2+ Bedrooms",
+              "3+ Bedrooms",
+              "4+ Bedrooms",
+              "5+ Bedrooms"
+            ]}
+            determinant="bedrooms"
+            name={name}
+            searchDiv={searchDiv}
+            title="No of Bedrooms"
+            setName={setName}
+            className="d_search"
+          />
+        </div>
+        <div className={styles.upper}>
+          <Dropdown
+            selections={[
+              "1+ Bathroom",
+              "2+ Bathrooms",
+              "3+ Bathrooms",
+              "4+ Bathrooms",
+              "5+ Bathrooms"
+            ]}
+            determinant="bathrooms"
+            name={name}
+            searchDiv={searchDiv}
+            title="No of Bathrooms"
+            setName={setName}
+            className="d_search"
+          />
+        </div>
+        <RangeComponent className="properties" />
+        <button className={styles.property_btn}>Search Property</button>
       </div>
-      <div className={styles.upper}>
-        <Dropdown
-          selections={["Nairobi", "Mombasa", "Nakuru", "Kisumu", "Eldoret"]}
-          determinant="location"
-          name={name}
-          searchDiv={searchDiv}
-          title="Location"
-          setName={setName}
-          className="d_search"
-        />
-      </div>
-      <div className={styles.upper}>
-        <Dropdown
-          selections={[
-            "1+ Bedroom",
-            "2+ Bedrooms",
-            "3+ Bedrooms",
-            "4+ Bedrooms",
-            "5+ Bedrooms"
-          ]}
-          determinant="bedrooms"
-          name={name}
-          searchDiv={searchDiv}
-          title="No of Bedrooms"
-          setName={setName}
-          className="d_search"
-        />
-      </div>
-      <div className={styles.upper}>
-        <Dropdown
-          selections={[
-            "1+ Bathroom",
-            "2+ Bathrooms",
-            "3+ Bathrooms",
-            "4+ Bathrooms",
-            "5+ Bathrooms"
-          ]}
-          determinant="bathrooms"
-          name={name}
-          searchDiv={searchDiv}
-          title="No of Bathrooms"
-          setName={setName}
-          className="d_search"
-        />
-      </div>
-      <RangeComponent className="properties" />
-      <button className={styles.property_btn}>Search Property</button>
     </div>
   );
 };
