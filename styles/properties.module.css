@@ -7,6 +7,7 @@
   position: relative;
   top: 6rem;
   display: grid;
+  color: #707079;
 }
 .search {
   display: grid;
@@ -39,6 +40,7 @@
   width: 80%;
   background-color: #f2f4f5;
   color: #707079;
+  text-transform: uppercase;
 }
 .buyRent > * {
   width: 100%;

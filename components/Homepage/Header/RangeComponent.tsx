@@ -25,13 +25,13 @@ const RangeComponent: React.FC<Props> = props => {
       </div>
 
       <Range
-        min={0}
+        min={20}
         max={100000000}
         defaultValue={num.value}
         allowCross={false}
         style={{
           alignItems: "baseline",
-          ...(props.className && { width: "80%" })
+          ...(props.className && { width: "100%" })
         }}
         trackStyle={[{ backgroundColor: "rgba(1, 2, 78, 0.76)" }]}
         handleStyle={[

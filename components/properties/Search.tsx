@@ -21,6 +21,7 @@ const Search = () => {
   };
   return (
     <div className={styles.search}>
+      <h4>Search Property</h4>
       <div className={styles.buyRent}>
         <p
           onClick={() => setSelected("buy")}
