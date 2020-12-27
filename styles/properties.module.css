@@ -2,8 +2,6 @@
   font-size: 1.6rem;
   display: grid;
   grid-template-columns: 3fr 7fr;
-  height: 100vh;
-  width: 100vw;
   position: relative;
   top: 6rem;
   display: grid;
@@ -56,4 +54,49 @@
 .selected {
   background-color: rgba(1, 2, 78, 0.76);
   color: #fff;
+}
+.property {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  column-gap: 2rem;
+}
+.property svg {
+  color: rgba(1, 2, 78, 0.76);
+}
+.bg_image {
+  height: 30rem;
+  background-position: center;
+  background-size: cover;
+}
+.fs_tr {
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #fff;
+  padding: 0.5rem 2rem;
+  width: max-content;
+}
+.property span {
+  color: rgba(1, 2, 78, 0.76);
+  font-weight: 700;
+}
+.location {
+  display: flex;
+  align-items: center;
+}
+.location p {
+  padding-left: 1rem;
+}
+.p_footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 9rem;
+}
+.p_footer div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p_footer p {
+  margin: 1rem 0;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import Search from "../../components/properties/Search";
-import Property from "../../components/properties/Property";
+import Property from "../../components/properties/Properties";
 import styles from "../../styles/properties.module.css";
 import Layout from "../../components/Layout/Layout";
 
