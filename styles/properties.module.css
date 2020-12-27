@@ -108,3 +108,23 @@
 .p_footer p {
   margin: 1rem 0;
 }
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+}
+.pagination p {
+  height: 4rem;
+  width: 4rem;
+  border: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.pagination p:hover {
+  cursor: pointer;
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #fff;
+}
