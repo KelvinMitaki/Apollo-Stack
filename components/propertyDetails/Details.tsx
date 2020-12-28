@@ -18,17 +18,29 @@ const Details = () => {
         <img src="/image-1.jpeg" alt="" className={styles.large_img} />
         <img src="/image-2.jpg" alt="" className={styles.large_img} />
         <img src="/image-3.jpg" alt="" className={styles.large_img} />
+        <img src="/image-1.jpeg" alt="" className={styles.large_img} />
+        <img src="/image-2.jpg" alt="" className={styles.large_img} />
+        <img src="/image-3.jpg" alt="" className={styles.large_img} />
+        <img src="/image-1.jpeg" alt="" className={styles.large_img} />
+        <img src="/image-2.jpg" alt="" className={styles.large_img} />
+        <img src="/image-3.jpg" alt="" className={styles.large_img} />
       </Slider>
       <Slider
         asNavFor={nav.nav1 as any}
         ref={slider2}
-        slidesToShow={3}
+        slidesToShow={4}
         swipeToSlide
         focusOnSelect
         dots
         autoplay
         autoplaySpeed={5000}
       >
+        <img src="/image-1.jpeg" alt="" className={styles.small_img} />
+        <img src="/image-2.jpg" alt="" className={styles.small_img} />
+        <img src="/image-3.jpg" alt="" className={styles.small_img} />
+        <img src="/image-1.jpeg" alt="" className={styles.small_img} />
+        <img src="/image-2.jpg" alt="" className={styles.small_img} />
+        <img src="/image-3.jpg" alt="" className={styles.small_img} />
         <img src="/image-1.jpeg" alt="" className={styles.small_img} />
         <img src="/image-2.jpg" alt="" className={styles.small_img} />
         <img src="/image-3.jpg" alt="" className={styles.small_img} />
