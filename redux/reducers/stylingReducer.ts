@@ -1,12 +1,25 @@
 import { AnyAction } from "redux";
+import { SetToggleNavbar } from "../actions";
+import { ActionTypes } from "../types/types";
 
-export interface StylingState {}
+export interface StylingState {
+  toggleNavbar: boolean;
+}
 
-const INITIAL_STATE: StylingState = {};
+const INITIAL_STATE: StylingState = {
+  toggleNavbar: false
+};
+
+type Action = SetToggleNavbar;
 
 export const stylingReducer = (
   state = INITIAL_STATE,
-  action: AnyAction
+  action: Action
 ): StylingState => {
-  return state;
+  switch (action.type) {
+    case ActionTypes.toggleNavbar:
+      return { ...state, toggleNavbar: action.payload };
+    default:
+      return state;
+  }
 };
