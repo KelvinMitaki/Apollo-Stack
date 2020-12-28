@@ -4,7 +4,10 @@ import styles from "../../styles/propertyDetails.module.css";
 const Details = () => {
   return (
     <div>
-      <div style={{ backgroundImage: "url(/image-2.jpg)" }}></div>
+      <div
+        className={styles.bg_image}
+        style={{ backgroundImage: "url(/image-2.jpg)" }}
+      ></div>
       <div>
         <h4>Description</h4>
         <p>
@@ -15,9 +18,11 @@ const Details = () => {
           natus aut nam sapiente minima reiciendis! Temporibus inventore numquam
           molestias delectus repudiandae magnam.
         </p>
-        <div>
-          <h5>Overview</h5>
-          <div>
+        <div className={styles.table}>
+          <div className={styles.table_title}>
+            <h5>Overview</h5>
+          </div>
+          <div className={styles.table_body}>
             <div>
               <p>Price</p>
               <p>Ksh 2,000,000</p>

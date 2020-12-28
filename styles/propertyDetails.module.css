@@ -4,4 +4,57 @@
   display: grid;
   grid-template-columns: 7fr 3fr;
   font-size: 1.6rem;
+  color: #707079;
+  padding: 2rem;
+  margin-bottom: 10rem;
+}
+.container h4,
+.container h5 {
+  color: #333;
+}
+.container h4 {
+  font-size: 2rem;
+}
+.bg_image {
+  height: 40rem;
+  background-position: center;
+  background-size: cover;
+}
+.table {
+  border: 1px solid #ebebeb;
+}
+.table_title {
+  height: 5rem;
+  background-color: #f2f4f5;
+  border: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+}
+.table_title h5 {
+  background-color: rgba(1, 2, 78, 0.76);
+  height: 5rem;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  padding: 0% 1rem;
+  color: #f2f4f5;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.table_body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.table_body div {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 2rem;
+  align-items: center;
+  margin-left: 2rem;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.table_body p:last-child {
+  color: #333;
+  font-weight: 500;
 }
