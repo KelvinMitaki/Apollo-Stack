@@ -5,6 +5,7 @@
   grid-template-columns:
     minmax(0, 7fr)
     minmax(0, 3fr);
+  column-gap: 2rem;
   font-size: 1.6rem;
   color: #707079;
   padding: 2rem;
@@ -61,4 +62,55 @@
 .table_body p:last-child {
   color: #333;
   font-weight: 500;
+}
+.contact {
+  border: 1px solid #ebebeb;
+  background-color: #f2f4f5;
+  padding-bottom: 2rem;
+  position: sticky;
+  top: 5rem;
+}
+.contact_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phone,
+.email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone div,
+.email div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 15vw;
+}
+.contact_header h4 {
+  margin: 0%;
+}
+.input {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input input {
+  height: 4rem;
+  width: 20vw;
+  border: 1px solid #ebebeb;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+.input button {
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #f2f4f5;
+  border: none;
+  height: 4rem;
+  width: 20vw;
+  cursor: pointer;
 }

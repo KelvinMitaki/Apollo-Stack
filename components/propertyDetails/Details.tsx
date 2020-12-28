@@ -14,7 +14,7 @@ const Details = () => {
   }, []);
   return (
     <div>
-      <Slider ref={slider1} asNavFor={nav.nav2 as any}>
+      <Slider ref={slider1} asNavFor={nav.nav2 as any} arrows={false}>
         <img src="/image-1.jpeg" alt="" className={styles.large_img} />
         <img src="/image-2.jpg" alt="" className={styles.large_img} />
         <img src="/image-3.jpg" alt="" className={styles.large_img} />
@@ -34,6 +34,7 @@ const Details = () => {
         dots
         autoplay
         autoplaySpeed={5000}
+        arrows={false}
       >
         <img src="/image-1.jpeg" alt="" className={styles.small_img} />
         <img src="/image-2.jpg" alt="" className={styles.small_img} />
