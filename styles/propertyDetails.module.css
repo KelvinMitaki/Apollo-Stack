@@ -1,0 +1,7 @@
+.container {
+  position: relative;
+  top: 6rem;
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  font-size: 1.6rem;
+}
