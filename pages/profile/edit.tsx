@@ -7,8 +7,10 @@ import styles from "../../styles/profile.module.css";
 const edit = () => {
   return (
     <Layout title="Edit Profile">
-      <ProfileSidebar />
-      <ProfileEdit />
+      <div className={styles.container}>
+        <ProfileSidebar />
+        <ProfileEdit />
+      </div>
     </Layout>
   );
 };
