@@ -1,5 +1,4 @@
-import { AnyAction } from "redux";
-import { SetToggleNavbar } from "../actions";
+import { SetToggleNavbar } from "../../components/Layout/Layout";
 import { ActionTypes } from "../types/types";
 
 export interface StylingState {

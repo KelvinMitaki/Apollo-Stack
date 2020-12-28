@@ -1,25 +1,38 @@
 import React, { useContext } from "react";
 import { MdCancel } from "react-icons/md";
-import { StylingContext } from "../../../Context/StylingContext";
+import { useDispatch, useSelector } from "react-redux";
+import { Redux } from "../../../interfaces/Redux";
+import { ActionTypes } from "../../../redux/types/types";
 import styles from "../../../styles/Layout.module.css";
+import { SetToggleNavbar } from "../../Layout/Layout";
 
 interface Props {
-  toggle: boolean;
   toggleRef: React.RefObject<HTMLDivElement>;
 }
 
 const Sidebar: React.FC<Props> = props => {
-  const { setToggle } = useContext(StylingContext);
+  const dispatch = useDispatch();
+  const toggleNavbar = useSelector(
+    (state: Redux) => state.styling.toggleNavbar
+  );
   return (
     <div
       className={`${styles.sidebar} ${
-        props.toggle ? styles.sidebar_show : styles.sidebar_hide
+        toggleNavbar ? styles.sidebar_show : styles.sidebar_hide
       }`}
       ref={props.toggleRef}
     >
       <div className={styles.sidebar_header}>
         <h3>property domain</h3>
-        <MdCancel size="3rem" onClick={() => setToggle && setToggle(false)} />
+        <MdCancel
+          size="3rem"
+          onClick={() =>
+            dispatch<SetToggleNavbar>({
+              type: ActionTypes.toggleNavbar,
+              payload: false
+            })
+          }
+        />
       </div>
       <div className={styles.sidebar_body}>
         <div className={styles.opts_item}>

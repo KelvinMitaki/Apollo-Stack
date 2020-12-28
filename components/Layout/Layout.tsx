@@ -3,16 +3,40 @@ import Head from "next/head";
 import styles from "../../styles/Layout.module.css";
 import Footer from "../Homepage/Footer/Footer";
 import Sidebar from "../Homepage/Sidebar/Sidebar";
-import { StylingContext } from "../../Context/StylingContext";
 import Link from "next/link";
-
+import { useSelector, useDispatch } from "react-redux";
+import { ActionTypes } from "../../redux/types/types";
+import { Redux } from "../../interfaces/Redux";
+export interface SetToggleNavbar {
+  type: ActionTypes.toggleNavbar;
+  payload: boolean;
+}
 interface Props {
   title: string;
   children: React.ReactNode;
 }
 
 const Layout: React.FC<Props> = props => {
-  const { setToggle, toggle, toggleRef } = useContext(StylingContext);
+  const dispatch = useDispatch();
+  const toggleNavbar = useSelector(
+    (state: Redux) => state.styling.toggleNavbar
+  );
+  const toggleRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+  const handleOutsideClick = (e: Event) => {
+    // @ts-ignore
+    if (toggleRef.current && !toggleRef.current.contains(e.target)) {
+      dispatch<SetToggleNavbar>({
+        type: ActionTypes.toggleNavbar,
+        payload: false
+      });
+    }
+  };
   return (
     <div>
       <Head>
@@ -68,14 +92,19 @@ const Layout: React.FC<Props> = props => {
           </div>
           <div
             className={styles.sidebar_toggle}
-            onClick={() => setToggle && setToggle(!toggle)}
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: !toggleNavbar
+              });
+            }}
             ref={toggleRef}
           >
             <div></div>
           </div>
         </div>
-        <div className={` ${toggle ? styles.toggle : ""}`}></div>
-        {toggleRef && <Sidebar toggle={toggle} toggleRef={toggleRef} />}
+        <div className={` ${toggleNavbar ? styles.toggle : ""}`}></div>
+        <Sidebar toggleRef={toggleRef} />
         {props.children}
         <Footer />
       </main>
