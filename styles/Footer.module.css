@@ -7,6 +7,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  position: fixed;
+  bottom: 0;
 }
 .body {
   display: grid;
