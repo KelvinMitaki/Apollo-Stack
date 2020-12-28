@@ -15,15 +15,60 @@ const Details = () => {
   return (
     <div>
       <Slider ref={slider1} asNavFor={nav.nav2 as any} arrows={false}>
-        <img src="/image-1.jpeg" alt="" className={styles.large_img} />
-        <img src="/image-2.jpg" alt="" className={styles.large_img} />
-        <img src="/image-3.jpg" alt="" className={styles.large_img} />
-        <img src="/image-1.jpeg" alt="" className={styles.large_img} />
-        <img src="/image-2.jpg" alt="" className={styles.large_img} />
-        <img src="/image-3.jpg" alt="" className={styles.large_img} />
-        <img src="/image-1.jpeg" alt="" className={styles.large_img} />
-        <img src="/image-2.jpg" alt="" className={styles.large_img} />
-        <img src="/image-3.jpg" alt="" className={styles.large_img} />
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-1.jpeg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-2.jpg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-1.jpeg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-2.jpg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-1.jpeg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-2.jpg)" }}
+            className={styles.large_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            className={styles.large_img}
+          />
+        </div>
       </Slider>
       <Slider
         asNavFor={nav.nav1 as any}
@@ -36,15 +81,60 @@ const Details = () => {
         autoplaySpeed={5000}
         arrows={false}
       >
-        <img src="/image-1.jpeg" alt="" className={styles.small_img} />
-        <img src="/image-2.jpg" alt="" className={styles.small_img} />
-        <img src="/image-3.jpg" alt="" className={styles.small_img} />
-        <img src="/image-1.jpeg" alt="" className={styles.small_img} />
-        <img src="/image-2.jpg" alt="" className={styles.small_img} />
-        <img src="/image-3.jpg" alt="" className={styles.small_img} />
-        <img src="/image-1.jpeg" alt="" className={styles.small_img} />
-        <img src="/image-2.jpg" alt="" className={styles.small_img} />
-        <img src="/image-3.jpg" alt="" className={styles.small_img} />
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-1.jpeg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-2.jpg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-1.jpeg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-2.jpg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-1.jpeg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-2.jpg)" }}
+            className={styles.small_img}
+          />
+        </div>
+        <div>
+          <div
+            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            className={styles.small_img}
+          />
+        </div>
       </Slider>
       <div>
         <div>

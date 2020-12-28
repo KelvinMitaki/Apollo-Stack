@@ -20,10 +20,14 @@
 }
 .large_img {
   height: 40rem;
+  background-size: cover;
+  background-position: center;
 }
 .small_img {
   height: 10rem;
   cursor: pointer;
+  background-size: cover;
+  background-position: center;
 }
 .table {
   border: 1px solid #ebebeb;
@@ -113,4 +117,34 @@
   height: 4rem;
   width: 20vw;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .table {
+    margin-bottom: 5rem;
+  }
+  .phone div,
+  .email div {
+    width: 15rem;
+  }
+  .input input,
+  .input button {
+    width: 70vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .table_body {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .large_img {
+    height: 20rem;
+  }
+  .small_img {
+    height: 5rem;
+  }
 }
