@@ -108,6 +108,7 @@
 @media only screen and (max-width: 1000px) {
   .container {
     height: max-content;
+    position: relative;
   }
   .body {
     grid-template-columns: 1fr;
