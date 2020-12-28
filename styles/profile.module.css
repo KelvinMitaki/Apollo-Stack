@@ -12,6 +12,10 @@
 .sidebar {
   background-color: #f2f4f5;
   border: 1px solid #ebebeb;
+  height: max-content;
+  position: sticky;
+  top: 6rem;
+  width: 80%;
 }
 
 .sidebar div {
@@ -35,6 +39,7 @@
   background-color: #f2f4f5;
   border: 1px solid #ebebeb;
   padding: 2rem;
+  width: 80%;
 }
 
 .edit form div {
