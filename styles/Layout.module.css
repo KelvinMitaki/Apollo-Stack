@@ -1,3 +1,12 @@
+.main {
+  display: grid;
+  grid-template-rows: max-content;
+  grid-auto-rows: max-content;
+  min-height: 100vh;
+}
+.footer {
+  align-self: flex-end;
+}
 .container {
   display: grid;
   grid-template-columns: 3fr 5fr;

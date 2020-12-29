@@ -51,6 +51,10 @@
   cursor: pointer;
 }
 
+.saved_alerts_mobile {
+  display: none;
+}
+
 @media only screen and (max-width: 1000px) {
   .table {
     width: 95vw;
@@ -61,7 +65,15 @@
     width: 100vw;
     overflow-x: hidden;
   }
-  .container div {
-    transform: translateX(-0.5rem);
+  .container {
+    padding: 0%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .saved_alerts {
+    display: none;
+  }
+  .saved_alerts_mobile {
+    display: grid;
   }
 }

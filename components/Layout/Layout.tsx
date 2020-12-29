@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Head from "next/head";
 import styles from "../../styles/Layout.module.css";
 import Footer from "../Homepage/Footer/Footer";
@@ -59,7 +59,7 @@ const Layout: React.FC<Props> = props => {
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
       </Head>
-      <main>
+      <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.logo_prt}>
             <Link href="/">
@@ -106,7 +106,9 @@ const Layout: React.FC<Props> = props => {
         <div className={` ${toggleNavbar ? styles.toggle : ""}`}></div>
         <Sidebar toggleRef={toggleRef} />
         {props.children}
-        <Footer />
+        <div className={styles.footer}>
+          <Footer />
+        </div>
       </main>
     </div>
   );

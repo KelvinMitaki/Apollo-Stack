@@ -7,8 +7,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  position: fixed;
-  bottom: 0;
 }
 .body {
   display: grid;
@@ -122,11 +120,5 @@
   }
   .footer {
     padding: 2rem 0;
-  }
-}
-@media only screen and (max-height: 1050px) {
-  .container {
-    height: max-content;
-    position: relative;
   }
 }

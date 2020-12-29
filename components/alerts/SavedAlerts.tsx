@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/alerts.module.css";
 import AlertTable from "./AlertTable";
+import MobileAlertTable from "./MobileAlertTable";
 
 const SavedAlerts = () => {
   return (
@@ -28,6 +29,9 @@ const SavedAlerts = () => {
           <AlertTable />
           <AlertTable />
           <AlertTable />
+        </div>
+        <div className={styles.saved_alerts_mobile}>
+          <MobileAlertTable />
         </div>
       </div>
     </div>
