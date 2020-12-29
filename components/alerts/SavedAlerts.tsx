@@ -20,7 +20,7 @@ const SavedAlerts = () => {
             <p>created</p>
           </div>
           <div className={styles.table}>
-            <div>
+            <div className={styles.MdCancel}>
               <MdCancel />
               <p>to rent</p>
             </div>
@@ -30,13 +30,15 @@ const SavedAlerts = () => {
             <p>4+</p>
             <p>any</p>
             <p>apartment</p>
-            <div>
+            <div className={styles.AiOutlineSearch}>
               <p>2020-12-28</p>
-              <AiOutlineSearch />
+              <span>
+                <AiOutlineSearch />
+              </span>
             </div>
           </div>
           <div className={styles.table}>
-            <div>
+            <div className={styles.MdCancel}>
               <MdCancel />
               <p>to rent</p>
             </div>
@@ -46,13 +48,15 @@ const SavedAlerts = () => {
             <p>4+</p>
             <p>any</p>
             <p>apartment</p>
-            <div>
+            <div className={styles.AiOutlineSearch}>
               <p>2020-12-28</p>
-              <AiOutlineSearch />
+              <span>
+                <AiOutlineSearch />
+              </span>
             </div>
           </div>
           <div className={styles.table}>
-            <div>
+            <div className={styles.MdCancel}>
               <MdCancel />
               <p>to rent</p>
             </div>
@@ -62,13 +66,15 @@ const SavedAlerts = () => {
             <p>4+</p>
             <p>any</p>
             <p>apartment</p>
-            <div>
+            <div className={styles.AiOutlineSearch}>
               <p>2020-12-28</p>
-              <AiOutlineSearch />
+              <span>
+                <AiOutlineSearch />
+              </span>
             </div>
           </div>
           <div className={styles.table}>
-            <div>
+            <div className={styles.MdCancel}>
               <MdCancel />
               <p>to rent</p>
             </div>
@@ -78,13 +84,15 @@ const SavedAlerts = () => {
             <p>4+</p>
             <p>any</p>
             <p>apartment</p>
-            <div>
+            <div className={styles.AiOutlineSearch}>
               <p>2020-12-28</p>
-              <AiOutlineSearch />
+              <span>
+                <AiOutlineSearch />
+              </span>
             </div>
           </div>
           <div className={styles.table}>
-            <div>
+            <div className={styles.MdCancel}>
               <MdCancel />
               <p>to rent</p>
             </div>
@@ -94,13 +102,15 @@ const SavedAlerts = () => {
             <p>4+</p>
             <p>any</p>
             <p>apartment</p>
-            <div>
+            <div className={styles.AiOutlineSearch}>
               <p>2020-12-28</p>
-              <AiOutlineSearch />
+              <span>
+                <AiOutlineSearch />
+              </span>
             </div>
           </div>
           <div className={styles.table}>
-            <div>
+            <div className={styles.MdCancel}>
               <MdCancel />
               <p>to rent</p>
             </div>
@@ -110,13 +120,15 @@ const SavedAlerts = () => {
             <p>4+</p>
             <p>any</p>
             <p>apartment</p>
-            <div>
+            <div className={styles.AiOutlineSearch}>
               <p>2020-12-28</p>
-              <AiOutlineSearch />
+              <span>
+                <AiOutlineSearch />
+              </span>
             </div>
           </div>
           <div className={styles.table}>
-            <div>
+            <div className={styles.MdCancel}>
               <MdCancel />
               <p>to rent</p>
             </div>
@@ -126,9 +138,11 @@ const SavedAlerts = () => {
             <p>4+</p>
             <p>any</p>
             <p>apartment</p>
-            <div>
+            <div className={styles.AiOutlineSearch}>
               <p>2020-12-28</p>
-              <AiOutlineSearch />
+              <span>
+                <AiOutlineSearch />
+              </span>
             </div>
           </div>
         </div>
