@@ -38,6 +38,12 @@ const MobileAlertTable = () => {
         <p>created:</p>
         <p>2020-12-28</p>
       </div>
+      <div className={styles.remove}>
+        <MdCancel size="3rem" />
+      </div>
+      <div className={styles.search}>
+        <AiOutlineSearch size="3rem" />
+      </div>
     </div>
   );
 };
