@@ -1,4 +1,5 @@
 import React from "react";
+import SavedAlerts from "../../components/alerts/SavedAlerts";
 import HouseFilter from "../../components/Homepage/Header/HouseFilter";
 import Layout from "../../components/Layout/Layout";
 import ProfileSidebar from "../../components/profileEdit/ProfileSidebar";
@@ -11,6 +12,7 @@ const alerts = () => {
         <ProfileSidebar />
         <div>
           <HouseFilter alternate btnContent="Add Alert" width="60vw" />
+          <SavedAlerts />
         </div>
       </div>
     </Layout>
