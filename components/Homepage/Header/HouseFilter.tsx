@@ -29,7 +29,12 @@ const HouseFilter: React.FC<Props> = props => {
     }
   };
   return (
-    <div className={styles.search} style={{ width: props.width }}>
+    <div
+      className={`${styles.search} ${
+        props.alternate ? styles.search_alternate : ""
+      }`}
+      style={{ width: props.width }}
+    >
       {props.alternate ? (
         <div className={styles.alternate}>
           <AiFillAlert size="3rem" />

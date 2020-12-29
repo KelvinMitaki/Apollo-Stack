@@ -32,8 +32,7 @@ const RangeComponent: React.FC<Props> = props => {
         allowCross={false}
         style={{
           alignItems: "baseline",
-          ...(props.className && { width: "100%" }),
-          ...(props.alternate && { width: "50vw" })
+          ...(props.className && { width: "100%" })
         }}
         trackStyle={[{ backgroundColor: "rgba(1, 2, 78, 0.76)" }]}
         handleStyle={[

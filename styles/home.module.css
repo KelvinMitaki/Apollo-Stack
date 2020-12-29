@@ -22,6 +22,9 @@
   border-radius: 0.5rem;
   font-size: 1.6rem;
 }
+.search_alternate.search {
+  border: 1px solid #ebebeb;
+}
 .search_head {
   display: grid;
   grid-template-columns: max-content 1fr;
@@ -222,6 +225,9 @@
   }
   .range {
     width: 70vw;
+  }
+  .search_alternate .range {
+    width: 50vw;
   }
 }
 @media only screen and (max-width: 500px) {
