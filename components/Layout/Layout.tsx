@@ -7,10 +7,16 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { ActionTypes } from "../../redux/types/types";
 import { Redux } from "../../interfaces/Redux";
+import RegisterLoginModal from "../RegisterLogin/RegisterLoginModal";
 export interface SetToggleNavbar {
   type: ActionTypes.toggleNavbar;
   payload: boolean;
 }
+export interface SetToggleLogin {
+  type: ActionTypes.toggleLogin;
+  payload: boolean;
+}
+
 interface Props {
   title: string;
   children: React.ReactNode;
@@ -83,10 +89,34 @@ const Layout: React.FC<Props> = props => {
             <div className={styles.opts_item}>
               <p>repossessed</p>
             </div>
-            <div className={styles.opts_item}>
+            <div
+              className={styles.opts_item}
+              onClick={() => {
+                dispatch<SetToggleNavbar>({
+                  type: ActionTypes.toggleNavbar,
+                  payload: false
+                });
+                dispatch<SetToggleLogin>({
+                  type: ActionTypes.toggleLogin,
+                  payload: true
+                });
+              }}
+            >
               <p>login</p>
             </div>
-            <div className={styles.opts_item}>
+            <div
+              className={styles.opts_item}
+              onClick={() => {
+                dispatch<SetToggleNavbar>({
+                  type: ActionTypes.toggleNavbar,
+                  payload: false
+                });
+                dispatch<SetToggleLogin>({
+                  type: ActionTypes.toggleLogin,
+                  payload: true
+                });
+              }}
+            >
               <p>register</p>
             </div>
           </div>
@@ -105,6 +135,7 @@ const Layout: React.FC<Props> = props => {
         </div>
         <div className={` ${toggleNavbar ? styles.toggle : ""}`}></div>
         <Sidebar toggleRef={toggleRef} />
+        <RegisterLoginModal />
         {props.children}
         <div className={styles.footer}>
           <Footer />

@@ -1,0 +1,14 @@
+.container {
+  position: fixed !important;
+  top: 0%;
+  transform: translate(30vw, -100vw);
+  height: 75vh;
+  width: 50vw;
+  transition: all 0.2s;
+  z-index: 1000;
+  position: relative;
+  background-color: black;
+}
+.container__show {
+  transform: translate(30vw, 10vh);
+}
