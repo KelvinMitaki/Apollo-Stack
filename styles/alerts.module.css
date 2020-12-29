@@ -24,6 +24,7 @@
   border: 1px solid #ebebeb;
   width: 70vw;
 }
+
 .table div {
   display: flex;
   align-items: center;
@@ -53,5 +54,14 @@
 @media only screen and (max-width: 1000px) {
   .table {
     width: 95vw;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .table {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  .container div {
+    transform: translateX(-0.5rem);
   }
 }
