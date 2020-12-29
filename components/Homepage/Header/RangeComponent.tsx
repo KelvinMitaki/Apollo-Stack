@@ -4,6 +4,7 @@ import styles from "../../../styles/home.module.css";
 
 interface Props {
   className?: string;
+  alternate?: boolean;
 }
 
 const RangeComponent: React.FC<Props> = props => {
@@ -31,7 +32,8 @@ const RangeComponent: React.FC<Props> = props => {
         allowCross={false}
         style={{
           alignItems: "baseline",
-          ...(props.className && { width: "100%" })
+          ...(props.className && { width: "100%" }),
+          ...(props.alternate && { width: "50vw" })
         }}
         trackStyle={[{ backgroundColor: "rgba(1, 2, 78, 0.76)" }]}
         handleStyle={[

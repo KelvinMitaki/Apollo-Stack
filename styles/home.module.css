@@ -105,6 +105,18 @@
   transition: all 0.2s;
   transform: rotate(0deg);
 }
+.alternate {
+  display: flex;
+  align-items: center;
+  background-color: rgba(1, 2, 78, 0.76);
+}
+.alternate > * {
+  padding-left: 2rem;
+  color: #f2f4f5;
+}
+.alternate svg {
+  width: 4rem;
+}
 .dropdown {
   position: absolute;
   top: 100%;

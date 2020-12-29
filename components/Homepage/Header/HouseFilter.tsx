@@ -58,7 +58,7 @@ const HouseFilter: React.FC<Props> = props => {
             selections={["To Rent"]}
           />
           <input type="text" placeholder="Search for a City, Town or Surbub" />
-          <RangeComponent />
+          <RangeComponent {...props} />
         </div>
         <div className={styles.lower}>
           <div
