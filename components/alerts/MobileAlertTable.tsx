@@ -5,34 +5,38 @@ import styles from "../../styles/alerts.module.css";
 
 const MobileAlertTable = () => {
   return (
-    <div>
+    <div className={styles.MobileAlertTable}>
       <div>
-        <p>type</p>
-        <p>area</p>
-        <p>min price</p>
-        <p>max price</p>
-        <p>beds</p>
-        <p>baths</p>
-        <p>property type</p>
-        <p>created</p>
+        <p>type:</p>
+        <p>to rent</p>
       </div>
       <div>
-        <div className={styles.MdCancel}>
-          <MdCancel />
-          <p>to rent</p>
-        </div>
+        <p>area:</p>
         <p>karen nairobi</p>
+      </div>
+      <div>
+        <p>min price:</p>
         <p>ksh 150,000,000</p>
+      </div>
+      <div>
+        <p>max price:</p>
         <p>ksh 200,000,000</p>
+      </div>
+      <div>
+        <p>beds:</p>
         <p>4+</p>
+      </div>
+      <div>
+        <p>baths:</p>
         <p>any</p>
+      </div>
+      <div>
+        <p>property type:</p>
         <p>apartment</p>
-        <div className={styles.AiOutlineSearch}>
-          <p>2020-12-28</p>
-          <span>
-            <AiOutlineSearch />
-          </span>
-        </div>
+      </div>
+      <div>
+        <p>created:</p>
+        <p>2020-12-28</p>
       </div>
     </div>
   );

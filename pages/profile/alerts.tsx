@@ -17,7 +17,7 @@ const alerts = () => {
     }, []);
   }
   const resize = () => {
-    if (window.innerWidth < 1000 && window.innerWidth > 600 && num !== 95) {
+    if (window.innerWidth < 1000 && num !== 95) {
       setNum(95);
     }
     if (window.innerWidth > 1000 && num !== 60) {
