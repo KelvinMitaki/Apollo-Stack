@@ -124,3 +124,9 @@
     padding: 2rem 0;
   }
 }
+@media only screen and (max-height: 1050px) {
+  .container {
+    height: max-content;
+    position: relative;
+  }
+}
