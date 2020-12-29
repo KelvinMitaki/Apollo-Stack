@@ -32,6 +32,14 @@ const SavedAlerts = () => {
         </div>
         <div className={styles.saved_alerts_mobile}>
           <MobileAlertTable />
+          <MobileAlertTable />
+          <MobileAlertTable />
+          <MobileAlertTable />
+          <MobileAlertTable />
+          <MobileAlertTable />
+          <MobileAlertTable />
+          <MobileAlertTable />
+          <MobileAlertTable />
         </div>
       </div>
     </div>
