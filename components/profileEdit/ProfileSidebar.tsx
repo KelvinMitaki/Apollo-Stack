@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiFillAlert } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { MdFavorite } from "react-icons/md";
-import styles from "../../styles/profile.module.css";
+import styles from "../../styles/edit.module.css";
 import Router from "next/router";
 import { RiAdminFill } from "react-icons/ri";
 import { IoMdLogOut } from "react-icons/io";
@@ -26,7 +26,7 @@ const ProfileSidebar = () => {
       </Link>
       <Link href="/profile/alerts">
         <a>
-          <div>
+          <div className={active === "/profile/alerts" ? styles.active : ""}>
             <AiFillAlert />
             <p>Alerts</p>
           </div>
@@ -34,7 +34,7 @@ const ProfileSidebar = () => {
       </Link>
       <Link href="/profile/favorites">
         <a>
-          <div>
+          <div className={active === "/profile/favorites" ? styles.active : ""}>
             <MdFavorite />
             <p>Favorites</p>
           </div>
@@ -42,7 +42,7 @@ const ProfileSidebar = () => {
       </Link>
       <Link href="/profile/agent">
         <a>
-          <div>
+          <div className={active === "/profile/agent" ? styles.active : ""}>
             <RiAdminFill />
             <p>Agent Zone</p>
           </div>

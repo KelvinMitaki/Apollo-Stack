@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../styles/profile.module.css";
+import styles from "../../styles/edit.module.css";
 
 const ProfileEdit = () => {
   const [input, setInput] = useState({
