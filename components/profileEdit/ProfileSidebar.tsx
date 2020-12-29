@@ -4,6 +4,8 @@ import { FiEdit } from "react-icons/fi";
 import { MdFavorite } from "react-icons/md";
 import styles from "../../styles/profile.module.css";
 import Router from "next/router";
+import { RiAdminFill } from "react-icons/ri";
+import { IoMdLogOut } from "react-icons/io";
 
 const ProfileSidebar = () => {
   const [active, setActive] = useState<string>("");
@@ -24,6 +26,14 @@ const ProfileSidebar = () => {
       <div>
         <MdFavorite />
         <p>Favorites</p>
+      </div>
+      <div>
+        <RiAdminFill />
+        <p>Agent Zone</p>
+      </div>
+      <div>
+        <IoMdLogOut />
+        <p>Logout</p>
       </div>
     </div>
   );

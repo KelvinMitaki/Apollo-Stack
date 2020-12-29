@@ -79,7 +79,7 @@
   position: relative;
 }
 .lower > * {
-  height: 80% !important;
+  height: 4.3rem !important;
 }
 .upper div,
 .lower div {
