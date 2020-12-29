@@ -9,6 +9,7 @@ import RangeComponent from "./RangeComponent";
 interface Props {
   alternate: boolean;
   btnContent: string;
+  width: string | "fit-content";
 }
 
 const HouseFilter: React.FC<Props> = props => {
@@ -28,7 +29,7 @@ const HouseFilter: React.FC<Props> = props => {
     }
   };
   return (
-    <div className={styles.search}>
+    <div className={styles.search} style={{ width: props.width }}>
       {props.alternate ? (
         <div className={styles.alternate}>
           <AiFillAlert size="3rem" />

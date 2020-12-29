@@ -5,7 +5,7 @@ import HouseFilter from "./HouseFilter";
 const Header = () => {
   return (
     <div className={styles.header}>
-      <HouseFilter alternate={false} btnContent="Search" />
+      <HouseFilter alternate={false} btnContent="Search" width="90vw" />
     </div>
   );
 };
