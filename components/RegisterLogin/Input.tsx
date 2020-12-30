@@ -12,7 +12,7 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
   return (
     <div
       className={`${styles.input} ${focused ? styles.focused : ""} ${
-        props.meta.error ? styles.error : ""
+        props.meta.error && props.meta.touched ? styles.error : ""
       }`}
     >
       <label>{props.label}</label>
@@ -33,7 +33,7 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
           setFocused(true);
         }}
       />
-      {props.meta.error && <div>{props.meta.error}</div>}
+      {props.meta.error && props.meta.touched && <div>{props.meta.error}</div>}
     </div>
   );
 };

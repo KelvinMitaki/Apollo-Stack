@@ -51,6 +51,7 @@
 .input {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 /* background-color: #f2f4f5;
@@ -59,7 +60,6 @@ border: 1px solid #ebebeb; */
   border: none;
   border-bottom: 1px solid #707079;
   padding: 1rem 0 4px 0;
-  margin-bottom: 2rem;
   transition: all 0.2s;
   background-color: #f2f4f5;
 }
@@ -95,14 +95,14 @@ border: 1px solid #ebebeb; */
   transform: translateY(5rem);
 }
 .register {
-  transform: translateY(-18rem) scale(0);
+  transform: translateY(-13rem) scale(0);
   opacity: 0;
   visibility: hidden;
 }
 .register_active.register {
   opacity: 1;
   visibility: visible;
-  transform: translateY(-18rem) scale(1);
+  transform: translateY(-13rem) scale(1);
 }
 .register_active.login {
   opacity: 0;
