@@ -15,7 +15,7 @@ export interface ToggleLoginHeader {
 const RegisterLoginModal = () => {
   const dispatch = useDispatch();
   const loginRef = useRef<HTMLDivElement>(null);
-  const toggleLogin = useSelector((state: Redux) => state.styling.toggleLogin);
+  const styling = useSelector((state: Redux) => state.styling);
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
@@ -34,7 +34,7 @@ const RegisterLoginModal = () => {
   return (
     <div
       className={`${styles.container} ${
-        toggleLogin ? styles.container__show : ""
+        styling.toggleLogin ? styles.container__show : ""
       }`}
     >
       <div ref={loginRef} className={styles.body}>
@@ -46,6 +46,7 @@ const RegisterLoginModal = () => {
                 payload: true
               })
             }
+            className={styling.toggleLoginHeader ? styles.active : ""}
           >
             login
           </p>
@@ -56,6 +57,7 @@ const RegisterLoginModal = () => {
                 payload: false
               })
             }
+            className={!styling.toggleLoginHeader ? styles.active : ""}
           >
             register
           </p>

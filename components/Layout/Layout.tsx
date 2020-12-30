@@ -7,7 +7,9 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { ActionTypes } from "../../redux/types/types";
 import { Redux } from "../../interfaces/Redux";
-import RegisterLoginModal from "../RegisterLogin/RegisterLoginModal";
+import RegisterLoginModal, {
+  ToggleLoginHeader
+} from "../RegisterLogin/RegisterLoginModal";
 export interface SetToggleNavbar {
   type: ActionTypes.toggleNavbar;
   payload: boolean;
@@ -100,6 +102,10 @@ const Layout: React.FC<Props> = props => {
                   type: ActionTypes.toggleLogin,
                   payload: true
                 });
+                dispatch<ToggleLoginHeader>({
+                  type: ActionTypes.toggleLoginHeader,
+                  payload: true
+                });
               }}
             >
               <p>login</p>
@@ -114,6 +120,10 @@ const Layout: React.FC<Props> = props => {
                 dispatch<SetToggleLogin>({
                   type: ActionTypes.toggleLogin,
                   payload: true
+                });
+                dispatch<ToggleLoginHeader>({
+                  type: ActionTypes.toggleLoginHeader,
+                  payload: false
                 });
               }}
             >
