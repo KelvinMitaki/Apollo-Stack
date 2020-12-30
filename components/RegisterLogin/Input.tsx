@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { WrappedFieldProps } from "redux-form";
 import styles from "../../styles/registerLoginModal.module.css";
 
@@ -8,10 +8,27 @@ interface Props {
 }
 
 const Input: React.FC<WrappedFieldProps & Props> = props => {
+  const [focused, setFocused] = useState<boolean>(false);
   return (
-    <div>
+    <div className={`${styles.input} ${focused ? styles.focused : ""}`}>
       <label>{props.label}</label>
-      <input type={props.type} {...props.input} />
+      <input
+        type={props.type}
+        {...props.input}
+        onBlur={e => {
+          props.input.onBlur(e);
+          if (
+            typeof props.input.value === "string" &&
+            props.input.value.length === 0
+          ) {
+            setFocused(false);
+          }
+        }}
+        onFocus={e => {
+          props.input.onFocus(e);
+          setFocused(true);
+        }}
+      />
       {props.meta.error && <div>{props.meta.error}</div>}
     </div>
   );

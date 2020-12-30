@@ -25,3 +25,28 @@
 .container__show .body {
   transform: translate(30vw, 10vh);
 }
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+/* background-color: #f2f4f5;
+border: 1px solid #ebebeb; */
+.input input {
+  border: none;
+  border-bottom: 1px solid #707079;
+  padding: 1rem 0 0 0;
+  margin-bottom: 2rem;
+}
+
+.input label {
+  transform: translateY(3rem);
+  transition: all 0.2s;
+  width: fit-content;
+  cursor: text;
+}
+
+.focused label {
+  transform: translateY(1rem);
+}
