@@ -16,6 +16,7 @@
   height: 75vh;
   width: 50vw;
   transition: all 0.2s;
+  font-size: 1.6rem;
 }
 .container__show.container {
   opacity: 1;
