@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
@@ -39,6 +40,9 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
         <button type="submit" disabled={props.invalid}>
           register
         </button>
+      </div>
+      <div className={styles.agnt_link}>
+        <p>or register as an Agent</p>
       </div>
     </div>
   );

@@ -146,7 +146,15 @@ border: 1px solid #ebebeb; */
   background-color: rgba(1, 2, 78, 0.5);
   cursor: not-allowed;
 }
-
+.agnt_link {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  color: rgba(1, 2, 78, 0.76);
+  text-decoration: underline;
+  cursor: pointer;
+  font-style: italic;
+}
 @media only screen and (max-width: 1000px) {
   .body {
     width: 70vw;
