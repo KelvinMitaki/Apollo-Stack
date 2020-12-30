@@ -89,4 +89,23 @@ border: 1px solid #ebebeb; */
 .login,
 .register {
   padding: 2rem;
+  transition: all 0.2s;
+}
+.login {
+  transform: translateY(5rem);
+}
+.register {
+  transform: translateY(-18rem) scale(0);
+  opacity: 0;
+  visibility: hidden;
+}
+.register_active.register {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-18rem) scale(1);
+}
+.register_active.login {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
 }

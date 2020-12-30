@@ -1,11 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Field, reduxForm } from "redux-form";
+import { Redux } from "../../interfaces/Redux";
 import styles from "../../styles/registerLoginModal.module.css";
 import Input from "./Input";
 
 const Register = () => {
+  const styling = useSelector((state: Redux) => state.styling);
   return (
-    <div className={styles.register}>
+    <div
+      className={`${styles.register} ${
+        !styling.toggleLoginHeader ? styles.register_active : ""
+      }`}
+    >
       <Field component={Input} label="Full Name" type="text" name="fullName" />
       <Field component={Input} label="Email" type="text" name="email" />
       <Field
