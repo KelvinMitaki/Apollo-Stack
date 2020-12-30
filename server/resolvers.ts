@@ -1,12 +1,12 @@
 const users = [
   {
-    _id: Math.random(),
+    _id: Math.round(Math.random() * 100000000).toString(),
     fullName: "Kate Chopin",
     email: "kate@gmail.com",
     password: "kevinmitaki"
   },
   {
-    _id: Math.random(),
+    _id: Math.round(Math.random() * 100000000).toString(),
     fullName: "Paul Auster",
     email: "paul@gmail.com",
     password: "kevinmitaki"
@@ -15,6 +15,8 @@ const users = [
 
 export const resolvers = {
   Query: {
-    users: () => users
+    users(prt: any, args: any, ctx: any, info: any) {
+      return users;
+    }
   }
 };
