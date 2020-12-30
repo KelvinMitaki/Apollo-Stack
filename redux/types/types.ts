@@ -1,4 +1,5 @@
 export enum ActionTypes {
   toggleNavbar,
-  toggleLogin
+  toggleLogin,
+  toggleLoginHeader
 }

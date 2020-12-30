@@ -18,6 +18,11 @@
   transition: all 0.2s;
   font-size: 1.6rem;
 }
+.header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
 .container__show.container {
   opacity: 1;
   visibility: visible;

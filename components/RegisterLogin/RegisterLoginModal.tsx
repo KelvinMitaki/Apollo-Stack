@@ -7,6 +7,11 @@ import { SetToggleLogin } from "../Layout/Layout";
 import Login from "./Login";
 import Register from "./Register";
 
+export interface ToggleLoginHeader {
+  type: ActionTypes.toggleLoginHeader;
+  payload: boolean;
+}
+
 const RegisterLoginModal = () => {
   const dispatch = useDispatch();
   const loginRef = useRef<HTMLDivElement>(null);
@@ -33,6 +38,28 @@ const RegisterLoginModal = () => {
       }`}
     >
       <div ref={loginRef} className={styles.body}>
+        <div className={styles.header}>
+          <p
+            onClick={() =>
+              dispatch<ToggleLoginHeader>({
+                type: ActionTypes.toggleLoginHeader,
+                payload: true
+              })
+            }
+          >
+            login
+          </p>
+          <p
+            onClick={() =>
+              dispatch<ToggleLoginHeader>({
+                type: ActionTypes.toggleLoginHeader,
+                payload: false
+              })
+            }
+          >
+            register
+          </p>
+        </div>
         <Login />
         <Register />
       </div>
