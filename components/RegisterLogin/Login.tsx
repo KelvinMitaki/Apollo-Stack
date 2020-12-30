@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
@@ -13,6 +13,7 @@ interface FormValues {
 
 const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
+
   return (
     <div
       className={`${styles.login} ${

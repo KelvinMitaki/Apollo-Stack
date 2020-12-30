@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redux } from "../../../interfaces/Redux";
 import { ActionTypes } from "../../../redux/types/types";
 import styles from "../../../styles/Layout.module.css";
-import { SetToggleNavbar } from "../../Layout/Layout";
+import { SetToggleLogin, SetToggleNavbar } from "../../Layout/Layout";
+import { ToggleLoginHeader } from "../../RegisterLogin/RegisterLoginModal";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -47,10 +48,42 @@ const Sidebar: React.FC<Props> = props => {
         <div className={styles.opts_item}>
           <p>repossessed</p>
         </div>
-        <div className={styles.opts_item}>
+        <div
+          className={styles.opts_item}
+          onClick={() => {
+            dispatch<SetToggleNavbar>({
+              type: ActionTypes.toggleNavbar,
+              payload: false
+            });
+            dispatch<SetToggleLogin>({
+              type: ActionTypes.toggleLogin,
+              payload: true
+            });
+            dispatch<ToggleLoginHeader>({
+              type: ActionTypes.toggleLoginHeader,
+              payload: true
+            });
+          }}
+        >
           <p>login</p>
         </div>
-        <div className={styles.opts_item}>
+        <div
+          className={styles.opts_item}
+          onClick={() => {
+            dispatch<SetToggleNavbar>({
+              type: ActionTypes.toggleNavbar,
+              payload: false
+            });
+            dispatch<SetToggleLogin>({
+              type: ActionTypes.toggleLogin,
+              payload: true
+            });
+            dispatch<ToggleLoginHeader>({
+              type: ActionTypes.toggleLoginHeader,
+              payload: false
+            });
+          }}
+        >
           <p>register</p>
         </div>
       </div>

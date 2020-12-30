@@ -35,12 +35,6 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
         type="password"
         name="confirmPassword"
       />
-      <Field
-        component={Input}
-        label="Confirm Password"
-        type="password"
-        name="confirmPassword"
-      />
       <div className={styles.register_btn}>
         <button type="submit" disabled={props.invalid}>
           register
