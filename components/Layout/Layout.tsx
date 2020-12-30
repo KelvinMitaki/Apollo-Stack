@@ -79,18 +79,34 @@ const Layout: React.FC<Props> = props => {
             </Link>
           </div>
           <div className={styles.opts}>
-            <div className={styles.opts_item}>
-              <p>for sale</p>
-            </div>
-            <div className={styles.opts_item}>
-              <p>to rent</p>
-            </div>
-            <div className={styles.opts_item}>
-              <p>developments</p>
-            </div>
-            <div className={styles.opts_item}>
-              <p>repossessed</p>
-            </div>
+            <Link href="/properties/123">
+              <a>
+                <div className={styles.opts_item}>
+                  <p>for sale</p>
+                </div>
+              </a>
+            </Link>
+            <Link href="/properties/123">
+              <a>
+                <div className={styles.opts_item}>
+                  <p>to rent</p>
+                </div>
+              </a>
+            </Link>
+            <Link href="/properties/123">
+              <a>
+                <div className={styles.opts_item}>
+                  <p>developments</p>
+                </div>
+              </a>
+            </Link>
+            <Link href="/properties/123">
+              <a>
+                <div className={styles.opts_item}>
+                  <p>repossessed</p>
+                </div>
+              </a>
+            </Link>
             <div
               className={styles.opts_item}
               onClick={() => {

@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 import { Redux } from "../../../interfaces/Redux";
 import { ActionTypes } from "../../../redux/types/types";
 import styles from "../../../styles/Layout.module.css";
@@ -36,18 +37,66 @@ const Sidebar: React.FC<Props> = props => {
         />
       </div>
       <div className={styles.sidebar_body}>
-        <div className={styles.opts_item}>
-          <p>for sale</p>
-        </div>
-        <div className={styles.opts_item}>
-          <p>to rent</p>
-        </div>
-        <div className={styles.opts_item}>
-          <p>developments</p>
-        </div>
-        <div className={styles.opts_item}>
-          <p>repossessed</p>
-        </div>
+        <Link href="/properties/123">
+          <div
+            className={styles.opts_item}
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
+            <a>
+              <p>for sale</p>
+            </a>
+          </div>
+        </Link>
+        <Link href="/properties/123">
+          <div
+            className={styles.opts_item}
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
+            <a>
+              <p>to rent</p>
+            </a>
+          </div>
+        </Link>
+        <Link href="/properties/123">
+          <div
+            className={styles.opts_item}
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
+            <a>
+              <p>developments</p>
+            </a>
+          </div>
+        </Link>
+        <Link href="/properties/123">
+          <div
+            className={styles.opts_item}
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
+            <a>
+              <p>repossessed</p>
+            </a>
+          </div>
+        </Link>
         <div
           className={styles.opts_item}
           onClick={() => {
