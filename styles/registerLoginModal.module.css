@@ -72,7 +72,9 @@ border: 1px solid #ebebeb; */
   border-bottom: 1px solid #707079;
   padding: 1rem 0 4px 0;
   transition: all 0.2s;
-  background-color: #f2f4f5;
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
 }
 
 .input label {
