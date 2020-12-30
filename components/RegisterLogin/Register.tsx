@@ -6,17 +6,13 @@ import { Redux } from "../../interfaces/Redux";
 import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
 import Input from "./Input";
+import { ToggleLoginHeader } from "./RegisterLoginModal";
 
 interface FormValues {
   fullName: string;
   email: string;
   password: string;
   confirmPassword: string;
-}
-
-export interface ToggleAgentRegister {
-  type: ActionTypes.toggleAgentRegister;
-  payload: boolean;
 }
 
 const Register: React.FC<InjectedFormProps<FormValues>> = props => {
@@ -50,9 +46,9 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
       <div
         className={styles.agnt_link}
         onClick={() => {
-          dispatch<ToggleAgentRegister>({
-            type: ActionTypes.toggleAgentRegister,
-            payload: true
+          dispatch<ToggleLoginHeader>({
+            type: ActionTypes.toggleLoginHeader,
+            payload: "agent"
           });
         }}
       >

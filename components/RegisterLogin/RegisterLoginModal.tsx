@@ -6,7 +6,7 @@ import styles from "../../styles/registerLoginModal.module.css";
 import { SetToggleLogin } from "../Layout/Layout";
 import AgentRegister from "./AgentRegister";
 import Login from "./Login";
-import Register, { ToggleAgentRegister } from "./Register";
+import Register from "./Register";
 
 export interface ToggleLoginHeader {
   type: ActionTypes.toggleLoginHeader;
@@ -46,10 +46,6 @@ const RegisterLoginModal = () => {
                 type: ActionTypes.toggleLoginHeader,
                 payload: "login"
               });
-              dispatch<ToggleAgentRegister>({
-                type: ActionTypes.toggleAgentRegister,
-                payload: false
-              });
             }}
             className={
               styling.toggleLoginHeader === "login" ? styles.active : ""
@@ -63,13 +59,12 @@ const RegisterLoginModal = () => {
                 type: ActionTypes.toggleLoginHeader,
                 payload: "register"
               });
-              dispatch<ToggleAgentRegister>({
-                type: ActionTypes.toggleAgentRegister,
-                payload: false
-              });
             }}
             className={
-              styling.toggleLoginHeader === "register" ? styles.active : ""
+              styling.toggleLoginHeader === "register" ||
+              styling.toggleLoginHeader === "agent"
+                ? styles.active
+                : ""
             }
           >
             register

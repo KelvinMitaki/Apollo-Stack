@@ -2,7 +2,6 @@ import {
   SetToggleLogin,
   SetToggleNavbar
 } from "../../components/Layout/Layout";
-import { ToggleAgentRegister } from "../../components/RegisterLogin/Register";
 import { ToggleLoginHeader } from "../../components/RegisterLogin/RegisterLoginModal";
 import { ActionTypes } from "../types/types";
 
@@ -10,21 +9,15 @@ export interface StylingState {
   toggleNavbar: boolean;
   toggleLogin: boolean;
   toggleLoginHeader: "register" | "login" | "agent";
-  toggleAgentRegister: boolean;
 }
 
 const INITIAL_STATE: StylingState = {
   toggleNavbar: false,
   toggleLogin: false,
-  toggleLoginHeader: "login",
-  toggleAgentRegister: false
+  toggleLoginHeader: "login"
 };
 
-type Action =
-  | SetToggleNavbar
-  | SetToggleLogin
-  | ToggleLoginHeader
-  | ToggleAgentRegister;
+type Action = SetToggleNavbar | SetToggleLogin | ToggleLoginHeader;
 
 export const stylingReducer = (
   state = INITIAL_STATE,
@@ -37,8 +30,6 @@ export const stylingReducer = (
       return { ...state, toggleLogin: action.payload };
     case ActionTypes.toggleLoginHeader:
       return { ...state, toggleLoginHeader: action.payload };
-    case ActionTypes.toggleAgentRegister:
-      return { ...state, toggleAgentRegister: action.payload };
     default:
       return state;
   }
