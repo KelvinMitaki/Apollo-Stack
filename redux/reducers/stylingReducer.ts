@@ -9,14 +9,14 @@ import { ActionTypes } from "../types/types";
 export interface StylingState {
   toggleNavbar: boolean;
   toggleLogin: boolean;
-  toggleLoginHeader: "register" | "login" | "agent" | null;
+  toggleLoginHeader: "register" | "login" | "agent";
   toggleAgentRegister: boolean;
 }
 
 const INITIAL_STATE: StylingState = {
   toggleNavbar: false,
   toggleLogin: false,
-  toggleLoginHeader: null,
+  toggleLoginHeader: "login",
   toggleAgentRegister: false
 };
 

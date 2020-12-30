@@ -104,6 +104,9 @@ border: 1px solid #ebebeb; */
 }
 .login {
   transform: translateY(5rem);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
 }
 .register {
   transform: scale(0);
@@ -115,10 +118,10 @@ border: 1px solid #ebebeb; */
   visibility: visible;
   transform: scale(1);
 }
-.register_active.login {
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0);
+.login_active.login {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(5rem);
 }
 
 .login_btn {
@@ -154,6 +157,18 @@ border: 1px solid #ebebeb; */
   text-decoration: underline;
   cursor: pointer;
   font-style: italic;
+}
+.agent {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+  transition: all 0.2s;
+}
+
+.agent_active.agent {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
 }
 @media only screen and (max-width: 1000px) {
   .body {

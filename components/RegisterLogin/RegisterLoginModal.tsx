@@ -51,7 +51,9 @@ const RegisterLoginModal = () => {
                 payload: false
               });
             }}
-            className={styling.toggleLoginHeader ? styles.active : ""}
+            className={
+              styling.toggleLoginHeader === "login" ? styles.active : ""
+            }
           >
             login
           </p>
@@ -66,7 +68,9 @@ const RegisterLoginModal = () => {
                 payload: false
               });
             }}
-            className={!styling.toggleLoginHeader ? styles.active : ""}
+            className={
+              styling.toggleLoginHeader === "register" ? styles.active : ""
+            }
           >
             register
           </p>

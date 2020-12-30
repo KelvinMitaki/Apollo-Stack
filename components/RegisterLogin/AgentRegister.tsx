@@ -17,9 +17,9 @@ const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
   return (
     <div
-      className={
+      className={`${styles.agent} ${
         styling.toggleLoginHeader === "agent" ? styles.agent_active : ""
-      }
+      }`}
     >
       <Field component={Input} label="Full Name" type="text" name="fullName" />
       <Field component={Input} label="Email" type="text" name="email" />
