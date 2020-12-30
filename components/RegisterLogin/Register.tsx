@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
 import { Redux } from "../../interfaces/Redux";
 import styles from "../../styles/registerLoginModal.module.css";
@@ -13,7 +13,7 @@ interface FormValues {
   confirmPassword: string;
 }
 
-const Register = () => {
+const Register: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
   return (
     <div
@@ -35,6 +35,17 @@ const Register = () => {
         type="password"
         name="confirmPassword"
       />
+      <Field
+        component={Input}
+        label="Confirm Password"
+        type="password"
+        name="confirmPassword"
+      />
+      <div className={styles.register_btn}>
+        <button type="submit" disabled={props.invalid}>
+          register
+        </button>
+      </div>
     </div>
   );
 };
@@ -62,4 +73,4 @@ const validate = (formValues: FormValues) => {
   return errors;
 };
 
-export default reduxForm({ form: "Register", validate })(Register);
+export default reduxForm<FormValues>({ form: "Register", validate })(Register);

@@ -62,8 +62,10 @@ const RegisterLoginModal = () => {
             register
           </p>
         </div>
-        <Login />
-        <Register />
+        <div className={styles.opts}>
+          <Login />
+          <Register />
+        </div>
       </div>
     </div>
   );

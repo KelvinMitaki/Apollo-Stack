@@ -35,6 +35,15 @@
   padding: 2rem;
   background-color: #ebebeb;
 }
+.opts {
+  position: relative;
+}
+.opts > * {
+  position: absolute;
+  top: 2rem;
+  width: 100%;
+  height: 100%;
+}
 .active {
   background-color: rgba(1, 2, 78, 0.76);
   color: #f2f4f5;
@@ -95,17 +104,43 @@ border: 1px solid #ebebeb; */
   transform: translateY(5rem);
 }
 .register {
-  transform: translateY(-13rem) scale(0);
+  transform: scale(0);
   opacity: 0;
   visibility: hidden;
 }
 .register_active.register {
   opacity: 1;
   visibility: visible;
-  transform: translateY(-13rem) scale(1);
+  transform: scale(1);
 }
 .register_active.login {
   opacity: 0;
   visibility: hidden;
   transform: scale(0);
+}
+
+.login_btn {
+  padding: 4rem;
+}
+
+.register_btn,
+.login_btn {
+  display: flex;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.register_btn button,
+.login_btn button {
+  width: 70%;
+  height: 4rem;
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #f2f4f5;
+  border: none;
+  cursor: pointer;
+}
+
+.register_btn button:disabled,
+.login_btn button:disabled {
+  background-color: rgba(1, 2, 78, 0.5);
+  cursor: not-allowed;
 }
