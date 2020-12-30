@@ -10,7 +10,7 @@
   visibility: hidden;
 }
 .body {
-  background-color: #fff;
+  background-color: #f2f4f5;
   top: 0%;
   transform: translate(30vw, -100vw);
   height: 75vh;
@@ -36,17 +36,35 @@ border: 1px solid #ebebeb; */
 .input input {
   border: none;
   border-bottom: 1px solid #707079;
-  padding: 1rem 0 0 0;
+  padding: 1rem 0 4px 0;
   margin-bottom: 2rem;
+  transition: all 0.2s;
+  background-color: #f2f4f5;
 }
 
 .input label {
-  transform: translateY(3rem);
+  transform: translateY(2.5rem);
   transition: all 0.2s;
   width: fit-content;
   cursor: text;
+  font-style: italic;
 }
 
 .focused label {
   transform: translateY(1rem);
+  font-style: normal;
+}
+.focused input {
+  border-bottom: 2px solid rgba(1, 2, 78, 0.76);
+}
+.error input {
+  border-bottom: 2px solid red;
+}
+.error div {
+  color: red;
+  font-weight: 600;
+}
+.login,
+.register {
+  padding: 2rem;
 }

@@ -5,7 +5,7 @@ import Input from "./Input";
 
 const Login = () => {
   return (
-    <div>
+    <div className={styles.login}>
       <Field component={Input} label="Email" type="text" name="email" />
       <Field
         component={Input}

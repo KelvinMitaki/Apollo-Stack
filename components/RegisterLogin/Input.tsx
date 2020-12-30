@@ -10,7 +10,11 @@ interface Props {
 const Input: React.FC<WrappedFieldProps & Props> = props => {
   const [focused, setFocused] = useState<boolean>(false);
   return (
-    <div className={`${styles.input} ${focused ? styles.focused : ""}`}>
+    <div
+      className={`${styles.input} ${focused ? styles.focused : ""} ${
+        props.meta.error ? styles.error : ""
+      }`}
+    >
       <label>{props.label}</label>
       <input
         type={props.type}
