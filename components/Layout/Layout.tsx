@@ -120,7 +120,7 @@ const Layout: React.FC<Props> = props => {
                 });
                 dispatch<ToggleLoginHeader>({
                   type: ActionTypes.toggleLoginHeader,
-                  payload: true
+                  payload: "login"
                 });
               }}
             >
@@ -139,7 +139,7 @@ const Layout: React.FC<Props> = props => {
                 });
                 dispatch<ToggleLoginHeader>({
                   type: ActionTypes.toggleLoginHeader,
-                  payload: false
+                  payload: "register"
                 });
               }}
             >

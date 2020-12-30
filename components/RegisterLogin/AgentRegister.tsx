@@ -1,6 +1,10 @@
 import React from "react";
-import { InjectedFormProps, reduxForm } from "redux-form";
+import { InjectedFormProps, reduxForm, Field } from "redux-form";
 import validator from "validator";
+import Input from "./Input";
+import styles from "../../styles/registerLoginModal.module.css";
+import { useSelector } from "react-redux";
+import { Redux } from "../../interfaces/Redux";
 
 interface FormValues {
   fullName: string;
@@ -10,7 +14,41 @@ interface FormValues {
 }
 
 const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
-  return <div>AgentRegister AgentRegister</div>;
+  const styling = useSelector((state: Redux) => state.styling);
+  return (
+    <div
+      className={
+        styling.toggleLoginHeader === "agent" ? styles.agent_active : ""
+      }
+    >
+      <Field component={Input} label="Full Name" type="text" name="fullName" />
+      <Field component={Input} label="Email" type="text" name="email" />
+      <Field
+        component={Input}
+        label="Phone Number"
+        type="text"
+        name="phoneNumber"
+      />
+      <Field component={Input} label="Address" type="text" name="address" />
+      <Field
+        component={Input}
+        label="Password"
+        type="password"
+        name="password"
+      />
+      <Field
+        component={Input}
+        label="Confirm Password"
+        type="password"
+        name="confirmPassword"
+      />
+      <div className={styles.register_btn}>
+        <button type="submit" disabled={props.invalid}>
+          register
+        </button>
+      </div>
+    </div>
+  );
 };
 
 const validate = (formValues: FormValues) => {

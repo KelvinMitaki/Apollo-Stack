@@ -17,7 +17,7 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   return (
     <div
       className={`${styles.login} ${
-        !styling.toggleLoginHeader ? styles.register_active : ""
+        styling.toggleLoginHeader === "login" ? styles.register_active : ""
       }`}
     >
       <Field component={Input} label="Email" type="text" name="email" />

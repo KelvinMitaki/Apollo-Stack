@@ -1,9 +1,9 @@
-import Link from "next/link";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
 import { Redux } from "../../interfaces/Redux";
+import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
 import Input from "./Input";
 
@@ -14,12 +14,18 @@ interface FormValues {
   confirmPassword: string;
 }
 
+export interface ToggleAgentRegister {
+  type: ActionTypes.toggleAgentRegister;
+  payload: boolean;
+}
+
 const Register: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
+  const dispatch = useDispatch();
   return (
     <div
       className={`${styles.register} ${
-        !styling.toggleLoginHeader ? styles.register_active : ""
+        styling.toggleLoginHeader === "register" ? styles.register_active : ""
       }`}
     >
       <Field component={Input} label="Full Name" type="text" name="fullName" />
@@ -41,7 +47,15 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
           register
         </button>
       </div>
-      <div className={styles.agnt_link}>
+      <div
+        className={styles.agnt_link}
+        onClick={() => {
+          dispatch<ToggleAgentRegister>({
+            type: ActionTypes.toggleAgentRegister,
+            payload: true
+          });
+        }}
+      >
         <p>or register as an Agent</p>
       </div>
     </div>

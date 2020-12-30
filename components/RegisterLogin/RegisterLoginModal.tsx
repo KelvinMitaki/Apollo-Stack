@@ -4,12 +4,13 @@ import { Redux } from "../../interfaces/Redux";
 import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
 import { SetToggleLogin } from "../Layout/Layout";
+import AgentRegister from "./AgentRegister";
 import Login from "./Login";
-import Register from "./Register";
+import Register, { ToggleAgentRegister } from "./Register";
 
 export interface ToggleLoginHeader {
   type: ActionTypes.toggleLoginHeader;
-  payload: boolean;
+  payload: "register" | "login" | "agent";
 }
 
 const RegisterLoginModal = () => {
@@ -40,23 +41,31 @@ const RegisterLoginModal = () => {
       <div ref={loginRef} className={styles.body}>
         <div className={styles.header}>
           <p
-            onClick={() =>
+            onClick={() => {
               dispatch<ToggleLoginHeader>({
                 type: ActionTypes.toggleLoginHeader,
-                payload: true
-              })
-            }
+                payload: "login"
+              });
+              dispatch<ToggleAgentRegister>({
+                type: ActionTypes.toggleAgentRegister,
+                payload: false
+              });
+            }}
             className={styling.toggleLoginHeader ? styles.active : ""}
           >
             login
           </p>
           <p
-            onClick={() =>
+            onClick={() => {
               dispatch<ToggleLoginHeader>({
                 type: ActionTypes.toggleLoginHeader,
+                payload: "register"
+              });
+              dispatch<ToggleAgentRegister>({
+                type: ActionTypes.toggleAgentRegister,
                 payload: false
-              })
-            }
+              });
+            }}
             className={!styling.toggleLoginHeader ? styles.active : ""}
           >
             register
@@ -65,6 +74,7 @@ const RegisterLoginModal = () => {
         <div className={styles.opts}>
           <Login />
           <Register />
+          <AgentRegister />
         </div>
       </div>
     </div>

@@ -110,7 +110,7 @@ const Sidebar: React.FC<Props> = props => {
             });
             dispatch<ToggleLoginHeader>({
               type: ActionTypes.toggleLoginHeader,
-              payload: true
+              payload: "login"
             });
           }}
         >
@@ -129,7 +129,7 @@ const Sidebar: React.FC<Props> = props => {
             });
             dispatch<ToggleLoginHeader>({
               type: ActionTypes.toggleLoginHeader,
-              payload: false
+              payload: "register"
             });
           }}
         >
