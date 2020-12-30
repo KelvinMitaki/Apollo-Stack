@@ -18,6 +18,9 @@
 .container h4 {
   font-size: 2rem;
 }
+.details {
+  background-color: #fff;
+}
 .large_img {
   height: 40rem;
   background-size: cover;
@@ -28,6 +31,9 @@
   cursor: pointer;
   background-size: cover;
   background-position: center;
+}
+.description {
+  padding: 1rem;
 }
 .table {
   border: 1px solid #ebebeb;

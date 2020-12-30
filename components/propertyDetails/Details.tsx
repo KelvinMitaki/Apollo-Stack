@@ -13,7 +13,7 @@ const Details = () => {
     setNav({ nav1: slider1.current, nav2: slider2.current });
   }, []);
   return (
-    <div>
+    <div className={styles.details}>
       <Slider ref={slider1} asNavFor={nav.nav2 as any} arrows={false}>
         <div>
           <div
@@ -137,7 +137,7 @@ const Details = () => {
         </div>
       </Slider>
       <div>
-        <div>
+        <div className={styles.description}>
           <h4>Description</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
