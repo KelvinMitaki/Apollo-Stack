@@ -9,6 +9,8 @@ import { Redux } from "../../interfaces/Redux";
 interface FormValues {
   fullName: string;
   email: string;
+  address: string;
+  phoneNumber: string;
   password: string;
   confirmPassword: string;
 }
@@ -61,6 +63,19 @@ const validate = (formValues: FormValues) => {
     (formValues.email && !validator.isEmail(formValues.email))
   ) {
     errors.email = "Please enter a valid email";
+  }
+  if (
+    !formValues.phoneNumber ||
+    !validator.isNumeric(formValues.phoneNumber) ||
+    formValues.phoneNumber.trim().length < 10
+  ) {
+    errors.phoneNumber = "Please enter a valid phone number";
+  }
+  if (
+    !formValues.address ||
+    (formValues.address && formValues.address.trim().length === 0)
+  ) {
+    errors.address = "Please enter a valid address";
   }
   if (
     !formValues.password ||

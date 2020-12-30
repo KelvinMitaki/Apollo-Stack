@@ -15,7 +15,7 @@
   background-color: #f2f4f5;
   top: 0%;
   transform: translateY(-100vw);
-  height: 55rem;
+  height: 60rem;
   width: 50vw;
   transition: all 0.2s;
   font-size: 1.6rem;
@@ -76,7 +76,9 @@ border: 1px solid #ebebeb; */
   position: relative;
   z-index: 10;
 }
-
+.agent .input {
+  margin-bottom: 0%;
+}
 .input label {
   transform: translateY(2.5rem);
   transition: all 0.2s;
@@ -136,6 +138,9 @@ border: 1px solid #ebebeb; */
   display: flex;
   justify-content: center;
   transition: all 0.2s;
+}
+.agent .register_btn {
+  margin-top: 2rem;
 }
 .register_btn button,
 .login_btn button {
