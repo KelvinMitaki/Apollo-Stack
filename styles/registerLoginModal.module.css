@@ -14,7 +14,7 @@
 .body {
   background-color: #f2f4f5;
   top: 0%;
-  transform: translateY(-100vw);
+  transform: translateY(-200vw);
   height: 60rem;
   width: 50vw;
   transition: all 0.2s;
