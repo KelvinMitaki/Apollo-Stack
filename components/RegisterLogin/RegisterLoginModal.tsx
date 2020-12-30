@@ -4,6 +4,8 @@ import { Redux } from "../../interfaces/Redux";
 import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
 import { SetToggleLogin } from "../Layout/Layout";
+import Login from "./Login";
+import Register from "./Register";
 
 const RegisterLoginModal = () => {
   const dispatch = useDispatch();
@@ -31,7 +33,8 @@ const RegisterLoginModal = () => {
       }`}
     >
       <div ref={loginRef} className={styles.body}>
-        RegisterLoginModal RegisterLoginModal
+        <Login />
+        <Register />
       </div>
     </div>
   );
