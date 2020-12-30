@@ -154,4 +154,7 @@
   .property {
     grid-template-columns: 1fr;
   }
+  .bg_image {
+    height: 30rem;
+  }
 }
