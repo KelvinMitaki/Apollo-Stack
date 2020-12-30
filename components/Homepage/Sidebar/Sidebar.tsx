@@ -37,66 +37,66 @@ const Sidebar: React.FC<Props> = props => {
         />
       </div>
       <div className={styles.sidebar_body}>
-        <Link href="/properties/123">
-          <div
-            className={styles.opts_item}
-            onClick={() => {
-              dispatch<SetToggleNavbar>({
-                type: ActionTypes.toggleNavbar,
-                payload: false
-              });
-            }}
-          >
+        <div
+          className={styles.opts_item}
+          onClick={() => {
+            dispatch<SetToggleNavbar>({
+              type: ActionTypes.toggleNavbar,
+              payload: false
+            });
+          }}
+        >
+          <Link href="/properties/123">
             <a>
               <p>for sale</p>
             </a>
-          </div>
-        </Link>
-        <Link href="/properties/123">
-          <div
-            className={styles.opts_item}
-            onClick={() => {
-              dispatch<SetToggleNavbar>({
-                type: ActionTypes.toggleNavbar,
-                payload: false
-              });
-            }}
-          >
+          </Link>
+        </div>
+        <div
+          className={styles.opts_item}
+          onClick={() => {
+            dispatch<SetToggleNavbar>({
+              type: ActionTypes.toggleNavbar,
+              payload: false
+            });
+          }}
+        >
+          <Link href="/properties/123">
             <a>
               <p>to rent</p>
             </a>
-          </div>
-        </Link>
-        <Link href="/properties/123">
-          <div
-            className={styles.opts_item}
-            onClick={() => {
-              dispatch<SetToggleNavbar>({
-                type: ActionTypes.toggleNavbar,
-                payload: false
-              });
-            }}
-          >
+          </Link>
+        </div>
+        <div
+          className={styles.opts_item}
+          onClick={() => {
+            dispatch<SetToggleNavbar>({
+              type: ActionTypes.toggleNavbar,
+              payload: false
+            });
+          }}
+        >
+          <Link href="/properties/123">
             <a>
               <p>developments</p>
             </a>
-          </div>
-        </Link>
-        <Link href="/properties/123">
-          <div
-            className={styles.opts_item}
-            onClick={() => {
-              dispatch<SetToggleNavbar>({
-                type: ActionTypes.toggleNavbar,
-                payload: false
-              });
-            }}
-          >
+          </Link>
+        </div>
+        <div
+          className={styles.opts_item}
+          onClick={() => {
+            dispatch<SetToggleNavbar>({
+              type: ActionTypes.toggleNavbar,
+              payload: false
+            });
+          }}
+        >
+          <Link href="/properties/123">
             <a>
               <p>repossessed</p>
             </a>
-          </div>
-        </Link>
+          </Link>
+        </div>
         <div
           className={styles.opts_item}
           onClick={() => {

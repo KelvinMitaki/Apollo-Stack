@@ -10,6 +10,7 @@ import { Redux } from "../../interfaces/Redux";
 import RegisterLoginModal, {
   ToggleLoginHeader
 } from "../RegisterLogin/RegisterLoginModal";
+import LayoutHeader from "./LayoutHeader";
 export interface SetToggleNavbar {
   type: ActionTypes.toggleNavbar;
   payload: boolean;
@@ -68,97 +69,7 @@ const Layout: React.FC<Props> = props => {
         />
       </Head>
       <main className={styles.main}>
-        <div className={styles.container}>
-          <div className={styles.logo_prt}>
-            <Link href="/">
-              <div className={styles.logo}>
-                <a>
-                  <p>property domain</p>
-                </a>
-              </div>
-            </Link>
-          </div>
-          <div className={styles.opts}>
-            <Link href="/properties/123">
-              <a>
-                <div className={styles.opts_item}>
-                  <p>for sale</p>
-                </div>
-              </a>
-            </Link>
-            <Link href="/properties/123">
-              <a>
-                <div className={styles.opts_item}>
-                  <p>to rent</p>
-                </div>
-              </a>
-            </Link>
-            <Link href="/properties/123">
-              <a>
-                <div className={styles.opts_item}>
-                  <p>developments</p>
-                </div>
-              </a>
-            </Link>
-            <Link href="/properties/123">
-              <a>
-                <div className={styles.opts_item}>
-                  <p>repossessed</p>
-                </div>
-              </a>
-            </Link>
-            <div
-              className={styles.opts_item}
-              onClick={() => {
-                dispatch<SetToggleNavbar>({
-                  type: ActionTypes.toggleNavbar,
-                  payload: false
-                });
-                dispatch<SetToggleLogin>({
-                  type: ActionTypes.toggleLogin,
-                  payload: true
-                });
-                dispatch<ToggleLoginHeader>({
-                  type: ActionTypes.toggleLoginHeader,
-                  payload: "login"
-                });
-              }}
-            >
-              <p>login</p>
-            </div>
-            <div
-              className={styles.opts_item}
-              onClick={() => {
-                dispatch<SetToggleNavbar>({
-                  type: ActionTypes.toggleNavbar,
-                  payload: false
-                });
-                dispatch<SetToggleLogin>({
-                  type: ActionTypes.toggleLogin,
-                  payload: true
-                });
-                dispatch<ToggleLoginHeader>({
-                  type: ActionTypes.toggleLoginHeader,
-                  payload: "register"
-                });
-              }}
-            >
-              <p>register</p>
-            </div>
-          </div>
-          <div
-            className={styles.sidebar_toggle}
-            onClick={() => {
-              dispatch<SetToggleNavbar>({
-                type: ActionTypes.toggleNavbar,
-                payload: !toggleNavbar
-              });
-            }}
-            ref={toggleRef}
-          >
-            <div></div>
-          </div>
-        </div>
+        <LayoutHeader toggleRef={toggleRef} />
         <div className={` ${toggleNavbar ? styles.toggle : ""}`}></div>
         <Sidebar toggleRef={toggleRef} />
         <RegisterLoginModal />
