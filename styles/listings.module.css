@@ -48,3 +48,6 @@
   color: #f2f4f5;
   font-weight: 600;
 }
+
+@media only screen and (max-width: 1024px) {
+}
