@@ -8,36 +8,41 @@ const listings = () => {
   return (
     <Layout title="Listings">
       <div className={styles.container}>
-        <HouseFilter alternate={false} btnContent="Search" width="90vw" />
+        <HouseFilter alternate={false} btnContent="Search" width="100%" agent />
         <div>
           <div className={styles.body}>
-            <div>
+            <div className={styles.header_item}>
               <p>reference</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>list no</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>thumbnail</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>category</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>address</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>price</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>type</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>status</p>
             </div>
-            <div>
+            <div className={styles.header_item}>
               <p>modified</p>
             </div>
+            <Listing />
+            <Listing />
+            <Listing />
+            <Listing />
+            <Listing />
             <Listing />
             <Listing />
             <Listing />

@@ -10,6 +10,7 @@ interface Props {
   alternate: boolean;
   btnContent: string;
   width: string | "fit-content";
+  agent?: boolean;
 }
 
 const HouseFilter: React.FC<Props> = props => {
@@ -33,7 +34,13 @@ const HouseFilter: React.FC<Props> = props => {
       className={`${styles.search} ${
         props.alternate ? styles.search_alternate : ""
       }`}
-      style={{ width: props.width }}
+      style={{
+        width: props.width,
+        ...(props.agent && {
+          border: "1px solid #707079"
+          // borderBottom: "none"
+        })
+      }}
     >
       {props.alternate ? (
         <div className={styles.alternate}>
@@ -41,7 +48,10 @@ const HouseFilter: React.FC<Props> = props => {
           <p>Add Alerts</p>
         </div>
       ) : (
-        <div className={styles.search_head}>
+        <div
+          className={styles.search_head}
+          style={{ display: props.agent ? "none" : "block" }}
+        >
           <div>
             <AiOutlineSearch size="3rem" />
             <p>Find your home</p>
