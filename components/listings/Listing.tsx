@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/listings.module.css";
+import Router from "next/router";
 
 interface Props {
   className?: string;
@@ -7,11 +8,12 @@ interface Props {
 
 const Listing: React.FC<Props> = props => {
   return (
-    <tr className={`${styles.listing} ${props.className ? styles.active : ""}`}>
+    <tr
+      className={`${styles.listing} ${props.className ? styles.active : ""}`}
+      onClick={() => Router.push("/listing/edit/123")}
+    >
       <td>123</td>
-
       <td>12373625681269798</td>
-
       <td>
         <div className={styles.img}>
           <div
@@ -20,17 +22,11 @@ const Listing: React.FC<Props> = props => {
           ></div>
         </div>
       </td>
-
       <td>townhouse</td>
-
       <td>Ongata Rongai, Nairobi</td>
-
       <td>32,000,000</td>
-
       <td>rent</td>
-
       <td>expired</td>
-
       <td>31/12/2020</td>
     </tr>
   );

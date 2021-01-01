@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import styles from "../../styles/listings.module.css";
 
@@ -30,7 +31,7 @@ const MobileListing = () => {
           </div>
           <div>
             <p>price:</p>
-            <p>ksh:2,000,000</p>
+            <p>ksh 2,000,000</p>
           </div>
           <div>
             <p>address:</p>
@@ -38,9 +39,13 @@ const MobileListing = () => {
           </div>
         </div>
       </div>
-      <div className={styles.btn}>
-        <button>edit</button>
-      </div>
+      <Link href="/listing/edit/123">
+        <a>
+          <div className={styles.btn}>
+            <button>edit</button>
+          </div>
+        </a>
+      </Link>
     </div>
   );
 };

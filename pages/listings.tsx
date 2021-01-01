@@ -73,6 +73,15 @@ const listings = () => {
             </tbody>
           </table>
           <MobileListing />
+          <MobileListing />
+          <MobileListing />
+          <MobileListing />
+          <MobileListing />
+          <MobileListing />
+          <MobileListing />
+          <MobileListing />
+          <MobileListing />
+          <MobileListing />
         </div>
       </div>
     </Layout>

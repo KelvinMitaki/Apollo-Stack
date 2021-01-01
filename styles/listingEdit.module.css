@@ -1,0 +1,56 @@
+.container {
+  padding: 2rem;
+  font-size: 1.6rem;
+  position: relative;
+  top: 6rem;
+}
+.body {
+  border: 1px solid #bebdbd;
+  margin-bottom: 10rem;
+  margin-top: 5rem;
+  text-transform: capitalize;
+  min-height: 50vh;
+}
+.header {
+  display: grid;
+  grid-template-columns: repeat(4, max-content) 1fr max-content;
+  width: 100%;
+  border: 1px solid #bebdbd;
+  border-top: none;
+  font-weight: 700;
+  background-color: #f2f4f5;
+}
+
+.header p {
+  padding: 2rem 4rem;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  margin: 0%;
+}
+.header p:hover {
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #fff;
+}
+
+.active {
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #fff;
+}
+
+.btn {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  padding: 0% 2rem;
+  border-left: 1px solid #bebdbd;
+}
+
+.btn button {
+  padding: 1rem 2rem;
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #f2f4f5;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}

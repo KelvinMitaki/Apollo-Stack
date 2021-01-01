@@ -47,7 +47,7 @@ const Layout: React.FC<Props> = props => {
     }
   };
   return (
-    <div>
+    <>
       <Head>
         <title>{props.title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -78,7 +78,7 @@ const Layout: React.FC<Props> = props => {
           <Footer />
         </div>
       </main>
-    </div>
+    </>
   );
 };
 

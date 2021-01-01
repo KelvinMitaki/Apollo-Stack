@@ -100,6 +100,7 @@
   background-color: rgba(1, 2, 78, 0.76);
   color: #f2f4f5;
   border: none;
+  cursor: pointer;
 }
 .btn {
   display: flex;
