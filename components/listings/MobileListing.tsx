@@ -4,21 +4,26 @@ import styles from "../../styles/listings.module.css";
 const MobileListing = () => {
   return (
     <div className={styles.MobileListing}>
-      <div>
-        <p>list no:</p>
-        <p>982378632687437683709</p>
-      </div>
-      <div>
-        <p>reference</p>
-        <p>123</p>
-      </div>
-      <div>
-        <p>status:</p>
-        <p>expired</p>
-      </div>
-      <div className={styles.body}>
-        <div style={{ backgroundImage: "url(/image-3.jpg)" }}></div>
+      <div className={styles.header}>
         <div>
+          <p>list no:</p>
+          <p>982378632687437683709</p>
+        </div>
+        <div>
+          <p>reference</p>
+          <p>123</p>
+        </div>
+        <div>
+          <p>status:</p>
+          <p>expired</p>
+        </div>
+      </div>
+      <div className={styles.mb_body}>
+        <div
+          className={styles.mb_img}
+          style={{ backgroundImage: "url(/image-3.jpg)" }}
+        ></div>
+        <div className={styles.content}>
           <div>
             <p>for rent:</p>
             <p>townhouse</p>
@@ -27,12 +32,15 @@ const MobileListing = () => {
             <p>price:</p>
             <p>ksh:2,000,000</p>
           </div>
-          <p>address</p>
-          <p>Ongata Rongai</p>
-          <p></p>
+          <div>
+            <p>address:</p>
+            <p>Ongata Rongai</p>
+          </div>
         </div>
       </div>
-      <button>edit</button>
+      <div className={styles.btn}>
+        <button>edit</button>
+      </div>
     </div>
   );
 };

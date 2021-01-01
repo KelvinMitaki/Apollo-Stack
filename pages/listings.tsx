@@ -2,6 +2,7 @@ import React from "react";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import Listing from "../components/listings/Listing";
+import MobileListing from "../components/listings/MobileListing";
 import styles from "../styles/listings.module.css";
 
 const listings = () => {
@@ -71,6 +72,7 @@ const listings = () => {
               <Listing />
             </tbody>
           </table>
+          <MobileListing />
         </div>
       </div>
     </Layout>
