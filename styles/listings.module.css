@@ -10,29 +10,35 @@
   padding: 0 2rem;
 }
 
-.body {
-  display: grid;
-  grid-template-columns:
-    0.5fr 1fr 0.5fr max-content repeat(2, minmax(max-content, 1fr))
-    repeat(2, max-content) 1fr;
-  border: 1px solid #707079;
-  border-top: none;
+.table {
+  width: 100%;
+  background-color: #f2f4f5;
 }
-.body > * {
-  padding: 0 1rem;
-  justify-items: stretch;
+.table td,
+.table th {
   border-bottom: 1px solid #707079;
+}
+.listing {
+  text-align: center;
+  vertical-align: middle;
+  height: 6rem;
+}
+.img {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .bg_image {
   height: 4rem;
-  width: 4rem;
+  width: 6rem;
   background-size: cover;
   background-position: center;
 }
-.header_item {
-  background-color: #f2f4f5;
-  font-weight: 500;
+.active {
+  background-color: rgba(255, 255, 255, 0.527);
+}
+.table tbody tr:hover {
+  cursor: pointer;
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #f2f4f5;
+  font-weight: 600;
 }

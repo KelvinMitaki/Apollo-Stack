@@ -9,46 +9,68 @@ const listings = () => {
     <Layout title="Listings">
       <div className={styles.container}>
         <HouseFilter alternate={false} btnContent="Search" width="100%" agent />
-        <div>
-          <div className={styles.body}>
-            <div className={styles.header_item}>
-              <p>reference</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>list no</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>thumbnail</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>category</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>address</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>price</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>type</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>status</p>
-            </div>
-            <div className={styles.header_item}>
-              <p>modified</p>
-            </div>
-            <Listing />
-            <Listing />
-            <Listing />
-            <Listing />
-            <Listing />
-            <Listing />
-            <Listing />
-            <Listing />
-            <Listing />
-            <Listing />
-          </div>
+        <div style={{ width: "100%" }}>
+          <table className={styles.table} cellSpacing="0">
+            <thead>
+              <tr className={styles.header}>
+                <th>
+                  <p>reference</p>
+                </th>
+                <th>
+                  <p>list no</p>
+                </th>
+                <th>
+                  <p>thumbnail</p>
+                </th>
+                <th>
+                  <p>category</p>
+                </th>
+                <th>
+                  <p>address</p>
+                </th>
+                <th>
+                  <p>price</p>
+                </th>
+                <th>
+                  <p>type</p>
+                </th>
+                <th>
+                  <p>status</p>
+                </th>
+                <th>
+                  <p>modified</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+              <Listing className="active" />
+              <Listing />
+            </tbody>
+          </table>
         </div>
       </div>
     </Layout>

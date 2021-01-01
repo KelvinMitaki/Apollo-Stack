@@ -1,40 +1,38 @@
 import React from "react";
 import styles from "../../styles/listings.module.css";
 
-const Listing = () => {
+interface Props {
+  className?: string;
+}
+
+const Listing: React.FC<Props> = props => {
   return (
-    <>
-      <div>
-        <p>123</p>
-      </div>
-      <div>
-        <p>12373625681269798</p>
-      </div>
-      <div>
-        <div
-          className={styles.bg_image}
-          style={{ backgroundImage: "url(/image-3.jpg)" }}
-        ></div>
-      </div>{" "}
-      <div>
-        <p>townhouse</p>
-      </div>{" "}
-      <div>
-        <p>Ongata Rongai, Nairobi</p>
-      </div>{" "}
-      <div>
-        <p>32,000,000</p>
-      </div>{" "}
-      <div>
-        <p>rent</p>
-      </div>{" "}
-      <div>
-        <p>expired</p>
-      </div>{" "}
-      <div>
-        <p>31/12/2020</p>
-      </div>
-    </>
+    <tr className={`${styles.listing} ${props.className ? styles.active : ""}`}>
+      <td>123</td>
+
+      <td>12373625681269798</td>
+
+      <td>
+        <div className={styles.img}>
+          <div
+            className={styles.bg_image}
+            style={{ backgroundImage: "url(/image-3.jpg)" }}
+          ></div>
+        </div>
+      </td>
+
+      <td>townhouse</td>
+
+      <td>Ongata Rongai, Nairobi</td>
+
+      <td>32,000,000</td>
+
+      <td>rent</td>
+
+      <td>expired</td>
+
+      <td>31/12/2020</td>
+    </tr>
   );
 };
 
