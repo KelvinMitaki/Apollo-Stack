@@ -6,7 +6,6 @@ import Layout from "../components/Layout/Layout";
 import styles from "../styles/home.module.css";
 
 const Home: React.FC = props => {
-  console.log(props);
   return (
     <div className={`${styles.container}`}>
       <Layout title="Home Page">

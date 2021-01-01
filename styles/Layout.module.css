@@ -29,7 +29,7 @@
 }
 .opts {
   display: grid;
-  grid-template-columns: repeat(2, 1fr) repeat(2, 1.5fr) 1fr 1.5fr;
+  grid-template-columns: repeat(3, 1fr) repeat(2, 1.5fr) 1fr 1.5fr;
 }
 .opts_item {
   cursor: pointer;
@@ -39,6 +39,7 @@
   font-size: 1.8rem;
   font-weight: 500;
   text-transform: capitalize;
+  position: relative;
 }
 
 .opts_item:hover {

@@ -68,6 +68,10 @@
   background-color: #f2f4f5;
   cursor: pointer;
   margin-bottom: 3rem;
+  transition: all 0.2s;
+}
+.property:hover {
+  border: 1px solid rgba(1, 2, 78, 0.76);
 }
 .property:not(:last-child) {
   border-bottom: 1px solid #ebebeb;

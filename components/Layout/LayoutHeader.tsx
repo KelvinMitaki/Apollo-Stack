@@ -6,6 +6,7 @@ import { ActionTypes } from "../../redux/types/types";
 import { Redux } from "../../interfaces/Redux";
 import { ToggleLoginHeader } from "../RegisterLogin/RegisterLoginModal";
 import { SetToggleNavbar, SetToggleLogin } from "./Layout";
+import AgentDropDown from "./AgentDropDown";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -30,6 +31,10 @@ const LayoutHeader: React.FC<Props> = props => {
           </div>
         </div>
         <div className={styles.opts}>
+          <div className={styles.opts_item}>
+            <p>agent</p>
+            <AgentDropDown />
+          </div>
           <Link href="/properties/123">
             <a>
               <div className={styles.opts_item}>
