@@ -31,3 +31,6 @@ a {
   -ms-touch-action: manipulation;
   touch-action: manipulation;
 }
+#__next {
+  display: flex;
+}
