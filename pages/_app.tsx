@@ -15,8 +15,8 @@ import { FETCH_CURRENT_USER } from "../graphql/queries/queries";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState);
-  // const { data } = useQuery(FETCH_CURRENT_USER, { client });
-  // console.log(data);
+  const { data } = useQuery(FETCH_CURRENT_USER, { client });
+  console.log(data);
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />;
@@ -28,10 +28,11 @@ MyApp.getInitialProps = async (appCtx: AppContext) => {
   const appProps = await App.getInitialProps(appCtx);
   await apolloClient.query({ query: FETCH_CURRENT_USER });
   return {
-    props: {
+    ...appProps,
+    pageProps: {
+      ...appProps.pageProps,
       initialApolloState: apolloClient.cache.extract()
-    },
-    ...appProps
+    }
   };
 };
 export default wrapper.withRedux(MyApp);

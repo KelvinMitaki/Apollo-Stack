@@ -11,7 +11,8 @@ const createApolloClient = () =>
   new ApolloClient({
     ssrMode: typeof window === "undefined",
     cache: new InMemoryCache(),
-    uri: "http://localhost:4000/graphql"
+    uri: "http://localhost:4000/graphql",
+    connectToDevTools: process.env.NODE_ENV !== "production"
   });
 
 export const initializeApollo = (
