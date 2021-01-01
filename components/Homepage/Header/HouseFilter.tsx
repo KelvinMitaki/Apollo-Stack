@@ -37,7 +37,7 @@ const HouseFilter: React.FC<Props> = props => {
       style={{
         width: props.width,
         ...(props.agent && {
-          border: "1px solid #707079"
+          border: "1px solid #bebdbd"
           // borderBottom: "none"
         })
       }}

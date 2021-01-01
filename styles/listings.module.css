@@ -12,11 +12,17 @@
 
 .table {
   width: 100%;
+  min-width: 107rem;
   background-color: #f2f4f5;
 }
 .table td,
 .table th {
-  border-bottom: 1px solid #707079;
+  border-bottom: 1px solid #bebdbd;
+}
+.table {
+  border: 1px solid #bebdbd;
+  border-top: none;
+  border-bottom: none;
 }
 .listing {
   text-align: center;
