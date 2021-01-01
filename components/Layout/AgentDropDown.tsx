@@ -1,9 +1,20 @@
 import React from "react";
 import styles from "../../styles/agentDropDown.module.css";
 
-const AgentDropDown = () => {
+interface Props {
+  hover: boolean;
+  agentDropDownRef: React.RefObject<HTMLDivElement>;
+}
+
+const AgentDropDown: React.FC<Props> = props => {
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        props.hover ? styles.container__show : ""
+      }`}
+      ref={props.agentDropDownRef}
+    >
+      <div className={styles.layer}></div>
       <div>
         <p>listings</p>
       </div>

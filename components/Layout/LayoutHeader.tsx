@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/Layout.module.css";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,10 +13,28 @@ interface Props {
 }
 
 const LayoutHeader: React.FC<Props> = props => {
+  const [hover, setHover] = useState<boolean>(false);
+  const agentDropDownRef = useRef<HTMLDivElement>(null);
   const toggleNavbar = useSelector(
     (state: Redux) => state.styling.toggleNavbar
   );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.addEventListener("mouseover", onHover);
+    return () => {
+      document.removeEventListener("mouseover", onHover);
+    };
+  }, []);
+  const onHover = (e: Event) => {
+    if (
+      agentDropDownRef.current &&
+      // @ts-ignore
+      !agentDropDownRef.current.contains(e.target)
+    ) {
+      setHover(false);
+    }
+  };
   const { toggleRef } = props;
   return (
     <div>
@@ -31,9 +49,13 @@ const LayoutHeader: React.FC<Props> = props => {
           </div>
         </div>
         <div className={styles.opts}>
-          <div className={styles.opts_item}>
+          <div
+            className={styles.opts_item}
+            ref={agentDropDownRef}
+            onMouseOver={() => setHover(true)}
+          >
             <p>agent</p>
-            <AgentDropDown />
+            <AgentDropDown hover={hover} agentDropDownRef={agentDropDownRef} />
           </div>
           <Link href="/properties/123">
             <a>
