@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import styles from "../../styles/agentDropDown.module.css";
 
@@ -15,9 +16,13 @@ const AgentDropDown: React.FC<Props> = props => {
       ref={props.agentDropDownRef}
     >
       <div className={styles.layer}></div>
-      <div>
-        <p>listings</p>
-      </div>
+      <Link href="/listings">
+        <a>
+          <div>
+            <p>listings</p>
+          </div>
+        </a>
+      </Link>
       <div>
         <p>create a new listing</p>
       </div>

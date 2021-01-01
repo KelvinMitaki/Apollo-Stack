@@ -1,0 +1,25 @@
+.container {
+  font-size: 1.6rem;
+  position: relative;
+  top: 6rem;
+  margin-bottom: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.body {
+  display: grid;
+  grid-template-columns:
+    0.5fr 1fr 0.5fr max-content repeat(2, minmax(max-content, 1fr))
+    repeat(2, max-content) 1fr;
+  column-gap: 3rem;
+  justify-items: center;
+}
+.bg_image {
+  height: 4rem;
+  width: 4rem;
+  background-size: cover;
+  background-position: center;
+}
