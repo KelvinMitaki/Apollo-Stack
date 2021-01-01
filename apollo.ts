@@ -11,7 +11,10 @@ const createApolloClient = () =>
   new ApolloClient({
     ssrMode: typeof window === "undefined",
     cache: new InMemoryCache(),
-    uri: "http://localhost:4000/graphql",
+    uri:
+      process.env.NODE_ENV !== "production"
+        ? "http://localhost:4000/graphql"
+        : "https://apollo-stack-server.herokuapp.com/graphql",
     connectToDevTools: process.env.NODE_ENV !== "production"
   });
 

@@ -1,6 +1,7 @@
 .container {
   overflow: hidden;
   background-color: #f2f4f5;
+  font-size: 1.6rem;
 }
 .header {
   height: 90vh;

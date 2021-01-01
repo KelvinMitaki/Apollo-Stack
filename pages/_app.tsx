@@ -16,10 +16,9 @@ import { FETCH_CURRENT_USER } from "../graphql/queries/queries";
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState);
   const { data } = useQuery(FETCH_CURRENT_USER, { client });
-  console.log(data);
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} {...data} />;
     </ApolloProvider>
   );
 }
