@@ -10,6 +10,7 @@
   margin-top: 5rem;
   text-transform: capitalize;
   min-height: 50vh;
+  width: 70%;
 }
 .header {
   display: grid;
@@ -56,11 +57,10 @@
 }
 
 .Listing {
-  display: flex;
-  justify-content: center;
   width: 100%;
+  margin-left: 2rem;
 }
 
 .Listing div {
-  width: 70%;
+  width: 90%;
 }
