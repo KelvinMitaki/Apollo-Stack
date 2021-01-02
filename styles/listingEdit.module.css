@@ -57,13 +57,15 @@
 }
 
 .Listing,
-.Attributes {
+.Attributes,
+.Marketing {
   width: 100%;
   margin-left: 2rem;
 }
 
 .Listing div,
-.Attributes div:not(.BiCheck) {
+.Attributes div:not(.BiCheck),
+.Marketing div:not(.BiCheck) {
   width: 90%;
 }
 

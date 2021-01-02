@@ -1,11 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import Dropdown from "../Homepage/Header/Dropdown";
 import Input from "../RegisterLogin/Input";
 import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
 
-const Marketing = () => {
+interface FormValues {
+  status: string;
+  price: string;
+  serviceCharge: string;
+  marketingHeading: string;
+  marketingDescription: string;
+  expiryDate: string;
+  auctionDate: string;
+  auctionVenue: string;
+}
+
+const Marketing: React.FC<InjectedFormProps<FormValues>> = () => {
   const [repossessed, setRepossessed] = useState<boolean>(false);
   const [auction, setAuction] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
@@ -23,7 +34,7 @@ const Marketing = () => {
     }
   };
   return (
-    <div>
+    <div className={styles.Marketing}>
       <div>
         <Field
           component={Input}
@@ -122,4 +133,9 @@ const Marketing = () => {
   );
 };
 
-export default reduxForm({ form: "Marketing" })(Marketing);
+export default reduxForm<FormValues>({
+  form: "Marketing",
+  initialValues: {
+    status: "EXPIRED"
+  }
+})(Marketing);
