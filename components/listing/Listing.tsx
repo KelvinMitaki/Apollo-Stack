@@ -46,19 +46,21 @@ const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
             name="reference"
           />
         </div>
-        <div>
+        <div style={{ cursor: "pointer" }}>
           <Dropdown
             selections={[
-              "1+ Bedroom",
-              "2+ Bedrooms",
-              "3+ Bedrooms",
-              "4+ Bedrooms",
-              "5+ Bedrooms"
+              "apartment ",
+              "house ",
+              "townhouse",
+              "vacant land",
+              "farm",
+              "commercial",
+              "industrial"
             ]}
-            determinant="bedrooms"
+            determinant="category"
             name={name}
             searchDiv={searchDiv}
-            title="No of Bedrooms"
+            title="Category"
             setName={setName}
             className="d_search"
           />
