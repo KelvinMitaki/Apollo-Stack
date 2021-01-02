@@ -54,3 +54,13 @@
   border: none;
   cursor: pointer;
 }
+
+.Listing {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.Listing div {
+  width: 70%;
+}

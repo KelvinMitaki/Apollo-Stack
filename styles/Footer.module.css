@@ -6,7 +6,8 @@
   color: #aaaab3;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: 50% -100%;
+  background-attachment: fixed;
 }
 .body {
   display: grid;

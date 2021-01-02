@@ -50,7 +50,7 @@ const HouseFilter: React.FC<Props> = props => {
       ) : (
         <div
           className={styles.search_head}
-          style={{ display: props.agent ? "none" : "block" }}
+          style={{ ...(props.agent && { display: "none" }) }}
         >
           <div>
             <AiOutlineSearch size="3rem" />
