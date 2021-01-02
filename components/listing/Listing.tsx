@@ -1,9 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import styles from "../../styles/listingEdit.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import Input from "../RegisterLogin/Input";
-const Listing = () => {
+
+interface FormValues {
+  listNo: string;
+  reference: string;
+  location: string;
+  address: string;
+}
+
+const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
   const [name, setName] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -22,7 +30,13 @@ const Listing = () => {
     <div className={styles.Listing}>
       <div>
         <div>
-          <Field component={Input} label="List No" type="text" name="listNo" />
+          <Field
+            component={Input}
+            label="List No"
+            type="text"
+            name="listNo"
+            disabled
+          />
         </div>
         <div>
           <Field
@@ -70,4 +84,9 @@ const Listing = () => {
   );
 };
 
-export default reduxForm({ form: "Listing" })(Listing);
+export default reduxForm<FormValues>({
+  form: "Listing",
+  initialValues: {
+    listNo: "36876238768786"
+  }
+})(Listing);
