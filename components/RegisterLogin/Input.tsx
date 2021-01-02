@@ -46,6 +46,7 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
           setFocused(true);
         }}
         disabled={props.disabled}
+        style={{ ...(props.disabled && { cursor: "not-allowed" }) }}
       />
       {props.meta.error && props.meta.touched && <div>{props.meta.error}</div>}
     </div>
