@@ -6,6 +6,7 @@ const Images = () => {
   for (let i = 0; i < 50; i++) {
     images.push(
       <div
+        key={i}
         style={{ backgroundImage: "url(/image-3.jpg)" }}
         className={styles.bg_image}
       ></div>
