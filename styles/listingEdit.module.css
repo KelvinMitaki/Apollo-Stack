@@ -56,11 +56,48 @@
   cursor: pointer;
 }
 
-.Listing {
+.Listing,
+.Attributes {
   width: 100%;
   margin-left: 2rem;
 }
 
-.Listing div {
+.Listing div,
+.Attributes div:not(.BiCheck) {
   width: 90%;
+}
+
+.inp {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: max-content !important;
+}
+
+.BiCheck {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #bebdbd;
+  border-radius: 2px;
+  transition: all 0.2s;
+  height: 2rem;
+  width: 2rem;
+}
+.inp svg {
+  opacity: 0;
+  visibility: hidden;
+}
+.clicked svg {
+  opacity: 1;
+  visibility: visible;
+}
+
+.clicked .BiCheck {
+  background-color: rgba(1, 2, 78, 0.76);
+  color: #f2f4f5;
+  border: none;
+  height: 2rem;
+  width: 2rem;
 }

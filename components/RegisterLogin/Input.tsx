@@ -6,6 +6,7 @@ interface Props {
   type: "text" | "password";
   label: "Email" | "Password";
   disabled?: boolean;
+  sup?: number;
 }
 
 const Input: React.FC<WrappedFieldProps & Props> = props => {
@@ -24,7 +25,10 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
         props.meta.error && props.meta.touched ? styles.error : ""
       }`}
     >
-      <label>{props.label}</label>
+      <label>
+        {props.label}
+        {props.sup && <sup>{props.sup}</sup>}
+      </label>
       <input
         type={props.type}
         {...props.input}
