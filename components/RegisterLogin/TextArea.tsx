@@ -9,7 +9,7 @@ interface Props {
 const TextArea: React.FC<WrappedFieldProps & Props> = props => {
   return (
     <div
-      className={`${styles.input} ${
+      className={`${styles.TextArea} ${
         props.meta.error && props.meta.touched ? styles.error : ""
       }`}
     >

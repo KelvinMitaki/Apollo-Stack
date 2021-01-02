@@ -59,12 +59,17 @@
   transform: translate(0vh);
 }
 
-.input {
+.input,
+.TextArea {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
   position: relative;
   z-index: 1;
+}
+.TextArea textarea {
+  background-color: #ebebeb;
+  resize: none;
 }
 
 /* background-color: #f2f4f5;

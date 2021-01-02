@@ -4,6 +4,7 @@ import Dropdown from "../Homepage/Header/Dropdown";
 import Input from "../RegisterLogin/Input";
 import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
+import TextArea from "../RegisterLogin/TextArea";
 
 interface FormValues {
   status: string;
@@ -81,9 +82,8 @@ const Marketing: React.FC<InjectedFormProps<FormValues>> = () => {
       </div>{" "}
       <div>
         <Field
-          component={Input}
+          component={TextArea}
           label="Marketing Description"
-          type="text"
           name="marketingDescription"
         />
       </div>
