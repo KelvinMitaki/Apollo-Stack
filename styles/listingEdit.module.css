@@ -148,3 +148,52 @@
 .active_rb span {
   background-color: rgba(1, 2, 78, 0.76);
 }
+
+@media only screen and (max-width: 1000px) {
+  .body {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 720px) {
+  .header {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .header > * {
+    height: 6rem;
+  }
+  .header > *:not(.btn) {
+    border-bottom: 2px solid #bebdbd;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+  }
+  .header button {
+    height: 4rem;
+    width: 100%;
+  }
+  .header p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0%;
+  }
+  .no_content {
+    display: none;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .opts {
+    width: 100% !important;
+  }
+  .Listing div,
+  .Attributes div:not(.BiCheck),
+  .Marketing div:not(.BiCheck) {
+    width: 96%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+}

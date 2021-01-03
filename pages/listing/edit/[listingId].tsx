@@ -39,12 +39,12 @@ const listingId = () => {
             >
               <p>images</p>
             </div>
-            <div></div>
+            <div className={styles.no_content}></div>
             <div className={styles.btn}>
               <button>save</button>
             </div>
           </div>
-          <div>
+          <div className={styles.opts}>
             {active === "listing" && <Listing />}
             {active === "attributes" && <Attributes />}
             {active === "marketing" && <Marketing />}

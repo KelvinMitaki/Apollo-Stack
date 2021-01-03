@@ -39,30 +39,32 @@ const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
   return (
     <div className={styles.Listing}>
       <div>
-        <div>
-          <div
-            className={`${styles.option} ${
-              option === "sale" ? styles.active_rb : ""
-            }`}
-            onClick={() => setOption("sale")}
-          >
-            <div>
-              <span></span>
+        {!edit && (
+          <div>
+            <div
+              className={`${styles.option} ${
+                option === "sale" ? styles.active_rb : ""
+              }`}
+              onClick={() => setOption("sale")}
+            >
+              <div>
+                <span></span>
+              </div>
+              <p>for sale</p>
             </div>
-            <p>for sale</p>
-          </div>
-          <div
-            className={`${styles.option} ${
-              option === "rent" ? styles.active_rb : ""
-            }`}
-            onClick={() => setOption("rent")}
-          >
-            <div>
-              <span></span>
+            <div
+              className={`${styles.option} ${
+                option === "rent" ? styles.active_rb : ""
+              }`}
+              onClick={() => setOption("rent")}
+            >
+              <div>
+                <span></span>
+              </div>
+              <p>to rent</p>
             </div>
-            <p>to rent</p>
           </div>
-        </div>
+        )}
         {edit && (
           <div>
             <Field
