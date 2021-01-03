@@ -186,7 +186,7 @@
   .opts {
     width: 100% !important;
   }
-  .Listing div,
+  .Listing div:not(.option div),
   .Attributes div:not(.BiCheck),
   .Marketing div:not(.BiCheck) {
     width: 96%;
