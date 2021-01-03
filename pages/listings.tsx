@@ -33,6 +33,12 @@ const listings = () => {
                   <p>price</p>
                 </th>
                 <th>
+                  <p>bedrooms</p>
+                </th>
+                <th>
+                  <p>bathrooms</p>
+                </th>
+                <th>
                   <p>type</p>
                 </th>
                 <th>

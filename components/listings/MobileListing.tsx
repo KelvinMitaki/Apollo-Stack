@@ -11,7 +11,7 @@ const MobileListing = () => {
           <p>982378632687437683709</p>
         </div>
         <div>
-          <p>reference</p>
+          <p>reference:</p>
           <p>123</p>
         </div>
         <div>
@@ -36,6 +36,14 @@ const MobileListing = () => {
           <div>
             <p>address:</p>
             <p>Ongata Rongai</p>
+          </div>
+          <div>
+            <p>bedrooms:</p>
+            <p>3</p>
+          </div>
+          <div>
+            <p>bathrooms:</p>
+            <p>2</p>
           </div>
         </div>
       </div>

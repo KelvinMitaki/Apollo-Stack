@@ -25,6 +25,8 @@ const Listing: React.FC<Props> = props => {
       <td>townhouse</td>
       <td>Ongata Rongai, Nairobi</td>
       <td>32,000,000</td>
+      <td>3</td>
+      <td>2</td>
       <td>rent</td>
       <td>expired</td>
       <td>31/12/2020</td>
