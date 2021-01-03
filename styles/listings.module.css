@@ -114,6 +114,32 @@
   width: 100%;
   margin-top: 1rem;
 }
+.BiCheck {
+  border: 2px solid #bebdbd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: all 0.2s;
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+}
+.BiCheck svg {
+  transform: rotate(-5deg);
+  opacity: 0;
+  visibility: hidden;
+  color: #f2f4f5;
+  transition: all 0.2s;
+}
+.checked.BiCheck {
+  border: none;
+  background-color: rgba(1, 2, 78, 0.76);
+}
+.checked.BiCheck svg {
+  opacity: 1;
+  visibility: visible;
+}
 @media only screen and (max-width: 1024px) {
   .MobileListing {
     display: block;

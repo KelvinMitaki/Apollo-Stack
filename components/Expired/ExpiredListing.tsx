@@ -1,6 +1,6 @@
 import React from "react";
+import { BiCheck } from "react-icons/bi";
 import styles from "../../styles/listings.module.css";
-import Router from "next/router";
 
 interface Props {
   className?: string;
@@ -12,8 +12,12 @@ const ExpiredListing: React.FC<Props> = props => {
       className={`${styles.listing} ${
         props.className ? styles[props.className] : ""
       }`}
-      onClick={() => Router.push("/listing/edit/123")}
     >
+      <td>
+        <p className={styles.BiCheck}>
+          <BiCheck />
+        </p>
+      </td>
       <td>123</td>
       <td>12373625681269798</td>
       <td>

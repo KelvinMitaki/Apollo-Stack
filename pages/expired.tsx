@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { BiCheck } from "react-icons/bi";
 import ExpiredListing from "../components/Expired/ExpiredListing";
 import ExpiredMobileListing from "../components/Expired/ExpiredMobileListing";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
@@ -6,6 +7,7 @@ import Layout from "../components/Layout/Layout";
 import styles from "../styles/listings.module.css";
 
 const expired = () => {
+  const [check, setCheck] = useState<boolean>(false);
   const listings = [];
   for (let i = 0; i < 50; i++) {
     listings.push(
@@ -24,6 +26,16 @@ const expired = () => {
           <table className={styles.exp_table} cellSpacing="0">
             <thead>
               <tr className={styles.header}>
+                <th>
+                  <p
+                    className={`${styles.BiCheck} ${
+                      check ? styles.checked : ""
+                    }`}
+                    onClick={() => setCheck(ck => !ck)}
+                  >
+                    <BiCheck />
+                  </p>
+                </th>
                 <th>
                   <p>reference</p>
                 </th>
