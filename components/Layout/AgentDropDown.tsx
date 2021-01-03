@@ -23,9 +23,13 @@ const AgentDropDown: React.FC<Props> = props => {
           </div>
         </a>
       </Link>
-      <div>
-        <p>create a new listing</p>
-      </div>
+      <Link href="/listing/new">
+        <a>
+          <div>
+            <p>create a new listing</p>
+          </div>
+        </a>
+      </Link>
       <Link href="/expired">
         <a>
           <div>
@@ -45,9 +49,13 @@ const AgentDropDown: React.FC<Props> = props => {
       <div>
         <p>listing statistics</p>
       </div>
-      <div>
-        <p>profile</p>
-      </div>
+      <Link href="/profile/edit">
+        <a>
+          <div>
+            <p>profile</p>
+          </div>
+        </a>
+      </Link>
     </div>
   );
 };
