@@ -185,10 +185,14 @@
   .opts {
     width: 100% !important;
   }
-  .Listing div:not(.option div),
+  .Listing div,
   .Attributes div:not(.BiCheck),
   .Marketing div:not(.BiCheck) {
     width: 96%;
+  }
+  .option div {
+    height: 1.8rem;
+    width: 1.8rem;
   }
 }
 @media only screen and (max-width: 400px) {
