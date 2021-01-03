@@ -6,21 +6,10 @@ import Dropdown from "../Homepage/Header/Dropdown";
 import { BiCheck } from "react-icons/bi";
 
 const Attributes = () => {
-  const [name, setName] = useState<string>("");
   const [clicked, setClicked] = useState<boolean>(false);
-  const searchDiv = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-  const handleClickOutside = (e: Event) => {
-    // @ts-ignore
-    if (searchDiv.current && !searchDiv.current.contains(e.target)) {
-      setName("");
-    }
-  };
+  const [furnished, setFurnished] = useState<boolean>(false);
+  const [pet, setPet] = useState<boolean>(false);
+
   return (
     <div className={styles.Attributes}>
       <div>
@@ -67,18 +56,28 @@ const Attributes = () => {
           name="location"
           sup={2}
         />
-      </div>{" "}
-      <div style={{ cursor: "pointer" }}>
-        <Dropdown
-          selections={["yes ", "no"]}
-          determinant="petFriendly"
-          name={name}
-          searchDiv={searchDiv}
-          title="Pet Friendly"
-          setName={setName}
-          className="d_search"
-        />
       </div>
+
+      <div
+        className={`${styles.inp} ${furnished ? styles.clicked : ""}`}
+        onClick={() => setFurnished(cl => !cl)}
+      >
+        <div className={styles.BiCheck}>
+          <BiCheck />
+        </div>
+        <p>furnished</p>
+      </div>
+
+      <div
+        className={`${styles.inp} ${pet ? styles.clicked : ""}`}
+        onClick={() => setPet(cl => !cl)}
+      >
+        <div className={styles.BiCheck}>
+          <BiCheck />
+        </div>
+        <p>pet friendly</p>
+      </div>
+
       <div
         className={`${styles.inp} ${clicked ? styles.clicked : ""}`}
         onClick={() => setClicked(cl => !cl)}
