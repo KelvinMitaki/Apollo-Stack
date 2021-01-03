@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiCheck } from "react-icons/bi";
+import { FiCheck } from "react-icons/fi";
 import styles from "../../styles/listings.module.css";
 
 interface Props {
   className?: string;
+  checked: boolean;
 }
 
 const ExpiredListing: React.FC<Props> = props => {
+  const [check, setCheck] = useState<boolean>(false);
+  useEffect(() => {
+    setCheck(props.checked);
+  }, [props.checked]);
   return (
     <tr
       className={`${styles.listing} ${
@@ -14,9 +20,14 @@ const ExpiredListing: React.FC<Props> = props => {
       }`}
     >
       <td>
-        <p className={styles.BiCheck}>
-          <BiCheck />
-        </p>
+        <span className={styles.icon}>
+          <p
+            className={`${styles.BiCheck} ${check ? styles.checked : ""}`}
+            onClick={() => setCheck(ck => !ck)}
+          >
+            <FiCheck />
+          </p>
+        </span>
       </td>
       <td>123</td>
       <td>12373625681269798</td>

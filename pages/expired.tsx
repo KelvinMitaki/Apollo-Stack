@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BiCheck } from "react-icons/bi";
+import { FiCheck } from "react-icons/fi";
 import ExpiredListing from "../components/Expired/ExpiredListing";
 import ExpiredMobileListing from "../components/Expired/ExpiredMobileListing";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
@@ -11,7 +12,11 @@ const expired = () => {
   const listings = [];
   for (let i = 0; i < 50; i++) {
     listings.push(
-      <ExpiredListing key={i} className={`${i % 2 === 0 ? "active" : ""}`} />
+      <ExpiredListing
+        key={i}
+        className={`${i % 2 === 0 ? "active" : ""}`}
+        checked={check}
+      />
     );
   }
   const mobileListings = [];
@@ -27,14 +32,16 @@ const expired = () => {
             <thead>
               <tr className={styles.header}>
                 <th>
-                  <p
-                    className={`${styles.BiCheck} ${
-                      check ? styles.checked : ""
-                    }`}
-                    onClick={() => setCheck(ck => !ck)}
-                  >
-                    <BiCheck />
-                  </p>
+                  <span className={styles.icon}>
+                    <p
+                      className={`${styles.BiCheck} ${
+                        check ? styles.checked : ""
+                      }`}
+                      onClick={() => setCheck(ck => !ck)}
+                    >
+                      <FiCheck />
+                    </p>
+                  </span>
                 </th>
                 <th>
                   <p>reference</p>

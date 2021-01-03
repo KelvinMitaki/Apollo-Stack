@@ -73,6 +73,7 @@
 .header div p:first-child {
   font-weight: 700;
 }
+
 .mb_body {
   display: flex;
   margin-top: 1rem;
@@ -113,6 +114,12 @@
   justify-content: center;
   width: 100%;
   margin-top: 1rem;
+}
+.icon {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .BiCheck {
   border: 2px solid #bebdbd;
