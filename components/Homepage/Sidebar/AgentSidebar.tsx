@@ -2,7 +2,12 @@ import Link from "next/link";
 import React from "react";
 import styles from "../../../styles/Layout.module.css";
 
-const AgentSidebar = () => {
+interface Props {
+  setAgentSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+  agentSidebar: boolean;
+}
+
+const AgentSidebar: React.FC<Props> = props => {
   return (
     <div className={styles.AgentSidebar}>
       <Link href="/listings">
