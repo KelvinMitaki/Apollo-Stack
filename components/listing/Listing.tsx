@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import styles from "../../styles/listingEdit.module.css";
@@ -14,8 +15,14 @@ interface FormValues {
 const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
   const [name, setName] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
+  const [edit, setEdit] = useState<boolean>(false);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+    if (Router.pathname.includes("edit")) {
+      setEdit(true);
+    } else {
+      setEdit(false);
+    }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -29,15 +36,17 @@ const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
   return (
     <div className={styles.Listing}>
       <div>
-        <div>
-          <Field
-            component={Input}
-            label="List No"
-            type="text"
-            name="listNo"
-            disabled
-          />
-        </div>
+        {edit && (
+          <div>
+            <Field
+              component={Input}
+              label="List No"
+              type="text"
+              name="listNo"
+              disabled
+            />
+          </div>
+        )}
         <div>
           <Field
             component={Input}

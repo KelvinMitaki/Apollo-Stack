@@ -5,6 +5,7 @@ import Input from "../RegisterLogin/Input";
 import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
 import TextArea from "../RegisterLogin/TextArea";
+import Router from "next/router";
 
 interface FormValues {
   status: string;
@@ -20,10 +21,16 @@ interface FormValues {
 const Marketing: React.FC<InjectedFormProps<FormValues>> = () => {
   const [repossessed, setRepossessed] = useState<boolean>(false);
   const [auction, setAuction] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+    if (Router.pathname.includes("edit")) {
+      setEdit(true);
+    } else {
+      setEdit(false);
+    }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -36,15 +43,17 @@ const Marketing: React.FC<InjectedFormProps<FormValues>> = () => {
   };
   return (
     <div className={styles.Marketing}>
-      <div>
-        <Field
-          component={Input}
-          label="Status"
-          type="text"
-          name="status"
-          disabled
-        />
-      </div>
+      {edit && (
+        <div>
+          <Field
+            component={Input}
+            label="Status"
+            type="text"
+            name="status"
+            disabled
+          />
+        </div>
+      )}
       <div>
         <Field
           component={Input}
