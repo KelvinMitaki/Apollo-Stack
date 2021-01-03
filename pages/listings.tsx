@@ -30,7 +30,7 @@ const listings = () => {
                   <p>address</p>
                 </th>
                 <th>
-                  <p>price</p>
+                  <p>price in ksh</p>
                 </th>
                 <th>
                   <p>bedrooms</p>
