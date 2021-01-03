@@ -12,8 +12,11 @@ interface FormValues {
   address: string;
 }
 
+type Option = "sale" | "rent";
+
 const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
   const [name, setName] = useState<string>("");
+  const [option, setOption] = useState<Option>("sale");
   const searchDiv = useRef<HTMLDivElement>(null);
   const [edit, setEdit] = useState<boolean>(false);
   useEffect(() => {
@@ -36,6 +39,20 @@ const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
   return (
     <div className={styles.Listing}>
       <div>
+        <div>
+          <div className={styles.option}>
+            <div>
+              <span></span>
+            </div>
+            <p>for sale</p>
+          </div>
+          <div className={styles.option}>
+            <div>
+              <span></span>
+            </div>
+            <p>to rent</p>
+          </div>
+        </div>
         {edit && (
           <div>
             <Field
