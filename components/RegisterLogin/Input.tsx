@@ -27,7 +27,12 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
     >
       <label>
         {props.label}
-        {props.sup && <sup>{props.sup}</sup>}
+        {props.sup && (
+          <>
+            <span>(in m</span>
+            <sup>{props.sup}</sup>)
+          </>
+        )}
       </label>
       <input
         type={props.type}

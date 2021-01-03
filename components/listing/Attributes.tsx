@@ -42,7 +42,7 @@ const Attributes = () => {
       <div>
         <Field
           component={Input}
-          label="Home Area(in m)"
+          label="Home Area"
           type="text"
           name="location"
           sup={2}
@@ -51,7 +51,7 @@ const Attributes = () => {
       <div>
         <Field
           component={Input}
-          label="Lot Area(in m)"
+          label="Lot Area"
           type="text"
           name="location"
           sup={2}

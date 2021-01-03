@@ -151,7 +151,8 @@
   .MobileListing {
     display: block;
   }
-  .table {
+  .table,
+  .exp_table {
     display: none;
   }
 }
