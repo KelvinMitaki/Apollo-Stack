@@ -11,16 +11,20 @@
   text-transform: capitalize;
 }
 
-.table {
+.table,
+.exp_table {
   width: 100%;
   min-width: 107rem;
   background-color: #f2f4f5;
 }
 .table td,
-.table th {
+.table th,
+.exp_table th,
+.exp_table td {
   border-bottom: 1px solid #bebdbd;
 }
-.table {
+.table,
+.exp_table {
   border: 1px solid #bebdbd;
   border-top: none;
   border-bottom: none;

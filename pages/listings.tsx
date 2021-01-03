@@ -6,6 +6,16 @@ import MobileListing from "../components/listings/MobileListing";
 import styles from "../styles/listings.module.css";
 
 const listings = () => {
+  const listings = [];
+  for (let i = 0; i < 50; i++) {
+    listings.push(
+      <Listing key={i} className={`${i % 2 === 0 ? "active" : ""}`} />
+    );
+  }
+  const mobileListings = [];
+  for (let i = 0; i < 50; i++) {
+    mobileListings.push(<MobileListing key={i} />);
+  }
   return (
     <Layout title="Listings">
       <div className={styles.container}>
@@ -49,45 +59,9 @@ const listings = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-              <Listing className="active" />
-              <Listing />
-            </tbody>
+            <tbody>{listings}</tbody>
           </table>
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
-          <MobileListing />
+          {mobileListings}
         </div>
       </div>
     </Layout>

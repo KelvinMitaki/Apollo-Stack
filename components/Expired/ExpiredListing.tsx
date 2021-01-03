@@ -9,7 +9,9 @@ interface Props {
 const ExpiredListing: React.FC<Props> = props => {
   return (
     <tr
-      className={`${styles.listing} ${props.className ? styles.active : ""}`}
+      className={`${styles.listing} ${
+        props.className ? styles[props.className] : ""
+      }`}
       onClick={() => Router.push("/listing/edit/123")}
     >
       <td>123</td>
