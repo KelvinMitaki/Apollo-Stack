@@ -8,6 +8,7 @@ import styles from "../../../styles/Layout.module.css";
 import { SetToggleLogin, SetToggleNavbar } from "../../Layout/Layout";
 import { ToggleLoginHeader } from "../../RegisterLogin/RegisterLoginModal";
 import { BsArrowRight } from "react-icons/bs";
+import AgentSidebar from "./AgentSidebar";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -38,7 +39,15 @@ const Sidebar: React.FC<Props> = props => {
           }
         />
       </div>
-      <div className={styles.sidebar_body}>
+      <div
+        className={`${styles.sidebar_body} ${
+          agentSidebar ? styles.agentSidebar__show : ""
+        }`}
+      >
+        <AgentSidebar
+          setAgentSidebar={setAgentSidebar}
+          agentSidebar={agentSidebar}
+        />
         <div className={styles.opts_item} onClick={() => setAgentSidebar(true)}>
           <div className={styles.toggle_agent}>
             <p>agent</p>

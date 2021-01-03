@@ -1,6 +1,10 @@
 import Link from "next/link";
 import React from "react";
+import { BsArrowLeft } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { ActionTypes } from "../../../redux/types/types";
 import styles from "../../../styles/Layout.module.css";
+import { SetToggleNavbar } from "../../Layout/Layout";
 
 interface Props {
   setAgentSidebar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,25 +12,58 @@ interface Props {
 }
 
 const AgentSidebar: React.FC<Props> = props => {
+  const dispatch = useDispatch();
   return (
-    <div className={styles.AgentSidebar}>
+    <div
+      className={`${styles.AgentSidebar} ${
+        props.agentSidebar ? styles.agentSidebar__show : ""
+      }`}
+    >
+      <div
+        className={styles.BsArrowLeft}
+        onClick={() => props.setAgentSidebar(false)}
+      >
+        <BsArrowLeft size="3rem" />
+        <p>back</p>
+      </div>
       <Link href="/listings">
         <a>
-          <div>
+          <div
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
             <p>listings</p>
           </div>
         </a>
       </Link>
       <Link href="/listing/new">
         <a>
-          <div>
+          <div
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
             <p>create a new listing</p>
           </div>
         </a>
       </Link>
       <Link href="/expired">
         <a>
-          <div>
+          <div
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
             <p>expired listings</p>
           </div>
         </a>
@@ -45,7 +82,14 @@ const AgentSidebar: React.FC<Props> = props => {
       </div>
       <Link href="/profile/edit">
         <a>
-          <div>
+          <div
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
             <p>profile</p>
           </div>
         </a>

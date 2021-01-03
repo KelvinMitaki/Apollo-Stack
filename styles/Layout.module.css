@@ -41,9 +41,13 @@
   font-weight: 500;
   text-transform: capitalize;
   position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
 }
 
-.opts_item:hover {
+.opts_item:hover,
+.AgentSidebar div:hover {
   background-color: rgba(1, 2, 78, 0.76);
 }
 .sidebar_toggle {
@@ -66,6 +70,8 @@
   flex-direction: column;
   justify-content: center;
   height: 70%;
+  position: relative;
+  transition: all 0.2s;
 }
 
 .sidebar_header {
@@ -110,6 +116,36 @@
 .AgentSidebar {
   opacity: 0;
   visibility: hidden;
+  position: absolute;
+  transition: all 0.2s;
+  transform: scale(0) translateY(3.5rem);
+  width: 100%;
+  padding: 0%;
+}
+.AgentSidebar div {
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  padding-left: 2rem;
+}
+.agentSidebar__show.AgentSidebar {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(3.5rem);
+}
+.agentSidebar__show .opts_item {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+}
+.BsArrowLeft {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
 }
 @media only screen and (max-width: 1000px) {
   .container {
