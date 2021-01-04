@@ -1,7 +1,9 @@
+import { useMutation } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
+import { LOGIN_USER } from "../../graphql/mutations/mutations";
 import { Redux } from "../../interfaces/Redux";
 import styles from "../../styles/registerLoginModal.module.css";
 import Input from "./Input";
@@ -13,25 +15,38 @@ interface FormValues {
 
 const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
-
+  const [loginUser] = useMutation(LOGIN_USER, {
+    onCompleted(data) {
+      localStorage.setItem("token", data.loginUser.token);
+    },
+    onError(err) {
+      console.log(err);
+    }
+  });
   return (
     <div
       className={`${styles.login} ${
         styling.toggleLoginHeader === "login" ? styles.login_active : ""
       }`}
     >
-      <Field component={Input} label="Email" type="text" name="email" />
-      <Field
-        component={Input}
-        label="Password"
-        type="password"
-        name="password"
-      />
-      <div className={styles.login_btn}>
-        <button type="submit" disabled={props.invalid}>
-          login
-        </button>
-      </div>
+      <form
+        onSubmit={props.handleSubmit(formvalues =>
+          loginUser({ variables: formvalues })
+        )}
+      >
+        <Field component={Input} label="Email" type="text" name="email" />
+        <Field
+          component={Input}
+          label="Password"
+          type="password"
+          name="password"
+        />
+        <div className={styles.login_btn}>
+          <button type="submit" disabled={props.invalid}>
+            login
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
