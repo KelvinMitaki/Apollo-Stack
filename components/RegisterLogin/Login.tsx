@@ -21,8 +21,9 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted(data) {
-      localStorage.setItem("token", data.loginUser.token);
-      document.cookie = `token=${data.loginUser.token}; Max-Age=86400; Path=/;`;
+      console.log({ data });
+      // localStorage.setItem("token", data.loginUser.token);
+      // document.cookie = `token=${data.loginUser.token}; Max-Age=86400; Path=/;`;
       dispatch<SetToggleLogin>({
         type: ActionTypes.toggleLogin,
         payload: false

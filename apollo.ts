@@ -16,7 +16,8 @@ const createApolloClient = () =>
       uri:
         process.env.NODE_ENV !== "production"
           ? "http://localhost:4000/graphql"
-          : "https://apollo-stack-server.herokuapp.com/graphql"
+          : "https://apollo-stack-server.herokuapp.com/graphql",
+      credentials: "include"
     }),
     connectToDevTools: process.env.NODE_ENV !== "production"
   });
