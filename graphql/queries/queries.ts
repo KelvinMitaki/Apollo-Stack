@@ -4,7 +4,8 @@ export const FETCH_CURRENT_USER = gql`
   query {
     currentUser {
       _id
-      fullName
+      firstName
+      lastName
       email
     }
   }

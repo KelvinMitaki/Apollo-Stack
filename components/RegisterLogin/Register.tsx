@@ -9,7 +9,8 @@ import Input from "./Input";
 import { ToggleLoginHeader } from "./RegisterLoginModal";
 
 interface FormValues {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -24,7 +25,8 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
         styling.toggleLoginHeader === "register" ? styles.register_active : ""
       }`}
     >
-      <Field component={Input} label="Full Name" type="text" name="fullName" />
+      <Field component={Input} label="Full Name" type="text" name="firstName" />
+      <Field component={Input} label="Full Name" type="text" name="lastName" />
       <Field component={Input} label="Email" type="text" name="email" />
       <Field
         component={Input}
@@ -60,8 +62,11 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
 
 const validate = (formValues: FormValues) => {
   const errors = {} as FormValues;
-  if (!formValues.fullName || formValues.fullName.trim().length === 0) {
-    errors.fullName = "Please enter a valid full name";
+  if (!formValues.firstName || formValues.firstName.trim().length === 0) {
+    errors.firstName = "Please enter a valid first name";
+  }
+  if (!formValues.lastName || formValues.lastName.trim().length === 0) {
+    errors.lastName = "Please enter a valid last name";
   }
   if (
     !formValues.email ||
