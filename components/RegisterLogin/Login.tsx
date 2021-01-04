@@ -1,11 +1,14 @@
 import { useMutation } from "@apollo/client";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
 import { LOGIN_USER } from "../../graphql/mutations/mutations";
+import { FETCH_CURRENT_USER } from "../../graphql/queries/queries";
 import { Redux } from "../../interfaces/Redux";
+import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
+import { SetToggleLogin } from "../Layout/Layout";
 import Input from "./Input";
 
 interface FormValues {
@@ -14,10 +17,16 @@ interface FormValues {
 }
 
 const Login: React.FC<InjectedFormProps<FormValues>> = props => {
+  const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted(data) {
       localStorage.setItem("token", data.loginUser.token);
+      document.cookie = `token=${data.loginUser.token}; Max-Age=86400; Path=/;`;
+      dispatch<SetToggleLogin>({
+        type: ActionTypes.toggleLogin,
+        payload: false
+      });
     },
     onError(err) {
       console.log(err);
@@ -31,7 +40,11 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
     >
       <form
         onSubmit={props.handleSubmit(formvalues =>
-          loginUser({ variables: formvalues })
+          loginUser({
+            variables: formvalues,
+            refetchQueries: [{ query: FETCH_CURRENT_USER }],
+            awaitRefetchQueries: true
+          })
         )}
       >
         <Field component={Input} label="Email" type="text" name="email" />
