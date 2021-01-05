@@ -69,4 +69,4 @@ const listings = () => {
   );
 };
 
-export default withAuth(listings);
+export default listings;
