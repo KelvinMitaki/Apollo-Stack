@@ -81,7 +81,7 @@ const LayoutHeader: React.FC<Props> = props => {
           <Link href="/properties/123">
             <a>
               <div className={styles.opts_item}>
-                <p>repossessed</p>
+                <p>furnished</p>
               </div>
             </a>
           </Link>

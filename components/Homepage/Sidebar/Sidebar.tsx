@@ -110,7 +110,7 @@ const Sidebar: React.FC<Props> = props => {
         >
           <Link href="/properties/123">
             <a>
-              <p>repossessed</p>
+              <p>furnished</p>
             </a>
           </Link>
         </div>
