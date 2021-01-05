@@ -12,13 +12,14 @@ const createApolloClient = () =>
   new ApolloClient({
     ssrMode: typeof window === "undefined",
     cache: new InMemoryCache(),
-
-    connectToDevTools: process.env.NODE_ENV !== "production",
-    uri:
-      process.env.NODE_ENV !== "production"
-        ? "http://localhost:4000/graphql"
-        : "https://apollo-stack-server.herokuapp.com/graphql",
-    credentials: "include"
+    link: new HttpLink({
+      uri:
+        process.env.NODE_ENV !== "production"
+          ? "http://localhost:4000/graphql"
+          : "apollo-stack-server.herokuapp.com/graphql",
+      credentials: "include"
+    }),
+    connectToDevTools: process.env.NODE_ENV !== "production"
   });
 
 export const initializeApollo = (
