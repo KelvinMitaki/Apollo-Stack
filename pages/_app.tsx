@@ -15,22 +15,22 @@ import { FETCH_CURRENT_USER } from "../graphql/queries/queries";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState);
-  const { data } = useQuery(FETCH_CURRENT_USER, { client });
-  console.log(data);
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} {...data} />;
+      <Component {...pageProps} />;
     </ApolloProvider>
   );
 }
 MyApp.getInitialProps = async (appCtx: AppContext) => {
+  console.log("_app");
   const apolloClient = initializeApollo();
   const appProps = await App.getInitialProps(appCtx);
   await apolloClient.query({
     query: FETCH_CURRENT_USER,
     context: {
       headers: appCtx.ctx.req?.headers
-    }
+    },
+    fetchPolicy: "network-only"
   });
   return {
     ...appProps,
