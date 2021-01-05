@@ -206,7 +206,7 @@ const Details = () => {
               <p>200 sqft</p>
             </div>
             <div>
-              <p>Home Area</p>
+              <p>Plinth Area</p>
               <p>1200 sqft</p>
             </div>
           </div>

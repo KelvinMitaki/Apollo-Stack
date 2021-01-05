@@ -29,9 +29,6 @@ const Attributes = () => {
         />
       </div>
       <div>
-        <Field component={Input} label="Garages" type="text" name="garages" />
-      </div>
-      <div>
         <Field
           component={Input}
           label="Parking Lots"
@@ -42,7 +39,7 @@ const Attributes = () => {
       <div>
         <Field
           component={Input}
-          label="Home Area"
+          label="Plinth Area"
           type="text"
           name="location"
           sup={2}
