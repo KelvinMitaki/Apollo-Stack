@@ -24,10 +24,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 MyApp.getInitialProps = async (appCtx: AppContext) => {
-  console.log(appCtx.ctx.req?.headers);
   const apolloClient = initializeApollo();
   const appProps = await App.getInitialProps(appCtx);
-  await apolloClient.query({ query: FETCH_CURRENT_USER });
+  await apolloClient.query({
+    query: FETCH_CURRENT_USER,
+    context: {
+      headers: appCtx.ctx.req?.headers
+    }
+  });
   return {
     ...appProps,
     pageProps: {
