@@ -4,7 +4,9 @@ import {
   InMemoryCache,
   NormalizedCacheObject
 } from "@apollo/client";
+import { Agent } from "https";
 import { useMemo } from "react";
+import fetch from "isomorphic-fetch";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -16,8 +18,12 @@ const createApolloClient = () =>
       uri:
         process.env.NODE_ENV !== "production"
           ? "http://localhost:4000/graphql"
-          : "http://apollo-stack-server.herokuapp.com/graphql",
-      credentials: "include"
+          : "https://apollo-stack-server.herokuapp.com/graphql",
+      credentials: "include",
+      fetch,
+      fetchOptions: {
+        agent: new Agent({ rejectUnauthorized: false })
+      }
     }),
     connectToDevTools: process.env.NODE_ENV !== "production"
   });
