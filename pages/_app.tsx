@@ -1,41 +1,72 @@
 import { AppContext, AppProps } from "next/app";
 import "../styles/globals.css";
 import "rc-slider/assets/index.css";
-import { ApolloProvider, useQuery } from "@apollo/client";
+import {
+  ApolloProvider,
+  useQuery,
+  ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+  HttpLink
+} from "@apollo/client";
 import App from "next/app";
 import { wrapper } from "../redux/reducers";
 import nProgress from "nprogress";
 import Router from "next/router";
 import { initializeApollo, useApollo } from "../apollo";
 import { FETCH_CURRENT_USER } from "../graphql/queries/queries";
+import withApollo, {
+  ApolloAppContext,
+  ApolloContext,
+  ApolloPageContext
+} from "next-with-apollo";
+import { Agent } from "https";
 
 (Router as any).onRouteChangeStart = () => nProgress.start();
 (Router as any).onRouteChangeComplete = () => nProgress.done();
 (Router as any).onRouteChangeError = () => nProgress.done();
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const client = useApollo(pageProps.initialApolloState);
+interface Props {
+  apollo: ApolloClient<NormalizedCacheObject>;
+}
+
+function MyApp({ Component, pageProps, apollo }: AppProps & Props) {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apollo}>
       <Component {...pageProps} />;
     </ApolloProvider>
   );
 }
-MyApp.getInitialProps = async (appCtx: AppContext) => {
-  const apolloClient = initializeApollo();
+MyApp.getInitialProps = async (appCtx: ApolloAppContext) => {
+  const apolloClient = appCtx.ctx.apolloClient;
   const appProps = await App.getInitialProps(appCtx);
   await apolloClient.query({
-    query: FETCH_CURRENT_USER,
-    context: {
-      headers: appCtx.ctx.req?.headers
-    }
+    query: FETCH_CURRENT_USER
   });
   return {
-    ...appProps,
-    pageProps: {
-      ...appProps.pageProps,
-      initialApolloState: apolloClient.cache.extract()
-    }
+    ...appProps
   };
 };
-export default wrapper.withRedux(MyApp);
+export default withApollo(({ initialState, headers }) => {
+  return new ApolloClient({
+    // uri:
+    //   process.env.NODE_ENV !== "production"
+    //     ? "https://apollo-stack-server.herokuapp.com/graphql"
+    //     : "https://apollo-stack-server.herokuapp.com/graphql",
+    cache: new InMemoryCache().restore(initialState || {}),
+    credentials: "include",
+    headers: headers as Record<string, string>,
+    connectToDevTools: process.env.NODE_ENV !== "production",
+    link: new HttpLink({
+      uri:
+        process.env.NODE_ENV !== "production"
+          ? "https://apollo-stack-server.herokuapp.com/graphql"
+          : "https://apollo-stack-server.herokuapp.com/graphql",
+      credentials: "include",
+      fetch,
+      fetchOptions: {
+        agent: new Agent({ rejectUnauthorized: false })
+      }
+    })
+  });
+})(wrapper.withRedux(MyApp));
