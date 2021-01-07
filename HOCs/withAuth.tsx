@@ -5,7 +5,7 @@ import Router from "next/router";
 import { NextPage } from "next";
 
 const withAuth = (WrappedComponent: NextPage) => {
-  const HocComponent: NextPage = (props: any): JSX.Element => {
+  const HocComponent: NextPage = (props: any) => {
     const { data } = useQuery(FETCH_CURRENT_USER, {
       onError(err) {
         console.log("withauth", err);
@@ -18,7 +18,8 @@ const withAuth = (WrappedComponent: NextPage) => {
       Router.replace("/");
       return <></>;
     }
-    return <></>;
+
+    return null;
   };
   return HocComponent;
 };

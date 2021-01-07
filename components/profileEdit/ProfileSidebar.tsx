@@ -48,7 +48,12 @@ const ProfileSidebar = () => {
           </div>
         </a>
       </Link>
-      <div>
+      <div
+        onClick={() => {
+          document.cookie = `token=; Path=/; Expires=${new Date()}`;
+          window.location.reload();
+        }}
+      >
         <IoMdLogOut />
         <p>Logout</p>
       </div>
