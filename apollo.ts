@@ -6,7 +6,6 @@ import {
 } from "@apollo/client";
 import { Agent } from "https";
 import { useMemo } from "react";
-import fetch from "isomorphic-fetch";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -20,10 +19,11 @@ const createApolloClient = () =>
           ? "http://localhost:4000/graphql"
           : "https://apollo-stack-server.herokuapp.com/graphql",
       credentials: "include",
-      fetch,
-      fetchOptions: {
-        agent: new Agent({ rejectUnauthorized: false })
-      }
+      ...(process.env.NODE_ENV === "production" && {
+        fetchOptions: {
+          agent: new Agent({ rejectUnauthorized: false })
+        }
+      })
     }),
     connectToDevTools: process.env.NODE_ENV !== "production"
   });

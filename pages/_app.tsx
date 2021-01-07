@@ -22,13 +22,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 MyApp.getInitialProps = async (appCtx: AppContext) => {
-  console.log("_app");
   const apolloClient = initializeApollo();
   const appProps = await App.getInitialProps(appCtx);
   await apolloClient.query({
     query: FETCH_CURRENT_USER,
     context: {
-      headers: appCtx.ctx.req?.headers
+      headers: {
+        cookie: appCtx.ctx.req?.headers.cookie
+      }
     },
     fetchPolicy: "network-only"
   });
