@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import Router from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
@@ -40,13 +41,14 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
       }`}
     >
       <form
-        onSubmit={props.handleSubmit(formvalues =>
-          loginUser({
+        onSubmit={props.handleSubmit(async formvalues => {
+          await loginUser({
             variables: formvalues,
             refetchQueries: [{ query: FETCH_CURRENT_USER }],
             awaitRefetchQueries: true
-          })
-        )}
+          });
+          Router.replace("/profile/edit");
+        })}
       >
         <Field component={Input} label="Email" type="text" name="email" />
         <Field
