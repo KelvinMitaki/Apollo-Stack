@@ -48,7 +48,6 @@ MyApp.getInitialProps = async (appCtx: ApolloAppContext) => {
       }
     }
   });
-  console.log(apolloClient.cache.extract());
   return {
     ...appProps
   };
