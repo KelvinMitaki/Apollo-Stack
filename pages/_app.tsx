@@ -41,18 +41,21 @@ MyApp.getInitialProps = async (appCtx: ApolloAppContext) => {
   const apolloClient = appCtx.ctx.apolloClient;
   const appProps = await App.getInitialProps(appCtx);
   await apolloClient.query({
-    query: FETCH_CURRENT_USER
+    query: FETCH_CURRENT_USER,
+    context: {
+      headers: {
+        cookie: appCtx.ctx.req?.headers.cookie
+      }
+    }
   });
+  console.log(apolloClient.cache.extract());
   return {
     ...appProps
   };
 };
 export default withApollo(({ initialState, headers }) => {
+  console.log(headers);
   return new ApolloClient({
-    // uri:
-    //   process.env.NODE_ENV !== "production"
-    //     ? "https://apollo-stack-server.herokuapp.com/graphql"
-    //     : "https://apollo-stack-server.herokuapp.com/graphql",
     cache: new InMemoryCache().restore(initialState || {}),
     credentials: "include",
     headers: headers as Record<string, string>,
@@ -63,6 +66,11 @@ export default withApollo(({ initialState, headers }) => {
           ? "https://apollo-stack-server.herokuapp.com/graphql"
           : "https://apollo-stack-server.herokuapp.com/graphql",
       credentials: "include",
+      ...(process.env.NODE_ENV === "production" && {
+        fetchOptions: {
+          agent: new Agent({ rejectUnauthorized: false })
+        }
+      }),
       fetchOptions: {
         agent: new Agent({ rejectUnauthorized: false })
       }
