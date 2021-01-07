@@ -7,12 +7,15 @@ import { Redux } from "../../interfaces/Redux";
 import { ToggleLoginHeader } from "../RegisterLogin/RegisterLoginModal";
 import { SetToggleNavbar, SetToggleLogin } from "./Layout";
 import AgentDropDown from "./AgentDropDown";
+import { useQuery } from "@apollo/client";
+import { FETCH_CURRENT_USER } from "../../graphql/queries/queries";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
 }
 
 const LayoutHeader: React.FC<Props> = props => {
+  const { data } = useQuery(FETCH_CURRENT_USER);
   const [hover, setHover] = useState<boolean>(false);
   const agentDropDownRef = useRef<HTMLDivElement>(null);
   const toggleNavbar = useSelector(
@@ -84,45 +87,57 @@ const LayoutHeader: React.FC<Props> = props => {
                 <p>furnished</p>
               </div>
             </a>
-          </Link>
-          <div
-            className={styles.opts_item}
-            onClick={() => {
-              dispatch<SetToggleNavbar>({
-                type: ActionTypes.toggleNavbar,
-                payload: false
-              });
-              dispatch<SetToggleLogin>({
-                type: ActionTypes.toggleLogin,
-                payload: true
-              });
-              dispatch<ToggleLoginHeader>({
-                type: ActionTypes.toggleLoginHeader,
-                payload: "login"
-              });
-            }}
-          >
-            <p>login</p>
-          </div>
-          <div
-            className={styles.opts_item}
-            onClick={() => {
-              dispatch<SetToggleNavbar>({
-                type: ActionTypes.toggleNavbar,
-                payload: false
-              });
-              dispatch<SetToggleLogin>({
-                type: ActionTypes.toggleLogin,
-                payload: true
-              });
-              dispatch<ToggleLoginHeader>({
-                type: ActionTypes.toggleLoginHeader,
-                payload: "register"
-              });
-            }}
-          >
-            <p>register</p>
-          </div>
+          </Link>{" "}
+          {!data.currentUser ? (
+            <>
+              <div
+                className={styles.opts_item}
+                onClick={() => {
+                  dispatch<SetToggleNavbar>({
+                    type: ActionTypes.toggleNavbar,
+                    payload: false
+                  });
+                  dispatch<SetToggleLogin>({
+                    type: ActionTypes.toggleLogin,
+                    payload: true
+                  });
+                  dispatch<ToggleLoginHeader>({
+                    type: ActionTypes.toggleLoginHeader,
+                    payload: "login"
+                  });
+                }}
+              >
+                <p>login</p>
+              </div>
+              <div
+                className={styles.opts_item}
+                onClick={() => {
+                  dispatch<SetToggleNavbar>({
+                    type: ActionTypes.toggleNavbar,
+                    payload: false
+                  });
+                  dispatch<SetToggleLogin>({
+                    type: ActionTypes.toggleLogin,
+                    payload: true
+                  });
+                  dispatch<ToggleLoginHeader>({
+                    type: ActionTypes.toggleLoginHeader,
+                    payload: "register"
+                  });
+                }}
+              >
+                <p>register</p>
+              </div>
+            </>
+          ) : (
+            <Link href="/profile/edit">
+              <a>
+                <div className={styles.opts_item}>
+                  <p>profile</p>
+                </div>
+              </a>
+            </Link>
+          )}
         </div>
         <div
           className={styles.sidebar_toggle}
