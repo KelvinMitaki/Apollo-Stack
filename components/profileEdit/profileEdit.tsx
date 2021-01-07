@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import validator from "validator";
 import styles from "../../styles/edit.module.css";
 import ProfileInput from "./ProfileInput";
 
-const ProfileEdit: React.FC<InjectedFormProps> = props => {
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+}
+
+const ProfileEdit: React.FC<InjectedFormProps<FormValues>> = props => {
   return (
     <div className={styles.edit}>
       <h4>Profile</h4>
@@ -39,4 +47,31 @@ const ProfileEdit: React.FC<InjectedFormProps> = props => {
   );
 };
 
-export default reduxForm({ form: "ProfileEdit" })(ProfileEdit);
+const validate = (formValues: FormValues) => {
+  const errors = {} as FormValues;
+  if (!formValues.firstName || formValues.firstName.trim().length === 0) {
+    errors.firstName = "Please enter a valid first name";
+  }
+  if (!formValues.lastName || formValues.lastName.trim().length === 0) {
+    errors.lastName = "Please enter a valid last name";
+  }
+  if (
+    !formValues.email ||
+    (formValues.email && !validator.isEmail(formValues.email))
+  ) {
+    errors.email = "Please enter a valid email";
+  }
+  if (
+    !formValues.phoneNumber ||
+    (formValues.phoneNumber && !validator.isNumeric(formValues.phoneNumber)) ||
+    (formValues.phoneNumber && formValues.phoneNumber.length < 8)
+  ) {
+    errors.phoneNumber =
+      "Please enter a valid phone number of eight characters minimum";
+  }
+  return errors;
+};
+
+export default reduxForm<FormValues>({ form: "ProfileEdit", validate })(
+  ProfileEdit
+);
