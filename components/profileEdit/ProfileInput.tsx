@@ -10,7 +10,13 @@ interface Props {
 const ProfileInput: React.FC<WrappedFieldProps & Props> = props => {
   const [inputFocus, setInputFocus] = useState<string>("");
   return (
-    <div className={inputFocus === props.input.name ? styles.focused : ""}>
+    <div
+      className={
+        inputFocus === props.input.name || props.input.value
+          ? styles.focused
+          : ""
+      }
+    >
       <label htmlFor={props.input.name}>{props.label}</label>
       <input
         {...props.input}
