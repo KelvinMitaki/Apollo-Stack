@@ -9,9 +9,13 @@ interface FormValues {
   lastName: string;
   email: string;
   phoneNumber: string;
+  initialValues: Partial<FormValues>;
 }
 
-const ProfileEdit: React.FC<InjectedFormProps<FormValues>> = props => {
+const ProfileEdit: React.FC<
+  InjectedFormProps<FormValues, {}, string>
+> = props => {
+  props.initialValues;
   return (
     <div className={styles.edit}>
       <h4>Profile</h4>
@@ -33,6 +37,7 @@ const ProfileEdit: React.FC<InjectedFormProps<FormValues>> = props => {
           label="Email"
           type="text"
           name="email"
+          disabled
         />
         <Field
           component={ProfileInput}
@@ -71,7 +76,8 @@ const validate = (formValues: FormValues) => {
   }
   return errors;
 };
-
+// @ts-ignore
 export default reduxForm<FormValues>({ form: "ProfileEdit", validate })(
+  // @ts-ignore
   ProfileEdit
 );
