@@ -63,7 +63,6 @@ export default withApollo(({ initialState, headers }) => {
           ? "https://apollo-stack-server.herokuapp.com/graphql"
           : "https://apollo-stack-server.herokuapp.com/graphql",
       credentials: "include",
-      fetch,
       fetchOptions: {
         agent: new Agent({ rejectUnauthorized: false })
       }
