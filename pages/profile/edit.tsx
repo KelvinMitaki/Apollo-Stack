@@ -4,6 +4,7 @@ import Layout from "../../components/Layout/Layout";
 import ProfileEdit from "../../components/profileEdit/profileEdit";
 import ProfileSidebar from "../../components/profileEdit/ProfileSidebar";
 import { FETCH_CURRENT_USER } from "../../graphql/queries/queries";
+import withAuth from "../../HOCs/withAuth";
 import styles from "../../styles/edit.module.css";
 
 const edit = () => {
@@ -18,4 +19,4 @@ const edit = () => {
   );
 };
 
-export default edit;
+export default withAuth(edit);

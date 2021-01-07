@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
+import withAuth from "../../HOCs/withAuth";
 import styles from "../../styles/agent.module.css";
 
 const agent = () => {
@@ -37,4 +38,4 @@ const agent = () => {
   );
 };
 
-export default agent;
+export default withAuth(agent);

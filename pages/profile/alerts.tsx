@@ -3,6 +3,7 @@ import SavedAlerts from "../../components/alerts/SavedAlerts";
 import HouseFilter from "../../components/Homepage/Header/HouseFilter";
 import Layout from "../../components/Layout/Layout";
 import ProfileSidebar from "../../components/profileEdit/ProfileSidebar";
+import withAuth from "../../HOCs/withAuth";
 import styles from "../../styles/alerts.module.css";
 
 const alerts = () => {
@@ -41,4 +42,4 @@ const alerts = () => {
   );
 };
 
-export default alerts;
+export default withAuth(alerts);
