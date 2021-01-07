@@ -7,8 +7,8 @@ import { FETCH_CURRENT_USER } from "../graphql/queries/queries";
 import styles from "../styles/home.module.css";
 
 const Home: React.FC = props => {
-  // const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
-  // console.log(data);
+  const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
+  console.log(data);
   return (
     <div className={`${styles.container}`}>
       <Layout title="Home Page">
