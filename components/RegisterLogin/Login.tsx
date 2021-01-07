@@ -21,6 +21,9 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted(data) {
+      document.cookie = `token=${
+        data.loginUser.token
+      }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
       dispatch<SetToggleLogin>({
         type: ActionTypes.toggleLogin,
         payload: false
