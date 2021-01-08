@@ -1,6 +1,6 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import Router from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
@@ -18,6 +18,7 @@ interface FormValues {
 }
 
 const Login: React.FC<InjectedFormProps<FormValues>> = props => {
+  const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
   // useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
@@ -35,7 +36,7 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
       });
     },
     onError(err) {
-      console.log(err);
+      setError(err.graphQLErrors[0].message);
     }
   });
 
@@ -59,6 +60,9 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
           type="password"
           name="password"
         />
+        {error.trim().length !== 0 && (
+          <div className={styles.error}>{error}</div>
+        )}
         <div className={styles.login_btn}>
           <button type="submit" disabled={props.invalid}>
             login

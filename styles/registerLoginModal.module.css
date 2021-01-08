@@ -71,7 +71,10 @@
   background-color: #ebebeb;
   resize: none;
 }
-
+.error {
+  color: red;
+  font-weight: 600;
+}
 /* background-color: #f2f4f5;
 border: 1px solid #ebebeb; */
 .input input {

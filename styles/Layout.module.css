@@ -32,7 +32,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr) repeat(2, 1.5fr) 1fr 1.5fr;
 }
-.currentUser.opts{
+.currentUser.opts {
   grid-template-columns: repeat(3, 1fr) repeat(2, 1.5fr) 1fr;
 }
 .opts_item {
