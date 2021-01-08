@@ -15,7 +15,6 @@ interface FormValues {
 const ProfileEdit: React.FC<
   InjectedFormProps<FormValues, {}, string>
 > = props => {
-  props.initialValues;
   return (
     <div className={styles.edit}>
       <h4>Profile</h4>

@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import Router from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,11 +20,13 @@ interface FormValues {
 const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
+  // useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted(data) {
       document.cookie = `token=${
         data.loginUser.token
       }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
+      Router.replace("/profile/edit");
       dispatch<SetToggleLogin>({
         type: ActionTypes.toggleLogin,
         payload: false
@@ -34,6 +36,11 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
       console.log(err);
     }
   });
+  const getCookie = (name: string) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()!.split(";").shift();
+  };
   return (
     <div
       className={`${styles.login} ${
@@ -42,12 +49,9 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
     >
       <form
         onSubmit={props.handleSubmit(async formvalues => {
-          await loginUser({
-            variables: formvalues,
-            refetchQueries: [{ query: FETCH_CURRENT_USER }],
-            awaitRefetchQueries: true
+          loginUser({
+            variables: formvalues
           });
-          Router.replace("/profile/edit");
         })}
       >
         <Field component={Input} label="Email" type="text" name="email" />
