@@ -23,9 +23,11 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   // useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted(data) {
-      document.cookie = `token=${
-        data.loginUser.token
-      }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
+      document.cookie = `token=${data.loginUser.token}; Domain=${
+        process.env.NODE_ENV === "development"
+          ? "localhost"
+          : "https://apollo-stack-server.herokuapp.com/"
+      } Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
       Router.replace("/profile/edit");
       dispatch<SetToggleLogin>({
         type: ActionTypes.toggleLogin,
