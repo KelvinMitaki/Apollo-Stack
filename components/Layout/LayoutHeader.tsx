@@ -56,14 +56,19 @@ const LayoutHeader: React.FC<Props> = props => {
             data.currentUser ? styles.currentUser : ""
           }`}
         >
-          <div
-            className={styles.opts_item}
-            ref={agentDropDownRef}
-            onMouseOver={() => setHover(true)}
-          >
-            <p>agent</p>
-            <AgentDropDown hover={hover} agentDropDownRef={agentDropDownRef} />
-          </div>
+          {data.currentUser && data.currentUser.isAgent && (
+            <div
+              className={styles.opts_item}
+              ref={agentDropDownRef}
+              onMouseOver={() => setHover(true)}
+            >
+              <p>agent</p>
+              <AgentDropDown
+                hover={hover}
+                agentDropDownRef={agentDropDownRef}
+              />
+            </div>
+          )}
           <Link href="/properties/123">
             <a>
               <div className={styles.opts_item}>

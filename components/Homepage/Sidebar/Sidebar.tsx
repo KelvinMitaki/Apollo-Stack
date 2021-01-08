@@ -55,16 +55,23 @@ const Sidebar: React.FC<Props> = props => {
           agentSidebar ? styles.agentSidebar__show : ""
         }`}
       >
-        <AgentSidebar
-          setAgentSidebar={setAgentSidebar}
-          agentSidebar={agentSidebar}
-        />
-        <div className={styles.opts_item} onClick={() => setAgentSidebar(true)}>
-          <div className={styles.toggle_agent}>
-            <p>agent</p>
-            <BsArrowRight size="3rem" />
-          </div>
-        </div>
+        {data.currentUser && data.currentUser.isAgent && (
+          <>
+            <AgentSidebar
+              setAgentSidebar={setAgentSidebar}
+              agentSidebar={agentSidebar}
+            />
+            <div
+              className={styles.opts_item}
+              onClick={() => setAgentSidebar(true)}
+            >
+              <div className={styles.toggle_agent}>
+                <p>agent</p>
+                <BsArrowRight size="3rem" />
+              </div>
+            </div>
+          </>
+        )}
         <div
           className={styles.opts_item}
           onClick={() => {

@@ -8,6 +8,7 @@ export const FETCH_CURRENT_USER = gql`
       lastName
       email
       phoneNumber
+      isAgent
     }
   }
 `;

@@ -7,8 +7,8 @@ import Router from "next/router";
 import { RiAdminFill } from "react-icons/ri";
 import { IoMdLogOut } from "react-icons/io";
 import Link from "next/link";
-import { LOGOUT_USER } from "../../graphql/queries/queries";
-import { useLazyQuery } from "@apollo/client";
+import { FETCH_CURRENT_USER, LOGOUT_USER } from "../../graphql/queries/queries";
+import { useLazyQuery, useQuery } from "@apollo/client";
 
 const ProfileSidebar = () => {
   const [active, setActive] = useState<string>("");
@@ -20,6 +20,7 @@ const ProfileSidebar = () => {
       window.location.reload();
     }
   });
+  const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   return (
     <div className={styles.sidebar}>
       <Link href="/profile/edit">
@@ -46,14 +47,16 @@ const ProfileSidebar = () => {
           </div>
         </a>
       </Link>
-      <Link href="/profile/agent">
-        <a>
-          <div className={active === "/profile/agent" ? styles.active : ""}>
-            <RiAdminFill />
-            <p>Agent Zone</p>
-          </div>
-        </a>
-      </Link>
+      {data.currentUser && data.currentUser.isAgent && (
+        <Link href="/profile/agent">
+          <a>
+            <div className={active === "/profile/agent" ? styles.active : ""}>
+              <RiAdminFill />
+              <p>Agent Zone</p>
+            </div>
+          </a>
+        </Link>
+      )}
       <div
         onClick={() => {
           if (process.env.NODE_ENV === "production") {
