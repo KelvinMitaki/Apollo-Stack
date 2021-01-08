@@ -9,8 +9,11 @@ import { SetToggleLogin, SetToggleNavbar } from "../../Layout/Layout";
 import { ToggleLoginHeader } from "../../RegisterLogin/RegisterLoginModal";
 import { BsArrowRight } from "react-icons/bs";
 import AgentSidebar from "./AgentSidebar";
-import { FETCH_CURRENT_USER } from "../../../graphql/queries/queries";
-import { useQuery } from "@apollo/client";
+import {
+  FETCH_CURRENT_USER,
+  LOGOUT_USER
+} from "../../../graphql/queries/queries";
+import { useLazyQuery, useQuery } from "@apollo/client";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -18,6 +21,11 @@ interface Props {
 
 const Sidebar: React.FC<Props> = props => {
   const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
+  const [logoutUser, { called }] = useLazyQuery(LOGOUT_USER, {
+    onCompleted() {
+      window.location.reload();
+    }
+  });
   const [agentSidebar, setAgentSidebar] = useState<boolean>(false);
   const dispatch = useDispatch();
   const toggleNavbar = useSelector(
@@ -159,20 +167,36 @@ const Sidebar: React.FC<Props> = props => {
             </div>
           </>
         ) : (
-          <Link href="/profile/edit">
-            <a
-              onClick={() =>
-                dispatch<SetToggleNavbar>({
-                  type: ActionTypes.toggleNavbar,
-                  payload: false
-                })
-              }
+          <>
+            <Link href="/profile/edit">
+              <a
+                onClick={() =>
+                  dispatch<SetToggleNavbar>({
+                    type: ActionTypes.toggleNavbar,
+                    payload: false
+                  })
+                }
+              >
+                <div className={`${styles.opts_item} ${styles.profile}`}>
+                  <p>profile</p>
+                </div>
+              </a>
+            </Link>
+
+            <div
+              className={`${styles.opts_item} ${styles.profile}`}
+              onClick={() => {
+                if (process.env.NODE_ENV === "production") {
+                  document.cookie = `token=; Path=/; Expires=${new Date()}`;
+                }
+                if (!called) {
+                  logoutUser();
+                }
+              }}
             >
-              <div className={`${styles.opts_item} ${styles.profile}`}>
-                <p>profile</p>
-              </div>
-            </a>
-          </Link>
+              <p>logout</p>
+            </div>
+          </>
         )}
       </div>
     </div>
