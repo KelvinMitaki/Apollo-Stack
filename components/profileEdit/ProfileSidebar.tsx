@@ -7,13 +7,19 @@ import Router from "next/router";
 import { RiAdminFill } from "react-icons/ri";
 import { IoMdLogOut } from "react-icons/io";
 import Link from "next/link";
+import { LOGOUT_USER } from "../../graphql/queries/queries";
+import { useLazyQuery } from "@apollo/client";
 
 const ProfileSidebar = () => {
   const [active, setActive] = useState<string>("");
   useEffect(() => {
     setActive(Router.pathname);
   }, []);
-
+  const [logoutUser, { called }] = useLazyQuery(LOGOUT_USER, {
+    onCompleted() {
+      window.location.reload();
+    }
+  });
   return (
     <div className={styles.sidebar}>
       <Link href="/profile/edit">
@@ -50,8 +56,12 @@ const ProfileSidebar = () => {
       </Link>
       <div
         onClick={() => {
-          document.cookie = `token=; Path=/; Expires=${new Date()}`;
-          window.location.reload();
+          if (process.env.NODE_ENV === "production") {
+            document.cookie = `token=; Path=/; Expires=${new Date()}`;
+          }
+          if (!called) {
+            logoutUser();
+          }
         }}
       >
         <IoMdLogOut />

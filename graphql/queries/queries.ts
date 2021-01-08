@@ -10,3 +10,11 @@ export const FETCH_CURRENT_USER = gql`
     }
   }
 `;
+
+export const LOGOUT_USER = gql`
+  query {
+    logoutUser {
+      email
+    }
+  }
+`;

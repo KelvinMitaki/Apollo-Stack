@@ -23,9 +23,11 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   // useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted(data) {
-      document.cookie = `client_token=${
-        data.loginUser.token
-      }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
+      if (process.env.NODE_ENV === "production") {
+        document.cookie = `client_token=${
+          data.loginUser.token
+        }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
+      }
       Router.replace("/profile/edit");
       dispatch<SetToggleLogin>({
         type: ActionTypes.toggleLogin,
@@ -36,11 +38,7 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
       console.log(err);
     }
   });
-  const getCookie = (name: string) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()!.split(";").shift();
-  };
+
   return (
     <div
       className={`${styles.login} ${

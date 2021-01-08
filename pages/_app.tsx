@@ -22,7 +22,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 MyApp.getInitialProps = async (appCtx: AppContext) => {
-  appCtx.ctx.req && console.log("headers", appCtx.ctx.req.headers);
   const apolloClient = initializeApollo();
   const appProps = await App.getInitialProps(appCtx);
   await apolloClient.query({
