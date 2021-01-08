@@ -45,7 +45,9 @@ const ProfileEdit: React.FC<
           name="phoneNumber"
         />
 
-        <button type="submit">Save</button>
+        <button type="submit" disabled={props.invalid || props.pristine}>
+          Save
+        </button>
       </form>
     </div>
   );
@@ -65,13 +67,14 @@ const validate = (formValues: FormValues) => {
   ) {
     errors.email = "Please enter a valid email";
   }
-  if (
-    !formValues.phoneNumber ||
-    (formValues.phoneNumber && !validator.isNumeric(formValues.phoneNumber)) ||
-    (formValues.phoneNumber && formValues.phoneNumber.length < 8)
-  ) {
-    errors.phoneNumber =
-      "Please enter a valid phone number of eight characters minimum";
+  if (formValues.phoneNumber && formValues.phoneNumber.length !== 0) {
+    if (
+      !validator.isNumeric(formValues.phoneNumber) ||
+      formValues.phoneNumber.length < 8
+    ) {
+      errors.phoneNumber =
+        "Please enter a valid phone number of eight characters minimum";
+    }
   }
   return errors;
 };

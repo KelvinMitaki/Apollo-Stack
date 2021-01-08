@@ -81,6 +81,11 @@
   color: red;
 }
 
+.edit button:disabled {
+  background-color: rgba(1, 2, 78, 0.5);
+  cursor: not-allowed;
+}
+
 @media only screen and (max-width: 1000px) {
   .sidebar {
     display: none;
