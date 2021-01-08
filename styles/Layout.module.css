@@ -49,9 +49,12 @@
   transform: scale(1);
 }
 
+/* .profile.opts_item {
+  justify-content: flex-start;
+} */
 .opts_item:hover,
 .AgentSidebar div:hover {
-  background-color: rgba(1, 2, 78, 0.76);
+  background-color: rgba(1, 2, 78);
 }
 .sidebar_toggle {
   display: none;
@@ -94,6 +97,12 @@
   justify-content: start;
   align-content: center;
   padding-left: 2rem;
+}
+.sidebar_body a {
+  display: flex;
+}
+.sidebar_body a:hover {
+  background-color: rgba(1, 2, 78);
 }
 .sidebar_show.sidebar {
   transform: translateX(0);

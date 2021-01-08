@@ -19,12 +19,11 @@ const AgentSidebar: React.FC<Props> = props => {
         props.agentSidebar ? styles.agentSidebar__show : ""
       }`}
     >
-      <div
-        className={styles.BsArrowLeft}
-        onClick={() => props.setAgentSidebar(false)}
-      >
-        <BsArrowLeft size="3rem" />
-        <p>back</p>
+      <div onClick={() => props.setAgentSidebar(false)}>
+        <div className={styles.BsArrowLeft}>
+          <BsArrowLeft size="3rem" />
+          <p>back</p>
+        </div>
       </div>
       <Link href="/listings">
         <a>

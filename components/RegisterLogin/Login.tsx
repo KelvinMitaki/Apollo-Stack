@@ -21,7 +21,6 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
-  // useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   const [loginUser] = useMutation(LOGIN_USER, {
     onCompleted(data) {
       if (process.env.NODE_ENV === "production") {
