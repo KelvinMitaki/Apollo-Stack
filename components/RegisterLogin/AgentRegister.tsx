@@ -77,7 +77,7 @@ const validate = (formValues: FormValues) => {
   if (
     !formValues.phoneNumber ||
     !validator.isNumeric(formValues.phoneNumber) ||
-    formValues.phoneNumber.trim().length < 10
+    formValues.phoneNumber.trim().length < 8
   ) {
     errors.phoneNumber = "Please enter a valid phone number";
   }

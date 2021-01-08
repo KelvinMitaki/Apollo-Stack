@@ -40,10 +40,9 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
       }`}
     >
       <form
-        onSubmit={props.handleSubmit((formValues: FormValues) => {
-          console.log(formValues);
-          registerUser({ variables: formValues });
-        })}
+        onSubmit={props.handleSubmit((formValues: FormValues) =>
+          registerUser({ variables: formValues })
+        )}
       >
         <Field
           setError={setError}

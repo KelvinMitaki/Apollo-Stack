@@ -30,3 +30,30 @@ export const REGISTER_USER = gql`
     }
   }
 `;
+
+export const REGISTER_AGENT = gql`
+  mutation RegisterAgent(
+    $email: String!
+    $password: String!
+    $firstName: String!
+    $lastName: String!
+    $phoneNumber: Int!
+    $address: String!
+  ) {
+    registerAgent(
+      values: {
+        email: $email
+        password: $password
+        firstName: $firstName
+        lastName: $lastName
+        phoneNumber: $phoneNumber
+        address: $address
+      }
+    ) {
+      email
+      firstName
+      lastName
+      _id
+    }
+  }
+`;
