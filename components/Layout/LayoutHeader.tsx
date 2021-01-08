@@ -51,7 +51,11 @@ const LayoutHeader: React.FC<Props> = props => {
             </Link>
           </div>
         </div>
-        <div className={styles.opts}>
+        <div
+          className={`${styles.opts} ${
+            data.currentUser ? styles.currentUser : ""
+          }`}
+        >
           <div
             className={styles.opts_item}
             ref={agentDropDownRef}
