@@ -15,7 +15,7 @@
   background-color: #f2f4f5;
   top: 0%;
   transform: translateY(-200vw);
-  height: 60rem;
+  height: 65rem;
   width: 50vw;
   transition: all 0.2s;
   font-size: 1.6rem;
@@ -25,6 +25,8 @@
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
   text-transform: uppercase;
+  position: relative;
+  z-index: 10;
 }
 .header > * {
   width: 100%;
@@ -187,6 +189,11 @@ border: 1px solid #ebebeb; */
   opacity: 1;
   visibility: visible;
   transform: scale(1);
+}
+.agent_active.agent > * {
+  position: relative;
+  z-index: -1;
+  transform: translateY(-5rem);
 }
 @media only screen and (max-width: 1000px) {
   .body {

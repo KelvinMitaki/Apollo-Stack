@@ -52,8 +52,15 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
           });
         })}
       >
-        <Field component={Input} label="Email" type="text" name="email" />
         <Field
+          setError={setError}
+          component={Input}
+          label="Email"
+          type="text"
+          name="email"
+        />
+        <Field
+          setError={setError}
           component={Input}
           label="Password"
           type="password"

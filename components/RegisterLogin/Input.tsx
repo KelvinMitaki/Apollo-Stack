@@ -7,6 +7,7 @@ interface Props {
   label: "Email" | "Password";
   disabled?: boolean;
   sup?: number;
+  setError?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Input: React.FC<WrappedFieldProps & Props> = props => {
@@ -49,6 +50,10 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
         onFocus={e => {
           props.input.onFocus(e);
           setFocused(true);
+        }}
+        onChange={e => {
+          props.input.onChange(e);
+          props.setError && props.setError("");
         }}
         disabled={props.disabled}
         style={{ ...(props.disabled && { cursor: "not-allowed" }) }}
