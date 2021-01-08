@@ -1,7 +1,9 @@
-import React from "react";
+import { useMutation } from "@apollo/client";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
+import { REGISTER_USER } from "../../graphql/mutations/mutations";
 import { Redux } from "../../interfaces/Redux";
 import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
@@ -17,39 +19,78 @@ interface FormValues {
 }
 
 const Register: React.FC<InjectedFormProps<FormValues>> = props => {
+  const [error, setError] = useState<string>("");
   const styling = useSelector((state: Redux) => state.styling);
   const dispatch = useDispatch();
+  const [registerUser] = useMutation(REGISTER_USER, {
+    onError(err) {
+      setError(err.graphQLErrors[0].message);
+    },
+    onCompleted() {
+      dispatch<ToggleLoginHeader>({
+        type: ActionTypes.toggleLoginHeader,
+        payload: "login"
+      });
+    }
+  });
   return (
     <div
       className={`${styles.register} ${
         styling.toggleLoginHeader === "register" ? styles.register_active : ""
       }`}
     >
-      <Field
-        component={Input}
-        label="First Name"
-        type="text"
-        name="firstName"
-      />
-      <Field component={Input} label="Last Name" type="text" name="lastName" />
-      <Field component={Input} label="Email" type="text" name="email" />
-      <Field
-        component={Input}
-        label="Password"
-        type="password"
-        name="password"
-      />
-      <Field
-        component={Input}
-        label="Confirm Password"
-        type="password"
-        name="confirmPassword"
-      />
-      <div className={styles.register_btn}>
-        <button type="submit" disabled={props.invalid}>
-          register
-        </button>
-      </div>
+      <form
+        onSubmit={props.handleSubmit((formValues: FormValues) => {
+          console.log(formValues);
+          registerUser({ variables: formValues });
+        })}
+      >
+        <Field
+          setError={setError}
+          component={Input}
+          label="First Name"
+          type="text"
+          name="firstName"
+        />
+        <Field
+          setError={setError}
+          component={Input}
+          label="Last Name"
+          type="text"
+          name="lastName"
+        />
+        <Field
+          setError={setError}
+          component={Input}
+          label="Email"
+          type="text"
+          name="email"
+        />
+        <Field
+          setError={setError}
+          component={Input}
+          label="Password"
+          type="password"
+          name="password"
+        />
+        <Field
+          setError={setError}
+          component={Input}
+          label="Confirm Password"
+          type="password"
+          name="confirmPassword"
+        />
+        {error.trim().length !== 0 && (
+          <div className={styles.error} style={{ marginBottom: "2rem" }}>
+            {error}
+          </div>
+        )}
+        <div className={styles.register_btn}>
+          <button type="submit" disabled={props.invalid}>
+            register
+          </button>
+        </div>
+      </form>
       <div
         className={styles.agnt_link}
         onClick={() => {
