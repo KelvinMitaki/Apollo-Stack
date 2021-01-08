@@ -3,8 +3,12 @@ import { InjectedFormProps, reduxForm, Field } from "redux-form";
 import validator from "validator";
 import Input from "./Input";
 import styles from "../../styles/registerLoginModal.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redux } from "../../interfaces/Redux";
+import { useMutation } from "@apollo/client";
+import { REGISTER_AGENT } from "../../graphql/mutations/mutations";
+import { ToggleLoginHeader } from "./RegisterLoginModal";
+import { ActionTypes } from "../../redux/types/types";
 
 interface FormValues {
   firstName: string;
@@ -17,45 +21,73 @@ interface FormValues {
 }
 
 const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
+  const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
+  const [registerAgent] = useMutation(REGISTER_AGENT, {
+    onError(err) {
+      console.log(err);
+    },
+    onCompleted() {
+      dispatch<ToggleLoginHeader>({
+        type: ActionTypes.toggleLoginHeader,
+        payload: "login"
+      });
+    }
+  });
   return (
     <div
       className={`${styles.agent} ${
         styling.toggleLoginHeader === "agent" ? styles.agent_active : ""
       }`}
     >
-      <Field
-        component={Input}
-        label="First Name"
-        type="text"
-        name="firstName"
-      />
-      <Field component={Input} label="Last Name" type="text" name="lastName" />
-      <Field component={Input} label="Email" type="text" name="email" />
-      <Field
-        component={Input}
-        label="Phone Number"
-        type="text"
-        name="phoneNumber"
-      />
-      <Field component={Input} label="Address" type="text" name="address" />
-      <Field
-        component={Input}
-        label="Password"
-        type="password"
-        name="password"
-      />
-      <Field
-        component={Input}
-        label="Confirm Password"
-        type="password"
-        name="confirmPassword"
-      />
-      <div className={styles.register_btn}>
-        <button type="submit" disabled={props.invalid}>
-          register
-        </button>
-      </div>
+      <form
+        onSubmit={props.handleSubmit(formValues =>
+          registerAgent({
+            variables: {
+              ...formValues,
+              phoneNumber: parseInt(formValues.phoneNumber)
+            }
+          })
+        )}
+      >
+        <Field
+          component={Input}
+          label="First Name"
+          type="text"
+          name="firstName"
+        />
+        <Field
+          component={Input}
+          label="Last Name"
+          type="text"
+          name="lastName"
+        />
+        <Field component={Input} label="Email" type="text" name="email" />
+        <Field
+          component={Input}
+          label="Phone Number"
+          type="text"
+          name="phoneNumber"
+        />
+        <Field component={Input} label="Address" type="text" name="address" />
+        <Field
+          component={Input}
+          label="Password"
+          type="password"
+          name="password"
+        />
+        <Field
+          component={Input}
+          label="Confirm Password"
+          type="password"
+          name="confirmPassword"
+        />
+        <div className={styles.register_btn}>
+          <button type="submit" disabled={props.invalid}>
+            register
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
