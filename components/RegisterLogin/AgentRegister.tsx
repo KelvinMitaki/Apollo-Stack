@@ -24,8 +24,13 @@ const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
         styling.toggleLoginHeader === "agent" ? styles.agent_active : ""
       }`}
     >
-      <Field component={Input} label="Full Name" type="text" name="firstName" />
-      <Field component={Input} label="Full Name" type="text" name="lastName" />
+      <Field
+        component={Input}
+        label="First Name"
+        type="text"
+        name="firstName"
+      />
+      <Field component={Input} label="Last Name" type="text" name="lastName" />
       <Field component={Input} label="Email" type="text" name="email" />
       <Field
         component={Input}
