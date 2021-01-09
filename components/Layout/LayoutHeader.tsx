@@ -15,7 +15,7 @@ interface Props {
 }
 
 const LayoutHeader: React.FC<Props> = props => {
-  const { data } = useQuery(FETCH_CURRENT_USER);
+  const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   const [hover, setHover] = useState<boolean>(false);
   const agentDropDownRef = useRef<HTMLDivElement>(null);
   const toggleNavbar = useSelector(

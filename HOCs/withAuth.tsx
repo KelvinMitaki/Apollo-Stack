@@ -9,7 +9,8 @@ const withAuth = (WrappedComponent: NextPage) => {
     const { data } = useQuery(FETCH_CURRENT_USER, {
       onError(err) {
         console.log("withauth", err);
-      }
+      },
+      fetchPolicy: "cache-only"
     });
     if (typeof window !== "undefined") {
       if (data.currentUser) {
