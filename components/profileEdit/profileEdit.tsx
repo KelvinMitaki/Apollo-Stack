@@ -24,12 +24,14 @@ const ProfileEdit: React.FC<
           label="First Name"
           type="text"
           name="firstName"
+          capitalize
         />
         <Field
           component={ProfileInput}
           label="Last Name"
           type="text"
           name="lastName"
+          capitalize
         />
         <Field
           component={ProfileInput}

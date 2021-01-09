@@ -8,6 +8,7 @@ interface Props {
   disabled?: boolean;
   sup?: number;
   setError?: React.Dispatch<React.SetStateAction<string>>;
+  capitalize?: boolean;
 }
 
 const Input: React.FC<WrappedFieldProps & Props> = props => {
@@ -56,7 +57,10 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
           props.setError && props.setError("");
         }}
         disabled={props.disabled}
-        style={{ ...(props.disabled && { cursor: "not-allowed" }) }}
+        style={{
+          ...(props.disabled && { cursor: "not-allowed" }),
+          ...(props.capitalize && { textTransform: "capitalize" })
+        }}
       />
       {props.meta.error && props.meta.touched && <div>{props.meta.error}</div>}
     </div>

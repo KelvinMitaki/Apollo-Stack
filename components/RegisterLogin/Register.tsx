@@ -50,6 +50,7 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
           label="First Name"
           type="text"
           name="firstName"
+          capitalize
         />
         <Field
           setError={setError}
@@ -57,6 +58,7 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
           label="Last Name"
           type="text"
           name="lastName"
+          capitalize
         />
         <Field
           setError={setError}

@@ -5,6 +5,7 @@ import styles from "../../styles/edit.module.css";
 interface Props {
   label: string;
   disabled: boolean;
+  capitalize?: boolean;
 }
 
 const ProfileInput: React.FC<WrappedFieldProps & Props> = props => {
@@ -32,7 +33,10 @@ const ProfileInput: React.FC<WrappedFieldProps & Props> = props => {
         id={props.input.name}
         name={props.input.name}
         disabled={props.disabled}
-        style={{ ...(props.disabled && { cursor: "not-allowed" }) }}
+        style={{
+          ...(props.disabled && { cursor: "not-allowed" }),
+          ...(props.capitalize && { textTransform: "capitalize" })
+        }}
       />
       {props.meta.error && props.meta.touched && (
         <div className={styles.error}>{props.meta.error}</div>
