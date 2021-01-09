@@ -5,6 +5,14 @@ import styles from "../../styles/listingEdit.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import { BiCheck } from "react-icons/bi";
 
+export interface AttributesAttrs {
+  bedrooms: string;
+  bathrooms: string;
+  parkingLots: string;
+  plinthArea: string;
+  lotArea: string;
+}
+
 const Attributes = () => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [furnished, setFurnished] = useState<boolean>(false);
@@ -41,7 +49,7 @@ const Attributes = () => {
           component={Input}
           label="Plinth Area"
           type="text"
-          name="location"
+          name="plinthArea"
           sup={2}
         />
       </div>
@@ -50,7 +58,7 @@ const Attributes = () => {
           component={Input}
           label="Lot Area"
           type="text"
-          name="location"
+          name="lotArea"
           sup={2}
         />
       </div>
