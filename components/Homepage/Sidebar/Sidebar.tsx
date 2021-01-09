@@ -194,7 +194,7 @@ const Sidebar: React.FC<Props> = props => {
               className={`${styles.opts_item} ${styles.profile}`}
               onClick={() => {
                 if (process.env.NODE_ENV === "production") {
-                  document.cookie = `token=; Path=/; Expires=${new Date()}`;
+                  document.cookie = `client_token=; Path=/; Expires=${new Date()}`;
                 }
                 if (!called) {
                   logoutUser();

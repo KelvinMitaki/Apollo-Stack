@@ -23,11 +23,9 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const styling = useSelector((state: Redux) => state.styling);
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     onCompleted(data) {
-      if (process.env.NODE_ENV === "production") {
-        document.cookie = `client_token=${
-          data.loginUser.token
-        }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
-      }
+      document.cookie = `client_token=${
+        data.loginUser.token
+      }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
       Router.replace("/profile/edit");
       dispatch(reset("Login"));
       dispatch<SetToggleLogin>({
