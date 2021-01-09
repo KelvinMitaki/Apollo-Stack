@@ -5,6 +5,7 @@ import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
 import TextArea from "../RegisterLogin/TextArea";
 import Router from "next/router";
+import DatePicker from "react-datepicker";
 import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 
 interface Props extends InjectedFormProps<PropertyFormValues> {
@@ -17,6 +18,7 @@ const Marketing: React.FC<Props> = props => {
   const [auction, setAuction] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     props.setInvalid(props.invalid || props.pristine);
@@ -87,12 +89,11 @@ const Marketing: React.FC<Props> = props => {
           name="description"
         />
       </div>
-      <div>
-        <Field
-          component={Input}
-          label="Expiry Date"
-          type="text"
-          name="expiryDate"
+      <div className={styles.date}>
+        <DatePicker
+          className={styles.DatePicker}
+          selected={startDate}
+          onChange={date => setStartDate(date as Date)}
         />
       </div>
       <div

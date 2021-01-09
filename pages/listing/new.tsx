@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactDatePicker from "react-datepicker";
 import { InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
 import Layout from "../../components/Layout/Layout";
@@ -33,9 +34,16 @@ export interface PropertyFormValues {
 const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [active, setActive] = useState<HeaderType>("listing");
   const [invalid, setInvalid] = useState<boolean>(false);
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
   return (
     <Layout title="Edit Listing">
       <div className={styles.container}>
+        <div>
+          <ReactDatePicker
+            selected={startDate}
+            onChange={date => setStartDate(date as Date)}
+          />
+        </div>
         <div className={styles.body}>
           <form onSubmit={props.handleSubmit(fv => console.log(fv))}>
             <div className={styles.header}>
@@ -72,11 +80,8 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
             </div>
             <div>
               <Listing {...props} setInvalid={setInvalid} active={active} />
-
               <Attributes {...props} setInvalid={setInvalid} active={active} />
-
               <Marketing {...props} setInvalid={setInvalid} active={active} />
-
               <Images active={active} />
             </div>
           </form>

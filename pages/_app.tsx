@@ -1,7 +1,8 @@
 import { AppContext, AppProps } from "next/app";
 import "../styles/globals.css";
 import "rc-slider/assets/index.css";
-import { ApolloProvider, useQuery } from "@apollo/client";
+import "react-datepicker/dist/react-datepicker.css";
+import { ApolloProvider } from "@apollo/client";
 import App from "next/app";
 import { wrapper } from "../redux/reducers";
 import nProgress from "nprogress";

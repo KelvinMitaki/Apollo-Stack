@@ -71,12 +71,16 @@
 .active_header {
   display: block;
 }
-.Listing div,
+/* .Listing div,
 .Attributes div:not(.BiCheck),
-.Marketing div:not(.BiCheck) {
+.Marketing div:not(.BiCheck),
+.Marketing > *:not(.date) {
+  width: 90%;
+} */
+.body input,
+.body textarea {
   width: 90%;
 }
-
 .inp {
   display: flex;
   align-items: center;
