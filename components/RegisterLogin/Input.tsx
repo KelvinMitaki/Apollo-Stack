@@ -14,7 +14,6 @@ interface Props {
 }
 
 const Input: React.FC<WrappedFieldProps & Props> = props => {
-  const [plinth, setPlinth] = useState<string | null>(null);
   const [focused, setFocused] = useState<boolean>(false);
   useEffect(() => {
     if (
@@ -38,6 +37,13 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
             <sup>{props.sup}</sup>)
             {validator.isNumeric(props.input.value) &&
               (props.input.name as AttributesAttrs) === "plinthArea" && (
+                <span>
+                  {" "}
+                  / ({(parseInt(props.input.value) * 10.7639).toFixed(2)}) SQFT
+                </span>
+              )}
+            {validator.isNumeric(props.input.value) &&
+              (props.input.name as AttributesAttrs) === "lotArea" && (
                 <span>
                   {" "}
                   / ({(parseInt(props.input.value) * 10.7639).toFixed(2)}) SQFT

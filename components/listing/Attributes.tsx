@@ -5,14 +5,19 @@ import styles from "../../styles/listingEdit.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import { BiCheck } from "react-icons/bi";
 
-export interface AttributesAttrs {
+interface FormValues {
   bedrooms: string;
   bathrooms: string;
   parkingLots: string;
   plinthArea: string;
   lotArea: string;
 }
-
+export type AttributesAttrs =
+  | "bedrooms"
+  | "bathrooms"
+  | "parkingLots"
+  | "plinthArea"
+  | "lotArea";
 const Attributes = () => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [furnished, setFurnished] = useState<boolean>(false);
