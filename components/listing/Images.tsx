@@ -1,7 +1,10 @@
 import React from "react";
+import { HeaderType } from "../../pages/listing/new";
 import styles from "../../styles/listingEdit.module.css";
-
-const Images = () => {
+interface Props {
+  active: HeaderType;
+}
+const Images: React.FC<Props> = props => {
   const images = [] as JSX.Element[];
   for (let i = 0; i < 50; i++) {
     images.push(
@@ -12,7 +15,15 @@ const Images = () => {
       ></div>
     );
   }
-  return <div className={styles.Images}>{images}</div>;
+  return (
+    <div
+      className={`${styles.Images} ${
+        props.active === "images" ? styles.active_header : ""
+      }`}
+    >
+      {images}
+    </div>
+  );
 };
 
 export default Images;

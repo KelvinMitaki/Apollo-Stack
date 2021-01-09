@@ -5,10 +5,11 @@ import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
 import TextArea from "../RegisterLogin/TextArea";
 import Router from "next/router";
-import { PropertyFormValues } from "../../pages/listing/new";
+import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 
 interface Props extends InjectedFormProps<PropertyFormValues> {
   setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
+  active: HeaderType;
 }
 
 const Marketing: React.FC<Props> = props => {
@@ -39,7 +40,11 @@ const Marketing: React.FC<Props> = props => {
     }
   };
   return (
-    <div className={styles.Marketing}>
+    <div
+      className={`${styles.Marketing} ${
+        props.active === "marketing" ? styles.active_header : ""
+      }`}
+    >
       {edit && (
         <div>
           <Field

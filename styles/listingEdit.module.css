@@ -66,24 +66,11 @@
 .Marketing {
   width: 100%;
   margin-left: 2rem;
-  /* opacity: 0;
-  visibility: hidden;
-  transform: scale(0);
-  transition: all 0.2s;
-  position: absolute; */
+  display: none;
 }
-/* .Images {
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0);
-  transition: all 0.2s;
-  position: absolute;
-} */
-/* .active_header {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-} */
+.active_header {
+  display: block;
+}
 .Listing div,
 .Attributes div:not(.BiCheck),
 .Marketing div:not(.BiCheck) {
@@ -126,11 +113,14 @@
 }
 
 .Images {
-  display: grid;
+  display: none;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   row-gap: 2rem;
   padding: 2rem 0;
   padding-left: 2rem;
+}
+.active_header.Images {
+  display: grid;
 }
 
 .bg_image {

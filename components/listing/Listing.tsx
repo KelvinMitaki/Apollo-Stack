@@ -1,7 +1,7 @@
 import Router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { Field, InjectedFormProps } from "redux-form";
-import { PropertyFormValues } from "../../pages/listing/new";
+import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 import styles from "../../styles/listingEdit.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import Input from "../RegisterLogin/Input";
@@ -9,6 +9,7 @@ import Input from "../RegisterLogin/Input";
 type Option = "sale" | "rent";
 interface Props extends InjectedFormProps<PropertyFormValues> {
   setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
+  active: HeaderType;
 }
 const Listing: React.FC<Props> = props => {
   const [name, setName] = useState<string>("");
@@ -37,7 +38,11 @@ const Listing: React.FC<Props> = props => {
     }
   };
   return (
-    <div className={styles.Listing}>
+    <div
+      className={`${styles.Listing} ${
+        props.active === "listing" ? styles.active_header : ""
+      }`}
+    >
       <div>
         {!edit && (
           <div>

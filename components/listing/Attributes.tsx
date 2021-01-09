@@ -3,7 +3,7 @@ import { Field, InjectedFormProps } from "redux-form";
 import Input from "../RegisterLogin/Input";
 import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
-import { PropertyFormValues } from "../../pages/listing/new";
+import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 
 interface FormValues {
   bedrooms: string;
@@ -14,6 +14,7 @@ interface FormValues {
 }
 interface Props extends InjectedFormProps<PropertyFormValues> {
   setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
+  active: HeaderType;
 }
 export type AttributesAttrs =
   | "bedrooms"
@@ -33,7 +34,11 @@ const Attributes: React.FC<Props> = props => {
     props.setInvalid(props.invalid || props.pristine);
   }, [props.invalid, props.pristine]);
   return (
-    <div className={styles.Attributes}>
+    <div
+      className={`${styles.Attributes} ${
+        props.active === "attributes" ? styles.active_header : ""
+      }`}
+    >
       <div>
         <Field
           component={Input}

@@ -37,48 +37,49 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
     <Layout title="Edit Listing">
       <div className={styles.container}>
         <div className={styles.body}>
-          <div className={styles.header}>
-            <div
-              onClick={() => setActive("listing")}
-              className={active === "listing" ? styles.active : ""}
-            >
-              <p>listing</p>
+          <form onSubmit={props.handleSubmit(fv => console.log(fv))}>
+            <div className={styles.header}>
+              <div
+                onClick={() => setActive("listing")}
+                className={active === "listing" ? styles.active : ""}
+              >
+                <p>listing</p>
+              </div>
+              <div
+                onClick={() => setActive("attributes")}
+                className={active === "attributes" ? styles.active : ""}
+              >
+                <p>attributes</p>
+              </div>
+              <div
+                onClick={() => setActive("marketing")}
+                className={active === "marketing" ? styles.active : ""}
+              >
+                <p>marketing</p>
+              </div>
+              <div
+                onClick={() => setActive("images")}
+                className={active === "images" ? styles.active : ""}
+              >
+                <p>images</p>
+              </div>
+              <div className={styles.no_content}></div>
+              <div className={styles.btn}>
+                <button disabled={!props.valid} type="submit">
+                  save
+                </button>
+              </div>
             </div>
-            <div
-              onClick={() => setActive("attributes")}
-              className={active === "attributes" ? styles.active : ""}
-            >
-              <p>attributes</p>
+            <div>
+              <Listing {...props} setInvalid={setInvalid} active={active} />
+
+              <Attributes {...props} setInvalid={setInvalid} active={active} />
+
+              <Marketing {...props} setInvalid={setInvalid} active={active} />
+
+              <Images active={active} />
             </div>
-            <div
-              onClick={() => setActive("marketing")}
-              className={active === "marketing" ? styles.active : ""}
-            >
-              <p>marketing</p>
-            </div>
-            <div
-              onClick={() => setActive("images")}
-              className={active === "images" ? styles.active : ""}
-            >
-              <p>images</p>
-            </div>
-            <div className={styles.no_content}></div>
-            <div className={styles.btn}>
-              <button disabled={invalid}>save</button>
-            </div>
-          </div>
-          <div>
-            {active === "listing" && (
-              <Listing {...props} setInvalid={setInvalid} />
-            )}
-            {active === "attributes" && (
-              <Attributes {...props} setInvalid={setInvalid} />
-            )}
-            {active === "marketing" && (
-              <Marketing {...props} setInvalid={setInvalid} />
-            )}
-            {active === "images" && <Images />}
-          </div>
+          </form>
         </div>
       </div>
     </Layout>
