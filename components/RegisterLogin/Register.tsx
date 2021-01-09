@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm, reset } from "redux-form";
 import validator from "validator";
 import { REGISTER_USER } from "../../graphql/mutations/mutations";
 import { Redux } from "../../interfaces/Redux";
@@ -27,6 +27,7 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
       setError(err.graphQLErrors[0].message);
     },
     onCompleted() {
+      dispatch(reset("Register"));
       dispatch<ToggleLoginHeader>({
         type: ActionTypes.toggleLoginHeader,
         payload: "login"

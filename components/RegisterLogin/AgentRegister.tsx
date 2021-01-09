@@ -55,11 +55,13 @@ const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
           label="First Name"
           type="text"
           name="firstName"
+          capitalize
         />
         <Field
           component={Input}
           label="Last Name"
           type="text"
+          capitalize
           name="lastName"
         />
         <Field component={Input} label="Email" type="text" name="email" />
