@@ -30,9 +30,12 @@
 }
 .opts {
   display: grid;
-  grid-template-columns: repeat(3, 1fr) repeat(2, 1.5fr) 1fr 1.5fr;
+  grid-template-columns: repeat(6, 1fr);
 }
 .currentUser.opts {
+  grid-template-columns: repeat(5, 1fr);
+}
+.isAgent.opts {
   grid-template-columns: repeat(3, 1fr) repeat(2, 1.5fr) 1fr;
 }
 .opts_item {

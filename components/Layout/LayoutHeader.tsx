@@ -54,6 +54,8 @@ const LayoutHeader: React.FC<Props> = props => {
         <div
           className={`${styles.opts} ${
             data.currentUser ? styles.currentUser : ""
+          } ${
+            data.currentUser && data.currentUser.isAgent ? styles.isAgent : ""
           }`}
         >
           {data.currentUser && data.currentUser.isAgent && (
