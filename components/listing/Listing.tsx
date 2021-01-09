@@ -1,6 +1,7 @@
 import Router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import validator from "validator";
 import styles from "../../styles/listingEdit.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import Input from "../RegisterLogin/Input";
@@ -9,7 +10,7 @@ interface FormValues {
   listNo: string;
   reference: string;
   location: string;
-  address: string;
+  streetAddress: string;
 }
 
 type Option = "sale" | "rent";
@@ -116,7 +117,7 @@ const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
             component={Input}
             label="Street Address"
             type="text"
-            name="address"
+            name="streetAddress"
           />
         </div>
       </div>
@@ -124,9 +125,34 @@ const Listing: React.FC<InjectedFormProps<FormValues>> = () => {
   );
 };
 
+const validate = (formValues: FormValues) => {
+  const errors = {} as FormValues;
+  if (
+    !formValues.reference ||
+    (formValues.reference && !validator.isNumeric(formValues.reference))
+  ) {
+    errors.reference = "Enter a valid reference number";
+  }
+  if (
+    !formValues.location ||
+    (formValues.location && formValues.location.trim().length === 0)
+  ) {
+    errors.location = "Enter a valid location";
+  }
+  if (
+    !formValues.streetAddress ||
+    (formValues.streetAddress && formValues.streetAddress.trim().length === 0)
+  ) {
+    errors.streetAddress = "Enter a valid street address";
+  }
+
+  return errors;
+};
+
 export default reduxForm<FormValues>({
   form: "Listing",
   initialValues: {
     listNo: "36876238768786"
-  }
+  },
+  validate
 })(Listing);
