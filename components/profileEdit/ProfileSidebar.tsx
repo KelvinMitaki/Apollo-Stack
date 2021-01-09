@@ -21,8 +21,7 @@ const ProfileSidebar = () => {
     }
   });
   const { data } = useQuery(FETCH_CURRENT_USER, {
-    fetchPolicy: "cache-only",
-    variables: "ProfileSidebar"
+    fetchPolicy: "cache-only"
   });
   return (
     <div className={styles.sidebar}>

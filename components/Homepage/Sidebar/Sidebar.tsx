@@ -22,8 +22,7 @@ interface Props {
 
 const Sidebar: React.FC<Props> = props => {
   const { data } = useQuery(FETCH_CURRENT_USER, {
-    fetchPolicy: "cache-only",
-    variables: "Sidebar"
+    fetchPolicy: "cache-only"
   });
   const [logoutUser, { called }] = useLazyQuery(LOGOUT_USER, {
     onCompleted() {

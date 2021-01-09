@@ -9,8 +9,7 @@ import styles from "../../styles/edit.module.css";
 
 const edit = () => {
   const { data } = useQuery(FETCH_CURRENT_USER, {
-    fetchPolicy: "cache-only",
-    variables: "edit"
+    fetchPolicy: "cache-only"
   });
   return (
     <Layout title="Edit Profile">
