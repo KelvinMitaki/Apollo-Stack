@@ -56,6 +56,11 @@
   cursor: pointer;
 }
 
+.btn button:disabled {
+  background-color: rgba(1, 2, 78, 0.5);
+  cursor: default;
+}
+
 .Listing,
 .Attributes,
 .Marketing {

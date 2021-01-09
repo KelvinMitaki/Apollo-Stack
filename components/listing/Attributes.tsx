@@ -1,17 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import React, { useState } from "react";
+import { Field } from "redux-form";
 import Input from "../RegisterLogin/Input";
 import styles from "../../styles/listingEdit.module.css";
-import Dropdown from "../Homepage/Header/Dropdown";
 import { BiCheck } from "react-icons/bi";
-import validator from "validator";
 
-interface FormValues {
-  bedrooms: string;
-  bathrooms: string;
-  parkingLots: string;
-  plinthArea: string;
-  lotArea: string;
+interface Props {
+  setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export type AttributesAttrs =
   | "bedrooms"
@@ -19,7 +13,8 @@ export type AttributesAttrs =
   | "parkingLots"
   | "plinthArea"
   | "lotArea";
-const Attributes: React.FC<InjectedFormProps<FormValues>> = props => {
+
+const Attributes: React.FC<Props> = props => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [furnished, setFurnished] = useState<boolean>(false);
   const [pet, setPet] = useState<boolean>(false);
@@ -101,33 +96,4 @@ const Attributes: React.FC<InjectedFormProps<FormValues>> = props => {
     </div>
   );
 };
-
-const validate = (formvalues: FormValues) => {
-  const errors = {} as FormValues;
-  if (
-    !formvalues.bathrooms ||
-    (formvalues.bathrooms && !validator.isNumeric(formvalues.bathrooms))
-  ) {
-    errors.bathrooms = "Enter a valid bathroom number";
-  }
-  if (
-    !formvalues.bedrooms ||
-    (formvalues.bedrooms && !validator.isNumeric(formvalues.bedrooms))
-  ) {
-    errors.bedrooms = "Enter a valid bedroom number";
-  }
-  if (formvalues.parkingLots && !validator.isNumeric(formvalues.parkingLots)) {
-    errors.bedrooms = "Enter a valid parking lot number";
-  }
-  if (formvalues.plinthArea && !validator.isNumeric(formvalues.plinthArea)) {
-    errors.plinthArea = "Enter a valid plinth area number";
-  }
-  if (formvalues.lotArea && !validator.isNumeric(formvalues.lotArea)) {
-    errors.lotArea = "Enter a valid lot area number";
-  }
-  return errors;
-};
-
-export default reduxForm<FormValues>({ form: "Attributes", validate })(
-  Attributes
-);
+export default Attributes;
