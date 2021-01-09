@@ -6,13 +6,14 @@ import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
 import TextArea from "../RegisterLogin/TextArea";
 import Router from "next/router";
+import validator from "validator";
 
 interface FormValues {
   status: string;
   price: string;
   serviceCharge: string;
-  marketingHeading: string;
-  marketingDescription: string;
+  heading: string;
+  description: string;
   expiryDate: string;
   auctionDate: string;
   auctionVenue: string;
@@ -75,14 +76,14 @@ const Marketing: React.FC<InjectedFormProps<FormValues>> = () => {
           component={Input}
           label="Marketing Heading"
           type="text"
-          name="marketingHeading"
+          name="heading"
         />
       </div>{" "}
       <div>
         <Field
           component={TextArea}
           label="Marketing Description"
-          name="marketingDescription"
+          name="description"
         />
       </div>
       <div>
@@ -131,9 +132,42 @@ const Marketing: React.FC<InjectedFormProps<FormValues>> = () => {
   );
 };
 
+const validate = (formvalues: FormValues) => {
+  const errors = {} as FormValues;
+  if (
+    !formvalues.price ||
+    (formvalues.price && !validator.isNumeric(formvalues.price))
+  ) {
+    errors.price = "Enter a valid price";
+  }
+  if (
+    formvalues.serviceCharge &&
+    !validator.isNumeric(formvalues.serviceCharge)
+  ) {
+    errors.serviceCharge = "Enter a valid service charge";
+  }
+  if (
+    !formvalues.heading ||
+    (formvalues.heading && formvalues.heading.trim().length < 5)
+  ) {
+    errors.heading = "Heading must be five characters minimum";
+  }
+  if (
+    !formvalues.description ||
+    (formvalues.description && formvalues.description.trim().length < 20)
+  ) {
+    errors.description = "Description must be twenty characters minimum";
+  }
+  if (formvalues.auctionVenue && formvalues.auctionVenue.trim().length === 0) {
+    errors.auctionVenue = "Enter a valid auction venue";
+  }
+  return errors;
+};
+
 export default reduxForm<FormValues>({
   form: "Marketing",
   initialValues: {
     status: "EXPIRED"
-  }
+  },
+  validate
 })(Marketing);
