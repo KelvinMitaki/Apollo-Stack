@@ -14,6 +14,7 @@ import {
   LOGOUT_USER
 } from "../../../graphql/queries/queries";
 import { useLazyQuery, useQuery } from "@apollo/client";
+import Router from "next/router";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -23,7 +24,7 @@ const Sidebar: React.FC<Props> = props => {
   const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   const [logoutUser, { called }] = useLazyQuery(LOGOUT_USER, {
     onCompleted() {
-      window.location.reload();
+      Router.replace("/");
     }
   });
   const [agentSidebar, setAgentSidebar] = useState<boolean>(false);
