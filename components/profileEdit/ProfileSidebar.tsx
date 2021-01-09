@@ -20,7 +20,10 @@ const ProfileSidebar = () => {
       Router.replace("/");
     }
   });
-  const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
+  const { data } = useQuery(FETCH_CURRENT_USER, {
+    fetchPolicy: "cache-only",
+    variables: "ProfileSidebar"
+  });
   return (
     <div className={styles.sidebar}>
       <Link href="/profile/edit">

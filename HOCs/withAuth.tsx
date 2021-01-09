@@ -10,7 +10,8 @@ const withAuth = (WrappedComponent: NextPage) => {
       onError(err) {
         console.log("withauth", err);
       },
-      fetchPolicy: "cache-only"
+      fetchPolicy: "cache-only",
+      variables: "withAuth"
     });
     if (typeof window !== "undefined") {
       if (data.currentUser) {

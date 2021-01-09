@@ -8,7 +8,10 @@ import withAuth from "../../HOCs/withAuth";
 import styles from "../../styles/edit.module.css";
 
 const edit = () => {
-  const { data } = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
+  const { data } = useQuery(FETCH_CURRENT_USER, {
+    fetchPolicy: "cache-only",
+    variables: "edit"
+  });
   return (
     <Layout title="Edit Profile">
       <div className={styles.container}>
