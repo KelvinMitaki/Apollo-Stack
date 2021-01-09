@@ -70,17 +70,6 @@ const Marketing: React.FC<InjectedFormProps<FormValues>> = () => {
           name="serviceCharge"
         />
       </div>
-      <div style={{ cursor: "pointer" }}>
-        <Dropdown
-          selections={["John Doe"]}
-          determinant="agents"
-          name={name}
-          searchDiv={searchDiv}
-          title="Agents"
-          setName={setName}
-          className="d_search"
-        />
-      </div>{" "}
       <div>
         <Field
           component={Input}
