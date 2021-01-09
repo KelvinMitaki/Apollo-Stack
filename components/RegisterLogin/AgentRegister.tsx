@@ -1,5 +1,5 @@
 import React from "react";
-import { InjectedFormProps, reduxForm, Field } from "redux-form";
+import { InjectedFormProps, reduxForm, Field, reset } from "redux-form";
 import validator from "validator";
 import Input from "./Input";
 import styles from "../../styles/registerLoginModal.module.css";
@@ -9,6 +9,7 @@ import { useMutation } from "@apollo/client";
 import { REGISTER_AGENT } from "../../graphql/mutations/mutations";
 import { ToggleLoginHeader } from "./RegisterLoginModal";
 import { ActionTypes } from "../../redux/types/types";
+import Loading from "../loading/Loading";
 
 interface FormValues {
   firstName: string;
@@ -23,17 +24,19 @@ interface FormValues {
 const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
   const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
-  const [registerAgent] = useMutation(REGISTER_AGENT, {
+  const [registerAgent, { loading }] = useMutation(REGISTER_AGENT, {
     onError(err) {
       console.log(err);
     },
     onCompleted() {
+      dispatch(reset("AgentRegister"));
       dispatch<ToggleLoginHeader>({
         type: ActionTypes.toggleLoginHeader,
         payload: "login"
       });
     }
   });
+  if (loading) return <Loading />;
   return (
     <div
       className={`${styles.agent} ${

@@ -7,6 +7,7 @@ import { REGISTER_USER } from "../../graphql/mutations/mutations";
 import { Redux } from "../../interfaces/Redux";
 import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
+import Loading from "../loading/Loading";
 import Input from "./Input";
 import { ToggleLoginHeader } from "./RegisterLoginModal";
 
@@ -22,7 +23,7 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
   const [error, setError] = useState<string>("");
   const styling = useSelector((state: Redux) => state.styling);
   const dispatch = useDispatch();
-  const [registerUser] = useMutation(REGISTER_USER, {
+  const [registerUser, { loading }] = useMutation(REGISTER_USER, {
     onError(err) {
       setError(err.graphQLErrors[0].message);
     },
@@ -34,6 +35,7 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
       });
     }
   });
+  if (loading) return <Loading />;
   return (
     <div
       className={`${styles.register} ${

@@ -2,13 +2,14 @@ import { useMutation } from "@apollo/client";
 import Router from "next/router";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm, reset } from "redux-form";
 import validator from "validator";
 import { LOGIN_USER } from "../../graphql/mutations/mutations";
 import { Redux } from "../../interfaces/Redux";
 import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
 import { SetToggleLogin } from "../Layout/Layout";
+import Loading from "../loading/Loading";
 import Input from "./Input";
 
 interface FormValues {
@@ -20,7 +21,7 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
-  const [loginUser] = useMutation(LOGIN_USER, {
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     onCompleted(data) {
       if (process.env.NODE_ENV === "production") {
         document.cookie = `client_token=${
@@ -28,6 +29,7 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
         }; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)};`;
       }
       Router.replace("/profile/edit");
+      dispatch(reset("Login"));
       dispatch<SetToggleLogin>({
         type: ActionTypes.toggleLogin,
         payload: false
@@ -37,7 +39,7 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
       setError(err.graphQLErrors[0].message);
     }
   });
-
+  if (loading) return <Loading />;
   return (
     <div
       className={`${styles.login} ${
