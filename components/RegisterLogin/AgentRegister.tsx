@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { InjectedFormProps, reduxForm, Field, reset } from "redux-form";
 import validator from "validator";
 import Input from "./Input";
@@ -20,8 +20,13 @@ interface FormValues {
   password: string;
   confirmPassword: string;
 }
+interface Props {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
+const AgentRegister: React.FC<
+  InjectedFormProps<FormValues, Props> & Props
+> = props => {
   const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
   const [registerAgent, { loading }] = useMutation(REGISTER_AGENT, {
@@ -36,7 +41,9 @@ const AgentRegister: React.FC<InjectedFormProps<FormValues>> = props => {
       });
     }
   });
-  if (loading) return <Loading />;
+  useEffect(() => {
+    props.setLoading(loading);
+  }, [loading]);
   return (
     <div
       className={`${styles.agent} ${
@@ -136,6 +143,7 @@ const validate = (formValues: FormValues) => {
   return errors;
 };
 
-export default reduxForm<FormValues>({ form: "AgentRegister", validate })(
-  AgentRegister
-);
+export default reduxForm<FormValues, Props>({
+  form: "AgentRegister",
+  validate
+})(AgentRegister);

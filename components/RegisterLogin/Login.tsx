@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm, reset } from "redux-form";
 import validator from "validator";
@@ -17,7 +17,11 @@ interface FormValues {
   password: string;
 }
 
-const Login: React.FC<InjectedFormProps<FormValues>> = props => {
+interface Props {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login: React.FC<InjectedFormProps<FormValues, Props> & Props> = props => {
   const [error, setError] = useState<string>("");
   const dispatch = useDispatch();
   const styling = useSelector((state: Redux) => state.styling);
@@ -37,7 +41,9 @@ const Login: React.FC<InjectedFormProps<FormValues>> = props => {
       setError(err.graphQLErrors[0].message);
     }
   });
-  if (loading) return <Loading />;
+  useEffect(() => {
+    props.setLoading(loading);
+  }, [loading]);
   return (
     <div
       className={`${styles.login} ${
@@ -97,4 +103,4 @@ const validate = (formValues: FormValues) => {
   return errors;
 };
 
-export default reduxForm<FormValues>({ form: "Login", validate })(Login);
+export default reduxForm<FormValues, Props>({ form: "Login", validate })(Login);

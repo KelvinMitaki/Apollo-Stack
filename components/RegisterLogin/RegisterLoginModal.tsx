@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redux } from "../../interfaces/Redux";
 import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/registerLoginModal.module.css";
 import { SetToggleLogin } from "../Layout/Layout";
+import Loading from "../loading/Loading";
 import AgentRegister from "./AgentRegister";
 import Login from "./Login";
 import Register from "./Register";
@@ -14,6 +15,7 @@ export interface ToggleLoginHeader {
 }
 
 const RegisterLoginModal = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const loginRef = useRef<HTMLDivElement>(null);
   const styling = useSelector((state: Redux) => state.styling);
@@ -38,6 +40,7 @@ const RegisterLoginModal = () => {
         styling.toggleLogin ? styles.container__show : ""
       }`}
     >
+      {loading && <Loading />}
       <div ref={loginRef} className={styles.body}>
         <div className={styles.header}>
           <p
@@ -71,9 +74,9 @@ const RegisterLoginModal = () => {
           </p>
         </div>
         <div className={styles.opts}>
-          <Login />
-          <Register />
-          <AgentRegister />
+          <Login setLoading={setLoading} />
+          <Register setLoading={setLoading} />
+          <AgentRegister setLoading={setLoading} />
         </div>
       </div>
     </div>

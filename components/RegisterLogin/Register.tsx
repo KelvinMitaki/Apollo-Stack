@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Field, InjectedFormProps, reduxForm, reset } from "redux-form";
 import validator from "validator";
@@ -19,7 +19,12 @@ interface FormValues {
   confirmPassword: string;
 }
 
-const Register: React.FC<InjectedFormProps<FormValues>> = props => {
+interface Props {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const Register: React.FC<
+  InjectedFormProps<FormValues, Props> & Props
+> = props => {
   const [error, setError] = useState<string>("");
   const styling = useSelector((state: Redux) => state.styling);
   const dispatch = useDispatch();
@@ -35,7 +40,9 @@ const Register: React.FC<InjectedFormProps<FormValues>> = props => {
       });
     }
   });
-  if (loading) return <Loading />;
+  useEffect(() => {
+    props.setLoading(loading);
+  }, [loading]);
   return (
     <div
       className={`${styles.register} ${
@@ -136,4 +143,6 @@ const validate = (formValues: FormValues) => {
   return errors;
 };
 
-export default reduxForm<FormValues>({ form: "Register", validate })(Register);
+export default reduxForm<FormValues, Props>({ form: "Register", validate })(
+  Register
+);
