@@ -66,8 +66,24 @@
 .Marketing {
   width: 100%;
   margin-left: 2rem;
+  /* opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+  transition: all 0.2s;
+  position: absolute; */
 }
-
+/* .Images {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+  transition: all 0.2s;
+  position: absolute;
+} */
+/* .active_header {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+} */
 .Listing div,
 .Attributes div:not(.BiCheck),
 .Marketing div:not(.BiCheck) {

@@ -1,12 +1,13 @@
 import Router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { Field } from "redux-form";
+import { Field, InjectedFormProps } from "redux-form";
+import { PropertyFormValues } from "../../pages/listing/new";
 import styles from "../../styles/listingEdit.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import Input from "../RegisterLogin/Input";
 
 type Option = "sale" | "rent";
-interface Props {
+interface Props extends InjectedFormProps<PropertyFormValues> {
   setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const Listing: React.FC<Props> = props => {
@@ -15,6 +16,7 @@ const Listing: React.FC<Props> = props => {
   const searchDiv = useRef<HTMLDivElement>(null);
   const [edit, setEdit] = useState<boolean>(false);
   useEffect(() => {
+    props.setInvalid(props.invalid || props.pristine);
     document.addEventListener("mousedown", handleClickOutside);
     if (Router.pathname.includes("edit")) {
       setEdit(true);
@@ -25,6 +27,9 @@ const Listing: React.FC<Props> = props => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  useEffect(() => {
+    props.setInvalid(props.invalid || props.pristine);
+  }, [props.invalid, props.pristine]);
   const handleClickOutside = (e: Event) => {
     // @ts-ignore
     if (searchDiv.current && !searchDiv.current.contains(e.target)) {

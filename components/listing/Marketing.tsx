@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Field } from "redux-form";
+import { Field, InjectedFormProps } from "redux-form";
 import Input from "../RegisterLogin/Input";
 import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
 import TextArea from "../RegisterLogin/TextArea";
 import Router from "next/router";
+import { PropertyFormValues } from "../../pages/listing/new";
 
-interface Props {
+interface Props extends InjectedFormProps<PropertyFormValues> {
   setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -17,6 +18,7 @@ const Marketing: React.FC<Props> = props => {
   const [name, setName] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    props.setInvalid(props.invalid || props.pristine);
     document.addEventListener("mousedown", handleClickOutside);
     if (Router.pathname.includes("edit")) {
       setEdit(true);
@@ -27,6 +29,9 @@ const Marketing: React.FC<Props> = props => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  useEffect(() => {
+    props.setInvalid(props.invalid || props.pristine);
+  }, [props.invalid, props.pristine]);
   const handleClickOutside = (e: Event) => {
     // @ts-ignore
     if (searchDiv.current && !searchDiv.current.contains(e.target)) {

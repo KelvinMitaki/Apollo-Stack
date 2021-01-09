@@ -1,10 +1,18 @@
-import React, { useState } from "react";
-import { Field } from "redux-form";
+import React, { useEffect, useRef, useState } from "react";
+import { Field, InjectedFormProps } from "redux-form";
 import Input from "../RegisterLogin/Input";
 import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
+import { PropertyFormValues } from "../../pages/listing/new";
 
-interface Props {
+interface FormValues {
+  bedrooms: string;
+  bathrooms: string;
+  parkingLots: string;
+  plinthArea: string;
+  lotArea: string;
+}
+interface Props extends InjectedFormProps<PropertyFormValues> {
   setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export type AttributesAttrs =
@@ -18,7 +26,12 @@ const Attributes: React.FC<Props> = props => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [furnished, setFurnished] = useState<boolean>(false);
   const [pet, setPet] = useState<boolean>(false);
-
+  useEffect(() => {
+    props.setInvalid(props.invalid || props.pristine);
+  }, []);
+  useEffect(() => {
+    props.setInvalid(props.invalid || props.pristine);
+  }, [props.invalid, props.pristine]);
   return (
     <div className={styles.Attributes}>
       <div>

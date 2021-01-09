@@ -8,9 +8,9 @@ import Listing from "../../components/listing/Listing";
 import Marketing from "../../components/listing/Marketing";
 import styles from "../../styles/listingEdit.module.css";
 
-type HeaderType = "listing" | "attributes" | "marketing" | "images";
+export type HeaderType = "listing" | "attributes" | "marketing" | "images";
 
-interface FormValues {
+export interface PropertyFormValues {
   bedrooms: string;
   bathrooms: string;
   parkingLots: string;
@@ -30,7 +30,7 @@ interface FormValues {
   auctionVenue: string;
 }
 
-const listingId: React.FC<InjectedFormProps<FormValues>> = props => {
+const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [active, setActive] = useState<HeaderType>("listing");
   const [invalid, setInvalid] = useState<boolean>(false);
   return (
@@ -68,9 +68,15 @@ const listingId: React.FC<InjectedFormProps<FormValues>> = props => {
             </div>
           </div>
           <div>
-            {active === "listing" && <Listing setInvalid={setInvalid} />}
-            {active === "attributes" && <Attributes setInvalid={setInvalid} />}
-            {active === "marketing" && <Marketing setInvalid={setInvalid} />}
+            {active === "listing" && (
+              <Listing {...props} setInvalid={setInvalid} />
+            )}
+            {active === "attributes" && (
+              <Attributes {...props} setInvalid={setInvalid} />
+            )}
+            {active === "marketing" && (
+              <Marketing {...props} setInvalid={setInvalid} />
+            )}
             {active === "images" && <Images />}
           </div>
         </div>
@@ -78,8 +84,8 @@ const listingId: React.FC<InjectedFormProps<FormValues>> = props => {
     </Layout>
   );
 };
-const validate = (formValues: FormValues) => {
-  const errors = {} as FormValues;
+const validate = (formValues: PropertyFormValues) => {
+  const errors = {} as PropertyFormValues;
   if (
     !formValues.bathrooms ||
     (formValues.bathrooms && !validator.isNumeric(formValues.bathrooms))
@@ -148,7 +154,7 @@ const validate = (formValues: FormValues) => {
   }
   return errors;
 };
-export default reduxForm<FormValues>({
+export default reduxForm<PropertyFormValues>({
   form: "Property",
   validate,
   destroyOnUnmount: false,
