@@ -16,6 +16,7 @@ interface Props {
 const HouseFilter: React.FC<Props> = props => {
   const [name, setName] = useState<string>("");
   const [openSub, setOpenSub] = useState<string>("");
+  const [selection, setSelection] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -68,9 +69,10 @@ const HouseFilter: React.FC<Props> = props => {
             name={name}
             searchDiv={searchDiv}
             setName={setName}
-            determinant="forSale"
-            title="For Sale"
+            determinant={selection || "forSale"}
+            title={selection || "For Sale"}
             selections={["To Rent"]}
+            setSelection={setSelection}
           />
           <input type="text" placeholder="Search for a City, Town or Surbub" />
           <RangeComponent {...props} />

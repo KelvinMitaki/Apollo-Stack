@@ -6,6 +6,7 @@ import RangeComponent from "../Homepage/Header/RangeComponent";
 const Search = () => {
   const [name, setName] = useState<string>("");
   const [selected, setSelected] = useState<string>("buy");
+  const [selection, setSelection] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -40,12 +41,13 @@ const Search = () => {
         <div className={styles.upper}>
           <Dropdown
             selections={["Nairobi", "Mombasa", "Nakuru", "Kisumu", "Eldoret"]}
-            determinant="location"
+            determinant={selection || "location"}
             name={name}
             searchDiv={searchDiv}
-            title="Location"
+            title={selection || "Location"}
             setName={setName}
             className="d_search"
+            setSelection={setSelection}
           />
         </div>
         <div className={styles.upper}>
@@ -57,12 +59,13 @@ const Search = () => {
               "4+ Bedrooms",
               "5+ Bedrooms"
             ]}
-            determinant="bedrooms"
+            determinant={selection || "bedrooms"}
             name={name}
             searchDiv={searchDiv}
-            title="No of Bedrooms"
+            title={selection || "No of Bedrooms"}
             setName={setName}
             className="d_search"
+            setSelection={setSelection}
           />
         </div>
         <div className={styles.upper}>
@@ -74,12 +77,13 @@ const Search = () => {
               "4+ Bathrooms",
               "5+ Bathrooms"
             ]}
-            determinant="bathrooms"
+            determinant={selection || "bathrooms"}
             name={name}
             searchDiv={searchDiv}
-            title="No of Bathrooms"
+            title={selection || "No of Bathrooms"}
             setName={setName}
             className="d_search"
+            setSelection={setSelection}
           />
         </div>
         <RangeComponent className="properties" />
