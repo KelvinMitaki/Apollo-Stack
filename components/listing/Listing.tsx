@@ -84,7 +84,7 @@ const Listing: React.FC<Props> = props => {
             name="reference"
           />
         </div>
-        <div style={{ cursor: "pointer" }}>
+        <div style={{ cursor: "pointer", width: "100%" }}>
           <Dropdown
             selections={[
               "apartment ",
