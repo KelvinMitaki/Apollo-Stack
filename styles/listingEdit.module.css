@@ -81,11 +81,27 @@
 .body textarea {
   width: 90%;
 }
+.dp {
+  display: flex;
+  flex-direction: column;
+}
+.dp label {
+  transition: all 0.2s;
+  transform: translateY(17px);
+  font-style: italic;
+}
+.focused label {
+  transform: translateY(0);
+}
 .DatePicker {
   width: 90%;
   border: none;
   border-bottom: 1px solid #707079;
-  background-color: #ebebeb;
+  background-color: transparent;
+  transition: all 0.2s;
+}
+.focused .DatePicker {
+  border-bottom: 2px solid rgba(1, 2, 78, 0.76);
 }
 .popper {
   position: relative;

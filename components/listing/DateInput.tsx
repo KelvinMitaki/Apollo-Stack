@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { WrappedFieldProps } from "redux-form";
 import styles from "../../styles/listingEdit.module.css";
@@ -8,6 +8,7 @@ interface Props {
 }
 
 const DateInput: React.FC<WrappedFieldProps & Props> = props => {
+  const [focused, setFocused] = useState<boolean>(false);
   let date;
   const {
     input: { value }
@@ -20,7 +21,7 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
     date = value;
   }
   return (
-    <div className={styles.customDatePickerWidth}>
+    <div className={`${styles.dp} ${focused ? styles.focused : ""}`}>
       <label htmlFor={props.input.name}>{props.label}</label>
       <ReactDatePicker
         {...props.input}
@@ -37,6 +38,14 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
         wrapperClassName={styles.wrapper}
         dateFormat="eeee d MMMM, yyyy"
         onChangeRaw={e => e.preventDefault()}
+        onFocus={e => {
+          props.input.onFocus(e);
+          setFocused(true);
+        }}
+        onBlur={e => {
+          props.input.onBlur(e);
+          setFocused(false);
+        }}
       />
     </div>
   );
