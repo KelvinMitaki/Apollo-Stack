@@ -37,7 +37,7 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [option, setOption] = useState<Option>("sale");
   const genImages = (): string[] => {
     let images: string[] = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 6; i++) {
       const imgs = [
         "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-1.jpeg",
         "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-2.jpg",

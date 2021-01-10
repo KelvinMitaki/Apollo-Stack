@@ -57,3 +57,72 @@ export const REGISTER_AGENT = gql`
     }
   }
 `;
+
+export const ADD_PROPERTY = gql`
+  mutation AddProperty(
+    $reference: Int!
+    $location: String!
+    $streetAddress: String!
+    $category: String!
+    $price: Int!
+    $bedrooms: Int!
+    $bathrooms: Int!
+    $type: String!
+    $status: String!
+    $heading: String!
+    $description: String!
+    $expiryDate: String!
+    $images: [String!]!
+    $parkingLots: Int
+    $plinthArea: Int
+    $lotArea: Int
+    $furnished: Boolean
+    $petFriendly: Boolean
+    $garden: Boolean
+    $serviceCharge: Int
+    $repossessed: Boolean
+    $onAuction: Boolean
+    $auctionDate: String
+    $auctionVenue: String
+  ) {
+    addProperty(
+      values: {
+        reference: $reference
+        location: $location
+        streetAddress: $streetAddress
+        category: $category
+        price: $price
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+        type: $type
+        status: $status
+        heading: $heading
+        description: $description
+        expiryDate: $expiryDate
+        images: $images
+        parkingLots: $parkingLots
+        plinthArea: $plinthArea
+        lotArea: $lotArea
+        furnished: $furnished
+        petFriendly: $petFriendly
+        garden: $garden
+        serviceCharge: $serviceCharge
+        repossessed: $repossessed
+        onAuction: $onAuction
+        auctionDate: $auctionDate
+        auctionVenue: $auctionVenue
+      }
+    ) {
+      _id
+      reference
+      location
+      streetAddress
+      agent {
+        firstName
+        lastName
+        email
+        password
+      }
+    }
+  }
+`;
