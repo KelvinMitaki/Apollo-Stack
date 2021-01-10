@@ -16,7 +16,6 @@ const Listing: React.FC<Props> = props => {
   const searchDiv = useRef<HTMLDivElement>(null);
   const [edit, setEdit] = useState<boolean>(false);
   useEffect(() => {
-    props.setInvalid(props.invalid || props.pristine);
     document.addEventListener("mousedown", handleClickOutside);
     if (Router.pathname.includes("edit")) {
       setEdit(true);
@@ -27,9 +26,6 @@ const Listing: React.FC<Props> = props => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  useEffect(() => {
-    props.setInvalid(props.invalid || props.pristine);
-  }, [props.invalid, props.pristine]);
   const handleClickOutside = (e: Event) => {
     // @ts-ignore
     if (searchDiv.current && !searchDiv.current.contains(e.target)) {

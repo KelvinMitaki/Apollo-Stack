@@ -5,7 +5,6 @@ import styles from "../../styles/listingEdit.module.css";
 import { BiCheck } from "react-icons/bi";
 import TextArea from "../RegisterLogin/TextArea";
 import Router from "next/router";
-import DatePicker from "react-datepicker";
 import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 import DateInput from "./DateInput";
 
@@ -18,10 +17,8 @@ const Marketing: React.FC<Props> = props => {
   const [auction, setAuction] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
-  const [startDate, setStartDate] = useState<Date | null>(null);
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    props.setInvalid(props.invalid || props.pristine);
     document.addEventListener("mousedown", handleClickOutside);
     if (Router.pathname.includes("edit")) {
       setEdit(true);
@@ -32,9 +29,6 @@ const Marketing: React.FC<Props> = props => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  useEffect(() => {
-    props.setInvalid(props.invalid || props.pristine);
-  }, [props.invalid, props.pristine]);
   const handleClickOutside = (e: Event) => {
     // @ts-ignore
     if (searchDiv.current && !searchDiv.current.contains(e.target)) {
