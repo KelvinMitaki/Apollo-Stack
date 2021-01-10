@@ -22,6 +22,13 @@ const withAgent = (WrappedComponent: NextPage) => {
 
     return null;
   };
+  HocComponent.getInitialProps = async ctx => {
+    let componentProps = {};
+    if (WrappedComponent.getInitialProps) {
+      componentProps = await WrappedComponent.getInitialProps(ctx);
+    }
+    return { ...componentProps };
+  };
   return HocComponent;
 };
 

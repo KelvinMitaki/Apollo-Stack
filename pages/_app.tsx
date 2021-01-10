@@ -34,11 +34,24 @@ MyApp.getInitialProps = async (appCtx: AppContext) => {
     },
     fetchPolicy: "network-only"
   });
+
+  // console.log(JSON.stringify(appProps.pageProps.initialApolloState, null, 2));
+
+  // console.log(JSON.stringify(apolloClient.cache.extract().ROOT_QUERY, null, 2));
   return {
     ...appProps,
     pageProps: {
       ...appProps.pageProps,
-      initialApolloState: apolloClient.cache.extract()
+      initialApolloState: {
+        ...(appProps.pageProps.initialApolloState &&
+          appProps.pageProps.initialApolloState),
+        ...apolloClient.cache.extract(),
+        ROOT_QUERY: {
+          ...apolloClient.cache.extract().ROOT_QUERY,
+          ...(appProps.pageProps.initialApolloState &&
+            appProps.pageProps.initialApolloState.ROOT_QUERY)
+        }
+      }
     }
   };
 };

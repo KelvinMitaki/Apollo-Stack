@@ -1,23 +1,18 @@
+import { useQuery } from "@apollo/client";
+import { NextPage } from "next";
 import React from "react";
+import { initializeApollo } from "../apollo";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
-import Listing from "../components/listings/Listing";
+import Listing, { ListingProperty } from "../components/listings/Listing";
 import MobileListing from "../components/listings/MobileListing";
+import { FETCH_PROPERTIES } from "../graphql/queries/queries";
 import withAgent from "../HOCs/withAgent";
-import withAuth from "../HOCs/withAuth";
 import styles from "../styles/listings.module.css";
 
-const listings = () => {
-  const listings = [];
-  for (let i = 0; i < 50; i++) {
-    listings.push(
-      <Listing key={i} className={`${i % 2 === 0 ? "active" : ""}`} />
-    );
-  }
-  const mobileListings = [];
-  for (let i = 0; i < 50; i++) {
-    mobileListings.push(<MobileListing key={i} />);
-  }
+const listings: NextPage = () => {
+  const { data } = useQuery(FETCH_PROPERTIES, { fetchPolicy: "cache-only" });
+  console.log(data);
   return (
     <Layout title="Listings">
       <div className={styles.container}>
@@ -61,13 +56,45 @@ const listings = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>{listings}</tbody>
+            <tbody>
+              {(data.fetchProperties as ListingProperty[]).map((prop, i) => (
+                <Listing
+                  key={prop._id}
+                  {...prop}
+                  className={`${i % 2 === 0 ? "active" : ""}`}
+                />
+              ))}
+            </tbody>
           </table>
-          {mobileListings}
+          {(data.fetchProperties as ListingProperty[]).map(prop => (
+            <MobileListing key={prop._id} {...prop} />
+          ))}
         </div>
       </div>
     </Layout>
   );
+};
+
+listings.getInitialProps = async ctx => {
+  try {
+    const apolloClient = initializeApollo();
+    await apolloClient.query({
+      query: FETCH_PROPERTIES,
+      context: {
+        headers: {
+          cookie: ctx.req?.headers.cookie
+        }
+      }
+    });
+    return {
+      initialApolloState: apolloClient.cache.extract()
+    };
+  } catch (error) {
+    if (ctx.res) {
+      ctx.res.writeHead(301, { Location: "/" });
+      ctx.res.end();
+    }
+  }
 };
 
 export default withAgent(listings);

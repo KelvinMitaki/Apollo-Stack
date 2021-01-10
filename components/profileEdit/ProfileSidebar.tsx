@@ -12,10 +12,14 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 
 const ProfileSidebar = () => {
   const [active, setActive] = useState<string>("");
+  const [called, setCalled] = useState<boolean>(false);
   useEffect(() => {
     setActive(Router.pathname);
+    return () => {
+      setCalled(false);
+    };
   }, []);
-  const [logoutUser, { called }] = useLazyQuery(LOGOUT_USER, {
+  const [logoutUser] = useLazyQuery(LOGOUT_USER, {
     onCompleted() {
       Router.replace("/");
     }
@@ -61,6 +65,7 @@ const ProfileSidebar = () => {
       )}
       <div
         onClick={() => {
+          setCalled(true);
           document.cookie = `client_token=; Path=/; Expires=${new Date()}`;
           if (!called) {
             logoutUser();

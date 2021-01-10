@@ -1,49 +1,50 @@
 import Link from "next/link";
 import React from "react";
 import styles from "../../styles/listings.module.css";
+import { ListingProperty } from "./Listing";
 
-const MobileListing = () => {
+const MobileListing: React.FC<ListingProperty> = props => {
   return (
     <div className={styles.MobileListing}>
       <div className={styles.header}>
         <div>
           <p>list no:</p>
-          <p>982378632687437683709</p>
+          <p>{props._id}</p>
         </div>
         <div>
           <p>reference:</p>
-          <p>123</p>
+          <p>{props.reference}</p>
         </div>
         <div>
           <p>status:</p>
-          <p>expired</p>
+          <p>{props.status}</p>
         </div>
       </div>
       <div className={styles.mb_body}>
         <div
           className={styles.mb_img}
-          style={{ backgroundImage: "url(/image-3.jpg)" }}
+          style={{ backgroundImage: `url(${props.images[0]})` }}
         ></div>
         <div className={styles.content}>
           <div>
-            <p>for rent:</p>
-            <p>townhouse</p>
+            <p>{props.type === "rent" ? "to rent" : "for sale"}:</p>
+            <p>{props.category}</p>
           </div>
           <div>
             <p>price:</p>
-            <p>ksh 2,000,000</p>
+            <p>ksh {props.price.toLocaleString()}</p>
           </div>
           <div>
             <p>address:</p>
-            <p>Ongata Rongai</p>
+            <p>{props.streetAddress}</p>
           </div>
           <div>
             <p>bedrooms:</p>
-            <p>3</p>
+            <p>{props.bedrooms}</p>
           </div>
           <div>
             <p>bathrooms:</p>
-            <p>2</p>
+            <p>{props.bathrooms}</p>
           </div>
         </div>
       </div>

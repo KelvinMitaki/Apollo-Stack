@@ -6,30 +6,44 @@ interface Props {
   className?: string;
 }
 
-const Listing: React.FC<Props> = props => {
+export interface ListingProperty {
+  _id: string;
+  reference: number;
+  streetAddress: string;
+  category: string;
+  price: number;
+  bedrooms: number;
+  bathrooms: number;
+  type: string;
+  status: string;
+  updatedAt: Date;
+  images: string[];
+}
+
+const Listing: React.FC<Props & ListingProperty> = props => {
   return (
     <tr
       className={`${styles.listing} ${props.className ? styles.active : ""}`}
       onClick={() => Router.push("/listing/edit/123")}
     >
-      <td>123</td>
-      <td>12373625681269798</td>
+      <td>{props.reference}</td>
+      <td>{props._id}</td>
       <td>
         <div className={styles.img}>
           <div
             className={styles.bg_image}
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            style={{ backgroundImage: `url(${props.images[0]})` }}
           ></div>
         </div>
       </td>
-      <td>townhouse</td>
-      <td>Ongata Rongai, Nairobi</td>
-      <td>32,000,000</td>
-      <td>3</td>
-      <td>2</td>
-      <td>rent</td>
-      <td>expired</td>
-      <td>31/12/2020</td>
+      <td>{props.category}</td>
+      <td>{props.streetAddress}</td>
+      <td>{props.price.toLocaleString()}</td>
+      <td>{props.bedrooms}</td>
+      <td>{props.bathrooms}</td>
+      <td>{props.type}</td>
+      <td>{props.status}</td>
+      <td>{new Date(props.updatedAt).toLocaleDateString()}</td>
     </tr>
   );
 };
