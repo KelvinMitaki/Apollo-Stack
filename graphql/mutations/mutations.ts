@@ -121,7 +121,6 @@ export const ADD_PROPERTY = gql`
         firstName
         lastName
         email
-        password
       }
     }
   }

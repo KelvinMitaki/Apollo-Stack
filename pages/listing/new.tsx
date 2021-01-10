@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
@@ -6,6 +7,7 @@ import Attributes from "../../components/listing/Attributes";
 import Images from "../../components/listing/Images";
 import Listing from "../../components/listing/Listing";
 import Marketing from "../../components/listing/Marketing";
+import { ADD_PROPERTY } from "../../graphql/mutations/mutations";
 import styles from "../../styles/listingEdit.module.css";
 
 export type HeaderType = "listing" | "attributes" | "marketing" | "images";
@@ -29,24 +31,37 @@ export interface PropertyFormValues {
   auctionDate: string;
   auctionVenue: string;
 }
+const genImages = (): string[] => {
+  let images: string[] = [];
+  for (let i = 0; i < 6; i++) {
+    const imgs = [
+      "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-1.jpeg",
+      "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-2.jpg",
+      "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-3.jpg"
+    ];
+    images.push(...imgs);
+  }
+  return images;
+};
 
 type Option = "sale" | "rent";
 const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [active, setActive] = useState<HeaderType>("listing");
   const [selection, setSelection] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
-  const genImages = (): string[] => {
-    let images: string[] = [];
-    for (let i = 0; i < 6; i++) {
-      const imgs = [
-        "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-1.jpeg",
-        "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-2.jpg",
-        "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-3.jpg"
-      ];
-      images.push(...imgs);
+  const [addProperty] = useMutation(ADD_PROPERTY, {
+    onCompleted(data) {
+      console.log(data);
+    },
+    onError(err) {
+      console.log(err.message);
+      console.log(err.extraInfo);
+      console.log(err.name);
+      console.log(err.stack);
+      console.log(err.graphQLErrors);
     }
-    return images;
-  };
+  });
+
   return (
     <Layout title="Edit Listing">
       <div className={styles.container}>
@@ -58,9 +73,11 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
                   ...fv,
                   category: selection,
                   type: option,
-                  images: genImages()
+                  images: genImages(),
+                  status: "active"
                 };
                 console.log(formValues);
+                // addProperty({ variables: formValues });
               }
             })}
           >
@@ -140,7 +157,8 @@ const validate = (formValues: PropertyFormValues) => {
   }
   if (
     !formValues.reference ||
-    (formValues.reference && !validator.isNumeric(formValues.reference))
+    (formValues.reference && !validator.isNumeric(formValues.reference)) ||
+    parseInt(formValues.reference) > 2 ** 31
   ) {
     errors.reference = "Enter a valid reference number";
   }
