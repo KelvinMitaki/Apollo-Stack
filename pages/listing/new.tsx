@@ -160,9 +160,5 @@ const validate = (formValues: PropertyFormValues) => {
 export default reduxForm<PropertyFormValues>({
   form: "Property",
   validate,
-  destroyOnUnmount: false,
-  initialValues: {
-    listNo: "36876238768786",
-    status: "EXPIRED"
-  }
+  destroyOnUnmount: false
 })(listingId);
