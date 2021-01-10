@@ -81,6 +81,19 @@
 .body textarea {
   width: 90%;
 }
+.DatePicker {
+  width: 90%;
+  border: none;
+  border-bottom: 1px solid #707079;
+  background-color: #ebebeb;
+}
+.popper {
+  position: relative;
+  z-index: 3;
+}
+.wrapper {
+  width: 50%;
+}
 .inp {
   display: flex;
   align-items: center;

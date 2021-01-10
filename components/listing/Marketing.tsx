@@ -7,6 +7,7 @@ import TextArea from "../RegisterLogin/TextArea";
 import Router from "next/router";
 import DatePicker from "react-datepicker";
 import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
+import DateInput from "./DateInput";
 
 interface Props extends InjectedFormProps<PropertyFormValues> {
   setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +19,7 @@ const Marketing: React.FC<Props> = props => {
   const [auction, setAuction] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(null);
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     props.setInvalid(props.invalid || props.pristine);
@@ -89,13 +90,7 @@ const Marketing: React.FC<Props> = props => {
           name="description"
         />
       </div>
-      <div className={styles.date}>
-        <DatePicker
-          className={styles.DatePicker}
-          selected={startDate}
-          onChange={date => setStartDate(date as Date)}
-        />
-      </div>
+      <Field component={DateInput} name="expiryDate" label="Expiry Date" />
       <div
         className={`${styles.inp} ${repossessed ? styles.clicked : ""}`}
         onClick={() => setRepossessed(rep => !rep)}
