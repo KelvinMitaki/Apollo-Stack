@@ -115,13 +115,6 @@ export const ADD_PROPERTY = gql`
     ) {
       _id
       reference
-      location
-      streetAddress
-      agent {
-        firstName
-        lastName
-        email
-      }
     }
   }
 `;

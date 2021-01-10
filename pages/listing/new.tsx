@@ -54,7 +54,7 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [option, setOption] = useState<Option>("sale");
   const [addProperty] = useMutation(ADD_PROPERTY, {
     onCompleted(data) {
-      dispatch(reset("Property"));
+      // dispatch(reset("Property"));
       console.log(data);
       Router.push("/listings");
     },
@@ -92,7 +92,6 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
                   images: genImages(),
                   status: "active"
                 };
-                console.log({ formValues });
                 addProperty({ variables: formValues });
               }
             })}
