@@ -37,7 +37,7 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
         popperClassName={styles.popper}
         popperPlacement="top"
         wrapperClassName={styles.wrapper}
-        dateFormat="eeee d MMMM, yyyy"
+        dateFormat="eeee Do MMMM, yyyy"
         onChangeRaw={e => e.preventDefault()}
         onFocus={e => {
           props.input.onFocus(e);
