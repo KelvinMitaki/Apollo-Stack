@@ -17,7 +17,7 @@ const listings: NextPage = () => {
     <Layout title="Listings">
       <div className={styles.container}>
         <HouseFilter alternate={false} btnContent="Search" width="100%" agent />
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%", overflowX: "scroll" }}>
           <table className={styles.table} cellSpacing="0">
             <thead>
               <tr className={styles.header}>
