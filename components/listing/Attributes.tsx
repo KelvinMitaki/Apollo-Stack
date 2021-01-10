@@ -13,7 +13,6 @@ interface FormValues {
   lotArea: string;
 }
 interface Props extends InjectedFormProps<PropertyFormValues> {
-  setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
   active: HeaderType;
 }
 export type AttributesAttrs =

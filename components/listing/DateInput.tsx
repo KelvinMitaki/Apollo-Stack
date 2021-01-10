@@ -35,6 +35,7 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
         }
         minDate={new Date()}
         popperClassName={styles.popper}
+        popperPlacement="top"
         wrapperClassName={styles.wrapper}
         dateFormat="eeee d MMMM, yyyy"
         onChangeRaw={e => e.preventDefault()}

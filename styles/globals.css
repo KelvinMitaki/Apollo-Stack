@@ -89,3 +89,16 @@ a {
   border: none;
   border-bottom: 1px solid #707079;
 }
+
+@media only screen and (max-width: 500px) {
+  .react-datepicker,
+  .react-datepicker__month-container,
+  .react-datepicker__header {
+    width: 100% !important;
+  }
+  .react-datepicker__day-names,
+  .react-datepicker__week {
+    display: flex;
+    align-items: center;
+  }
+}

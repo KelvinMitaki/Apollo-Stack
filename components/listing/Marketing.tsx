@@ -10,7 +10,6 @@ import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 import DateInput from "./DateInput";
 
 interface Props extends InjectedFormProps<PropertyFormValues> {
-  setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
   active: HeaderType;
 }
 
@@ -110,12 +109,7 @@ const Marketing: React.FC<Props> = props => {
         <p>on auction</p>
       </div>
       <div>
-        <Field
-          component={Input}
-          label="Auction Date"
-          type="text"
-          name="auctionDate"
-        />
+        <Field component={DateInput} label="Auction Date" name="auctionDate" />
       </div>
       <div>
         <Field

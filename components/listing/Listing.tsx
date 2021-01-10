@@ -8,7 +8,6 @@ import Input from "../RegisterLogin/Input";
 
 type Option = "sale" | "rent";
 interface Props extends InjectedFormProps<PropertyFormValues> {
-  setInvalid: React.Dispatch<React.SetStateAction<boolean>>;
   active: HeaderType;
 }
 const Listing: React.FC<Props> = props => {
