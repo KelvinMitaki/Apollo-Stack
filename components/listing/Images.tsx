@@ -6,13 +6,34 @@ interface Props {
 }
 const Images: React.FC<Props> = props => {
   const images = [] as JSX.Element[];
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 15; i++) {
     images.push(
-      <div
-        key={i}
-        style={{ backgroundImage: "url(/image-3.jpg)" }}
-        className={styles.bg_image}
-      ></div>
+      <>
+        <div
+          key={Math.random() * Date.now() + 1 * i}
+          style={{
+            backgroundImage:
+              "url(https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-1.jpeg)"
+          }}
+          className={styles.bg_image}
+        ></div>
+        <div
+          key={Math.random() * Date.now() + 2 * i}
+          style={{
+            backgroundImage:
+              "url(https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-2.jpg)"
+          }}
+          className={styles.bg_image}
+        ></div>
+        <div
+          key={Math.random() * Date.now() + 3 * i}
+          style={{
+            backgroundImage:
+              "url(https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-3.jpg)"
+          }}
+          className={styles.bg_image}
+        ></div>
+      </>
     );
   }
   return (

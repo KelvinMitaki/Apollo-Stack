@@ -28,6 +28,7 @@ export interface PropertyFormValues {
   expiryDate: string;
   auctionDate: string;
   auctionVenue: string;
+  images: string;
 }
 
 const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {

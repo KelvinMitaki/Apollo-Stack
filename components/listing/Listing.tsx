@@ -12,6 +12,7 @@ interface Props extends InjectedFormProps<PropertyFormValues> {
 }
 const Listing: React.FC<Props> = props => {
   const [name, setName] = useState<string>("");
+  const [selection, setSelection] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
   const searchDiv = useRef<HTMLDivElement>(null);
   const [edit, setEdit] = useState<boolean>(false);
@@ -86,6 +87,7 @@ const Listing: React.FC<Props> = props => {
         </div>
         <div style={{ cursor: "pointer", width: "90%" }}>
           <Dropdown
+            setSelection={setSelection}
             selections={[
               "apartment ",
               "house ",
@@ -95,10 +97,10 @@ const Listing: React.FC<Props> = props => {
               "commercial",
               "industrial"
             ]}
-            determinant="category"
+            determinant={selection || "category"}
             name={name}
             searchDiv={searchDiv}
-            title="Category"
+            title={selection || "Category"}
             setName={setName}
             className="d_search"
           />
