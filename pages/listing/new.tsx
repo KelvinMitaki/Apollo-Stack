@@ -155,6 +155,12 @@ const validate = (formValues: PropertyFormValues) => {
   ) {
     errors.description = "Description must be twenty characters minimum";
   }
+  if (
+    !formValues.expiryDate ||
+    (formValues.expiryDate && !validator.isDate(formValues.expiryDate))
+  ) {
+    errors.expiryDate = "Choose a valid date";
+  }
   if (formValues.auctionVenue && formValues.auctionVenue.trim().length === 0) {
     errors.auctionVenue = "Enter a valid auction venue";
   }

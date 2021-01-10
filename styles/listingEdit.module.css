@@ -93,6 +93,10 @@
 .focused label {
   transform: translateY(0);
 }
+.error {
+  font-weight: 600;
+  color: red;
+}
 .DatePicker {
   width: 90%;
   border: none;

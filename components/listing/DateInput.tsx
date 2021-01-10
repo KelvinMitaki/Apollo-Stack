@@ -47,6 +47,9 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
           setFocused(false);
         }}
       />
+      {props.meta.error && props.meta.touched && (
+        <div className={styles.error}>{props.meta.error}</div>
+      )}
     </div>
   );
 };
