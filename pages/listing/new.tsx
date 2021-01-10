@@ -1,6 +1,8 @@
 import { useMutation } from "@apollo/client";
+import Router from "next/router";
 import React, { useState } from "react";
-import { InjectedFormProps, reduxForm } from "redux-form";
+import { useDispatch } from "react-redux";
+import { InjectedFormProps, reduxForm, reset } from "redux-form";
 import validator from "validator";
 import Layout from "../../components/Layout/Layout";
 import Attributes from "../../components/listing/Attributes";
@@ -46,19 +48,21 @@ const genImages = (): string[] => {
 
 type Option = "sale" | "rent";
 const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
+  const dispatch = useDispatch();
   const [active, setActive] = useState<HeaderType>("listing");
   const [selection, setSelection] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
   const [addProperty] = useMutation(ADD_PROPERTY, {
     onCompleted(data) {
+      dispatch(reset("Property"));
       console.log(data);
+      Router.push("/listings");
     },
     onError(err) {
       console.log(err.message);
       console.log(err.extraInfo);
-      console.log(err.name);
-      console.log(err.stack);
       console.log(err.graphQLErrors);
+      console.log(err.name);
     }
   });
 
@@ -71,13 +75,25 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
               if (selection) {
                 const formValues = {
                   ...fv,
+                  bathrooms: parseInt(fv.bathrooms),
+                  bedrooms: parseInt(fv.bedrooms),
+                  price: parseInt(fv.price),
+                  reference: parseInt(fv.reference),
+                  ...(fv.serviceCharge && {
+                    serviceCharge: parseInt(fv.serviceCharge)
+                  }),
+                  ...(fv.lotArea && { lotArea: parseInt(fv.lotArea) }),
+                  ...(fv.parkingLots && {
+                    parkingLots: parseInt(fv.parkingLots)
+                  }),
+                  ...(fv.plinthArea && { plinthArea: parseInt(fv.plinthArea) }),
                   category: selection,
                   type: option,
                   images: genImages(),
                   status: "active"
                 };
-                console.log(formValues);
-                // addProperty({ variables: formValues });
+                console.log({ formValues });
+                addProperty({ variables: formValues });
               }
             })}
           >
@@ -136,23 +152,34 @@ const validate = (formValues: PropertyFormValues) => {
   const errors = {} as PropertyFormValues;
   if (
     !formValues.bathrooms ||
-    (formValues.bathrooms && !validator.isNumeric(formValues.bathrooms))
+    (formValues.bathrooms && !validator.isNumeric(formValues.bathrooms)) ||
+    parseInt(formValues.bathrooms) > 2 ** 31
   ) {
     errors.bathrooms = "Enter a valid bathroom number";
   }
   if (
     !formValues.bedrooms ||
-    (formValues.bedrooms && !validator.isNumeric(formValues.bedrooms))
+    (formValues.bedrooms && !validator.isNumeric(formValues.bedrooms)) ||
+    parseInt(formValues.bedrooms) > 2 ** 31
   ) {
     errors.bedrooms = "Enter a valid bedroom number";
   }
-  if (formValues.parkingLots && !validator.isNumeric(formValues.parkingLots)) {
+  if (
+    (formValues.parkingLots && !validator.isNumeric(formValues.parkingLots)) ||
+    parseInt(formValues.parkingLots) > 2 ** 31
+  ) {
     errors.bedrooms = "Enter a valid parking lot number";
   }
-  if (formValues.plinthArea && !validator.isNumeric(formValues.plinthArea)) {
+  if (
+    (formValues.plinthArea && !validator.isNumeric(formValues.plinthArea)) ||
+    parseInt(formValues.plinthArea) > 2 ** 31
+  ) {
     errors.plinthArea = "Enter a valid plinth area number";
   }
-  if (formValues.lotArea && !validator.isNumeric(formValues.lotArea)) {
+  if (
+    (formValues.lotArea && !validator.isNumeric(formValues.lotArea)) ||
+    parseInt(formValues.lotArea) > 2 ** 31
+  ) {
     errors.lotArea = "Enter a valid lot area number";
   }
   if (
@@ -176,13 +203,15 @@ const validate = (formValues: PropertyFormValues) => {
   }
   if (
     !formValues.price ||
-    (formValues.price && !validator.isNumeric(formValues.price))
+    (formValues.price && !validator.isNumeric(formValues.price)) ||
+    parseInt(formValues.price) > 2 ** 31
   ) {
     errors.price = "Enter a valid price";
   }
   if (
-    formValues.serviceCharge &&
-    !validator.isNumeric(formValues.serviceCharge)
+    (formValues.serviceCharge &&
+      !validator.isNumeric(formValues.serviceCharge)) ||
+    parseInt(formValues.serviceCharge) > 2 ** 31
   ) {
     errors.serviceCharge = "Enter a valid service charge";
   }
