@@ -3,6 +3,7 @@ import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import Listing from "../components/listings/Listing";
 import MobileListing from "../components/listings/MobileListing";
+import withAgent from "../HOCs/withAgent";
 import withAuth from "../HOCs/withAuth";
 import styles from "../styles/listings.module.css";
 
@@ -69,4 +70,4 @@ const listings = () => {
   );
 };
 
-export default listings;
+export default withAgent(listings);

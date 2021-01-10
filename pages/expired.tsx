@@ -5,6 +5,7 @@ import ExpiredListing from "../components/Expired/ExpiredListing";
 import ExpiredMobileListing from "../components/Expired/ExpiredMobileListing";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
+import withAgent from "../HOCs/withAgent";
 import styles from "../styles/listings.module.css";
 
 const expired = () => {
@@ -87,4 +88,4 @@ const expired = () => {
   );
 };
 
-export default expired;
+export default withAgent(expired);

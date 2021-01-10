@@ -10,6 +10,7 @@ import Images from "../../components/listing/Images";
 import Listing from "../../components/listing/Listing";
 import Marketing from "../../components/listing/Marketing";
 import { ADD_PROPERTY } from "../../graphql/mutations/mutations";
+import withAgent from "../../HOCs/withAgent";
 import styles from "../../styles/listingEdit.module.css";
 
 export type HeaderType = "listing" | "attributes" | "marketing" | "images";
@@ -237,8 +238,10 @@ const validate = (formValues: PropertyFormValues) => {
   }
   return errors;
 };
-export default reduxForm<PropertyFormValues>({
-  form: "Property",
-  validate,
-  destroyOnUnmount: false
-})(listingId);
+export default withAgent(
+  reduxForm<PropertyFormValues>({
+    form: "Property",
+    validate,
+    destroyOnUnmount: false
+  })(listingId)
+);

@@ -6,6 +6,7 @@ import Attributes from "../../../components/listing/Attributes";
 import Images from "../../../components/listing/Images";
 import Listing from "../../../components/listing/Listing";
 import Marketing from "../../../components/listing/Marketing";
+import withAgent from "../../../HOCs/withAgent";
 import styles from "../../../styles/listingEdit.module.css";
 import { PropertyFormValues } from "../new";
 
@@ -145,12 +146,14 @@ const validate = (formValues: PropertyFormValues) => {
   }
   return errors;
 };
-export default reduxForm<PropertyFormValues>({
-  form: "PropertyEdit",
-  initialValues: {
-    listNo: "36876238768786",
-    status: "EXPIRED"
-  },
-  validate,
-  destroyOnUnmount: false
-})(listingEdit);
+export default withAgent(
+  reduxForm<PropertyFormValues>({
+    form: "PropertyEdit",
+    initialValues: {
+      listNo: "36876238768786",
+      status: "EXPIRED"
+    },
+    validate,
+    destroyOnUnmount: false
+  })(listingEdit)
+);
