@@ -9,11 +9,14 @@ import Input from "../RegisterLogin/Input";
 type Option = "sale" | "rent";
 interface Props extends InjectedFormProps<PropertyFormValues> {
   active: HeaderType;
+  setSelection: React.Dispatch<React.SetStateAction<string>>;
+  setOption: React.Dispatch<React.SetStateAction<Option>>;
+  selection: string;
+  option: string;
 }
 const Listing: React.FC<Props> = props => {
+  const { selection, setOption, option, setSelection } = props;
   const [name, setName] = useState<string>("");
-  const [selection, setSelection] = useState<string>("");
-  const [option, setOption] = useState<Option>("sale");
   const searchDiv = useRef<HTMLDivElement>(null);
   const [edit, setEdit] = useState<boolean>(false);
   useEffect(() => {

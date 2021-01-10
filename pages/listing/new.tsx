@@ -28,16 +28,42 @@ export interface PropertyFormValues {
   expiryDate: string;
   auctionDate: string;
   auctionVenue: string;
-  images: string;
 }
 
+type Option = "sale" | "rent";
 const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [active, setActive] = useState<HeaderType>("listing");
+  const [selection, setSelection] = useState<string>("");
+  const [option, setOption] = useState<Option>("sale");
+  const genImages = (): string[] => {
+    let images: string[] = [];
+    for (let i = 0; i < 15; i++) {
+      const imgs = [
+        "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-1.jpeg",
+        "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-2.jpg",
+        "https://e-commerce-gig.s3.eu-west-2.amazonaws.com/5efd9987b53dfa39cc27bae9/image-3.jpg"
+      ];
+      images.push(...imgs);
+    }
+    return images;
+  };
   return (
     <Layout title="Edit Listing">
       <div className={styles.container}>
         <div className={styles.body}>
-          <form onSubmit={props.handleSubmit(fv => console.log(fv))}>
+          <form
+            onSubmit={props.handleSubmit(fv => {
+              if (selection) {
+                const formValues = {
+                  ...fv,
+                  category: selection,
+                  type: option,
+                  images: genImages()
+                };
+                console.log(formValues);
+              }
+            })}
+          >
             <div className={styles.header}>
               <div
                 onClick={() => setActive("listing")}
@@ -65,13 +91,20 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
               </div>
               <div className={styles.no_content}></div>
               <div className={styles.btn}>
-                <button disabled={!props.valid} type="submit">
+                <button disabled={!props.valid || !selection} type="submit">
                   save
                 </button>
               </div>
             </div>
             <div>
-              <Listing {...props} active={active} />
+              <Listing
+                {...props}
+                active={active}
+                selection={selection}
+                setSelection={setSelection}
+                option={option}
+                setOption={setOption}
+              />
               <Attributes {...props} active={active} />
               <Marketing {...props} active={active} />
               <Images active={active} />

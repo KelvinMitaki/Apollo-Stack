@@ -10,9 +10,12 @@ import styles from "../../../styles/listingEdit.module.css";
 import { PropertyFormValues } from "../new";
 
 type HeaderType = "listing" | "attributes" | "marketing" | "images";
+type Option = "sale" | "rent";
 
 const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [active, setActive] = useState<HeaderType>("listing");
+  const [selection, setSelection] = useState<string>("");
+  const [option, setOption] = useState<Option>("sale");
   return (
     <Layout title="Edit Listing">
       <div className={styles.container}>
@@ -48,7 +51,14 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
             </div>
           </div>
           <div className={styles.opts}>
-            <Listing {...props} active={active} />
+            <Listing
+              {...props}
+              active={active}
+              selection={selection}
+              setSelection={setSelection}
+              option={option}
+              setOption={setOption}
+            />
             <Attributes {...props} active={active} />
             <Marketing {...props} active={active} />
             <Images active={active} />
