@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { NextPage } from "next";
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
@@ -12,9 +12,10 @@ import Images from "../../../components/listing/Images";
 import Listing from "../../../components/listing/Listing";
 import Marketing from "../../../components/listing/Marketing";
 import { FETCH_AGENT_PROPERTY } from "../../../graphql/queries/queries";
+import { EDIT_PROPERTY } from "../../../graphql/mutations/mutations";
 import withAgent from "../../../HOCs/withAgent";
 import styles from "../../../styles/listingEdit.module.css";
-import { PropertyFormValues } from "../new";
+import { genImages, PropertyFormValues } from "../new";
 import { parse } from "date-fns";
 
 type HeaderType = "listing" | "attributes" | "marketing" | "images";
@@ -36,6 +37,14 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
     fetchPolicy: "cache-only",
     variables: {
       propertyId: Router.query.listingId
+    }
+  });
+  const [editProperty] = useMutation(EDIT_PROPERTY, {
+    onError(err) {
+      console.log(err);
+    },
+    onCompleted(data) {
+      Router.push("/listings");
     }
   });
   useEffect(() => {
@@ -64,65 +73,110 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
     <Layout title="Edit Listing">
       <div className={styles.container}>
         <div className={styles.body}>
-          <div className={styles.header}>
-            <div
-              onClick={() => setActive("listing")}
-              className={active === "listing" ? styles.active : ""}
-            >
-              <p>listing</p>
+          <form
+            onSubmit={props.handleSubmit(fv => {
+              if (selection) {
+                if (typeof fv.expiryDate === "object") {
+                  // @ts-ignore
+                  fv.expiryDate = new Date(fv.expiryDate).toString();
+                }
+                // @ts-ignore
+                if (new Date(fv.expiryDate) == "Invalid Date") {
+                  fv.expiryDate = new Date(
+                    parse(fv.expiryDate, "EEE do MMMM, yyyy", new Date())
+                  ).toString();
+                }
+                const formValues = {
+                  ...fv,
+                  _id: fv.listNo,
+                  bathrooms: parseInt(fv.bathrooms),
+                  bedrooms: parseInt(fv.bedrooms),
+                  price: parseInt(fv.price),
+                  reference: parseInt(fv.reference),
+                  ...(fv.serviceCharge && {
+                    serviceCharge: parseInt(fv.serviceCharge)
+                  }),
+                  ...(fv.lotArea && { lotArea: parseInt(fv.lotArea) }),
+                  ...(fv.parkingLots && {
+                    parkingLots: parseInt(fv.parkingLots)
+                  }),
+                  ...(fv.plinthArea && { plinthArea: parseInt(fv.plinthArea) }),
+                  category: selection,
+                  type: option,
+                  images: genImages(),
+                  status: "active",
+                  garden,
+                  furnished,
+                  pet,
+                  repossessed,
+                  auction
+                };
+                // @ts-ignore
+                delete formValues.listNo;
+                editProperty({ variables: formValues });
+              }
+            })}
+          >
+            <div className={styles.header}>
+              <div
+                onClick={() => setActive("listing")}
+                className={active === "listing" ? styles.active : ""}
+              >
+                <p>listing</p>
+              </div>
+              <div
+                onClick={() => setActive("attributes")}
+                className={active === "attributes" ? styles.active : ""}
+              >
+                <p>attributes</p>
+              </div>
+              <div
+                onClick={() => setActive("marketing")}
+                className={active === "marketing" ? styles.active : ""}
+              >
+                <p>marketing</p>
+              </div>
+              <div
+                onClick={() => setActive("images")}
+                className={active === "images" ? styles.active : ""}
+              >
+                <p>images</p>
+              </div>
+              <div className={styles.no_content}></div>
+              <div className={styles.btn}>
+                <button disabled={!props.valid || !selection}>save</button>
+              </div>
             </div>
-            <div
-              onClick={() => setActive("attributes")}
-              className={active === "attributes" ? styles.active : ""}
-            >
-              <p>attributes</p>
+            <div className={styles.opts}>
+              <Listing
+                {...props}
+                active={active}
+                selection={selection}
+                setSelection={setSelection}
+                option={option}
+                setOption={setOption}
+              />
+              <Attributes
+                {...props}
+                active={active}
+                garden={garden}
+                setFurnished={setFurnished}
+                furnished={furnished}
+                setGarden={setGarden}
+                setPet={setPet}
+                pet={pet}
+              />
+              <Marketing
+                {...props}
+                active={active}
+                setAuction={setAuction}
+                setRepossessed={setRepossessed}
+                auction={auction}
+                repossessed={repossessed}
+              />
+              <Images active={active} images={data.fetchAgentProperty.images} />
             </div>
-            <div
-              onClick={() => setActive("marketing")}
-              className={active === "marketing" ? styles.active : ""}
-            >
-              <p>marketing</p>
-            </div>
-            <div
-              onClick={() => setActive("images")}
-              className={active === "images" ? styles.active : ""}
-            >
-              <p>images</p>
-            </div>
-            <div className={styles.no_content}></div>
-            <div className={styles.btn}>
-              <button disabled={!props.valid || !selection}>save</button>
-            </div>
-          </div>
-          <div className={styles.opts}>
-            <Listing
-              {...props}
-              active={active}
-              selection={selection}
-              setSelection={setSelection}
-              option={option}
-              setOption={setOption}
-            />
-            <Attributes
-              {...props}
-              active={active}
-              garden={garden}
-              setFurnished={setFurnished}
-              furnished={furnished}
-              setGarden={setGarden}
-              setPet={setPet}
-              pet={pet}
-            />
-            <Marketing
-              {...props}
-              active={active}
-              setAuction={setAuction}
-              setRepossessed={setRepossessed}
-              auction={auction}
-              repossessed={repossessed}
-            />
-            <Images active={active} images={data.fetchAgentProperty.images} />
-          </div>
+          </form>
         </div>
       </div>
     </Layout>

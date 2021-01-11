@@ -119,7 +119,7 @@ export const ADD_PROPERTY = gql`
   }
 `;
 
-export const EIDT_PROPERTY = gql`
+export const EDIT_PROPERTY = gql`
   mutation EditProperty(
     $_id: ID!
     $location: String

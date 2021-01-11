@@ -35,7 +35,7 @@ export interface PropertyFormValues {
   auctionDate: string;
   auctionVenue: string;
 }
-const genImages = (): string[] => {
+export const genImages = (): string[] => {
   let images: string[] = [];
   for (let i = 0; i < 6; i++) {
     const imgs = [
