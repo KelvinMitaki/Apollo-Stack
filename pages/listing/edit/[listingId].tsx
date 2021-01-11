@@ -23,6 +23,11 @@ type Option = "sale" | "rent";
 // @ts-ignore
 const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
   NextPage = props => {
+  const [garden, setGarden] = useState<boolean>(false);
+  const [furnished, setFurnished] = useState<boolean>(false);
+  const [pet, setPet] = useState<boolean>(false);
+  const [repossessed, setRepossessed] = useState<boolean>(false);
+  const [auction, setAuction] = useState<boolean>(false);
   const [active, setActive] = useState<HeaderType>("listing");
   const [selection, setSelection] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
@@ -98,8 +103,24 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
               option={option}
               setOption={setOption}
             />
-            <Attributes {...props} active={active} />
-            <Marketing {...props} active={active} />
+            <Attributes
+              {...props}
+              active={active}
+              garden={garden}
+              setFurnished={setFurnished}
+              furnished={furnished}
+              setGarden={setGarden}
+              setPet={setPet}
+              pet={pet}
+            />
+            <Marketing
+              {...props}
+              active={active}
+              setAuction={setAuction}
+              setRepossessed={setRepossessed}
+              auction={auction}
+              repossessed={repossessed}
+            />
             <Images active={active} images={data.fetchAgentProperty.images} />
           </div>
         </div>

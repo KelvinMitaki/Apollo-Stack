@@ -51,6 +51,11 @@ const genImages = (): string[] => {
 type Option = "sale" | "rent";
 const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const dispatch = useDispatch();
+  const [garden, setGarden] = useState<boolean>(false);
+  const [furnished, setFurnished] = useState<boolean>(false);
+  const [pet, setPet] = useState<boolean>(false);
+  const [repossessed, setRepossessed] = useState<boolean>(false);
+  const [auction, setAuction] = useState<boolean>(false);
   const [active, setActive] = useState<HeaderType>("listing");
   const [selection, setSelection] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
@@ -91,7 +96,12 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
                   category: selection,
                   type: option,
                   images: genImages(),
-                  status: "active"
+                  status: "active",
+                  garden,
+                  furnished,
+                  pet,
+                  repossessed,
+                  auction
                 };
                 addProperty({ variables: formValues });
               }
@@ -138,8 +148,24 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
                 option={option}
                 setOption={setOption}
               />
-              <Attributes {...props} active={active} />
-              <Marketing {...props} active={active} />
+              <Attributes
+                {...props}
+                active={active}
+                garden={garden}
+                setFurnished={setFurnished}
+                furnished={furnished}
+                setGarden={setGarden}
+                setPet={setPet}
+                pet={pet}
+              />
+              <Marketing
+                {...props}
+                active={active}
+                setAuction={setAuction}
+                setRepossessed={setRepossessed}
+                auction={auction}
+                repossessed={repossessed}
+              />
               <Images active={active} />
             </div>
           </form>

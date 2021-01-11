@@ -7,6 +7,12 @@ import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 
 interface Props extends InjectedFormProps<PropertyFormValues> {
   active: HeaderType;
+  setGarden: React.Dispatch<React.SetStateAction<boolean>>;
+  setFurnished: React.Dispatch<React.SetStateAction<boolean>>;
+  setPet: React.Dispatch<React.SetStateAction<boolean>>;
+  garden: boolean;
+  furnished: boolean;
+  pet: boolean;
 }
 export type AttributesAttrs =
   | "bedrooms"
@@ -16,9 +22,7 @@ export type AttributesAttrs =
   | "lotArea";
 
 const Attributes: React.FC<Props> = props => {
-  const [clicked, setClicked] = useState<boolean>(false);
-  const [furnished, setFurnished] = useState<boolean>(false);
-  const [pet, setPet] = useState<boolean>(false);
+  const { garden, setGarden, furnished, setFurnished, pet, setPet } = props;
   return (
     <div
       className={`${styles.Attributes} ${
@@ -89,8 +93,8 @@ const Attributes: React.FC<Props> = props => {
       </div>
 
       <div
-        className={`${styles.inp} ${clicked ? styles.clicked : ""}`}
-        onClick={() => setClicked(cl => !cl)}
+        className={`${styles.inp} ${garden ? styles.clicked : ""}`}
+        onClick={() => setGarden(cl => !cl)}
       >
         <div className={styles.BiCheck}>
           <BiCheck />

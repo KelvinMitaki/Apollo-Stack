@@ -10,11 +10,14 @@ import DateInput from "./DateInput";
 
 interface Props extends InjectedFormProps<PropertyFormValues> {
   active: HeaderType;
+  setRepossessed: React.Dispatch<React.SetStateAction<boolean>>;
+  setAuction: React.Dispatch<React.SetStateAction<boolean>>;
+  repossessed: boolean;
+  auction: boolean;
 }
 
 const Marketing: React.FC<Props> = props => {
-  const [repossessed, setRepossessed] = useState<boolean>(false);
-  const [auction, setAuction] = useState<boolean>(false);
+  const { repossessed, auction, setAuction, setRepossessed } = props;
   const [edit, setEdit] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
