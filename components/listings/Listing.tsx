@@ -24,7 +24,7 @@ const Listing: React.FC<Props & ListingProperty> = props => {
   return (
     <tr
       className={`${styles.listing} ${props.className ? styles.active : ""}`}
-      onClick={() => Router.push("/listing/edit/123")}
+      onClick={() => Router.push(`/listing/edit/${props._id}`)}
     >
       <td>{props.reference}</td>
       <td>{props._id}</td>

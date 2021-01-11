@@ -19,6 +19,7 @@ const Attributes: React.FC<Props> = props => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [furnished, setFurnished] = useState<boolean>(false);
   const [pet, setPet] = useState<boolean>(false);
+  console.log("Attributes", props.initialValues);
   return (
     <div
       className={`${styles.Attributes} ${

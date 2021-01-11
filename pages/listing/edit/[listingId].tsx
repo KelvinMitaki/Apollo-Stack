@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import { InjectedFormProps, reduxForm } from "redux-form";
+import { useQuery } from "@apollo/client";
+import { NextPage } from "next";
+import Router from "next/router";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { initialize, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
+import { initializeApollo } from "../../../apollo";
 import Layout from "../../../components/Layout/Layout";
 import Attributes from "../../../components/listing/Attributes";
 import Images from "../../../components/listing/Images";
 import Listing from "../../../components/listing/Listing";
 import Marketing from "../../../components/listing/Marketing";
+import { FETCH_AGENT_PROPERTY } from "../../../graphql/queries/queries";
 import withAgent from "../../../HOCs/withAgent";
 import styles from "../../../styles/listingEdit.module.css";
 import { PropertyFormValues } from "../new";
@@ -13,10 +19,39 @@ import { PropertyFormValues } from "../new";
 type HeaderType = "listing" | "attributes" | "marketing" | "images";
 type Option = "sale" | "rent";
 
-const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
+// @ts-ignore
+const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
+  NextPage = props => {
   const [active, setActive] = useState<HeaderType>("listing");
   const [selection, setSelection] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
+  const dispatch = useDispatch();
+  const { data } = useQuery(FETCH_AGENT_PROPERTY, {
+    fetchPolicy: "cache-only",
+    variables: {
+      propertyId: Router.query.listingId
+    }
+  });
+  useEffect(() => {
+    const transformedData = {} as { [key: string]: string | Date };
+    for (const property in data.fetchAgentProperty) {
+      if (
+        !isNaN(data.fetchAgentProperty[property]) &&
+        data.fetchAgentProperty[property] !== null &&
+        typeof data.fetchAgentProperty[property] !== "boolean"
+      ) {
+        transformedData[property] = data.fetchAgentProperty[
+          property
+        ].toString();
+      } else if (validator.isDate(data.fetchAgentProperty[property])) {
+        transformedData[property] = new Date(data.fetchAgentProperty[property]);
+      } else {
+        transformedData[property] = data.fetchAgentProperty[property];
+      }
+    }
+    console.log(transformedData);
+    dispatch(initialize("PropertyEdit", transformedData));
+  }, []);
   return (
     <Layout title="Edit Listing">
       <div className={styles.container}>
@@ -146,14 +181,36 @@ const validate = (formValues: PropertyFormValues) => {
   }
   return errors;
 };
+
+listingEdit.getInitialProps = async ctx => {
+  try {
+    const apolloClient = initializeApollo();
+    await apolloClient.query({
+      query: FETCH_AGENT_PROPERTY,
+      variables: { propertyId: ctx.query.listingId },
+      context: {
+        headers: {
+          cookie: ctx.req?.headers.cookie
+        }
+      }
+    });
+    return {
+      initialApolloState: apolloClient.cache.extract()
+    };
+  } catch (error) {
+    console.log(error);
+    if (ctx.res) {
+      ctx.res.writeHead(301, { Location: "/" });
+      ctx.res.end();
+    }
+  }
+};
+
 export default withAgent(
   reduxForm<PropertyFormValues>({
     form: "PropertyEdit",
-    initialValues: {
-      listNo: "36876238768786",
-      status: "EXPIRED"
-    },
     validate,
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    enableReinitialize: false
   })(listingEdit)
 );
