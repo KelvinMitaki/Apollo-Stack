@@ -38,3 +38,37 @@ export const FETCH_PROPERTIES = gql`
     }
   }
 `;
+
+export const FETCH_AGENT_PROPERTY = gql`
+  query FetchAgentProperty($propertyId: String!) {
+    fetchAgentProperty(propertyId: $propertyId) {
+      _id
+      reference
+      location
+      streetAddress
+      category
+      price
+      bedrooms
+      bathrooms
+      type
+      status
+      heading
+      description
+      expiryDate
+      images
+      parkingLots
+      homeArea
+      lotArea
+      furnished
+      petFriendly
+      garden
+      serviceCharge
+      repossessed
+      onAuction
+      auctionDate
+      auctionVenue
+      createdAt
+      updatedAt
+    }
+  }
+`;
