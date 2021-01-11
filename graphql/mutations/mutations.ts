@@ -118,3 +118,69 @@ export const ADD_PROPERTY = gql`
     }
   }
 `;
+
+export const EIDT_PROPERTY = gql`
+  mutation EditProperty(
+    $_id: ID!
+    $location: String
+    $streetAddress: String
+    $category: String
+    $price: Int
+    $bedrooms: Int
+    $bathrooms: Int
+    $heading: String
+    $description: String
+    $expiryDate: String
+    $images: [String!]
+    $parkingLots: Int
+    $plinthArea: Int
+    $lotArea: Int
+    $furnished: Boolean
+    $petFriendly: Boolean
+    $garden: Boolean
+    $serviceCharge: Int
+    $repossessed: Boolean
+    $onAuction: Boolean
+    $auctionDate: String
+    $auctionVenue: String
+  ) {
+    editProperty(
+      values: {
+        _id: $_id
+        location: $location
+        streetAddress: $streetAddress
+        category: $category
+        price: $price
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+        heading: $heading
+        description: $description
+        expiryDate: $expiryDate
+        images: $images
+        parkingLots: $parkingLots
+        plinthArea: $plinthArea
+        lotArea: $lotArea
+        furnished: $furnished
+        petFriendly: $petFriendly
+        garden: $garden
+        serviceCharge: $serviceCharge
+        repossessed: $repossessed
+        onAuction: $onAuction
+        auctionDate: $auctionDate
+        auctionVenue: $auctionVenue
+      }
+    ) {
+      _id
+      reference
+      images
+      category
+      streetAddress
+      price
+      bedrooms
+      bathrooms
+      type
+      status
+      updatedAt
+    }
+  }
+`;
