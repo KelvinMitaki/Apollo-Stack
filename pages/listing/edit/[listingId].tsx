@@ -43,13 +43,10 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
         transformedData[property] = data.fetchAgentProperty[
           property
         ].toString();
-      } else if (validator.isDate(data.fetchAgentProperty[property])) {
-        transformedData[property] = new Date(data.fetchAgentProperty[property]);
       } else {
         transformedData[property] = data.fetchAgentProperty[property];
       }
     }
-    console.log(transformedData);
     dispatch(initialize("PropertyEdit", transformedData));
   }, []);
   return (
