@@ -12,6 +12,7 @@ import Marketing from "../../components/listing/Marketing";
 import { ADD_PROPERTY } from "../../graphql/mutations/mutations";
 import withAgent from "../../HOCs/withAgent";
 import styles from "../../styles/listingEdit.module.css";
+import { parse } from "date-fns";
 
 export type HeaderType = "listing" | "attributes" | "marketing" | "images";
 
@@ -228,7 +229,12 @@ const validate = (formValues: PropertyFormValues) => {
   }
   if (
     !formValues.expiryDate ||
-    (formValues.expiryDate && !validator.isDate(formValues.expiryDate))
+    (formValues.expiryDate &&
+      !validator.isDate(
+        new Date(
+          parse(formValues.expiryDate, "EEE do MMMM, yyyy", new Date())
+        ).toString()
+      ))
   ) {
     errors.expiryDate = "Choose a valid date";
   }

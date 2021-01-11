@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { WrappedFieldProps } from "redux-form";
 import styles from "../../styles/listingEdit.module.css";
+import { parse } from "date-fns";
 
 interface Props {
   label: string;
@@ -14,13 +15,10 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
     input: { value }
   } = props;
   if (Object.prototype.toString.call(value) === "[object String]") {
-    console.log("reached 1");
     date = Object.prototype.toString.call(new Date(value));
   } else if (Object.prototype.toString.call(value) === "[object Date]") {
-    console.log("reached 2");
     date = Object.prototype.toString.call(value);
   } else {
-    console.log("reached 3");
     date = value;
   }
   useEffect(() => {
@@ -29,27 +27,34 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
       props.input.value.length !== 0 &&
       !focused
     ) {
-      console.log("reached 4");
       setFocused(true);
     }
   }, [props.input.value, focused]);
   const minDate = new Date();
+  let dateValue;
+  if (value) {
+    if (date !== "[object Date]") {
+      dateValue = value.toDate();
+    } else {
+      const dt = new Date(value);
+      // @ts-ignore
+      if (dt != "Invalid Date") {
+        dateValue = new Date(value);
+      } else {
+        dateValue = new Date(parse(value, "EEE do MMMM, yyyy", new Date()));
+      }
+    }
+  }
+
   return (
     <div className={`${styles.dp} ${focused ? styles.focused : ""}`}>
       <label htmlFor={props.input.name}>{props.label}</label>
       <ReactDatePicker
         onChange={e => {
           props.input.onChange(e);
-          console.log("changed");
         }}
         className={styles.DatePicker}
-        selected={
-          value
-            ? date !== "[object Date]"
-              ? value.toDate()
-              : new Date(value)
-            : null
-        }
+        selected={dateValue || null}
         minDate={minDate}
         popperClassName={styles.popper}
         popperPlacement="top"
@@ -58,13 +63,11 @@ const DateInput: React.FC<WrappedFieldProps & Props> = props => {
         onChangeRaw={e => e.preventDefault()}
         onFocus={e => {
           props.input.onFocus(e);
-          !focused && setFocused(true);
-          console.log("reached 5");
+          setFocused(true);
         }}
         onBlur={e => {
-          console.log("reached 6");
           props.input.onBlur(e);
-          focused && setFocused(false);
+          setFocused(false);
         }}
       />
       {props.meta.error && props.meta.touched && (

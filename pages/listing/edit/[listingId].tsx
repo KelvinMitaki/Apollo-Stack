@@ -15,6 +15,7 @@ import { FETCH_AGENT_PROPERTY } from "../../../graphql/queries/queries";
 import withAgent from "../../../HOCs/withAgent";
 import styles from "../../../styles/listingEdit.module.css";
 import { PropertyFormValues } from "../new";
+import { parse } from "date-fns";
 
 type HeaderType = "listing" | "attributes" | "marketing" | "images";
 type Option = "sale" | "rent";
@@ -167,10 +168,8 @@ const validate = (formValues: PropertyFormValues) => {
   ) {
     errors.description = "Description must be twenty characters minimum";
   }
-  if (
-    !formValues.expiryDate ||
-    (formValues.expiryDate && !validator.isDate(formValues.expiryDate))
-  ) {
+
+  if (!formValues.expiryDate) {
     errors.expiryDate = "Choose a valid date";
   }
   if (formValues.auctionVenue && formValues.auctionVenue.trim().length === 0) {
