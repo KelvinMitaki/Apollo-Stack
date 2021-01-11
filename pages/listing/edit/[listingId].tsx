@@ -50,7 +50,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
     }
   });
   useEffect(() => {
-    const transformedData = {} as { [key: string]: string | Date };
+    const transformedData = {} as { [key: string]: string | Date | boolean };
     for (const property in data.fetchAgentProperty) {
       if (
         !isNaN(data.fetchAgentProperty[property]) &&
@@ -69,6 +69,11 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
       }
     }
     dispatch(initialize("PropertyEdit", transformedData));
+    setFurnished(transformedData.furnished as boolean);
+    setGarden(transformedData.garden as boolean);
+    setAuction(transformedData.auction as boolean);
+    setPet(transformedData.pet as boolean);
+    setRepossessed(transformedData.repossessed as boolean);
     setSelection(transformedData.category as string);
     () => {
       setDisabled(false);
@@ -78,7 +83,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
     <Layout title="Edit Listing">
       <div className={styles.container}>
         <div className={styles.body}>
-          {loading && <Loading />};
+          {loading && <Loading />}
           <form
             onSubmit={props.handleSubmit(fv => {
               if (selection) {

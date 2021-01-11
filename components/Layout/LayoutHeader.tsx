@@ -87,13 +87,13 @@ const LayoutHeader: React.FC<Props> = props => {
               </div>
             </a>
           </Link>
-          <Link href="/properties/123">
+          {/* <Link href="/properties/123">
             <a>
               <div className={styles.opts_item}>
                 <p>developments</p>
               </div>
             </a>
-          </Link>
+          </Link> */}
           <Link href="/properties/123">
             <a>
               <div className={styles.opts_item}>
