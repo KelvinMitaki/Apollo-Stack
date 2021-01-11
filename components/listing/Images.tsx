@@ -3,6 +3,7 @@ import { HeaderType } from "../../pages/listing/new";
 import styles from "../../styles/listingEdit.module.css";
 interface Props {
   active: HeaderType;
+  images?: string[];
 }
 const Images: React.FC<Props> = props => {
   const images = [] as JSX.Element[];
@@ -42,7 +43,15 @@ const Images: React.FC<Props> = props => {
         props.active === "images" ? styles.active_header : ""
       }`}
     >
-      {images}
+      {props.images
+        ? props.images.map((img, i) => (
+            <div
+              className={styles.bg_image}
+              style={{ backgroundImage: `url(${img})` }}
+              key={i}
+            ></div>
+          ))
+        : { images }}
     </div>
   );
 };

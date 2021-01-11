@@ -45,10 +45,15 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
           property
         ].toString();
       } else {
-        transformedData[property] = data.fetchAgentProperty[property];
+        if (property === "_id") {
+          transformedData["listNo"] = data.fetchAgentProperty[property];
+        } else {
+          transformedData[property] = data.fetchAgentProperty[property];
+        }
       }
     }
     dispatch(initialize("PropertyEdit", transformedData));
+    setSelection(transformedData.category as string);
   }, []);
   return (
     <Layout title="Edit Listing">
@@ -81,7 +86,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
             </div>
             <div className={styles.no_content}></div>
             <div className={styles.btn}>
-              <button>save</button>
+              <button disabled={!props.valid || !selection}>save</button>
             </div>
           </div>
           <div className={styles.opts}>
@@ -95,7 +100,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
             />
             <Attributes {...props} active={active} />
             <Marketing {...props} active={active} />
-            <Images active={active} />
+            <Images active={active} images={data.fetchAgentProperty.images} />
           </div>
         </div>
       </div>
