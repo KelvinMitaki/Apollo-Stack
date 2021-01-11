@@ -17,6 +17,7 @@ import withAgent from "../../../HOCs/withAgent";
 import styles from "../../../styles/listingEdit.module.css";
 import { genImages, PropertyFormValues } from "../new";
 import { parse } from "date-fns";
+import Loading from "../../../components/loading/Loading";
 
 type HeaderType = "listing" | "attributes" | "marketing" | "images";
 type Option = "sale" | "rent";
@@ -24,6 +25,7 @@ type Option = "sale" | "rent";
 // @ts-ignore
 const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
   NextPage = props => {
+  const [disabled, setDisabled] = useState<boolean>(false);
   const [garden, setGarden] = useState<boolean>(false);
   const [furnished, setFurnished] = useState<boolean>(false);
   const [pet, setPet] = useState<boolean>(false);
@@ -39,7 +41,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
       propertyId: Router.query.listingId
     }
   });
-  const [editProperty] = useMutation(EDIT_PROPERTY, {
+  const [editProperty, { loading }] = useMutation(EDIT_PROPERTY, {
     onError(err) {
       console.log(err);
     },
@@ -68,11 +70,15 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
     }
     dispatch(initialize("PropertyEdit", transformedData));
     setSelection(transformedData.category as string);
+    () => {
+      setDisabled(false);
+    };
   }, []);
   return (
     <Layout title="Edit Listing">
       <div className={styles.container}>
         <div className={styles.body}>
+          {loading && <Loading />};
           <form
             onSubmit={props.handleSubmit(fv => {
               if (selection) {
@@ -113,6 +119,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
                 };
                 // @ts-ignore
                 delete formValues.listNo;
+                setDisabled(true);
                 editProperty({ variables: formValues });
               }
             })}
@@ -144,7 +151,9 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
               </div>
               <div className={styles.no_content}></div>
               <div className={styles.btn}>
-                <button disabled={!props.valid || !selection}>save</button>
+                <button disabled={!props.valid || !selection || disabled}>
+                  save
+                </button>
               </div>
             </div>
             <div className={styles.opts}>

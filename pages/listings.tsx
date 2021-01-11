@@ -12,7 +12,6 @@ import styles from "../styles/listings.module.css";
 
 const listings: NextPage = () => {
   const { data } = useQuery(FETCH_PROPERTIES, { fetchPolicy: "cache-only" });
-  console.log(data);
   return (
     <Layout title="Listings">
       <div className={styles.container}>

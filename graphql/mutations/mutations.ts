@@ -172,14 +172,30 @@ export const EDIT_PROPERTY = gql`
     ) {
       _id
       reference
-      images
-      category
+      location
       streetAddress
+      category
       price
       bedrooms
       bathrooms
       type
       status
+      heading
+      description
+      expiryDate
+      images
+      parkingLots
+      homeArea
+      lotArea
+      furnished
+      petFriendly
+      garden
+      serviceCharge
+      repossessed
+      onAuction
+      auctionDate
+      auctionVenue
+      createdAt
       updatedAt
     }
   }
