@@ -57,6 +57,7 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [auction, setAuction] = useState<boolean>(false);
   const [active, setActive] = useState<HeaderType>("listing");
   const [selection, setSelection] = useState<string>("");
+  const [mongoError, setError] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
   const [addProperty] = useMutation(ADD_PROPERTY, {
     onCompleted(data) {
@@ -66,7 +67,18 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
     onError(err) {
       console.log(err.message);
       console.log(err.extraInfo);
-      console.log(err.graphQLErrors);
+      console.log(err.graphQLErrors[0].extensions);
+      if (
+        err.graphQLErrors.length !== 0 &&
+        err.graphQLErrors[0].extensions &&
+        err.graphQLErrors[0].extensions.exception &&
+        err.graphQLErrors[0].extensions.exception.name &&
+        err.graphQLErrors[0].extensions.exception.name === "MongoError"
+      ) {
+        setError(
+          "Reference number already in use, please use a different reference number"
+        );
+      }
       console.log(err.name);
     }
   });
@@ -74,6 +86,16 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   return (
     <Layout title="Edit Listing">
       <div className={styles.container}>
+        <p
+          style={{
+            color: "red",
+            // @ts-ignore
+            fontWeight: "600",
+            transform: "translateY(25px)"
+          }}
+        >
+          {mongoError}
+        </p>
         <div className={styles.body}>
           <form
             onSubmit={props.handleSubmit(fv => {
@@ -112,8 +134,7 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
                   repossessed,
                   auction
                 };
-                console.log(formValues);
-                // addProperty({ variables: formValues });
+                addProperty({ variables: formValues });
               }
             })}
           >
@@ -157,6 +178,8 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
                 setSelection={setSelection}
                 option={option}
                 setOption={setOption}
+                setMongoError={setError}
+                mongoError={mongoError}
               />
               <Attributes
                 {...props}

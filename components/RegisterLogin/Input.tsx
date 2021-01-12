@@ -11,6 +11,8 @@ interface Props {
   sup?: number;
   setError?: React.Dispatch<React.SetStateAction<string>>;
   capitalize?: boolean;
+  setMongoError?: React.Dispatch<React.SetStateAction<string>>;
+  mongoError?: string;
 }
 
 const Input: React.FC<WrappedFieldProps & Props> = props => {
@@ -67,6 +69,13 @@ const Input: React.FC<WrappedFieldProps & Props> = props => {
         onFocus={e => {
           props.input.onFocus(e);
           setFocused(true);
+          if (
+            props.setMongoError &&
+            props.mongoError &&
+            props.mongoError.trim().length !== 0
+          ) {
+            props.setMongoError("");
+          }
         }}
         onChange={e => {
           props.input.onChange(e);

@@ -13,6 +13,8 @@ interface Props extends InjectedFormProps<PropertyFormValues> {
   setOption: React.Dispatch<React.SetStateAction<Option>>;
   selection: string;
   option: string;
+  setMongoError?: React.Dispatch<React.SetStateAction<string>>;
+  mongoError?: string;
 }
 const Listing: React.FC<Props> = props => {
   const { selection, setOption, option, setSelection } = props;
@@ -86,6 +88,8 @@ const Listing: React.FC<Props> = props => {
             label="Reference"
             type="text"
             name="reference"
+            mongoError={props.mongoError}
+            setMongoError={props.setMongoError}
           />
         </div>
         <div style={{ cursor: "pointer", width: "90%" }}>
