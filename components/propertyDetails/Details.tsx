@@ -17,11 +17,10 @@ const Details: React.FC<PropertyDetails> = props => {
     <div className={styles.details}>
       <Slider ref={slider1} asNavFor={nav.nav2 as any} arrows={false}>
         {props.images.map((img, i) => (
-          <div>
+          <div key={i}>
             <div
               style={{ backgroundImage: `url(${img})` }}
               className={styles.large_img}
-              key={i}
             />
           </div>
         ))}
@@ -39,11 +38,10 @@ const Details: React.FC<PropertyDetails> = props => {
       >
         {" "}
         {props.images.map((img, i) => (
-          <div>
+          <div key={i}>
             <div
               style={{ backgroundImage: `url(${img})` }}
               className={styles.small_img}
-              key={i}
             />
           </div>
         ))}
