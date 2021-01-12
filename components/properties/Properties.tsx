@@ -1,16 +1,30 @@
 import React from "react";
 import styles from "../../styles/properties.module.css";
 import Property from "./Property";
-const Properties = () => {
+export interface Properties {
+  _id: string;
+  images: string[];
+  type: "sale" | "rent";
+  price: number;
+  streetAddress: string;
+  location: string;
+  description: string;
+  plinthArea: number;
+  bedrooms: number;
+  bathrooms: number;
+  parkingLots: number;
+}
+interface Props {
+  properties: Properties[];
+}
+const Properties: React.FC<Props> = props => {
   return (
     <div className={styles.properties_prt}>
       <h3>Property</h3>
       <div className={styles.properties}>
-        <Property />
-        <Property />
-        <Property />
-        <Property />
-        <Property />
+        {props.properties.map(p => (
+          <Property key={p._id} property={p} />
+        ))}
       </div>
       <div className={styles.pagination}>
         <p>1</p>
