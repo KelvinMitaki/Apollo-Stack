@@ -73,24 +73,6 @@ export const FETCH_AGENT_PROPERTY = gql`
   }
 `;
 
-// _id
-//     price
-//     type
-//     createdAt
-//     bathrooms
-//     bedrooms
-//     parkingLots
-//     lotArea
-//     plinthArea
-//     agent{
-//       firstName
-//       lastName
-//       email
-//       phoneNumber
-//     }
-//     category
-//     images
-
 export const FILTER_PROPERTIES = gql`
   query FilterProperties($filter: String!) {
     filterProperties(filter: $filter) {
@@ -105,6 +87,30 @@ export const FILTER_PROPERTIES = gql`
       bedrooms
       bathrooms
       parkingLots
+    }
+  }
+`;
+
+export const FETCH_PROPERTY_DETAILS = gql`
+  query FetchPropertyDetails($_id: ID!) {
+    fetchPropertyDetails(_id: $_id) {
+      _id
+      price
+      type
+      createdAt
+      bathrooms
+      bedrooms
+      parkingLots
+      lotArea
+      plinthArea
+      agent {
+        firstName
+        lastName
+        email
+        phoneNumber
+      }
+      category
+      images
     }
   }
 `;

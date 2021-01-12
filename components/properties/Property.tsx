@@ -13,7 +13,7 @@ interface Props {
 const Property: React.FC<Props> = props => {
   const { property } = props;
   return (
-    <Link href="/property/123">
+    <Link href={`/property/${property._id}`}>
       <a>
         <div className={styles.property}>
           <div
