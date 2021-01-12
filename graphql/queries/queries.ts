@@ -72,3 +72,39 @@ export const FETCH_AGENT_PROPERTY = gql`
     }
   }
 `;
+
+// _id
+//     price
+//     type
+//     createdAt
+//     bathrooms
+//     bedrooms
+//     parkingLots
+//     lotArea
+//     plinthArea
+//     agent{
+//       firstName
+//       lastName
+//       email
+//       phoneNumber
+//     }
+//     category
+//     images
+
+export const FILTER_PROPERTIES = gql`
+  query FilterProperties($filter: String!) {
+    filterProperties(filter: $filter) {
+      _id
+      images
+      type
+      price
+      streetAddress
+      location
+      description
+      plinthArea
+      bedrooms
+      bathrooms
+      parkingLots
+    }
+  }
+`;

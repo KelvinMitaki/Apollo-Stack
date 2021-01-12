@@ -73,14 +73,14 @@ const LayoutHeader: React.FC<Props> = props => {
               />
             </div>
           )}
-          <Link href="/properties/123">
+          <Link href="/properties/sale">
             <a>
               <div className={styles.opts_item}>
                 <p>for sale</p>
               </div>
             </a>
           </Link>
-          <Link href="/properties/123">
+          <Link href="/properties/rent">
             <a>
               <div className={styles.opts_item}>
                 <p>to rent</p>
@@ -94,7 +94,7 @@ const LayoutHeader: React.FC<Props> = props => {
               </div>
             </a>
           </Link> */}
-          <Link href="/properties/123">
+          <Link href="/properties/furnished">
             <a>
               <div className={styles.opts_item}>
                 <p>furnished</p>
