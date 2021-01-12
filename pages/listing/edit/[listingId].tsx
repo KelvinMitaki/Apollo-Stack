@@ -44,6 +44,9 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
   const [editProperty, { loading }] = useMutation(EDIT_PROPERTY, {
     onError(err) {
       console.log(err);
+      console.log(err.graphQLErrors);
+      console.log(err.message);
+      console.log(err.name);
     },
     onCompleted(data) {
       Router.push("/listings");

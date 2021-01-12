@@ -51,7 +51,7 @@ const Images: React.FC<Props> = props => {
               key={i}
             ></div>
           ))
-        : { images }}
+        : images}
     </div>
   );
 };

@@ -47,7 +47,6 @@ export const genImages = (): string[] => {
   }
   return images;
 };
-
 type Option = "sale" | "rent";
 const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const dispatch = useDispatch();
@@ -79,6 +78,16 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
           <form
             onSubmit={props.handleSubmit(fv => {
               if (selection) {
+                if (typeof fv.expiryDate === "object") {
+                  // @ts-ignore
+                  fv.expiryDate = new Date(fv.expiryDate).toString();
+                }
+                // @ts-ignore
+                if (new Date(fv.expiryDate) == "Invalid Date") {
+                  fv.expiryDate = new Date(
+                    parse(fv.expiryDate, "EEE do MMMM, yyyy", new Date())
+                  ).toString();
+                }
                 const formValues = {
                   ...fv,
                   bathrooms: parseInt(fv.bathrooms),
@@ -103,7 +112,8 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
                   repossessed,
                   auction
                 };
-                addProperty({ variables: formValues });
+                console.log(formValues);
+                // addProperty({ variables: formValues });
               }
             })}
           >
@@ -253,15 +263,7 @@ const validate = (formValues: PropertyFormValues) => {
   ) {
     errors.description = "Description must be twenty characters minimum";
   }
-  if (
-    !formValues.expiryDate ||
-    (formValues.expiryDate &&
-      !validator.isDate(
-        new Date(
-          parse(formValues.expiryDate, "EEE do MMMM, yyyy", new Date())
-        ).toString()
-      ))
-  ) {
+  if (!formValues.expiryDate) {
     errors.expiryDate = "Choose a valid date";
   }
   if (formValues.auctionVenue && formValues.auctionVenue.trim().length === 0) {
