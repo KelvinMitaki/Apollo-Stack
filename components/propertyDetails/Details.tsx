@@ -49,6 +49,7 @@ const Details: React.FC<PropertyDetails> = props => {
       <div>
         <div className={styles.description}>
           <h4>Description</h4>
+          <h5>{props.heading}</h5>
           <p>{props.description}</p>
         </div>
         <div className={styles.table}>
