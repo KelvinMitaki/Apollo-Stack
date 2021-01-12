@@ -1,9 +1,10 @@
 import React from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { PropertyDetails } from "../../pages/property/[id]";
 import styles from "../../styles/propertyDetails.module.css";
 
-const Contact = () => {
+const Contact: React.FC<PropertyDetails> = props => {
   return (
     <div>
       <div className={styles.contact}>
@@ -14,14 +15,14 @@ const Contact = () => {
               <FaPhoneAlt />
               <p>Contact Number</p>
             </div>
-            <h4>0712345678</h4>
+            <h4>{props.agent.phoneNumber}</h4>
           </div>
           <div className={styles.email}>
             <div>
               <MdEmail />
               <p>Email Address</p>
             </div>
-            <h4>johndoe@gmail.com</h4>
+            <h4>{props.agent.email}</h4>
           </div>
         </div>
         <div className={styles.input}>

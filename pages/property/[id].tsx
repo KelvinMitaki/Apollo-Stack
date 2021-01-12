@@ -8,6 +8,28 @@ import Details from "../../components/propertyDetails/Details";
 import { FETCH_PROPERTY_DETAILS } from "../../graphql/queries/queries";
 import styles from "../../styles/propertyDetails.module.css";
 
+export interface PropertyDetails {
+  _id: string;
+  price: number;
+  type: string;
+  createdAt: string;
+  bathrooms: number;
+  bedrooms: number;
+  parkingLots: number;
+  lotArea: number;
+  plinthArea: number;
+  heading: string;
+  description: string;
+  agent: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: number;
+  };
+  category: string;
+  images: string[];
+}
+
 const propertyDetails: NextPage<{
   variables: { _id: string | string[] | undefined };
 }> = props => {
@@ -15,12 +37,12 @@ const propertyDetails: NextPage<{
     fetchPolicy: "cache-only",
     variables: props.variables
   });
-  // console.log(data);
+
   return (
     <Layout title="Property Details">
       <div className={styles.container}>
-        <Details />
-        <Contact />
+        <Details {...data.fetchPropertyDetails} />
+        <Contact {...data.fetchPropertyDetails} />
       </div>
     </Layout>
   );
@@ -29,7 +51,7 @@ const propertyDetails: NextPage<{
 propertyDetails.getInitialProps = async ctx => {
   const apolloClient = initializeApollo();
   try {
-    const data = await apolloClient.query({
+    const res = await apolloClient.query({
       query: FETCH_PROPERTY_DETAILS,
       context: {
         headers: {
@@ -38,7 +60,7 @@ propertyDetails.getInitialProps = async ctx => {
       },
       variables: { _id: ctx.query.id }
     });
-    if (!data.data.fetchPropertyDetails && ctx.res) {
+    if (!res.data.fetchPropertyDetails && ctx.res) {
       ctx.res.writeHead(301, { Location: "/" });
       ctx.res.end();
     }

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
+import { PropertyDetails } from "../../pages/property/[id]";
 import styles from "../../styles/propertyDetails.module.css";
 
-const Details = () => {
+const Details: React.FC<PropertyDetails> = props => {
   let slider1 = useRef(null);
   let slider2 = useRef(null);
   const [nav, setNav] = useState<{
@@ -15,60 +16,15 @@ const Details = () => {
   return (
     <div className={styles.details}>
       <Slider ref={slider1} asNavFor={nav.nav2 as any} arrows={false}>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-1.jpeg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-2.jpg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-1.jpeg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-2.jpg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-1.jpeg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-2.jpg)" }}
-            className={styles.large_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
-            className={styles.large_img}
-          />
-        </div>
+        {props.images.map((img, i) => (
+          <div>
+            <div
+              style={{ backgroundImage: `url(${img})` }}
+              className={styles.large_img}
+              key={i}
+            />
+          </div>
+        ))}
       </Slider>
       <Slider
         asNavFor={nav.nav1 as any}
@@ -81,72 +37,21 @@ const Details = () => {
         autoplaySpeed={5000}
         arrows={false}
       >
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-1.jpeg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-2.jpg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-1.jpeg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-2.jpg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-1.jpeg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-2.jpg)" }}
-            className={styles.small_img}
-          />
-        </div>
-        <div>
-          <div
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
-            className={styles.small_img}
-          />
-        </div>
+        {" "}
+        {props.images.map((img, i) => (
+          <div>
+            <div
+              style={{ backgroundImage: `url(${img})` }}
+              className={styles.small_img}
+              key={i}
+            />
+          </div>
+        ))}
       </Slider>
       <div>
         <div className={styles.description}>
           <h4>Description</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
-            cumque. Accusamus ex laudantium inventore aliquid, at autem eveniet
-            consequatur incidunt totam mollitia, in rem similique dignissimos
-            non modi dolorum id nisi aliquam temporibus nostrum. Totam velit
-            mollitia natus aut nam sapiente minima reiciendis! Temporibus
-            inventore numquam molestias delectus repudiandae magnam.
-          </p>
+          <p>{props.description}</p>
         </div>
         <div className={styles.table}>
           <div className={styles.table_title}>
@@ -155,19 +60,19 @@ const Details = () => {
           <div className={styles.table_body}>
             <div>
               <p>Price</p>
-              <p>Ksh 2,000,000</p>
+              <p>Ksh {props.price.toLocaleString()}</p>
             </div>
             <div>
               <p>Property Type</p>
-              <p>Appartment</p>
+              <p>{props.category}</p>
             </div>
             <div>
               <p>Year Built</p>
-              <p>2020</p>
+              <p>{new Date(props.createdAt).getFullYear()}</p>
             </div>
             <div>
               <p>Bathrooms</p>
-              <p>3</p>
+              <p>{props.bathrooms.toLocaleString()}</p>
             </div>
             <div>
               <p>Rooms</p>
@@ -175,27 +80,31 @@ const Details = () => {
             </div>
             <div>
               <p>Parking Lots</p>
-              <p>3</p>
+              <p>{props.parkingLots.toLocaleString()}</p>
             </div>
             <div>
               <p>Lot Area</p>
-              <p>200 sqft</p>
+              <p>
+                {props.lotArea.toLocaleString()} m<sup>2</sup>
+              </p>
             </div>
             <div>
               <p>Agent</p>
-              <p>John Doe</p>
+              <p>
+                {props.agent.firstName} {props.agent.lastName}
+              </p>
             </div>
             <div>
               <p>Listing Number</p>
-              <p>12345678</p>
+              <p>{props._id}</p>
             </div>
             <div>
               <p>Contract Type</p>
-              <p>Sale</p>
+              <p>{props.type}</p>
             </div>
             <div>
               <p>Beds</p>
-              <p>4</p>
+              <p>{props.bedrooms.toLocaleString()}</p>
             </div>
             <div>
               <p>Garages</p>
@@ -207,7 +116,9 @@ const Details = () => {
             </div>
             <div>
               <p>Plinth Area</p>
-              <p>1200 sqft</p>
+              <p>
+                {props.plinthArea.toLocaleString()} m<sup>2</sup>
+              </p>
             </div>
           </div>
         </div>

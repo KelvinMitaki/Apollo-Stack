@@ -103,6 +103,8 @@ export const FETCH_PROPERTY_DETAILS = gql`
       parkingLots
       lotArea
       plinthArea
+      heading
+      description
       agent {
         firstName
         lastName
