@@ -80,6 +80,10 @@
 .property svg {
   color: rgba(1, 2, 78, 0.76);
 }
+.description {
+  height: 6.6rem;
+  overflow: hidden;
+}
 .bg_image {
   height: 100%;
   background-position: center;
