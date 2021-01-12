@@ -13,6 +13,7 @@ import { ADD_PROPERTY } from "../../graphql/mutations/mutations";
 import withAgent from "../../HOCs/withAgent";
 import styles from "../../styles/listingEdit.module.css";
 import { parse } from "date-fns";
+import Loading from "../../components/loading/Loading";
 
 export type HeaderType = "listing" | "attributes" | "marketing" | "images";
 
@@ -59,7 +60,7 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
   const [selection, setSelection] = useState<string>("");
   const [mongoError, setError] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
-  const [addProperty] = useMutation(ADD_PROPERTY, {
+  const [addProperty, { loading }] = useMutation(ADD_PROPERTY, {
     onCompleted(data) {
       dispatch(reset("Property"));
       Router.push("/listings");
@@ -97,6 +98,7 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
           {mongoError}
         </p>
         <div className={styles.body}>
+          {loading && <Loading />}
           <form
             onSubmit={props.handleSubmit(fv => {
               if (selection) {
