@@ -6,12 +6,14 @@ import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import Listing, { ListingProperty } from "../components/listings/Listing";
 import MobileListing from "../components/listings/MobileListing";
-import { FETCH_PROPERTIES } from "../graphql/queries/queries";
+import { FETCH_AGENT_PROPERTIES } from "../graphql/queries/queries";
 import withAgent from "../HOCs/withAgent";
 import styles from "../styles/listings.module.css";
 
 const listings: NextPage = () => {
-  const { data } = useQuery(FETCH_PROPERTIES, { fetchPolicy: "cache-only" });
+  const { data } = useQuery(FETCH_AGENT_PROPERTIES, {
+    fetchPolicy: "cache-only"
+  });
   return (
     <Layout title="Listings">
       <div className={styles.container}>
@@ -56,16 +58,18 @@ const listings: NextPage = () => {
               </tr>
             </thead>
             <tbody>
-              {(data.fetchProperties as ListingProperty[]).map((prop, i) => (
-                <Listing
-                  key={prop._id}
-                  {...prop}
-                  className={`${i % 2 === 0 ? "active" : ""}`}
-                />
-              ))}
+              {(data.fetchAgentProperties as ListingProperty[]).map(
+                (prop, i) => (
+                  <Listing
+                    key={prop._id}
+                    {...prop}
+                    className={`${i % 2 === 0 ? "active" : ""}`}
+                  />
+                )
+              )}
             </tbody>
           </table>
-          {(data.fetchProperties as ListingProperty[]).map(prop => (
+          {(data.fetchAgentProperties as ListingProperty[]).map(prop => (
             <MobileListing key={prop._id} {...prop} />
           ))}
         </div>
@@ -77,8 +81,8 @@ const listings: NextPage = () => {
 listings.getInitialProps = async ctx => {
   try {
     const apolloClient = initializeApollo();
-    await apolloClient.query({
-      query: FETCH_PROPERTIES,
+    const res = await apolloClient.query({
+      query: FETCH_AGENT_PROPERTIES,
       context: {
         headers: {
           cookie: ctx.req?.headers.cookie

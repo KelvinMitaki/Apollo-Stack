@@ -21,9 +21,9 @@ export const LOGOUT_USER = gql`
   }
 `;
 
-export const FETCH_PROPERTIES = gql`
+export const FETCH_AGENT_PROPERTIES = gql`
   query {
-    fetchProperties {
+    fetchAgentProperties {
       _id
       reference
       images
@@ -40,7 +40,7 @@ export const FETCH_PROPERTIES = gql`
 `;
 
 export const FETCH_AGENT_PROPERTY = gql`
-  query FetchAgentProperty($propertyId: String!) {
+  query FetchAgentProperty($propertyId: ID!) {
     fetchAgentProperty(propertyId: $propertyId) {
       _id
       reference
@@ -57,7 +57,7 @@ export const FETCH_AGENT_PROPERTY = gql`
       expiryDate
       images
       parkingLots
-      homeArea
+      plinthArea
       lotArea
       furnished
       petFriendly
