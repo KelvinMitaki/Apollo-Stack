@@ -105,6 +105,9 @@ export const FETCH_PROPERTY_DETAILS = gql`
       plinthArea
       heading
       description
+      status
+      location
+      streetAddress
       agent {
         firstName
         lastName

@@ -73,18 +73,30 @@ const Details: React.FC<PropertyDetails> = props => {
               <p>{props.bathrooms.toLocaleString()}</p>
             </div>
             <div>
-              <p>Rooms</p>
-              <p>12</p>
+              <p>Status</p>
+              <p>{props.status}</p>
             </div>
             <div>
               <p>Parking Lots</p>
-              <p>{props.parkingLots.toLocaleString()}</p>
+              {props.parkingLots ? (
+                <p>{props.parkingLots.toLocaleString()}</p>
+              ) : (
+                <p>-</p>
+              )}
             </div>
             <div>
               <p>Lot Area</p>
-              <p>
-                {props.lotArea.toLocaleString()} m<sup>2</sup>
-              </p>
+              {props.lotArea ? (
+                <p>
+                  {props.lotArea.toLocaleString()} m<sup>2</sup> /{" "}
+                  {parseFloat(
+                    (props.lotArea * 10.7639).toFixed(2)
+                  ).toLocaleString()}{" "}
+                  SQFT
+                </p>
+              ) : (
+                <p>-</p>
+              )}
             </div>
             <div>
               <p>Agent</p>
@@ -105,18 +117,26 @@ const Details: React.FC<PropertyDetails> = props => {
               <p>{props.bedrooms.toLocaleString()}</p>
             </div>
             <div>
-              <p>Garages</p>
-              <p>2</p>
-            </div>
-            <div>
-              <p>Garage Size</p>
-              <p>200 sqft</p>
-            </div>
-            <div>
               <p>Plinth Area</p>
-              <p>
-                {props.plinthArea.toLocaleString()} m<sup>2</sup>
-              </p>
+              {props.plinthArea ? (
+                <p>
+                  {props.plinthArea.toLocaleString()} m<sup>2</sup> /{" "}
+                  {parseFloat(
+                    (props.plinthArea * 10.7639).toFixed(2)
+                  ).toLocaleString()}{" "}
+                  SQFT
+                </p>
+              ) : (
+                <p>-</p>
+              )}
+            </div>
+            <div>
+              <p>location</p>
+              <p>{props.location}</p>
+            </div>
+            <div>
+              <p>street address</p>
+              <p>{props.streetAddress}</p>
             </div>
           </div>
         </div>

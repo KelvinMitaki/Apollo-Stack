@@ -20,6 +20,7 @@
 }
 .details {
   background-color: #fff;
+  text-transform: capitalize;
 }
 .large_img {
   height: 40rem;

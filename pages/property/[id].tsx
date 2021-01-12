@@ -15,11 +15,14 @@ export interface PropertyDetails {
   createdAt: string;
   bathrooms: number;
   bedrooms: number;
-  parkingLots: number;
-  lotArea: number;
-  plinthArea: number;
+  parkingLots?: number;
+  lotArea?: number;
+  plinthArea?: number;
   heading: string;
   description: string;
+  status: string;
+  location: string;
+  streetAddress: string;
   agent: {
     firstName: string;
     lastName: string;
