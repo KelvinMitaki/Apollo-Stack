@@ -16,7 +16,6 @@ const property: NextPage<{
     fetchPolicy: "cache-only",
     variables: props.variables
   });
-  console.log(data);
   return (
     <Layout title="Properties">
       <div className={styles.container}>

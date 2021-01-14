@@ -5,6 +5,15 @@ import { PropertyDetails } from "../../pages/property/[id]";
 import styles from "../../styles/propertyDetails.module.css";
 
 const Contact: React.FC<PropertyDetails> = props => {
+  const formatPhoneNumber = (phoneNumber: number): string => {
+    if (phoneNumber.toString().length === 8) {
+      return `+2547${phoneNumber}`;
+    }
+    if (phoneNumber.toString().length === 9) {
+      return `+254${phoneNumber}`;
+    }
+    return phoneNumber.toString();
+  };
   return (
     <div>
       <div className={styles.contact}>
@@ -15,7 +24,7 @@ const Contact: React.FC<PropertyDetails> = props => {
               <FaPhoneAlt />
               <p>Contact Number</p>
             </div>
-            <h4>{props.agent.phoneNumber}</h4>
+            <h4>{formatPhoneNumber(props.agent.phoneNumber)}</h4>
           </div>
           <div className={styles.email}>
             <div>
