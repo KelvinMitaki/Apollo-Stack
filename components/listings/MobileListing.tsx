@@ -48,7 +48,7 @@ const MobileListing: React.FC<ListingProperty> = props => {
           </div>
         </div>
       </div>
-      <Link href="/listing/edit/123">
+      <Link href={`/listing/edit/${props._id}`}>
         <a>
           <div className={styles.btn}>
             <button>edit</button>

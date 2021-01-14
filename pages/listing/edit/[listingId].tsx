@@ -305,10 +305,12 @@ listingEdit.getInitialProps = async ctx => {
       initialApolloState: apolloClient.cache.extract()
     };
   } catch (error) {
-    console.log(error);
     if (ctx.res) {
       ctx.res.writeHead(301, { Location: "/" });
       ctx.res.end();
+    }
+    if (typeof window !== "undefined") {
+      Router.replace("/");
     }
   }
 };
