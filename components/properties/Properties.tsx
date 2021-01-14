@@ -9,10 +9,10 @@ export interface Properties {
   streetAddress: string;
   location: string;
   description: string;
-  plinthArea: number;
+  plinthArea?: number;
   bedrooms: number;
   bathrooms: number;
-  parkingLots: number;
+  parkingLots?: number;
 }
 interface Props {
   properties: Properties[];

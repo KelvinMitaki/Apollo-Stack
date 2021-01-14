@@ -41,9 +41,13 @@ const Property: React.FC<Props> = props => {
             <div className={styles.p_footer}>
               <div>
                 <BsArrowsMove size="2.5rem" />
-                <p>
-                  {property.plinthArea.toLocaleString()} m<sup>2</sup>{" "}
-                </p>
+                {property.plinthArea ? (
+                  <p>
+                    {property.plinthArea.toLocaleString()} m<sup>2</sup>{" "}
+                  </p>
+                ) : (
+                  <p>-</p>
+                )}
               </div>
               <div>
                 <FaBed size="2.5rem" />
@@ -55,11 +59,14 @@ const Property: React.FC<Props> = props => {
               </div>
               <div>
                 <FaCarAlt size="2.5rem" />
-
-                <p>
-                  {property.parkingLots.toLocaleString()} Parking{" "}
-                  {property.parkingLots > 1 ? "Lots" : "Lot"}
-                </p>
+                {property.parkingLots ? (
+                  <p>
+                    {property.parkingLots.toLocaleString()} Parking{" "}
+                    {property.parkingLots > 1 ? "Lots" : "Lot"}
+                  </p>
+                ) : (
+                  <p>-</p>
+                )}
               </div>
             </div>
           </div>
