@@ -185,7 +185,7 @@ export const EDIT_PROPERTY = gql`
       expiryDate
       images
       parkingLots
-      homeArea
+      plinthArea
       lotArea
       furnished
       petFriendly

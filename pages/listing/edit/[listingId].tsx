@@ -204,28 +204,40 @@ const validate = (formValues: PropertyFormValues) => {
   const errors = {} as PropertyFormValues;
   if (
     !formValues.bathrooms ||
-    (formValues.bathrooms && !validator.isNumeric(formValues.bathrooms))
+    (formValues.bathrooms && !validator.isNumeric(formValues.bathrooms)) ||
+    parseInt(formValues.bathrooms) > 2 ** 31
   ) {
     errors.bathrooms = "Enter a valid bathroom number";
   }
   if (
     !formValues.bedrooms ||
-    (formValues.bedrooms && !validator.isNumeric(formValues.bedrooms))
+    (formValues.bedrooms && !validator.isNumeric(formValues.bedrooms)) ||
+    parseInt(formValues.bedrooms) > 2 ** 31
   ) {
     errors.bedrooms = "Enter a valid bedroom number";
   }
-  if (formValues.parkingLots && !validator.isNumeric(formValues.parkingLots)) {
+  if (
+    (formValues.parkingLots && !validator.isNumeric(formValues.parkingLots)) ||
+    parseInt(formValues.parkingLots) > 2 ** 31
+  ) {
     errors.bedrooms = "Enter a valid parking lot number";
   }
-  if (formValues.plinthArea && !validator.isNumeric(formValues.plinthArea)) {
+  if (
+    (formValues.plinthArea && !validator.isNumeric(formValues.plinthArea)) ||
+    parseInt(formValues.plinthArea) > 2 ** 31
+  ) {
     errors.plinthArea = "Enter a valid plinth area number";
   }
-  if (formValues.lotArea && !validator.isNumeric(formValues.lotArea)) {
+  if (
+    (formValues.lotArea && !validator.isNumeric(formValues.lotArea)) ||
+    parseInt(formValues.lotArea) > 2 ** 31
+  ) {
     errors.lotArea = "Enter a valid lot area number";
   }
   if (
     !formValues.reference ||
-    (formValues.reference && !validator.isNumeric(formValues.reference))
+    (formValues.reference && !validator.isNumeric(formValues.reference)) ||
+    parseInt(formValues.reference) > 2 ** 31
   ) {
     errors.reference = "Enter a valid reference number";
   }
@@ -243,13 +255,15 @@ const validate = (formValues: PropertyFormValues) => {
   }
   if (
     !formValues.price ||
-    (formValues.price && !validator.isNumeric(formValues.price))
+    (formValues.price && !validator.isNumeric(formValues.price)) ||
+    parseInt(formValues.price) > 2 ** 31
   ) {
     errors.price = "Enter a valid price";
   }
   if (
-    formValues.serviceCharge &&
-    !validator.isNumeric(formValues.serviceCharge)
+    (formValues.serviceCharge &&
+      !validator.isNumeric(formValues.serviceCharge)) ||
+    parseInt(formValues.serviceCharge) > 2 ** 31
   ) {
     errors.serviceCharge = "Enter a valid service charge";
   }
