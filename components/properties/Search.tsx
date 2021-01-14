@@ -6,7 +6,9 @@ import RangeComponent from "../Homepage/Header/RangeComponent";
 const Search = () => {
   const [name, setName] = useState<string>("");
   const [selected, setSelected] = useState<string>("buy");
-  const [selection, setSelection] = useState<string>("");
+  const [citySelection, setCitySelection] = useState<string>("");
+  const [bedroomSelection, setBedroomSelection] = useState<string>("");
+  const [bathroomSelection, setBathroomSelection] = useState<string>("");
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -41,13 +43,13 @@ const Search = () => {
         <div className={styles.upper}>
           <Dropdown
             selections={["Nairobi", "Mombasa", "Nakuru", "Kisumu", "Eldoret"]}
-            determinant={selection || "location"}
+            determinant={citySelection || "location"}
             name={name}
             searchDiv={searchDiv}
-            title={selection || "Location"}
+            title={citySelection || "Location"}
             setName={setName}
             className="d_search"
-            setSelection={setSelection}
+            setSelection={setCitySelection}
           />
         </div>
         <div className={styles.upper}>
@@ -59,13 +61,13 @@ const Search = () => {
               "4+ Bedrooms",
               "5+ Bedrooms"
             ]}
-            determinant={selection || "bedrooms"}
+            determinant={bedroomSelection || "bedrooms"}
             name={name}
             searchDiv={searchDiv}
-            title={selection || "No of Bedrooms"}
+            title={bedroomSelection || "No of Bedrooms"}
             setName={setName}
             className="d_search"
-            setSelection={setSelection}
+            setSelection={setBedroomSelection}
           />
         </div>
         <div className={styles.upper}>
@@ -77,13 +79,13 @@ const Search = () => {
               "4+ Bathrooms",
               "5+ Bathrooms"
             ]}
-            determinant={selection || "bathrooms"}
+            determinant={bathroomSelection || "bathrooms"}
             name={name}
             searchDiv={searchDiv}
-            title={selection || "No of Bathrooms"}
+            title={bathroomSelection || "No of Bathrooms"}
             setName={setName}
             className="d_search"
-            setSelection={setSelection}
+            setSelection={setBathroomSelection}
           />
         </div>
         <RangeComponent className="properties" />

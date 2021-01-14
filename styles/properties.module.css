@@ -7,6 +7,7 @@
   display: grid;
   color: #707079;
   margin-bottom: 10rem;
+  text-transform: capitalize;
 }
 .search {
   display: grid;
@@ -83,6 +84,7 @@
 .description {
   height: 6.6rem;
   overflow: hidden;
+  text-transform: none;
 }
 .bg_image {
   height: 100%;
