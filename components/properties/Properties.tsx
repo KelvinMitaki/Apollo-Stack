@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/properties.module.css";
+import Pagination from "./Pagination";
 import Property from "./Property";
 export interface Properties {
   _id: string;
@@ -74,71 +75,16 @@ const Properties: React.FC<Props> = props => {
           <Property key={p._id} property={p} />
         ))}
       </div>
-      <div className={styles.pagination}>
-        {selectedNum > 3 && (
-          <>
-            <p
-              className={selectedNum === 1 ? styles.active : ""}
-              onClick={async () => {
-                setSelectedNum(1);
-                await props.fetchMore({
-                  variables: {
-                    offset: props.properties.length,
-                    limit: 10
-                  }
-                });
-                props.setLimit(10);
-                props.setSkip(0);
-              }}
-            >
-              1
-            </p>
-            <span>...</span>
-          </>
-        )}
-        {nums
-          .filter(n => n <= lastPage)
-          .map(n => (
-            <p
-              className={selectedNum === n ? styles.active : ""}
-              key={n}
-              onClick={async () => {
-                setSelectedNum(n);
-                await props.fetchMore({
-                  variables: {
-                    offset: props.properties.length,
-                    limit: 10
-                  }
-                });
-                props.setLimit(10);
-                props.setSkip((n - 1) * 10);
-              }}
-            >
-              {n}
-            </p>
-          ))}
-        {selectedNum !== lastPage && !nums.find(n => n === lastPage) && (
-          <>
-            <span>...</span>{" "}
-            <p
-              className={selectedNum === lastPage ? styles.active : ""}
-              onClick={async () => {
-                setSelectedNum(lastPage);
-                await props.fetchMore({
-                  variables: {
-                    offset: props.properties.length,
-                    limit: 10
-                  }
-                });
-                props.setLimit(10);
-                props.setSkip((lastPage - 1) * 10);
-              }}
-            >
-              {lastPage}
-            </p>
-          </>
-        )}
-      </div>
+      <Pagination
+        selectedNum={selectedNum}
+        setSelectedNum={setSelectedNum}
+        setSkip={props.setSkip}
+        lastPage={lastPage}
+        fetchMore={props.fetchMore}
+        nums={nums}
+        properties={props.properties}
+        setLimit={props.setLimit}
+      />
     </div>
   );
 };
