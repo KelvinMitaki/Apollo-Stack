@@ -81,8 +81,7 @@ const Properties: React.FC<Props> = props => {
                   }
                 });
                 props.setLimit(
-                  data.filterProperties[0].properties.length +
-                    props.properties.length
+                  data.filterProperties.length + props.properties.length
                 );
                 setSelectedNum(1);
               }}
@@ -106,8 +105,7 @@ const Properties: React.FC<Props> = props => {
                   }
                 });
                 props.setLimit(
-                  data.filterProperties[0].properties.length +
-                    props.properties.length
+                  data.filterProperties.length + props.properties.length
                 );
                 setSelectedNum(n);
               }}
@@ -128,8 +126,7 @@ const Properties: React.FC<Props> = props => {
                   }
                 });
                 props.setLimit(
-                  data.filterProperties[0].properties.length +
-                    props.properties.length
+                  data.filterProperties.length + props.properties.length
                 );
                 setSelectedNum(lastPage);
               }}
