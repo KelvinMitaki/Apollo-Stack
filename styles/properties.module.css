@@ -146,6 +146,7 @@
 }
 .pagination span {
   color: rgba(1, 2, 78, 0.76);
+  cursor: text;
 }
 @media only screen and (max-width: 1000px) {
   .container {

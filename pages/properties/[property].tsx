@@ -20,7 +20,7 @@ const property: NextPage<{
   const [skip, setSkip] = useState<number>(0);
   const { data, fetchMore, loading } = useQuery(FILTER_PROPERTIES, {
     fetchPolicy: "cache-only",
-    variables: { ...props.variables, limit, skip },
+    variables: { ...props.variables, limit, offset: skip },
     notifyOnNetworkStatusChange: true,
     onError(err) {
       console.log(err);
@@ -32,8 +32,6 @@ const property: NextPage<{
     fetchPolicy: "cache-only",
     variables: { filter: props.variables.filter }
   });
-  console.log({ skip });
-  console.log(data);
   return (
     <Layout title="Properties">
       <div className={styles.container}>
