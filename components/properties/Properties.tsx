@@ -42,7 +42,7 @@ interface Props {
 const Properties: React.FC<Props> = props => {
   const [selectedNum, setSelectedNum] = useState<number>(1);
   let nums = [1, 2, 3, 4, 5, 6];
-  const lastPage = 200 / 10;
+  const lastPage = props.count / 10;
   if (selectedNum > 3) {
     nums = [
       selectedNum - 2,
@@ -61,6 +61,9 @@ const Properties: React.FC<Props> = props => {
       selectedNum - 1,
       selectedNum
     ];
+  }
+  if (nums.find(num => num < 1)) {
+    nums = nums.filter(num => num > 0);
   }
   return (
     <div className={styles.properties_prt}>
