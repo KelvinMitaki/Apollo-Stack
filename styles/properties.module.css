@@ -171,3 +171,16 @@
     height: 30rem;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .pagination {
+    width: 100%;
+  }
+  .p_footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .property {
+    height: 70rem;
+  }
+}
