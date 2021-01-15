@@ -20,7 +20,7 @@ const property: NextPage<{
     <Layout title="Properties">
       <div className={styles.container}>
         <Search />
-        <Property properties={data.filterProperties} />
+        <Property properties={data.filterProperties[0].properties} />
       </div>
     </Layout>
   );
@@ -30,7 +30,7 @@ property.getInitialProps = async ctx => {
   const apolloClient = initializeApollo();
   await apolloClient.query({
     query: FILTER_PROPERTIES,
-    variables: { filter: ctx.query.property },
+    variables: { filter: ctx.query.property, offset: 0, limit: 10 },
     context: {
       headers: {
         cookie: ctx.req?.headers.cookie

@@ -35,7 +35,7 @@ MyApp.getInitialProps = async (appCtx: AppContext) => {
     fetchPolicy: "network-only"
   });
 
-  // console.log(JSON.stringify(appProps.pageProps.initialApolloState, null, 2));
+  console.log(JSON.stringify(appProps.pageProps.initialApolloState, null, 2));
 
   // console.log(JSON.stringify(apolloClient.cache.extract().ROOT_QUERY, null, 2));
   return {

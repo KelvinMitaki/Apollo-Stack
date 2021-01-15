@@ -74,19 +74,22 @@ export const FETCH_AGENT_PROPERTY = gql`
 `;
 
 export const FILTER_PROPERTIES = gql`
-  query FilterProperties($filter: String!, $offset: Int!, $limit: Int!) {
-    filterProperties(filter: $filter, offset: $offset, limit: $limit) {
-      _id
-      images
-      type
-      price
-      streetAddress
-      location
-      description
-      plinthArea
-      bedrooms
-      bathrooms
-      parkingLots
+  query FilterProperties($filter: String!, $limit: Int!, $offset: Int!) {
+    filterProperties(filter: $filter, limit: $limit, offset: $offset) {
+      properties {
+        _id
+        images
+        type
+        price
+        streetAddress
+        location
+        description
+        plinthArea
+        bedrooms
+        bathrooms
+        parkingLots
+      }
+      count
     }
   }
 `;
