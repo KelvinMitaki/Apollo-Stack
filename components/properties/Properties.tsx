@@ -35,10 +35,10 @@ interface Props {
       } & FetchMoreQueryOptions<OperationVariables2, K, any> &
         FetchMoreOptions<any2, OperationVariables2>
     ) => Promise<ApolloQueryResult<any2>>);
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
 }
 const Properties: React.FC<Props> = props => {
   const [selectedNum, setSelectedNum] = useState<number>(1);
-  const [total, setTotal] = useState<number>(0);
   let nums = [1, 2, 3, 4, 5, 6];
   const lastPage = 200 / 10;
   if (selectedNum > 3) {
@@ -74,12 +74,16 @@ const Properties: React.FC<Props> = props => {
             <p
               className={selectedNum === 1 ? styles.active : ""}
               onClick={async () => {
-                await props.fetchMore({
+                const { data } = await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
                     limit: 10
                   }
                 });
+                props.setLimit(
+                  data.filterProperties[0].properties.length +
+                    props.properties.length
+                );
                 setSelectedNum(1);
               }}
             >
@@ -95,12 +99,16 @@ const Properties: React.FC<Props> = props => {
               className={selectedNum === n ? styles.active : ""}
               key={n}
               onClick={async () => {
-                await props.fetchMore({
+                const { data } = await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
                     limit: 10
                   }
                 });
+                props.setLimit(
+                  data.filterProperties[0].properties.length +
+                    props.properties.length
+                );
                 setSelectedNum(n);
               }}
             >
@@ -113,12 +121,16 @@ const Properties: React.FC<Props> = props => {
             <p
               className={selectedNum === lastPage ? styles.active : ""}
               onClick={async () => {
-                await props.fetchMore({
+                const { data } = await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
                     limit: 10
                   }
                 });
+                props.setLimit(
+                  data.filterProperties[0].properties.length +
+                    props.properties.length
+                );
                 setSelectedNum(lastPage);
               }}
             >

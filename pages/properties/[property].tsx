@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Router from "next/router";
 import Search from "../../components/properties/Search";
 import Property from "../../components/properties/Properties";
@@ -6,16 +6,20 @@ import styles from "../../styles/properties.module.css";
 import Layout from "../../components/Layout/Layout";
 import { NextPage } from "next";
 import { initializeApollo } from "../../apollo";
-import { FILTER_PROPERTIES } from "../../graphql/queries/queries";
+import {
+  FETCH_PROPERTIES_COUNT,
+  FILTER_PROPERTIES
+} from "../../graphql/queries/queries";
 import { useQuery } from "@apollo/client";
 import Loading from "../../components/loading/Loading";
 
 const property: NextPage<{
   variables: { [key: string]: string | string[] | undefined };
 }> = props => {
+  const [limit, setLimit] = useState<number>(10);
   const { data, fetchMore, loading } = useQuery(FILTER_PROPERTIES, {
     fetchPolicy: "cache-only",
-    variables: props.variables,
+    variables: { ...props.variables, limit },
     notifyOnNetworkStatusChange: true,
     onError(err) {
       console.log(err);
@@ -23,15 +27,20 @@ const property: NextPage<{
       console.log(err.message);
     }
   });
+  const count = useQuery(FETCH_PROPERTIES_COUNT, {
+    fetchPolicy: "cache-only",
+    variables: { filter: props.variables.filter }
+  });
   return (
     <Layout title="Properties">
       <div className={styles.container}>
         {loading && <Loading />}
         <Search />
         <Property
-          properties={data.filterProperties[0].properties}
-          count={data.filterProperties[0].count}
+          properties={data.filterProperties}
+          count={count.data.filterPropertiesCount.count}
           fetchMore={fetchMore}
+          setLimit={setLimit}
         />
       </div>
     </Layout>
@@ -43,6 +52,15 @@ property.getInitialProps = async ctx => {
   await apolloClient.query({
     query: FILTER_PROPERTIES,
     variables: { filter: ctx.query.property, offset: 0, limit: 10 },
+    context: {
+      headers: {
+        cookie: ctx.req?.headers.cookie
+      }
+    }
+  });
+  await apolloClient.query({
+    query: FETCH_PROPERTIES_COUNT,
+    variables: { filter: ctx.query.property },
     context: {
       headers: {
         cookie: ctx.req?.headers.cookie
