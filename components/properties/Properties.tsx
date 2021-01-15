@@ -36,6 +36,7 @@ interface Props {
         FetchMoreOptions<any2, OperationVariables2>
     ) => Promise<ApolloQueryResult<any2>>);
   setLimit: React.Dispatch<React.SetStateAction<number>>;
+  setSkip: React.Dispatch<React.SetStateAction<number>>;
 }
 const Properties: React.FC<Props> = props => {
   const [selectedNum, setSelectedNum] = useState<number>(1);
@@ -74,6 +75,7 @@ const Properties: React.FC<Props> = props => {
             <p
               className={selectedNum === 1 ? styles.active : ""}
               onClick={async () => {
+                setSelectedNum(1);
                 const { data } = await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
@@ -83,7 +85,7 @@ const Properties: React.FC<Props> = props => {
                 props.setLimit(
                   data.filterProperties.length + props.properties.length
                 );
-                setSelectedNum(1);
+                props.setSkip(0);
               }}
             >
               1
@@ -98,6 +100,7 @@ const Properties: React.FC<Props> = props => {
               className={selectedNum === n ? styles.active : ""}
               key={n}
               onClick={async () => {
+                setSelectedNum(n);
                 const { data } = await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
@@ -107,7 +110,7 @@ const Properties: React.FC<Props> = props => {
                 props.setLimit(
                   data.filterProperties.length + props.properties.length
                 );
-                setSelectedNum(n);
+                props.setSkip((n - 1) * 10);
               }}
             >
               {n}
@@ -119,6 +122,7 @@ const Properties: React.FC<Props> = props => {
             <p
               className={selectedNum === lastPage ? styles.active : ""}
               onClick={async () => {
+                setSelectedNum(lastPage);
                 const { data } = await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
@@ -128,7 +132,7 @@ const Properties: React.FC<Props> = props => {
                 props.setLimit(
                   data.filterProperties.length + props.properties.length
                 );
-                setSelectedNum(lastPage);
+                props.setSkip((lastPage - 1) * 10);
               }}
             >
               {lastPage}
