@@ -127,7 +127,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 15rem;
+  width: 25rem;
 }
 .pagination p {
   height: 4rem;
@@ -138,12 +138,15 @@
   justify-content: center;
   transition: all 0.2s;
 }
-.pagination p:hover {
+.pagination p:hover,
+.active {
   cursor: pointer;
   background-color: rgba(1, 2, 78, 0.76);
   color: #fff;
 }
-
+.pagination span {
+  color: rgba(1, 2, 78, 0.76);
+}
 @media only screen and (max-width: 1000px) {
   .container {
     grid-template-columns: 1fr;
