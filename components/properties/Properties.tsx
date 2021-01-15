@@ -37,6 +37,7 @@ interface Props {
     ) => Promise<ApolloQueryResult<any2>>);
   setLimit: React.Dispatch<React.SetStateAction<number>>;
   setSkip: React.Dispatch<React.SetStateAction<number>>;
+  scrollDiv: React.RefObject<HTMLDivElement>;
 }
 const Properties: React.FC<Props> = props => {
   const [selectedNum, setSelectedNum] = useState<number>(1);
@@ -63,6 +64,7 @@ const Properties: React.FC<Props> = props => {
   }
   return (
     <div className={styles.properties_prt}>
+      <div ref={props.scrollDiv}></div>
       <h3>Property</h3>
       <div className={styles.properties}>
         {props.properties.map(p => (
@@ -76,15 +78,13 @@ const Properties: React.FC<Props> = props => {
               className={selectedNum === 1 ? styles.active : ""}
               onClick={async () => {
                 setSelectedNum(1);
-                const { data } = await props.fetchMore({
+                await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
                     limit: 10
                   }
                 });
-                props.setLimit(
-                  data.filterProperties.length + props.properties.length
-                );
+                props.setLimit(10);
                 props.setSkip(0);
               }}
             >
@@ -101,15 +101,13 @@ const Properties: React.FC<Props> = props => {
               key={n}
               onClick={async () => {
                 setSelectedNum(n);
-                const { data } = await props.fetchMore({
+                await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
                     limit: 10
                   }
                 });
-                props.setLimit(
-                  data.filterProperties.length + props.properties.length
-                );
+                props.setLimit(10);
                 props.setSkip((n - 1) * 10);
               }}
             >
@@ -123,15 +121,13 @@ const Properties: React.FC<Props> = props => {
               className={selectedNum === lastPage ? styles.active : ""}
               onClick={async () => {
                 setSelectedNum(lastPage);
-                const { data } = await props.fetchMore({
+                await props.fetchMore({
                   variables: {
                     offset: props.properties.length,
                     limit: 10
                   }
                 });
-                props.setLimit(
-                  data.filterProperties.length + props.properties.length
-                );
+                props.setLimit(10);
                 props.setSkip((lastPage - 1) * 10);
               }}
             >

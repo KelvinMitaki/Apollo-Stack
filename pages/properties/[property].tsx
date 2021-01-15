@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Router from "next/router";
 import Search from "../../components/properties/Search";
 import Property from "../../components/properties/Properties";
@@ -18,6 +18,12 @@ const property: NextPage<{
 }> = props => {
   const [limit, setLimit] = useState<number>(10);
   const [skip, setSkip] = useState<number>(0);
+  const scrollDiv = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (scrollDiv.current) {
+      scrollDiv.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [limit, skip]);
   const { data, fetchMore, loading } = useQuery(FILTER_PROPERTIES, {
     fetchPolicy: "cache-only",
     variables: { ...props.variables, limit, offset: skip },
@@ -43,6 +49,7 @@ const property: NextPage<{
           fetchMore={fetchMore}
           setLimit={setLimit}
           setSkip={setSkip}
+          scrollDiv={scrollDiv}
         />
       </div>
     </Layout>
