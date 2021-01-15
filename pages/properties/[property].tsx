@@ -8,21 +8,30 @@ import { NextPage } from "next";
 import { initializeApollo } from "../../apollo";
 import { FILTER_PROPERTIES } from "../../graphql/queries/queries";
 import { useQuery } from "@apollo/client";
+import Loading from "../../components/loading/Loading";
 
 const property: NextPage<{
   variables: { [key: string]: string | string[] | undefined };
 }> = props => {
-  const { data } = useQuery(FILTER_PROPERTIES, {
+  const { data, fetchMore, loading } = useQuery(FILTER_PROPERTIES, {
     fetchPolicy: "cache-only",
-    variables: props.variables
+    variables: props.variables,
+    notifyOnNetworkStatusChange: true,
+    onError(err) {
+      console.log(err);
+      console.log(err.graphQLErrors);
+      console.log(err.message);
+    }
   });
   return (
     <Layout title="Properties">
       <div className={styles.container}>
+        {loading && <Loading />}
         <Search />
         <Property
           properties={data.filterProperties[0].properties}
           count={data.filterProperties[0].count}
+          fetchMore={fetchMore}
         />
       </div>
     </Layout>

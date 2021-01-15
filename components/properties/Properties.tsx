@@ -1,3 +1,11 @@
+import {
+  ApolloQueryResult,
+  DocumentNode,
+  FetchMoreOptions,
+  FetchMoreQueryOptions,
+  OperationVariables,
+  TypedDocumentNode
+} from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/properties.module.css";
 import Property from "./Property";
@@ -17,9 +25,20 @@ export interface Properties {
 interface Props {
   properties: Properties[];
   count: number;
+  fetchMore: (<K extends keyof OperationVariables>(
+    fetchMoreOptions: FetchMoreQueryOptions<OperationVariables, K, any> &
+      FetchMoreOptions<any, OperationVariables>
+  ) => Promise<ApolloQueryResult<any>>) &
+    (<any2, OperationVariables2, K extends keyof OperationVariables2>(
+      fetchMoreOptions: {
+        query?: DocumentNode | TypedDocumentNode<any, OperationVariables>;
+      } & FetchMoreQueryOptions<OperationVariables2, K, any> &
+        FetchMoreOptions<any2, OperationVariables2>
+    ) => Promise<ApolloQueryResult<any2>>);
 }
 const Properties: React.FC<Props> = props => {
   const [selectedNum, setSelectedNum] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
   let nums = [1, 2, 3, 4, 5, 6];
   const lastPage = 200 / 10;
   if (selectedNum > 3) {
@@ -54,7 +73,15 @@ const Properties: React.FC<Props> = props => {
           <>
             <p
               className={selectedNum === 1 ? styles.active : ""}
-              onClick={() => setSelectedNum(1)}
+              onClick={async () => {
+                await props.fetchMore({
+                  variables: {
+                    offset: props.properties.length,
+                    limit: 10
+                  }
+                });
+                setSelectedNum(1);
+              }}
             >
               1
             </p>
@@ -67,7 +94,15 @@ const Properties: React.FC<Props> = props => {
             <p
               className={selectedNum === n ? styles.active : ""}
               key={n}
-              onClick={() => setSelectedNum(n)}
+              onClick={async () => {
+                await props.fetchMore({
+                  variables: {
+                    offset: props.properties.length,
+                    limit: 10
+                  }
+                });
+                setSelectedNum(n);
+              }}
             >
               {n}
             </p>
@@ -77,7 +112,15 @@ const Properties: React.FC<Props> = props => {
             <span>...</span>{" "}
             <p
               className={selectedNum === lastPage ? styles.active : ""}
-              onClick={() => setSelectedNum(lastPage)}
+              onClick={async () => {
+                await props.fetchMore({
+                  variables: {
+                    offset: props.properties.length,
+                    limit: 10
+                  }
+                });
+                setSelectedNum(lastPage);
+              }}
             >
               {lastPage}
             </p>
