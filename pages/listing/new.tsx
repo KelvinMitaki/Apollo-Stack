@@ -69,6 +69,7 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
       console.log(err.message);
       console.log(err.extraInfo);
       console.log(err.graphQLErrors[0].extensions);
+      console.log(err.name);
       if (
         err.graphQLErrors.length !== 0 &&
         err.graphQLErrors[0].extensions &&
@@ -80,7 +81,6 @@ const listingId: React.FC<InjectedFormProps<PropertyFormValues>> = props => {
           "Reference number already in use, please use a different reference number"
         );
       }
-      console.log(err.name);
     }
   });
 

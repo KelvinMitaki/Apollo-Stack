@@ -74,8 +74,8 @@ export const FETCH_AGENT_PROPERTY = gql`
 `;
 
 export const FILTER_PROPERTIES = gql`
-  query FilterProperties($filter: String!) {
-    filterProperties(filter: $filter) {
+  query FilterProperties($filter: String!, $offset: Int!, $limit: Int!) {
+    filterProperties(filter: $filter, offset: $offset, limit: $limit) {
       _id
       images
       type
