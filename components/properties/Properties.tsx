@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/properties.module.css";
 import Property from "./Property";
 export interface Properties {
@@ -16,8 +16,22 @@ export interface Properties {
 }
 interface Props {
   properties: Properties[];
+  count: number;
 }
 const Properties: React.FC<Props> = props => {
+  const [selectedNum, setSelectedNum] = useState<number>(1);
+  let nums = [1, 2, 3, 4, 5, 6];
+  if (selectedNum > 3) {
+    nums = [
+      selectedNum - 2,
+      selectedNum - 1,
+      selectedNum,
+      selectedNum + 1,
+      selectedNum + 2,
+      selectedNum + 3
+    ];
+  }
+  const lastPage = 200 / 10;
   return (
     <div className={styles.properties_prt}>
       <h3>Property</h3>
@@ -27,9 +41,17 @@ const Properties: React.FC<Props> = props => {
         ))}
       </div>
       <div className={styles.pagination}>
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
+        {selectedNum > 3 && <p onClick={() => setSelectedNum(1)}>1</p>}
+        {nums
+          .filter(n => n <= lastPage)
+          .map(n => (
+            <p key={n} onClick={() => setSelectedNum(n)}>
+              {n}
+            </p>
+          ))}
+        {selectedNum !== lastPage && !nums.find(n => n === lastPage) && (
+          <p onClick={() => setSelectedNum(lastPage)}>{lastPage}</p>
+        )}
       </div>
     </div>
   );

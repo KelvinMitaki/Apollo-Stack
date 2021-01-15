@@ -20,7 +20,10 @@ const property: NextPage<{
     <Layout title="Properties">
       <div className={styles.container}>
         <Search />
-        <Property properties={data.filterProperties[0].properties} />
+        <Property
+          properties={data.filterProperties[0].properties}
+          count={data.filterProperties[0].count}
+        />
       </div>
     </Layout>
   );
