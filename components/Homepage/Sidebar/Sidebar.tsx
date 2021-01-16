@@ -84,7 +84,7 @@ const Sidebar: React.FC<Props> = props => {
             });
           }}
         >
-          <Link href="/properties/123">
+          <Link href="/properties/sale">
             <a>
               <p>for sale</p>
             </a>
@@ -99,7 +99,7 @@ const Sidebar: React.FC<Props> = props => {
             });
           }}
         >
-          <Link href="/properties/123">
+          <Link href="/properties/rent">
             <a>
               <p>to rent</p>
             </a>
@@ -114,22 +114,7 @@ const Sidebar: React.FC<Props> = props => {
             });
           }}
         >
-          <Link href="/properties/123">
-            <a>
-              <p>developments</p>
-            </a>
-          </Link>
-        </div>
-        <div
-          className={styles.opts_item}
-          onClick={() => {
-            dispatch<SetToggleNavbar>({
-              type: ActionTypes.toggleNavbar,
-              payload: false
-            });
-          }}
-        >
-          <Link href="/properties/123">
+          <Link href="/properties/furnished">
             <a>
               <p>furnished</p>
             </a>

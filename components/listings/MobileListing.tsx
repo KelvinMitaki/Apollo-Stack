@@ -17,7 +17,9 @@ const MobileListing: React.FC<ListingProperty> = props => {
         </div>
         <div>
           <p>status:</p>
-          <p>{props.status}</p>
+          <p>
+            {new Date(props.expiryDate) > new Date() ? props.status : "expired"}
+          </p>
         </div>
       </div>
       <div className={styles.mb_body}>

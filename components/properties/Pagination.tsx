@@ -76,27 +76,29 @@ const Pagination: React.FC<Props> = props => {
             {n}
           </p>
         ))}
-      {selectedNum !== lastPage && !nums.find(n => n === lastPage) && (
-        <>
-          <span>...</span>{" "}
-          <p
-            className={selectedNum === lastPage ? styles.active : ""}
-            onClick={async () => {
-              setSelectedNum(lastPage);
-              await props.fetchMore({
-                variables: {
-                  offset: (lastPage - 1) * 10,
-                  limit: 10
-                }
-              });
-              props.setLimit(10);
-              props.setSkip((lastPage - 1) * 10);
-            }}
-          >
-            {lastPage}
-          </p>
-        </>
-      )}
+      {selectedNum !== lastPage &&
+        !nums.find(n => n === lastPage) &&
+        lastPage !== 0 && (
+          <>
+            <span>...</span>{" "}
+            <p
+              className={selectedNum === lastPage ? styles.active : ""}
+              onClick={async () => {
+                setSelectedNum(lastPage);
+                await props.fetchMore({
+                  variables: {
+                    offset: (lastPage - 1) * 10,
+                    limit: 10
+                  }
+                });
+                props.setLimit(10);
+                props.setSkip((lastPage - 1) * 10);
+              }}
+            >
+              {lastPage}
+            </p>
+          </>
+        )}
     </div>
   );
 };
