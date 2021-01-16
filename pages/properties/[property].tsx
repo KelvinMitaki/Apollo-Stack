@@ -34,7 +34,7 @@ const property: NextPage<{
       console.log(err.message);
     }
   });
-  const count = useQuery(FETCH_PROPERTIES_COUNT, {
+  const countData = useQuery(FETCH_PROPERTIES_COUNT, {
     fetchPolicy: "cache-only",
     variables: { filter: props.variables.filter }
   });
@@ -45,7 +45,7 @@ const property: NextPage<{
         <Search />
         <Property
           properties={data.filterProperties}
-          count={count.data.filterPropertiesCount.count}
+          count={countData.data.filterPropertiesCount.count}
           fetchMore={fetchMore}
           setLimit={setLimit}
           setSkip={setSkip}

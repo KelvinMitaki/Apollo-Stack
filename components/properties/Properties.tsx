@@ -43,7 +43,7 @@ interface Props {
 const Properties: React.FC<Props> = props => {
   const [selectedNum, setSelectedNum] = useState<number>(1);
   let nums = [1, 2, 3, 4, 5, 6];
-  const lastPage = props.count / 10;
+  const lastPage = Math.ceil(props.count / 10);
   if (selectedNum > 3) {
     nums = [
       selectedNum - 2,
