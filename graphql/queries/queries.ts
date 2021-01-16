@@ -35,6 +35,7 @@ export const FETCH_AGENT_PROPERTIES = gql`
       type
       status
       updatedAt
+      expiryDate
     }
   }
 `;

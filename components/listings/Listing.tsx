@@ -18,6 +18,7 @@ export interface ListingProperty {
   status: string;
   updatedAt: Date;
   images: string[];
+  expiryDate: string;
 }
 
 const Listing: React.FC<Props & ListingProperty> = props => {
@@ -42,7 +43,9 @@ const Listing: React.FC<Props & ListingProperty> = props => {
       <td>{props.bedrooms}</td>
       <td>{props.bathrooms}</td>
       <td>{props.type}</td>
-      <td>{props.status}</td>
+      <td>
+        {new Date(props.expiryDate) > new Date() ? props.status : "expired"}
+      </td>
       <td>{new Date(props.updatedAt).toLocaleDateString()}</td>
     </tr>
   );
