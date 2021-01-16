@@ -6,6 +6,7 @@ import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import Listing, { ListingProperty } from "../components/listings/Listing";
 import MobileListing from "../components/listings/MobileListing";
+import Loading from "../components/loading/Loading";
 import Pagination from "../components/properties/Pagination";
 import {
   AGENT_PROPERTY_COUNT,
@@ -33,6 +34,8 @@ const listings: NextPage = () => {
       console.log(err.message);
     }
   });
+  // console.log({ skip });
+  // console.log({ limit });
   const countData = useQuery(AGENT_PROPERTY_COUNT, {
     fetchPolicy: "cache-only"
   });
@@ -61,8 +64,10 @@ const listings: NextPage = () => {
   if (nums.find(num => num < 1)) {
     nums = nums.filter(num => num > 0);
   }
+
   return (
     <Layout title="Listings">
+      {loading && <Loading />}
       <div className={styles.container}>
         <HouseFilter alternate={false} btnContent="Search" width="100%" agent />
         <div style={{ width: "100%", overflowX: "scroll" }}>

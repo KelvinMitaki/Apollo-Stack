@@ -42,7 +42,7 @@ const Pagination: React.FC<Props> = props => {
               setSelectedNum(1);
               await props.fetchMore({
                 variables: {
-                  offset: props.properties.length,
+                  offset: 0,
                   limit: 10
                 }
               });
@@ -65,7 +65,7 @@ const Pagination: React.FC<Props> = props => {
               setSelectedNum(n);
               await props.fetchMore({
                 variables: {
-                  offset: props.properties.length,
+                  offset: (n - 1) * 10,
                   limit: 10
                 }
               });
@@ -85,7 +85,7 @@ const Pagination: React.FC<Props> = props => {
               setSelectedNum(lastPage);
               await props.fetchMore({
                 variables: {
-                  offset: props.properties.length,
+                  offset: (lastPage - 1) * 10,
                   limit: 10
                 }
               });
