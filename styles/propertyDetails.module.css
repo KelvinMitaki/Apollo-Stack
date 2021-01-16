@@ -154,4 +154,7 @@
   .small_img {
     height: 5rem;
   }
+  .table_body div {
+    overflow-x: scroll;
+  }
 }
