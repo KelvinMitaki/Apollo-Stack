@@ -38,7 +38,7 @@ const listings: NextPage = () => {
   });
   const [selectedNum, setSelectedNum] = useState<number>(1);
   let nums = [1, 2, 3, 4, 5, 6];
-  const lastPage = countData.data.count / 10;
+  const lastPage = countData.data.agentPropertiesCount.count / 10;
   if (selectedNum > 3) {
     nums = [
       selectedNum - 2,
@@ -120,8 +120,6 @@ const listings: NextPage = () => {
             <MobileListing key={prop._id} {...prop} />
           ))}
         </div>
-        {console.log({ nums })}
-        {console.log({ lastPage })}
         <Pagination
           setLimit={setLimit}
           nums={nums}
