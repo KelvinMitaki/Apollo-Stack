@@ -14,14 +14,14 @@ const Property: React.FC<Props> = props => {
   const formatDescription = (desc: string): string => {
     if (typeof window !== "undefined") {
       if (window.innerWidth < 400) {
-        return `${desc.slice(0, 50)}...`;
-      }
-      if (window.innerWidth < 700) {
         return `${desc.slice(0, 100)}...`;
       }
-      return `${desc.slice(0, 150)}...`;
+      if (window.innerWidth < 700) {
+        return `${desc.slice(0, 150)}...`;
+      }
+      return `${desc.slice(0, 200)}...`;
     }
-    return `${desc.slice(0, 150)}...`;
+    return `${desc.slice(0, 200)}...`;
   };
   const { property } = props;
   return (
