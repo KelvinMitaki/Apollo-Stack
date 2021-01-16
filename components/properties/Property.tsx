@@ -11,6 +11,18 @@ interface Props {
 }
 
 const Property: React.FC<Props> = props => {
+  const formatDescription = (desc: string): string => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 400) {
+        return `${desc.slice(0, 50)}...`;
+      }
+      if (window.innerWidth < 700) {
+        return `${desc.slice(0, 100)}...`;
+      }
+      return `${desc.slice(0, 150)}...`;
+    }
+    return `${desc.slice(0, 150)}...`;
+  };
   const { property } = props;
   return (
     <Link href={`/property/${property._id}`}>
@@ -37,7 +49,9 @@ const Property: React.FC<Props> = props => {
                 {property.streetAddress}, {property.location}
               </p>
             </div>
-            <div className={styles.description}>{property.description}</div>
+            <div className={styles.description}>
+              {formatDescription(property.description)}
+            </div>
             <div className={styles.p_footer}>
               <div>
                 <BsArrowsMove size="2.5rem" />
