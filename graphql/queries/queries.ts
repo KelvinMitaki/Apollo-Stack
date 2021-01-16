@@ -22,8 +22,8 @@ export const LOGOUT_USER = gql`
 `;
 
 export const FETCH_AGENT_PROPERTIES = gql`
-  query {
-    fetchAgentProperties {
+  query FetchAgentProperties($offset: Int!, $limit: Int!) {
+    fetchAgentProperties(offset: $offset, limit: $limit) {
       _id
       reference
       images
@@ -123,6 +123,14 @@ export const FETCH_PROPERTY_DETAILS = gql`
       }
       category
       images
+    }
+  }
+`;
+
+export const AGENT_PROPERTY_COUNT = gql`
+  query {
+    agentPropertiesCount {
+      count
     }
   }
 `;

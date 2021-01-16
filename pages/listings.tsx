@@ -1,19 +1,66 @@
 import { useQuery } from "@apollo/client";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { initializeApollo } from "../apollo";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import Listing, { ListingProperty } from "../components/listings/Listing";
 import MobileListing from "../components/listings/MobileListing";
-import { FETCH_AGENT_PROPERTIES } from "../graphql/queries/queries";
+import Pagination from "../components/properties/Pagination";
+import {
+  AGENT_PROPERTY_COUNT,
+  FETCH_AGENT_PROPERTIES
+} from "../graphql/queries/queries";
 import withAgent from "../HOCs/withAgent";
 import styles from "../styles/listings.module.css";
 
 const listings: NextPage = () => {
-  const { data } = useQuery(FETCH_AGENT_PROPERTIES, {
+  const [limit, setLimit] = useState<number>(10);
+  const [skip, setSkip] = useState<number>(0);
+  const scrollDiv = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (scrollDiv.current) {
+      scrollDiv.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [limit, skip]);
+  const { data, fetchMore, loading } = useQuery(FETCH_AGENT_PROPERTIES, {
+    fetchPolicy: "cache-only",
+    variables: { offset: skip, limit },
+    notifyOnNetworkStatusChange: true,
+    onError(err) {
+      console.log(err);
+      console.log(err.graphQLErrors);
+      console.log(err.message);
+    }
+  });
+  const countData = useQuery(AGENT_PROPERTY_COUNT, {
     fetchPolicy: "cache-only"
   });
+  const [selectedNum, setSelectedNum] = useState<number>(1);
+  let nums = [1, 2, 3, 4, 5, 6];
+  const lastPage = countData.data.count / 10;
+  if (selectedNum > 3) {
+    nums = [
+      selectedNum - 2,
+      selectedNum - 1,
+      selectedNum,
+      selectedNum + 1,
+      selectedNum + 2
+    ];
+  }
+  if (selectedNum === lastPage) {
+    nums = [
+      selectedNum - 5,
+      selectedNum - 4,
+      selectedNum - 3,
+      selectedNum - 2,
+      selectedNum - 1,
+      selectedNum
+    ];
+  }
+  if (nums.find(num => num < 1)) {
+    nums = nums.filter(num => num > 0);
+  }
   return (
     <Layout title="Listings">
       <div className={styles.container}>
@@ -73,6 +120,18 @@ const listings: NextPage = () => {
             <MobileListing key={prop._id} {...prop} />
           ))}
         </div>
+        {console.log({ nums })}
+        {console.log({ lastPage })}
+        <Pagination
+          setLimit={setLimit}
+          nums={nums}
+          lastPage={lastPage}
+          fetchMore={fetchMore}
+          properties={data.fetchAgentProperties}
+          selectedNum={selectedNum}
+          setSelectedNum={setSelectedNum}
+          setSkip={setSkip}
+        />
       </div>
     </Layout>
   );
@@ -81,14 +140,24 @@ const listings: NextPage = () => {
 listings.getInitialProps = async ctx => {
   try {
     const apolloClient = initializeApollo();
-    const res = await apolloClient.query({
+    await apolloClient.query({
       query: FETCH_AGENT_PROPERTIES,
+      variables: { offset: 0, limit: 10 },
       context: {
         headers: {
           cookie: ctx.req?.headers.cookie
         }
       }
     });
+    await apolloClient.query({
+      query: AGENT_PROPERTY_COUNT,
+      context: {
+        headers: {
+          cookie: ctx.req?.headers.cookie
+        }
+      }
+    });
+
     return {
       initialApolloState: apolloClient.cache.extract()
     };
