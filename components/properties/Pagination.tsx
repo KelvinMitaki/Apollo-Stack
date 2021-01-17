@@ -34,7 +34,7 @@ const Pagination: React.FC<Props> = props => {
   const { selectedNum, setSelectedNum, nums, lastPage } = props;
   return (
     <div className={styles.pagination}>
-      {selectedNum > 3 && (
+      {selectedNum > 3 && !nums.find(num => num === 1) && (
         <>
           <p
             className={selectedNum === 1 ? styles.active : ""}
