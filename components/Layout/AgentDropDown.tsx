@@ -5,6 +5,7 @@ import styles from "../../styles/agentDropDown.module.css";
 interface Props {
   hover: boolean;
   agentDropDownRef: React.RefObject<HTMLDivElement>;
+  content: { name: string; link: string }[];
 }
 
 const AgentDropDown: React.FC<Props> = props => {
@@ -16,46 +17,15 @@ const AgentDropDown: React.FC<Props> = props => {
       ref={props.agentDropDownRef}
     >
       <div className={styles.layer}></div>
-      <Link href="/listings">
-        <a>
-          <div>
-            <p>listings</p>
-          </div>
-        </a>
-      </Link>
-      <Link href="/listing/new">
-        <a>
-          <div>
-            <p>create a new listing</p>
-          </div>
-        </a>
-      </Link>
-      <Link href="/expired">
-        <a>
-          <div>
-            <p>expired listings</p>
-          </div>
-        </a>
-      </Link>
-      <div>
-        <p>leads</p>
-      </div>
-      <div>
-        <p>agents</p>
-      </div>
-      <div>
-        <p>agency statistics</p>
-      </div>
-      <div>
-        <p>listing statistics</p>
-      </div>
-      <Link href="/profile/edit">
-        <a>
-          <div>
-            <p>profile</p>
-          </div>
-        </a>
-      </Link>
+      {props.content.map(ctnt => (
+        <Link href={ctnt.link}>
+          <a>
+            <div>
+              <p>{ctnt.name}</p>
+            </div>
+          </a>
+        </Link>
+      ))}
     </div>
   );
 };

@@ -88,6 +88,16 @@ const LayoutHeader: React.FC<Props> = props => {
               <AgentDropDown
                 hover={hover}
                 agentDropDownRef={agentDropDownRef}
+                content={[
+                  { name: "listings", link: "/listings" },
+                  { name: "create a new listing", link: "/listing/new" },
+                  { name: "expired listings", link: "/expired" },
+                  { name: "leads", link: "/leads" },
+                  { name: "agents", link: "/agents" },
+                  { name: "agency statistics", link: "/agency/statistics" },
+                  { name: "listing statistics", link: "/listing/statistics" },
+                  { name: "profile", link: "/profile/edit" }
+                ]}
               />
             </div>
           )}
@@ -98,10 +108,10 @@ const LayoutHeader: React.FC<Props> = props => {
                 ref={saleDropDownRef}
                 onMouseOver={() => setSaleHover(true)}
               >
-                <AgentDropDown
+                {/* <AgentDropDown
                   hover={saleHover}
                   agentDropDownRef={saleDropDownRef}
-                />
+                /> */}
                 <p>for sale</p>
               </div>
             </a>
@@ -113,10 +123,10 @@ const LayoutHeader: React.FC<Props> = props => {
                 ref={rentDropDownRef}
                 onMouseOver={() => setRentHover(true)}
               >
-                <AgentDropDown
+                {/* <AgentDropDown
                   hover={rentHover}
                   agentDropDownRef={rentDropDownRef}
-                />
+                /> */}
 
                 <p>to rent</p>
               </div>
