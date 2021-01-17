@@ -18,7 +18,7 @@ const AgentDropDown: React.FC<Props> = props => {
     >
       <div className={styles.layer}></div>
       {props.content.map(ctnt => (
-        <Link href={ctnt.link}>
+        <Link href={ctnt.link} key={ctnt.link}>
           <a>
             <div>
               <p>{ctnt.name}</p>

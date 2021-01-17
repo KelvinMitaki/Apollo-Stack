@@ -108,10 +108,19 @@ const LayoutHeader: React.FC<Props> = props => {
                 ref={saleDropDownRef}
                 onMouseOver={() => setSaleHover(true)}
               >
-                {/* <AgentDropDown
+                <AgentDropDown
                   hover={saleHover}
                   agentDropDownRef={saleDropDownRef}
-                /> */}
+                  content={[
+                    { name: "apartment", link: "/apartments" },
+                    { name: "house", link: "/houses" },
+                    { name: "townhouse", link: "/townhouses" },
+                    { name: "vacant land", link: "/vacant-land" },
+                    { name: "farm", link: "/farms" },
+                    { name: "commercial", link: "/commercials" },
+                    { name: "industrial", link: "/industrial" }
+                  ]}
+                />
                 <p>for sale</p>
               </div>
             </a>
@@ -123,10 +132,19 @@ const LayoutHeader: React.FC<Props> = props => {
                 ref={rentDropDownRef}
                 onMouseOver={() => setRentHover(true)}
               >
-                {/* <AgentDropDown
+                <AgentDropDown
                   hover={rentHover}
                   agentDropDownRef={rentDropDownRef}
-                /> */}
+                  content={[
+                    { name: "apartment", link: "/apartments" },
+                    { name: "house", link: "/houses" },
+                    { name: "townhouse", link: "/townhouses" },
+                    { name: "vacant land", link: "/vacant-land" },
+                    { name: "farm", link: "/farms" },
+                    { name: "commercial", link: "/commercials" },
+                    { name: "industrial", link: "/industrial" }
+                  ]}
+                />
 
                 <p>to rent</p>
               </div>
