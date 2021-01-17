@@ -102,49 +102,14 @@ const LayoutHeader: React.FC<Props> = props => {
           )}
           <Link href="/properties/sale">
             <a>
-              <div
-                className={styles.opts_item}
-                ref={saleDropDownRef}
-                onMouseOver={() => setSaleHover(true)}
-              >
-                <AgentDropDown
-                  hover={saleHover}
-                  agentDropDownRef={saleDropDownRef}
-                  content={[
-                    { name: "apartment", link: "/apartments" },
-                    { name: "house", link: "/houses" },
-                    { name: "townhouse", link: "/townhouses" },
-                    { name: "vacant land", link: "/vacant-land" },
-                    { name: "farm", link: "/farms" },
-                    { name: "commercial", link: "/commercials" },
-                    { name: "industrial", link: "/industrial" }
-                  ]}
-                />
+              <div className={styles.opts_item}>
                 <p>for sale</p>
               </div>
             </a>
           </Link>
           <Link href="/properties/rent">
             <a>
-              <div
-                className={styles.opts_item}
-                ref={rentDropDownRef}
-                onMouseOver={() => setRentHover(true)}
-              >
-                <AgentDropDown
-                  hover={rentHover}
-                  agentDropDownRef={rentDropDownRef}
-                  content={[
-                    { name: "apartment", link: "/apartments" },
-                    { name: "house", link: "/houses" },
-                    { name: "townhouse", link: "/townhouses" },
-                    { name: "vacant land", link: "/vacant-land" },
-                    { name: "farm", link: "/farms" },
-                    { name: "commercial", link: "/commercials" },
-                    { name: "industrial", link: "/industrial" }
-                  ]}
-                />
-
+              <div className={styles.opts_item}>
                 <p>to rent</p>
               </div>
             </a>

@@ -59,7 +59,7 @@ const HouseFilter: React.FC<Props> = props => {
           </div>
           <div>
             <BsHouseFill size="3rem" />
-            <p>House for sell</p>
+            <p></p>
           </div>
         </div>
       )}

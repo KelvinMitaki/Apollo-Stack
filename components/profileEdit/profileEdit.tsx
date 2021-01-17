@@ -9,16 +9,25 @@ interface FormValues {
   lastName: string;
   email: string;
   phoneNumber: string;
+  isAgent?: boolean;
   initialValues: Partial<FormValues>;
 }
 
 const ProfileEdit: React.FC<
   InjectedFormProps<FormValues, {}, string>
 > = props => {
+  const [error, setError] = useState<string | null>(null);
   return (
     <div className={styles.edit}>
       <h4>Profile</h4>
-      <form>
+      <form
+        onSubmit={props.handleSubmit(formValues => {
+          if (props.initialValues.isAgent && !formValues.phoneNumber) {
+            setError("phone number is required");
+            return;
+          }
+        })}
+      >
         <Field
           component={ProfileInput}
           label="First Name"
@@ -51,6 +60,7 @@ const ProfileEdit: React.FC<
           Save
         </button>
       </form>
+      {error && <div style={{ fontWeight: "bold", color: "red" }}>{error}</div>}
     </div>
   );
 };
