@@ -93,7 +93,6 @@ const LayoutHeader: React.FC<Props> = props => {
                   { name: "create a new listing", link: "/listing/new" },
                   { name: "expired listings", link: "/expired" },
                   { name: "leads", link: "/leads" },
-                  { name: "agents", link: "/agents" },
                   { name: "agency statistics", link: "/agency/statistics" },
                   { name: "listing statistics", link: "/listing/statistics" },
                   { name: "profile", link: "/profile/edit" }

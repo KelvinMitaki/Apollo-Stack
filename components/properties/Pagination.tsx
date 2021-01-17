@@ -31,7 +31,8 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = props => {
-  const { selectedNum, setSelectedNum, nums, lastPage } = props;
+  let { selectedNum, setSelectedNum, nums, lastPage } = props;
+  lastPage = Math.ceil(lastPage);
   return (
     <div className={styles.pagination}>
       {selectedNum > 3 && !nums.find(num => num === 1) && (
