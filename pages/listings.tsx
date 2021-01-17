@@ -69,6 +69,7 @@ const listings: NextPage = () => {
     <Layout title="Listings">
       {loading && <Loading />}
       <div className={styles.container}>
+        <div ref={scrollDiv}></div>
         <HouseFilter alternate={false} btnContent="Search" width="100%" agent />
         <div style={{ width: "100%", overflowX: "scroll" }}>
           <table className={styles.table} cellSpacing="0">
