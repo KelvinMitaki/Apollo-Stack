@@ -19,7 +19,11 @@ const LayoutHeader: React.FC<Props> = props => {
     fetchPolicy: "cache-only"
   });
   const [hover, setHover] = useState<boolean>(false);
+  const [saleHover, setSaleHover] = useState<boolean>(false);
+  const [rentHover, setRentHover] = useState<boolean>(false);
   const agentDropDownRef = useRef<HTMLDivElement>(null);
+  const saleDropDownRef = useRef<HTMLDivElement>(null);
+  const rentDropDownRef = useRef<HTMLDivElement>(null);
   const toggleNavbar = useSelector(
     (state: Redux) => state.styling.toggleNavbar
   );
@@ -38,6 +42,20 @@ const LayoutHeader: React.FC<Props> = props => {
       !agentDropDownRef.current.contains(e.target)
     ) {
       setHover(false);
+    }
+    if (
+      saleDropDownRef.current &&
+      // @ts-ignore
+      !saleDropDownRef.current.contains(e.target)
+    ) {
+      setSaleHover(false);
+    }
+    if (
+      rentDropDownRef.current &&
+      // @ts-ignore
+      !rentDropDownRef.current.contains(e.target)
+    ) {
+      setRentHover(false);
     }
   };
   const { toggleRef } = props;
@@ -75,14 +93,31 @@ const LayoutHeader: React.FC<Props> = props => {
           )}
           <Link href="/properties/sale">
             <a>
-              <div className={styles.opts_item}>
+              <div
+                className={styles.opts_item}
+                ref={saleDropDownRef}
+                onMouseOver={() => setSaleHover(true)}
+              >
+                <AgentDropDown
+                  hover={saleHover}
+                  agentDropDownRef={saleDropDownRef}
+                />
                 <p>for sale</p>
               </div>
             </a>
           </Link>
           <Link href="/properties/rent">
             <a>
-              <div className={styles.opts_item}>
+              <div
+                className={styles.opts_item}
+                ref={rentDropDownRef}
+                onMouseOver={() => setRentHover(true)}
+              >
+                <AgentDropDown
+                  hover={rentHover}
+                  agentDropDownRef={rentDropDownRef}
+                />
+
                 <p>to rent</p>
               </div>
             </a>
