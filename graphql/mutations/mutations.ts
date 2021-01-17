@@ -202,3 +202,27 @@ export const EDIT_PROPERTY = gql`
     }
   }
 `;
+
+export const EDIT_PROFILE = gql`
+  mutation EditProfile(
+    $email: String!
+    $firstName: String!
+    $lastName: String!
+    $phoneNumber: Int!
+  ) {
+    editProfile(
+      values: {
+        email: $email
+        firstName: $firstName
+        lastName: $lastName
+        phoneNumber: $phoneNumber
+      }
+    ) {
+      email
+      phoneNumber
+      firstName
+      lastName
+      _id
+    }
+  }
+`;

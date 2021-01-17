@@ -1,7 +1,10 @@
+import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
+import { EDIT_PROFILE } from "../../graphql/mutations/mutations";
 import styles from "../../styles/edit.module.css";
+import Loading from "../loading/Loading";
 import ProfileInput from "./ProfileInput";
 
 interface FormValues {
@@ -17,15 +20,31 @@ const ProfileEdit: React.FC<
   InjectedFormProps<FormValues, {}, string>
 > = props => {
   const [error, setError] = useState<string | null>(null);
+  const [editProfile, { loading }] = useMutation(EDIT_PROFILE, {
+    onError(err) {
+      console.log(err);
+      console.log(err.graphQLErrors);
+      console.log(err.message);
+    }
+  });
   return (
     <div className={styles.edit}>
       <h4>Profile</h4>
+      {loading && <Loading />}
       <form
         onSubmit={props.handleSubmit(formValues => {
+          error && setError("");
           if (props.initialValues.isAgent && !formValues.phoneNumber) {
             setError("phone number is required");
             return;
           }
+
+          editProfile({
+            variables: {
+              ...formValues,
+              phoneNumber: parseInt(formValues.phoneNumber)
+            }
+          });
         })}
       >
         <Field
@@ -81,7 +100,7 @@ const validate = (formValues: FormValues) => {
   }
   if (formValues.phoneNumber && formValues.phoneNumber.length !== 0) {
     if (
-      !validator.isNumeric(formValues.phoneNumber) ||
+      !validator.isNumeric(formValues.phoneNumber.toString()) ||
       formValues.phoneNumber.length < 8
     ) {
       errors.phoneNumber =
