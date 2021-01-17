@@ -7,13 +7,18 @@ import TextArea from "../RegisterLogin/TextArea";
 import Router from "next/router";
 import { HeaderType, PropertyFormValues } from "../../pages/listing/new";
 import DateInput from "./DateInput";
+import Dropdown from "../Homepage/Header/Dropdown";
 
 interface Props extends InjectedFormProps<PropertyFormValues> {
   active: HeaderType;
   setRepossessed: React.Dispatch<React.SetStateAction<boolean>>;
   setAuction: React.Dispatch<React.SetStateAction<boolean>>;
+  setStatus?: React.Dispatch<React.SetStateAction<string>>;
   repossessed: boolean;
   auction: boolean;
+  status?: string;
+  expiryDate?: string;
+  type?: string;
 }
 
 const Marketing: React.FC<Props> = props => {
@@ -46,12 +51,25 @@ const Marketing: React.FC<Props> = props => {
     >
       {edit && (
         <div>
-          <Field
-            component={Input}
-            label="Status"
-            type="text"
-            name="status"
-            disabled
+          <Dropdown
+            setSelection={props.setStatus!}
+            selections={
+              props.expiryDate && new Date(props.expiryDate) > new Date()
+                ? [
+                    "active",
+                    "pending",
+                    props.type && props.type === "rent" ? "rented" : "sold",
+                    "withdrawn"
+                  ]
+                : ["expired"]
+            }
+            determinant={props.status || "status"}
+            name={name}
+            searchDiv={searchDiv}
+            title={props.status || "Status"}
+            setName={setName}
+            className="d_search"
+            style={{ width: "90%", cursor: "pointer" }}
           />
         </div>
       )}

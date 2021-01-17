@@ -11,6 +11,7 @@ interface Props {
   selections: string[];
   className?: string;
   setSelection: React.Dispatch<React.SetStateAction<string>>;
+  style?: React.CSSProperties;
 }
 
 const Dropdown: React.FC<Props> = props => {
@@ -34,6 +35,7 @@ const Dropdown: React.FC<Props> = props => {
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         setName(determinant);
       }}
+      style={props.style}
     >
       <p>{title}</p>
       <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />

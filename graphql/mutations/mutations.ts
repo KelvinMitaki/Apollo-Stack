@@ -143,6 +143,7 @@ export const EDIT_PROPERTY = gql`
     $onAuction: Boolean
     $auctionDate: String
     $auctionVenue: String
+    $status: String
   ) {
     editProperty(
       values: {
@@ -168,6 +169,7 @@ export const EDIT_PROPERTY = gql`
         onAuction: $onAuction
         auctionDate: $auctionDate
         auctionVenue: $auctionVenue
+        status: $status
       }
     ) {
       _id

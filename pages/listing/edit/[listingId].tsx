@@ -21,6 +21,14 @@ import Loading from "../../../components/loading/Loading";
 
 type HeaderType = "listing" | "attributes" | "marketing" | "images";
 type Option = "sale" | "rent";
+export type Status =
+  | "active"
+  | "expired"
+  | "cancelled"
+  | "pending"
+  | "rented"
+  | "sold"
+  | "withdrawn";
 
 // @ts-ignore
 const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
@@ -33,6 +41,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
   const [auction, setAuction] = useState<boolean>(false);
   const [active, setActive] = useState<HeaderType>("listing");
   const [selection, setSelection] = useState<string>("");
+  const [status, setStatus] = useState<string>("");
   const [option, setOption] = useState<Option>("sale");
   const dispatch = useDispatch();
   const { data } = useQuery(FETCH_AGENT_PROPERTY, {
@@ -78,6 +87,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
     setPet(transformedData.pet as boolean);
     setRepossessed(transformedData.repossessed as boolean);
     setSelection(transformedData.category as string);
+    setStatus(transformedData.status as string);
     () => {
       setDisabled(false);
     };
@@ -118,7 +128,7 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
                   category: selection,
                   type: option,
                   images: genImages(),
-                  status: "active",
+                  status,
                   garden,
                   furnished,
                   pet,
@@ -190,6 +200,10 @@ const listingEdit: React.FC<InjectedFormProps<PropertyFormValues>> &
                 setRepossessed={setRepossessed}
                 auction={auction}
                 repossessed={repossessed}
+                setStatus={setStatus}
+                status={status}
+                expiryDate={data.fetchAgentProperty.expiryDate}
+                type={data.fetchAgentProperty.type}
               />
               <Images active={active} images={data.fetchAgentProperty.images} />
             </div>
