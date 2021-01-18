@@ -66,10 +66,10 @@ const Search: React.FC<Props> = props => {
       search.maxPrice = parseInt(input.max);
     }
     if (selected) {
-      search.type = selected;
+      search.type = selected.toLowerCase();
     }
     if (citySelection) {
-      search.location = citySelection;
+      search.location = citySelection.toLowerCase();
     }
     if (
       search.maxPrice &&
