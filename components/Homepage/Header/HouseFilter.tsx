@@ -19,6 +19,7 @@ const HouseFilter: React.FC<Props> = props => {
   const [name, setName] = useState<string>("");
   const [openSub, setOpenSub] = useState<string>("");
   const [selection, setSelection] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
   const [bedroom, setBedroom] = useState<string>("");
   const [bathroom, setBathroom] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -39,6 +40,62 @@ const HouseFilter: React.FC<Props> = props => {
     if (searchDiv.current && !searchDiv.current.contains(e.target)) {
       setName("");
     }
+  };
+  const onSubmit = () => {
+    const search = {} as {
+      bedrooms: number;
+      bathrooms: number;
+      minPrice: number;
+      maxPrice: number;
+      location: string;
+      category: string;
+
+      type: string;
+      furnished: boolean;
+    };
+    if (bedroom) {
+      search.bedrooms = parseInt(bedroom.split("+ ")[0]);
+    }
+    if (bathroom) {
+      search.bathrooms = parseInt(bathroom.split("+ ")[0]);
+    }
+    if (category && !category.includes("FUR")) {
+      search.category = category.toLowerCase();
+    }
+    if (category && category.split(" ")[1] === "FUR") {
+      search.category = category.split(": ")[0].toLowerCase();
+      search.furnished = true;
+    }
+    if (category && category.split(" ")[1] === "UNFUR") {
+      search.category = category.split(": ")[0].toLowerCase();
+      search.furnished = false;
+    }
+    if (input.min) {
+      search.minPrice = parseInt(input.min);
+    }
+    if (input.max) {
+      search.maxPrice = parseInt(input.max);
+    }
+    if (selection && selection.toLowerCase().includes("sale")) {
+      search.type = "sale";
+    }
+
+    if (selection && selection.toLowerCase().includes("rent")) {
+      search.type = "rent";
+    }
+    if (location) {
+      search.location = location.toLowerCase();
+    }
+    if (
+      search.minPrice &&
+      search.maxPrice &&
+      search.minPrice > search.maxPrice
+    ) {
+      const greaterPrice = search.minPrice;
+      search.minPrice = search.maxPrice;
+      search.maxPrice = greaterPrice;
+    }
+    console.log(search);
   };
   return (
     <div
@@ -84,7 +141,12 @@ const HouseFilter: React.FC<Props> = props => {
             selections={["For Sale", "To Rent"]}
             setSelection={setSelection}
           />
-          <input type="text" placeholder="Search for a City, Town or Surbub" />
+          <input
+            type="text"
+            placeholder="Search for a City, Town or Surbub"
+            onChange={e => setLocation(e.target.value)}
+            value={location}
+          />
           <div
             className={`${styles.min} ${
               focus === "min" || input.min.length !== 0 ? styles.focused : ""
@@ -214,7 +276,7 @@ const HouseFilter: React.FC<Props> = props => {
               ))}
             </div>
           </div>
-          <button>{props.btnContent}</button>
+          <button onClick={onSubmit}>{props.btnContent}</button>
         </div>
       </div>
     </div>
