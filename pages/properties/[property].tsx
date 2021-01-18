@@ -65,7 +65,8 @@ property.getInitialProps = async ctx => {
       headers: {
         cookie: ctx.req?.headers.cookie
       }
-    }
+    },
+    fetchPolicy: "network-only"
   });
   await apolloClient.query({
     query: FETCH_PROPERTIES_COUNT,
