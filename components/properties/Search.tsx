@@ -87,7 +87,7 @@ const Search: React.FC<Props> = props => {
   };
   return (
     <div>
-      {loading || (args.loading && <Loading />)}
+      {(loading || args.loading) && <Loading />}
       <div className={styles.search}>
         <h3>Search Property</h3>
         <div className={styles.buyRent}>

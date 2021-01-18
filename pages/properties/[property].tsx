@@ -39,7 +39,7 @@ const property: NextPage<{
     fetchPolicy: "cache-only",
     variables: { filter: props.variables.filter }
   });
-  const [searchProperty, arg] = useLazyQuery(SEARCH_PROPERTIES, {
+  const [searchProperty, args1] = useLazyQuery(SEARCH_PROPERTIES, {
     onError(err) {
       console.log("SEARCH_PROPERTIES", err);
     }
@@ -49,13 +49,14 @@ const property: NextPage<{
       console.log("FETCH_PROPERTIES_COUNT", err);
     }
   });
-  console.log(arg.data);
+  console.log(args1.data);
+  console.log(args1.loading);
   return (
     <Layout title="Properties">
       <div className={styles.container}>
         {loading && <Loading />}
         <Search
-          loading={arg.loading}
+          loading={args1.loading}
           args={args}
           fetchPropertiesCount={fetchPropertiesCount}
           searchProperty={searchProperty}
