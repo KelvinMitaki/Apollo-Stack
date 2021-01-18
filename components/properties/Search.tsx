@@ -1,5 +1,8 @@
 import { LazyQueryResult, QueryLazyOptions } from "@apollo/client";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { FetchType } from "../../pages/properties/[property]";
+import { ActionTypes } from "../../redux/types/types";
 import styles from "../../styles/properties.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import Loading from "../loading/Loading";
@@ -27,6 +30,7 @@ const Search: React.FC<Props> = props => {
     min: "",
     max: ""
   });
+  const dispatch = useDispatch();
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -191,7 +195,13 @@ const Search: React.FC<Props> = props => {
         <button
           className={styles.property_btn}
           type="submit"
-          onClick={onSubmit}
+          onClick={() => {
+            dispatch<FetchType>({
+              type: ActionTypes.fetchType,
+              payload: "sidebar"
+            });
+            onSubmit();
+          }}
         >
           Search Property
         </button>

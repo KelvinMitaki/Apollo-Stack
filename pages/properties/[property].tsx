@@ -13,10 +13,19 @@ import {
 } from "../../graphql/queries/queries";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import Loading from "../../components/loading/Loading";
+import { ActionTypes } from "../../redux/types/types";
+import { useSelector } from "react-redux";
+import { Redux } from "../../interfaces/Redux";
+
+export interface FetchType {
+  type: ActionTypes.fetchType;
+  payload: "header" | "sidebar";
+}
 
 const property: NextPage<{
   variables: { [key: string]: string | string[] | undefined };
 }> = props => {
+  const fetchType = useSelector((state: Redux) => state.styling.fetchType);
   const [limit, setLimit] = useState<number>(10);
   const [skip, setSkip] = useState<number>(0);
   const scrollDiv = useRef<HTMLDivElement>(null);
@@ -39,18 +48,16 @@ const property: NextPage<{
     fetchPolicy: "cache-only",
     variables: { filter: props.variables.filter }
   });
-  const [searchProperty, args1] = useLazyQuery(SEARCH_PROPERTIES, {
+  let [searchProperty, args1] = useLazyQuery(SEARCH_PROPERTIES, {
     onError(err) {
       console.log("SEARCH_PROPERTIES", err);
     }
   });
-  const [fetchPropertiesCount, args] = useLazyQuery(FETCH_PROPERTIES_COUNT, {
+  let [fetchPropertiesCount, args] = useLazyQuery(FETCH_PROPERTIES_COUNT, {
     onError(err) {
       console.log("FETCH_PROPERTIES_COUNT", err);
     }
   });
-  console.log(args1.data);
-  console.log(args1.loading);
   return (
     <Layout title="Properties">
       <div className={styles.container}>
@@ -62,9 +69,21 @@ const property: NextPage<{
           searchProperty={searchProperty}
         />
         <Property
-          properties={data.filterProperties}
-          count={countData.data.filterPropertiesCount.count}
-          fetchMore={fetchMore}
+          properties={
+            args1.data && fetchType === "sidebar"
+              ? args1.data.searchProperties
+              : data.filterProperties
+          }
+          count={
+            args.data && fetchType === "sidebar"
+              ? args.data.filterPropertiesCount.count
+              : countData.data.filterPropertiesCount.count
+          }
+          fetchMore={
+            args1.fetchMore && fetchType === "sidebar"
+              ? args1.fetchMore
+              : fetchMore
+          }
           setLimit={setLimit}
           setSkip={setSkip}
           scrollDiv={scrollDiv}

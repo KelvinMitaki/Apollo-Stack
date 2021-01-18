@@ -9,6 +9,7 @@ import { SetToggleNavbar, SetToggleLogin } from "./Layout";
 import AgentDropDown from "./AgentDropDown";
 import { useQuery } from "@apollo/client";
 import { FETCH_CURRENT_USER } from "../../graphql/queries/queries";
+import { FetchType } from "../../pages/properties/[property]";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -101,28 +102,42 @@ const LayoutHeader: React.FC<Props> = props => {
             </div>
           )}
           <Link href="/properties/sale">
-            <a>
+            <a
+              onClick={() =>
+                dispatch<FetchType>({
+                  type: ActionTypes.fetchType,
+                  payload: "header"
+                })
+              }
+            >
               <div className={styles.opts_item}>
                 <p>for sale</p>
               </div>
             </a>
           </Link>
           <Link href="/properties/rent">
-            <a>
+            <a
+              onClick={() =>
+                dispatch<FetchType>({
+                  type: ActionTypes.fetchType,
+                  payload: "header"
+                })
+              }
+            >
               <div className={styles.opts_item}>
                 <p>to rent</p>
               </div>
             </a>
           </Link>
-          {/* <Link href="/properties/123">
-            <a>
-              <div className={styles.opts_item}>
-                <p>developments</p>
-              </div>
-            </a>
-          </Link> */}
           <Link href="/properties/furnished">
-            <a>
+            <a
+              onClick={() =>
+                dispatch<FetchType>({
+                  type: ActionTypes.fetchType,
+                  payload: "header"
+                })
+              }
+            >
               <div className={styles.opts_item}>
                 <p>furnished</p>
               </div>
