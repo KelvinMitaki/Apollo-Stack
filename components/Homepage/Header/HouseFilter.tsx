@@ -19,6 +19,9 @@ const HouseFilter: React.FC<Props> = props => {
   const [name, setName] = useState<string>("");
   const [openSub, setOpenSub] = useState<string>("");
   const [selection, setSelection] = useState<string>("");
+  const [bedroom, setBedroom] = useState<string>("");
+  const [bathroom, setBathroom] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [focus, setFocus] = useState<"min" | "max" | null>(null);
   const [input, setInput] = useState<{ min: string; max: string }>({
     min: "",
@@ -37,6 +40,7 @@ const HouseFilter: React.FC<Props> = props => {
       setName("");
     }
   };
+  console.log("name", name);
   return (
     <div
       className={`${styles.search} ${
@@ -77,8 +81,8 @@ const HouseFilter: React.FC<Props> = props => {
             searchDiv={searchDiv}
             setName={setName}
             determinant={selection || "forSale"}
-            title={selection || "For Sale"}
-            selections={["To Rent"]}
+            title={selection || "Type"}
+            selections={["For Sale", "To Rent"]}
             setSelection={setSelection}
           />
           <input type="text" placeholder="Search for a City, Town or Surbub" />
@@ -120,12 +124,14 @@ const HouseFilter: React.FC<Props> = props => {
           </div>
         </div>
         <div className={styles.lower}>
-          <div
-            className={name === "category" ? styles.open : styles.close}
-            onClick={e => setName("category")}
-          >
-            <p>category</p>
-            <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
+          <div className={name === "category" ? styles.open : styles.close}>
+            <div
+              onClick={e => setName("category")}
+              style={{ height: "100%", width: "100%" }}
+            >
+              <p>category</p>
+              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
+            </div>
             <div className={styles.dropdown}>
               {props.categories.map(cat => (
                 <div
@@ -149,31 +155,49 @@ const HouseFilter: React.FC<Props> = props => {
               ))}
             </div>
           </div>
-          <div
-            ref={searchDiv}
-            className={name === "bedrooms" ? styles.open : styles.close}
-            onClick={e => setName("bedrooms")}
-          >
-            <p>Bedrooms</p>
-            <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
+          <div className={name === "bedrooms" ? styles.open : styles.close}>
+            <div
+              onClick={e => setName("bedrooms")}
+              style={{ height: "100%", width: "100%" }}
+            >
+              <p>{bedroom || "Bedrooms"}</p>
+              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
+            </div>
             <div className={styles.dropdown}>
               {props.bedrooms.map(num => (
-                <p className={styles.select} key={num}>
+                <p
+                  className={styles.select}
+                  key={num}
+                  onClick={() => {
+                    setBedroom(`${num}+ ${num > 1 ? "Bedrooms" : "Bedroom"}`);
+                    setName("");
+                  }}
+                >
                   {num}+ {num > 1 ? "Bedrooms" : "Bedroom"}{" "}
                 </p>
               ))}
             </div>
           </div>
-          <div
-            ref={searchDiv}
-            className={name === "bathrooms" ? styles.open : styles.close}
-            onClick={e => setName("bathrooms")}
-          >
-            <p>Bathrooms</p>
-            <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
+          <div className={name === "bathrooms" ? styles.open : styles.close}>
+            <div
+              onClick={e => setName("bathrooms")}
+              style={{ height: "100%", width: "100%" }}
+            >
+              <p>{bathroom || "Bathrooms"}</p>
+              <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
+            </div>
             <div className={styles.dropdown}>
               {props.bathrooms.map(num => (
-                <p className={styles.select} key={num}>
+                <p
+                  className={styles.select}
+                  key={num}
+                  onClick={() => {
+                    setBathroom(
+                      `${num}+ ${num > 1 ? "bathrooms" : "bathroom"}`
+                    );
+                    setName("");
+                  }}
+                >
                   {num}+ {num > 1 ? "bathrooms" : "bathroom"}
                 </p>
               ))}
