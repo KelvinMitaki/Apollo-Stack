@@ -58,7 +58,7 @@
 }
 .upper {
   display: grid;
-  grid-template-columns: 1fr 2fr 1.3fr;
+  grid-template-columns: 1fr 2fr 1.5fr 1.5fr;
   height: 50%;
   align-items: center;
   justify-items: center;
@@ -71,7 +71,7 @@
   align-items: center;
   justify-items: center;
 }
-.upper > *:not(:nth-child(3)),
+.upper > *,
 .lower > * {
   background-color: #f2f4f5;
   border: 1px solid #ebebeb;
@@ -81,6 +81,16 @@
   color: #707079;
   cursor: pointer;
   position: relative;
+  text-transform: capitalize;
+}
+.upper input::-webkit-outer-spin-button,
+.upper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.upper input[type="number"] {
+  -moz-appearance: textfield;
 }
 .lower > * {
   height: 4.3rem !important;
@@ -102,6 +112,36 @@
   font-size: 1.7rem !important;
   font-weight: 500 !important;
   border: none;
+}
+.min,
+.max {
+  background-color: transparent !important;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  height: 6rem;
+  justify-content: center !important;
+}
+.min input,
+.max input {
+  height: 4rem;
+  position: relative;
+  z-index: 10;
+  background-color: transparent !important;
+}
+
+.min label,
+.max label {
+  align-self: flex-start;
+  padding-left: 1rem;
+  transition: all 0.2s;
+  transform: translateY(3rem);
+  position: relative;
+  z-index: 1;
+}
+.focused label {
+  transform: translateY(0);
+  font-weight: 600;
 }
 .open .IoIosArrowDown {
   transition: all 0.2s;

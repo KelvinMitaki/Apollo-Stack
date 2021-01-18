@@ -4,7 +4,6 @@ import { BsHouseFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import styles from "../../../styles/home.module.css";
 import Dropdown from "./Dropdown";
-import RangeComponent from "./RangeComponent";
 
 interface Props {
   alternate: boolean;
@@ -17,6 +16,7 @@ const HouseFilter: React.FC<Props> = props => {
   const [name, setName] = useState<string>("");
   const [openSub, setOpenSub] = useState<string>("");
   const [selection, setSelection] = useState<string>("");
+  const [focus, setFocus] = useState<"min" | "max" | null>(null);
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -75,7 +75,30 @@ const HouseFilter: React.FC<Props> = props => {
             setSelection={setSelection}
           />
           <input type="text" placeholder="Search for a City, Town or Surbub" />
-          <RangeComponent {...props} />
+          <div
+            className={`${styles.min} ${focus === "min" ? styles.focused : ""}`}
+          >
+            <label htmlFor="min">min price</label>
+            <input
+              type="number"
+              onBlur={() => setFocus(null)}
+              onFocus={() => setFocus("min")}
+              name="min"
+              id="min"
+            />
+          </div>
+          <div
+            className={`${styles.max} ${focus === "max" ? styles.focused : ""}`}
+          >
+            <label htmlFor="max">max price</label>
+            <input
+              type="number"
+              name="max"
+              id="max"
+              onBlur={() => setFocus(null)}
+              onFocus={() => setFocus("max")}
+            />
+          </div>
         </div>
         <div className={styles.lower}>
           <div
