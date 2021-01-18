@@ -242,7 +242,8 @@
   height: 0;
 }
 .subcats > *:hover,
-.select:hover {
+.select:hover,
+.no_sub:hover {
   background-color: rgb(204, 204, 204);
 }
 .select {

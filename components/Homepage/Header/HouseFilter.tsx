@@ -10,6 +10,9 @@ interface Props {
   btnContent: string;
   width: string | "fit-content";
   agent?: boolean;
+  bedrooms: number[];
+  bathrooms: number[];
+  categories: { name: string; subCats?: boolean }[];
 }
 
 const HouseFilter: React.FC<Props> = props => {
@@ -124,63 +127,26 @@ const HouseFilter: React.FC<Props> = props => {
             <p>category</p>
             <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
             <div className={styles.dropdown}>
-              <div
-                className={`${styles.dropdown_2} ${
-                  openSub === "Apartment" ? styles.openSub : styles.closeSub
-                }`}
-                onClick={() => setOpenSub("Apartment")}
-              >
-                <div>
-                  <p>Apartment</p>
-                  <IoIosArrowDown size="2rem" />
+              {props.categories.map(cat => (
+                <div
+                  className={`${cat.subCats ? styles.dropdown_2 : ""} ${
+                    openSub === cat.name ? styles.openSub : styles.closeSub
+                  }`}
+                  onClick={() => cat.subCats && setOpenSub(cat.name)}
+                  key={cat.name}
+                >
+                  <div className={!cat.subCats ? styles.no_sub : ""}>
+                    <p>{cat.name}</p>
+                    {cat.subCats && <IoIosArrowDown size="2rem" />}
+                  </div>
+                  {cat.subCats && (
+                    <div className={styles.subcats}>
+                      <span>furnished</span>
+                      <span>unfurnished</span>
+                    </div>
+                  )}
                 </div>
-                <div className={styles.subcats}>
-                  <span>furnished</span>
-                  <span>unfurnished</span>
-                </div>
-              </div>
-              <div
-                className={`${styles.dropdown_2} ${
-                  openSub === "House" ? styles.openSub : styles.closeSub
-                }`}
-                onClick={() => setOpenSub("House")}
-              >
-                <div>
-                  <p>House</p>
-                  <IoIosArrowDown size="2rem" />
-                </div>
-                <div className={styles.subcats}>
-                  <span>furnished</span>
-                  <span>unfurnished</span>
-                </div>
-              </div>
-              <div
-                className={`${styles.dropdown_2} ${
-                  openSub === "Townhouse" ? styles.openSub : styles.closeSub
-                }`}
-                onClick={() => setOpenSub("Townhouse")}
-              >
-                <div>
-                  <p>Townhouse</p>
-                  <IoIosArrowDown size="2rem" />
-                </div>
-                <div className={styles.subcats}>
-                  <span>furnished</span>
-                  <span>unfurnished</span>
-                </div>
-              </div>
-              <div className={styles.select}>
-                <p>Vacant Land</p>
-              </div>
-              <div className={styles.select}>
-                <p>Farm</p>
-              </div>
-              <div className={styles.select}>
-                <p>Commercial</p>
-              </div>
-              <div className={styles.select}>
-                <p>industrial</p>
-              </div>
+              ))}
             </div>
           </div>
           <div
@@ -191,11 +157,11 @@ const HouseFilter: React.FC<Props> = props => {
             <p>Bedrooms</p>
             <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
             <div className={styles.dropdown}>
-              <p className={styles.select}>1+ Bedroom</p>
-              <p className={styles.select}>2+ Bedrooms</p>
-              <p className={styles.select}>3+ Bedrooms</p>
-              <p className={styles.select}>4+ Bedrooms</p>
-              <p className={styles.select}>5+ Bedrooms</p>
+              {props.bedrooms.map(num => (
+                <p className={styles.select} key={num}>
+                  {num}+ {num > 1 ? "Bedrooms" : "Bedroom"}{" "}
+                </p>
+              ))}
             </div>
           </div>
           <div
@@ -206,11 +172,11 @@ const HouseFilter: React.FC<Props> = props => {
             <p>Bathrooms</p>
             <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
             <div className={styles.dropdown}>
-              <p className={styles.select}>1+ bathroom</p>
-              <p className={styles.select}>2+ bathrooms</p>
-              <p className={styles.select}>3+ bathrooms</p>
-              <p className={styles.select}>4+ bathrooms</p>
-              <p className={styles.select}>5+ bathrooms</p>
+              {props.bathrooms.map(num => (
+                <p className={styles.select} key={num}>
+                  {num}+ {num > 1 ? "bathrooms" : "bathroom"}
+                </p>
+              ))}
             </div>
           </div>
           <button>{props.btnContent}</button>

@@ -27,7 +27,23 @@ const expired = () => {
   return (
     <Layout title="Listings">
       <div className={styles.container}>
-        <HouseFilter alternate={false} btnContent="Search" width="100%" agent />
+        <HouseFilter
+          bathrooms={[1, 2, 3, 4, 5]}
+          bedrooms={[1, 2, 3, 4, 5]}
+          categories={[
+            { name: "apartement", subCats: true },
+            { name: "house", subCats: true },
+            { name: "townhouse", subCats: true },
+            { name: "vacant land" },
+            { name: "farm" },
+            { name: "commercial" },
+            { name: "industrial" }
+          ]}
+          alternate={false}
+          btnContent="Search"
+          width="100%"
+          agent
+        />
         <div style={{ width: "100%" }}>
           <table className={styles.exp_table} cellSpacing="0">
             <thead>

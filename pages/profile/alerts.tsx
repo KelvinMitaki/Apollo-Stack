@@ -31,6 +31,17 @@ const alerts = () => {
         <ProfileSidebar />
         <div className={styles.alert_content}>
           <HouseFilter
+            bathrooms={[1, 2, 3, 4, 5]}
+            bedrooms={[1, 2, 3, 4, 5]}
+            categories={[
+              { name: "apartement", subCats: true },
+              { name: "house", subCats: true },
+              { name: "townhouse", subCats: true },
+              { name: "vacant land" },
+              { name: "farm" },
+              { name: "commercial" },
+              { name: "industrial" }
+            ]}
             alternate
             btnContent="Add Alert"
             width={`${num?.toString()}vw` || "60vw"}

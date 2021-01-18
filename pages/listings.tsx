@@ -70,7 +70,23 @@ const listings: NextPage = () => {
       {loading && <Loading />}
       <div className={styles.container}>
         <div ref={scrollDiv}></div>
-        <HouseFilter alternate={false} btnContent="Search" width="100%" agent />
+        <HouseFilter
+          bathrooms={[1, 2, 3, 4, 5]}
+          bedrooms={[1, 2, 3, 4, 5]}
+          categories={[
+            { name: "apartement", subCats: true },
+            { name: "house", subCats: true },
+            { name: "townhouse", subCats: true },
+            { name: "vacant land" },
+            { name: "farm" },
+            { name: "commercial" },
+            { name: "industrial" }
+          ]}
+          alternate={false}
+          btnContent="Search"
+          width="100%"
+          agent
+        />
         <div style={{ width: "100%", overflowX: "scroll" }}>
           <table className={styles.table} cellSpacing="0">
             <thead>
