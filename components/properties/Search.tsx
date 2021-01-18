@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/properties.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
-import RangeComponent from "../Homepage/Header/RangeComponent";
 
 const Search = () => {
   const [name, setName] = useState<string>("");
@@ -26,6 +25,47 @@ const Search = () => {
     if (searchDiv.current && !searchDiv.current.contains(e.target)) {
       setName("");
     }
+  };
+  const onSubmit = () => {
+    const search = {} as {
+      bedrooms: number;
+      bathrooms: number;
+      minPrice: number;
+      maxPrice: number;
+      location: string;
+      type: string;
+    };
+    if (bedroomSelection) {
+      search.bedrooms = parseInt(bedroomSelection.split("+ ")[0]);
+    }
+    if (bathroomSelection) {
+      search.bathrooms = parseInt(bathroomSelection.split("+ ")[0]);
+    }
+    if (input.min) {
+      search.minPrice = parseInt(input.min);
+    }
+    if (input.max) {
+      search.maxPrice = parseInt(input.max);
+    }
+    if (selected) {
+      search.type = selected;
+    }
+    if (citySelection) {
+      search.location = citySelection;
+    }
+    if (
+      search.maxPrice &&
+      search.minPrice &&
+      search.minPrice > search.maxPrice
+    ) {
+      const greaterPrice = search.minPrice;
+      search.minPrice = search.maxPrice;
+      search.maxPrice = greaterPrice;
+    }
+    if (search.type === "buy") {
+      search.type = "sale";
+    }
+    console.log(search);
   };
   return (
     <div>
@@ -129,7 +169,13 @@ const Search = () => {
             value={input.max}
           />
         </div>
-        <button className={styles.property_btn}>Search Property</button>
+        <button
+          className={styles.property_btn}
+          type="submit"
+          onClick={onSubmit}
+        >
+          Search Property
+        </button>
       </div>
     </div>
   );
