@@ -17,6 +17,10 @@ const HouseFilter: React.FC<Props> = props => {
   const [openSub, setOpenSub] = useState<string>("");
   const [selection, setSelection] = useState<string>("");
   const [focus, setFocus] = useState<"min" | "max" | null>(null);
+  const [input, setInput] = useState<{ min: string; max: string }>({
+    min: "",
+    max: ""
+  });
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -76,7 +80,9 @@ const HouseFilter: React.FC<Props> = props => {
           />
           <input type="text" placeholder="Search for a City, Town or Surbub" />
           <div
-            className={`${styles.min} ${focus === "min" ? styles.focused : ""}`}
+            className={`${styles.min} ${
+              focus === "min" || input.min.length !== 0 ? styles.focused : ""
+            }`}
           >
             <label htmlFor="min">min price</label>
             <input
@@ -85,10 +91,16 @@ const HouseFilter: React.FC<Props> = props => {
               onFocus={() => setFocus("min")}
               name="min"
               id="min"
+              onChange={e =>
+                setInput({ ...input, [e.target.name]: e.target.value })
+              }
+              value={input.min}
             />
           </div>
           <div
-            className={`${styles.max} ${focus === "max" ? styles.focused : ""}`}
+            className={`${styles.max} ${
+              focus === "max" || input.max.length !== 0 ? styles.focused : ""
+            }`}
           >
             <label htmlFor="max">max price</label>
             <input
@@ -97,6 +109,10 @@ const HouseFilter: React.FC<Props> = props => {
               id="max"
               onBlur={() => setFocus(null)}
               onFocus={() => setFocus("max")}
+              onChange={e =>
+                setInput({ ...input, [e.target.name]: e.target.value })
+              }
+              value={input.max}
             />
           </div>
         </div>

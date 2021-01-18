@@ -9,6 +9,11 @@ const Search = () => {
   const [citySelection, setCitySelection] = useState<string>("");
   const [bedroomSelection, setBedroomSelection] = useState<string>("");
   const [bathroomSelection, setBathroomSelection] = useState<string>("");
+  const [focus, setFocus] = useState<"min" | "max" | null>(null);
+  const [input, setInput] = useState<{ min: string; max: string }>({
+    min: "",
+    max: ""
+  });
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -88,7 +93,42 @@ const Search = () => {
             setSelection={setBathroomSelection}
           />
         </div>
-        <RangeComponent className="properties" />
+        <div
+          className={`${styles.min} ${
+            focus === "min" || input.min.length !== 0 ? styles.focused : ""
+          }`}
+        >
+          <label htmlFor="min">min price</label>
+          <input
+            type="number"
+            onBlur={() => setFocus(null)}
+            onFocus={() => setFocus("min")}
+            name="min"
+            id="min"
+            onChange={e =>
+              setInput({ ...input, [e.target.name]: e.target.value })
+            }
+            value={input.min}
+          />
+        </div>
+        <div
+          className={`${styles.max} ${
+            focus === "max" || input.max.length !== 0 ? styles.focused : ""
+          }`}
+        >
+          <label htmlFor="max">max price</label>
+          <input
+            type="number"
+            name="max"
+            id="max"
+            onBlur={() => setFocus(null)}
+            onFocus={() => setFocus("max")}
+            onChange={e =>
+              setInput({ ...input, [e.target.name]: e.target.value })
+            }
+            value={input.max}
+          />
+        </div>
         <button className={styles.property_btn}>Search Property</button>
       </div>
     </div>
