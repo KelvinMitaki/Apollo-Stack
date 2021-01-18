@@ -92,8 +92,28 @@ export const FILTER_PROPERTIES = gql`
   }
 `;
 export const FETCH_PROPERTIES_COUNT = gql`
-  query FilterPropertiesCount($filter: String!) {
-    filterPropertiesCount(filter: $filter) {
+  query FilterPropertiesCount(
+    $filter: String
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+  ) {
+    filterPropertiesCount(
+      filter: $filter
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+      }
+    ) {
       count
     }
   }
@@ -172,32 +192,6 @@ export const SEARCH_PROPERTY = gql`
       bedrooms
       bathrooms
       parkingLots
-    }
-  }
-`;
-
-export const SEARCH_PROPERTY_COUNT = gql`
-  query SearchPropertyCount(
-    $type: String
-    $category: String
-    $location: String
-    $minPrice: Int
-    $maxPrice: Int
-    $bedrooms: Int
-    $bathrooms: Int
-  ) {
-    searchPropertyCount(
-      values: {
-        type: $type
-        category: $category
-        location: $location
-        minPrice: $minPrice
-        maxPrice: $maxPrice
-        bedrooms: $bedrooms
-        bathrooms: $bathrooms
-      }
-    ) {
-      count
     }
   }
 `;
