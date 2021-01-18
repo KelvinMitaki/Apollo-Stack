@@ -135,3 +135,69 @@ export const AGENT_PROPERTY_COUNT = gql`
     }
   }
 `;
+
+export const SEARCH_PROPERTY = gql`
+  query SearchProperty(
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+    $offset: Int!
+    $limit: Int!
+  ) {
+    searchProperty(
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+      }
+      offset: $offset
+      limit: $limit
+    ) {
+      _id
+      images
+      type
+      price
+      streetAddress
+      location
+      description
+      plinthArea
+      bedrooms
+      bathrooms
+      parkingLots
+    }
+  }
+`;
+
+export const SEARCH_PROPERTY_COUNT = gql`
+  query SearchPropertyCount(
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+  ) {
+    searchPropertyCount(
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+      }
+    ) {
+      count
+    }
+  }
+`;
