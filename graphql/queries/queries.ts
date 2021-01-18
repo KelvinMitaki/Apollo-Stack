@@ -156,8 +156,8 @@ export const AGENT_PROPERTY_COUNT = gql`
   }
 `;
 
-export const SEARCH_PROPERTY = gql`
-  query SearchProperty(
+export const SEARCH_PROPERTIES = gql`
+  query SearchProperties(
     $type: String
     $category: String
     $location: String
@@ -168,7 +168,7 @@ export const SEARCH_PROPERTY = gql`
     $offset: Int!
     $limit: Int!
   ) {
-    searchProperty(
+    searchProperties(
       values: {
         type: $type
         category: $category

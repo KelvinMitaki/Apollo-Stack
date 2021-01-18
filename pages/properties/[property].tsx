@@ -8,9 +8,10 @@ import { NextPage } from "next";
 import { initializeApollo } from "../../apollo";
 import {
   FETCH_PROPERTIES_COUNT,
-  FILTER_PROPERTIES
+  FILTER_PROPERTIES,
+  SEARCH_PROPERTIES
 } from "../../graphql/queries/queries";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import Loading from "../../components/loading/Loading";
 
 const property: NextPage<{
@@ -38,11 +39,27 @@ const property: NextPage<{
     fetchPolicy: "cache-only",
     variables: { filter: props.variables.filter }
   });
+  const [searchProperty, arg] = useLazyQuery(SEARCH_PROPERTIES, {
+    onError(err) {
+      console.log("SEARCH_PROPERTIES", err);
+    }
+  });
+  const [fetchPropertiesCount, args] = useLazyQuery(FETCH_PROPERTIES_COUNT, {
+    onError(err) {
+      console.log("FETCH_PROPERTIES_COUNT", err);
+    }
+  });
+  console.log(arg.data);
   return (
     <Layout title="Properties">
       <div className={styles.container}>
         {loading && <Loading />}
-        <Search />
+        <Search
+          loading={arg.loading}
+          args={args}
+          fetchPropertiesCount={fetchPropertiesCount}
+          searchProperty={searchProperty}
+        />
         <Property
           properties={data.filterProperties}
           count={countData.data.filterPropertiesCount.count}

@@ -1,14 +1,22 @@
-import { useLazyQuery } from "@apollo/client";
+import { LazyQueryResult, QueryLazyOptions } from "@apollo/client";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  FETCH_PROPERTIES_COUNT,
-  SEARCH_PROPERTY
-} from "../../graphql/queries/queries";
 import styles from "../../styles/properties.module.css";
 import Dropdown from "../Homepage/Header/Dropdown";
 import Loading from "../loading/Loading";
 
-const Search = () => {
+interface Props {
+  loading: boolean;
+  args: LazyQueryResult<any, Record<string, any>>;
+  searchProperty: (
+    options?: QueryLazyOptions<Record<string, any>> | undefined
+  ) => void;
+  fetchPropertiesCount: (
+    options?: QueryLazyOptions<Record<string, any>> | undefined
+  ) => void;
+}
+
+const Search: React.FC<Props> = props => {
+  const { loading, args, searchProperty, fetchPropertiesCount } = props;
   const [name, setName] = useState<string>("");
   const [selected, setSelected] = useState<string>("buy");
   const [citySelection, setCitySelection] = useState<string>("");
@@ -20,17 +28,6 @@ const Search = () => {
     max: ""
   });
   const searchDiv = useRef<HTMLDivElement>(null);
-  const [searchProperty, { loading }] = useLazyQuery(SEARCH_PROPERTY, {
-    onError(err) {
-      console.log("SEARCH_PROPERTY", err);
-    }
-  });
-  const [fetchPropertiesCount, args] = useLazyQuery(FETCH_PROPERTIES_COUNT, {
-    onError(err) {
-      console.log("FETCH_PROPERTIES_COUNT", err);
-    }
-  });
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -81,6 +78,9 @@ const Search = () => {
     }
     if (search.type === "buy") {
       search.type = "sale";
+    }
+    if (search.type === "sell") {
+      search.type = "rent";
     }
     fetchPropertiesCount({ variables: search });
     searchProperty({ variables: { ...search, offset: 0, limit: 10 } });
