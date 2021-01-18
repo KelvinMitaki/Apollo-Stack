@@ -40,7 +40,6 @@ const HouseFilter: React.FC<Props> = props => {
       setName("");
     }
   };
-  console.log("name", name);
   return (
     <div
       className={`${styles.search} ${
@@ -129,7 +128,7 @@ const HouseFilter: React.FC<Props> = props => {
               onClick={e => setName("category")}
               style={{ height: "100%", width: "100%" }}
             >
-              <p>category</p>
+              <p>{category || "category"}</p>
               <IoIosArrowDown size="2rem" className={styles.IoIosArrowDown} />
             </div>
             <div className={styles.dropdown}>
@@ -138,17 +137,29 @@ const HouseFilter: React.FC<Props> = props => {
                   className={`${cat.subCats ? styles.dropdown_2 : ""} ${
                     openSub === cat.name ? styles.openSub : styles.closeSub
                   }`}
-                  onClick={() => cat.subCats && setOpenSub(cat.name)}
+                  onClick={() => {
+                    cat.subCats && setOpenSub(cat.name);
+                    if (!cat.subCats) {
+                      setCategory(cat.name);
+                    }
+                  }}
                   key={cat.name}
                 >
-                  <div className={!cat.subCats ? styles.no_sub : ""}>
+                  <div
+                    className={!cat.subCats ? styles.no_sub : ""}
+                    onClick={() => cat.subCats && setName("category")}
+                  >
                     <p>{cat.name}</p>
                     {cat.subCats && <IoIosArrowDown size="2rem" />}
                   </div>
                   {cat.subCats && (
                     <div className={styles.subcats}>
-                      <span>furnished</span>
-                      <span>unfurnished</span>
+                      <span onClick={() => setCategory(`${cat.name}: FUR`)}>
+                        furnished
+                      </span>
+                      <span onClick={() => setCategory(`${cat.name}: UNFUR`)}>
+                        unfurnished
+                      </span>
                     </div>
                   )}
                 </div>
