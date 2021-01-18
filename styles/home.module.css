@@ -122,6 +122,7 @@
   height: 6rem;
   justify-content: center !important;
   cursor: default;
+  position: relative;
 }
 .min input,
 .max input {
@@ -136,13 +137,20 @@
   align-self: flex-start;
   padding-left: 1rem;
   transition: all 0.2s;
-  transform: translateY(3rem);
+  transform: translateY(1rem);
   position: relative;
   z-index: 1;
 }
+.min > *,
+.max > * {
+  position: absolute !important;
+  top: 1.5rem;
+  left: 0;
+}
 .focused label {
-  transform: translateY(0);
+  transform: translateY(-2rem);
   font-weight: 600;
+  padding-left: 0;
 }
 .open .IoIosArrowDown {
   transition: all 0.2s;
@@ -263,7 +271,7 @@
     height: max-content;
   }
   .search_body {
-    height: 45rem;
+    height: 50rem;
   }
   .upper {
     grid-template-columns: 1fr;
