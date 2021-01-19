@@ -88,7 +88,6 @@ const listings: NextPage = () => {
   if (nums.find(num => num < 1)) {
     nums = nums.filter(num => num > 0);
   }
-  console.log(args1.data);
   return (
     <Layout title="Listings">
       {loading && <Loading />}
