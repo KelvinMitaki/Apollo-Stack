@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillAlert, AiOutlineSearch } from "react-icons/ai";
 import { BsHouseFill } from "react-icons/bs";
@@ -106,7 +107,10 @@ const HouseFilter: React.FC<Props> = props => {
     if (query[query.length - 1] === "&") {
       query = query.slice(0, -1);
     }
-    console.log(query);
+    // console.log(query);
+    if (search.type) {
+      Router.push(`/properties/${search.type}${query}`);
+    }
   };
   return (
     <div

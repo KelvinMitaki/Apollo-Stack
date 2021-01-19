@@ -77,6 +77,8 @@ const property: NextPage<{
           count={
             args.data && fetchType === "sidebar"
               ? args.data.filterPropertiesCount.count
+              : countData.data === undefined
+              ? 0
               : countData.data.filterPropertiesCount.count
           }
           fetchMore={
@@ -94,11 +96,37 @@ const property: NextPage<{
 };
 
 property.getInitialProps = async ctx => {
-  console.log(ctx.query);
+  // console.log(ctx.query);
+  const query = {} as typeof ctx.query;
+  for (let prop in ctx.query) {
+    query[prop] = ctx.query[prop];
+    if (
+      (ctx.query[prop] as string).trim() !== "" &&
+      !isNaN(parseInt(ctx.query[prop] as string))
+    ) {
+      // @ts-ignore
+      query[prop] = parseInt(ctx.query[prop]);
+    }
+    if (ctx.query[prop] === "true") {
+      // @ts-ignore
+      query[prop] = true;
+    }
+    if (ctx.query[prop] === "false") {
+      // @ts-ignore
+      query[prop] = false;
+    }
+  }
   const apolloClient = initializeApollo();
   await apolloClient.query({
     query: FILTER_PROPERTIES,
-    variables: { filter: ctx.query.property, offset: 0, limit: 10 },
+    variables: {
+      filter: ctx.query.property,
+      offset: 0,
+      limit: 10,
+      // ...(Object.keys(query).length > 1 && {
+      ...query
+      // })
+    },
     context: {
       headers: {
         cookie: ctx.req?.headers.cookie
@@ -106,15 +134,22 @@ property.getInitialProps = async ctx => {
     },
     fetchPolicy: "network-only"
   });
-  await apolloClient.query({
+  const res = await apolloClient.query({
     query: FETCH_PROPERTIES_COUNT,
-    variables: { filter: ctx.query.property },
+    variables: {
+      filter: ctx.query.property,
+      // ...(Object.keys(query).length > 1 && {
+      ...query
+      //  })
+    },
     context: {
       headers: {
         cookie: ctx.req?.headers.cookie
       }
-    }
+    },
+    fetchPolicy: "network-only"
   });
+  // console.log(res.data);
   return {
     initialApolloState: apolloClient.cache.extract(),
     variables: { filter: ctx.query.property }
