@@ -90,7 +90,7 @@ const listings: NextPage = () => {
   }
   return (
     <Layout title="Listings">
-      {loading && <Loading />}
+      {(loading || args.loading || args1.loading) && <Loading />}
       <div className={styles.container}>
         <div ref={scrollDiv}></div>
         <HouseFilter
