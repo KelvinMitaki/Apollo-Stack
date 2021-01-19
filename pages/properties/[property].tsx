@@ -94,6 +94,7 @@ const property: NextPage<{
 };
 
 property.getInitialProps = async ctx => {
+  console.log(ctx.query);
   const apolloClient = initializeApollo();
   await apolloClient.query({
     query: FILTER_PROPERTIES,

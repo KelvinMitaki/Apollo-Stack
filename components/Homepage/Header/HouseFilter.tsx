@@ -95,6 +95,18 @@ const HouseFilter: React.FC<Props> = props => {
       search.maxPrice = greaterPrice;
     }
     console.log(search);
+    let query = "";
+    for (let prop in search) {
+      query = query.includes("?")
+        ? // @ts-ignore
+          `${query}${prop}=${search[prop]}&`
+        : // @ts-ignore
+          `${query}?${prop}=${search[prop]}&`;
+    }
+    if (query[query.length - 1] === "&") {
+      query = query.slice(0, -1);
+    }
+    console.log(query);
   };
   return (
     <div
