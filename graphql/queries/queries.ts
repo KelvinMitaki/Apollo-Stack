@@ -30,6 +30,7 @@ export const FETCH_AGENT_PROPERTIES = gql`
     $maxPrice: Int
     $bedrooms: Int
     $bathrooms: Int
+    $furnished: Boolean
     $offset: Int!
     $limit: Int!
   ) {
@@ -42,6 +43,7 @@ export const FETCH_AGENT_PROPERTIES = gql`
         maxPrice: $maxPrice
         bedrooms: $bedrooms
         bathrooms: $bathrooms
+        furnished: $furnished
       }
       offset: $offset
       limit: $limit
@@ -106,6 +108,7 @@ export const FILTER_PROPERTIES = gql`
     $maxPrice: Int
     $bedrooms: Int
     $bathrooms: Int
+    $furnished: Boolean
     $offset: Int!
     $limit: Int!
   ) {
@@ -119,6 +122,7 @@ export const FILTER_PROPERTIES = gql`
         maxPrice: $maxPrice
         bedrooms: $bedrooms
         bathrooms: $bathrooms
+        furnished: $furnished
       }
       offset: $offset
       limit: $limit
@@ -147,6 +151,7 @@ export const FETCH_PROPERTIES_COUNT = gql`
     $maxPrice: Int
     $bedrooms: Int
     $bathrooms: Int
+    $furnished: Boolean
   ) {
     filterPropertiesCount(
       filter: $filter
@@ -158,6 +163,7 @@ export const FETCH_PROPERTIES_COUNT = gql`
         maxPrice: $maxPrice
         bedrooms: $bedrooms
         bathrooms: $bathrooms
+        furnished: $furnished
       }
     ) {
       count
@@ -203,6 +209,7 @@ export const AGENT_PROPERTY_COUNT = gql`
     $maxPrice: Int
     $bedrooms: Int
     $bathrooms: Int
+    $furnished: Boolean
   ) {
     agentPropertiesCount(
       values: {
@@ -213,6 +220,7 @@ export const AGENT_PROPERTY_COUNT = gql`
         maxPrice: $maxPrice
         bedrooms: $bedrooms
         bathrooms: $bathrooms
+        furnished: $furnished
       }
     ) {
       count
@@ -229,6 +237,7 @@ export const SEARCH_PROPERTIES = gql`
     $maxPrice: Int
     $bedrooms: Int
     $bathrooms: Int
+    $furnished: Boolean
     $offset: Int!
     $limit: Int!
   ) {
@@ -241,6 +250,7 @@ export const SEARCH_PROPERTIES = gql`
         maxPrice: $maxPrice
         bedrooms: $bedrooms
         bathrooms: $bathrooms
+        furnished: $furnished
       }
       offset: $offset
       limit: $limit

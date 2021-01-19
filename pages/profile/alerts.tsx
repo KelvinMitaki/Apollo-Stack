@@ -34,7 +34,7 @@ const alerts = () => {
             bathrooms={[1, 2, 3, 4, 5]}
             bedrooms={[1, 2, 3, 4, 5]}
             categories={[
-              { name: "apartement", subCats: true },
+              { name: "apartment", subCats: true },
               { name: "house", subCats: true },
               { name: "townhouse", subCats: true },
               { name: "vacant land" },

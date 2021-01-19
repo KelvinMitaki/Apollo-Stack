@@ -88,6 +88,7 @@ const listings: NextPage = () => {
   if (nums.find(num => num < 1)) {
     nums = nums.filter(num => num > 0);
   }
+  console.log(args1.data);
   return (
     <Layout title="Listings">
       {loading && <Loading />}
@@ -97,7 +98,7 @@ const listings: NextPage = () => {
           bathrooms={[1, 2, 3, 4, 5]}
           bedrooms={[1, 2, 3, 4, 5]}
           categories={[
-            { name: "apartement", subCats: true },
+            { name: "apartment", subCats: true },
             { name: "house", subCats: true },
             { name: "townhouse", subCats: true },
             { name: "vacant land" },
