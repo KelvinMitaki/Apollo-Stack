@@ -75,8 +75,32 @@ export const FETCH_AGENT_PROPERTY = gql`
 `;
 
 export const FILTER_PROPERTIES = gql`
-  query FilterProperties($filter: String!, $limit: Int!, $offset: Int!) {
-    filterProperties(filter: $filter, limit: $limit, offset: $offset) {
+  query FilterProperties(
+    $filter: String
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+    $offset: Int!
+    $limit: Int!
+  ) {
+    filterProperties(
+      filter: $filter
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+      }
+      offset: $offset
+      limit: $limit
+    ) {
       _id
       images
       type

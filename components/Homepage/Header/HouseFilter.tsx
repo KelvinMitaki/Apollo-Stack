@@ -49,7 +49,6 @@ const HouseFilter: React.FC<Props> = props => {
       maxPrice: number;
       location: string;
       category: string;
-
       type: string;
       furnished: boolean;
     };
