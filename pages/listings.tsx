@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { NextPage } from "next";
 import React, { useEffect, useRef, useState } from "react";
 import { initializeApollo } from "../apollo";
@@ -18,6 +18,10 @@ import styles from "../styles/listings.module.css";
 const listings: NextPage = () => {
   const [limit, setLimit] = useState<number>(10);
   const [skip, setSkip] = useState<number>(0);
+  const [filter, setFilter] = useState<{
+    [key: string]: string | number | boolean;
+  }>({});
+  const [selectedNum, setSelectedNum] = useState<number>(1);
   const scrollDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (scrollDiv.current) {
@@ -34,14 +38,34 @@ const listings: NextPage = () => {
       console.log(err.message);
     }
   });
-  // console.log({ skip });
-  // console.log({ limit });
   const countData = useQuery(AGENT_PROPERTY_COUNT, {
     fetchPolicy: "cache-only"
   });
-  const [selectedNum, setSelectedNum] = useState<number>(1);
+  const [fetchAgentProperties, args] = useLazyQuery(FETCH_AGENT_PROPERTIES, {
+    fetchPolicy: "network-only",
+    variables: { offset: skip, limit, ...filter },
+    onError(err) {
+      console.log(err);
+      console.log(err.graphQLErrors);
+      console.log(err.message);
+    }
+  });
+  const [agentPropertyCount, args1] = useLazyQuery(AGENT_PROPERTY_COUNT, {
+    fetchPolicy: "network-only",
+    variables: filter,
+    onError(err) {
+      console.log(err);
+      console.log(err.graphQLErrors);
+      console.log(err.message);
+    }
+  });
+
   let nums = [1, 2, 3, 4, 5, 6];
-  const lastPage = Math.ceil(countData.data.agentPropertiesCount.count / 10);
+  const lastPage = Math.ceil(
+    args1.data
+      ? args1.data.agentPropertiesCount.count / 10
+      : countData.data.agentPropertiesCount.count / 10
+  );
   if (selectedNum > 3) {
     nums = [
       selectedNum - 2,
@@ -64,7 +88,6 @@ const listings: NextPage = () => {
   if (nums.find(num => num < 1)) {
     nums = nums.filter(num => num > 0);
   }
-
   return (
     <Layout title="Listings">
       {loading && <Loading />}
@@ -87,6 +110,9 @@ const listings: NextPage = () => {
           width="100%"
           agent
           component="listings"
+          setFilter={setFilter}
+          fetchAgentProperties={fetchAgentProperties}
+          agentPropertyCount={agentPropertyCount}
         />
         <div style={{ width: "100%", overflowX: "scroll" }}>
           <table className={styles.table} cellSpacing="0">
@@ -128,20 +154,22 @@ const listings: NextPage = () => {
               </tr>
             </thead>
             <tbody>
-              {(data.fetchAgentProperties as ListingProperty[]).map(
-                (prop, i) => (
+              {(data.fetchAgentProperties as ListingProperty[])
+                .filter((p, i, s) => s.findIndex(pr => pr._id === p._id) === i)
+                .map((prop, i) => (
                   <Listing
                     key={prop._id}
                     {...prop}
                     className={`${i % 2 === 0 ? "active" : ""}`}
                   />
-                )
-              )}
+                ))}
             </tbody>
           </table>
-          {(data.fetchAgentProperties as ListingProperty[]).map(prop => (
-            <MobileListing key={prop._id} {...prop} />
-          ))}
+          {(data.fetchAgentProperties as ListingProperty[])
+            .filter((p, i, s) => s.findIndex(pr => pr._id === p._id) === i)
+            .map(prop => (
+              <MobileListing key={prop._id} {...prop} />
+            ))}
         </div>
         <Pagination
           setLimit={setLimit}

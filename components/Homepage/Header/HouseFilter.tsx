@@ -1,3 +1,4 @@
+import { QueryLazyOptions } from "@apollo/client";
 import Router from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillAlert, AiOutlineSearch } from "react-icons/ai";
@@ -15,6 +16,26 @@ interface Props {
   bathrooms: number[];
   categories: { name: string; subCats?: boolean }[];
   component: "header" | "expired" | "listings" | "alerts";
+  setFilter?: React.Dispatch<
+    React.SetStateAction<{
+      [key: string]: string | number | boolean;
+    }>
+  >;
+  fetchAgentProperties?: (
+    options?:
+      | QueryLazyOptions<{
+          offset: number;
+          limit: number;
+        }>
+      | undefined
+  ) => void;
+  agentPropertyCount?: (
+    options?:
+      | QueryLazyOptions<{
+          [key: string]: string | number | boolean;
+        }>
+      | undefined
+  ) => void;
 }
 
 const HouseFilter: React.FC<Props> = props => {
@@ -109,6 +130,17 @@ const HouseFilter: React.FC<Props> = props => {
     }
     if (search.type && props.component === "header") {
       Router.push(`/properties/${search.type}${query}`);
+    }
+    if (
+      search.type &&
+      props.component === "listings" &&
+      props.setFilter &&
+      props.fetchAgentProperties &&
+      props.agentPropertyCount
+    ) {
+      props.setFilter(search);
+      props.agentPropertyCount();
+      props.fetchAgentProperties();
     }
   };
   return (

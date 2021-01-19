@@ -195,8 +195,26 @@ export const FETCH_PROPERTY_DETAILS = gql`
 `;
 
 export const AGENT_PROPERTY_COUNT = gql`
-  query {
-    agentPropertiesCount {
+  query AgentPropertiesCount(
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+  ) {
+    agentPropertiesCount(
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+      }
+    ) {
       count
     }
   }

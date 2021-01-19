@@ -59,15 +59,19 @@ const createApolloClient = () =>
                 {
                   args: {
                     // @ts-ignore
-                    offset = 0
+                    offset = 0,
+                    ...props
                   }
                 }
               ) {
-                const merged = existing ? existing.slice(0) : [];
-                for (let i = 0; i < incoming.length; ++i) {
-                  merged[offset + i] = incoming[i];
+                if (!Object.values(props.values).find(val => !undefined)) {
+                  const merged = existing ? existing.slice(0) : [];
+                  for (let i = 0; i < incoming.length; ++i) {
+                    merged[offset + i] = incoming[i];
+                  }
+                  return merged;
                 }
-                return merged;
+                return incoming;
               },
               read(
                 existing: any[],
