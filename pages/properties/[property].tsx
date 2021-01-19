@@ -136,7 +136,6 @@ property.getInitialProps = async ctx => {
     },
     fetchPolicy: "network-only"
   });
-
   await apolloClient.query({
     query: FETCH_PROPERTIES_COUNT,
     variables: {

@@ -22,6 +22,8 @@ export interface Properties {
   bedrooms: number;
   bathrooms: number;
   parkingLots?: number;
+  furnished: boolean;
+  category: string;
 }
 interface Props {
   properties: Properties[];
