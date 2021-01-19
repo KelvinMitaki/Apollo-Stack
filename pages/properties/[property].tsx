@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Router from "next/router";
 import Search from "../../components/properties/Search";
-import Property from "../../components/properties/Properties";
+import Property, { Properties } from "../../components/properties/Properties";
 import styles from "../../styles/properties.module.css";
 import Layout from "../../components/Layout/Layout";
 import { NextPage } from "next";
@@ -46,7 +46,7 @@ const property: NextPage<{
   });
   const countData = useQuery(FETCH_PROPERTIES_COUNT, {
     fetchPolicy: "cache-only",
-    variables: { filter: props.variables.filter }
+    variables: { ...props.variables, filter: props.variables.filter }
   });
   let [searchProperty, args1] = useLazyQuery(SEARCH_PROPERTIES, {
     onError(err) {
@@ -56,7 +56,8 @@ const property: NextPage<{
   let [fetchPropertiesCount, args] = useLazyQuery(FETCH_PROPERTIES_COUNT, {
     onError(err) {
       console.log("FETCH_PROPERTIES_COUNT", err);
-    }
+    },
+    fetchPolicy: "network-only"
   });
   return (
     <Layout title="Properties">
@@ -71,8 +72,12 @@ const property: NextPage<{
         <Property
           properties={
             args1.data && fetchType === "sidebar"
-              ? args1.data.searchProperties
-              : data.filterProperties
+              ? (args1.data.searchProperties as Properties[]).filter(
+                  (p, i, s) => s.findIndex(pr => pr._id === p._id) === i
+                )
+              : (data.filterProperties as Properties[]).filter(
+                  (p, i, s) => s.findIndex(pr => pr._id === p._id) === i
+                )
           }
           count={
             args.data && fetchType === "sidebar"
@@ -96,7 +101,6 @@ const property: NextPage<{
 };
 
 property.getInitialProps = async ctx => {
-  // console.log(ctx.query);
   const query = {} as typeof ctx.query;
   for (let prop in ctx.query) {
     query[prop] = ctx.query[prop];
@@ -123,9 +127,7 @@ property.getInitialProps = async ctx => {
       filter: ctx.query.property,
       offset: 0,
       limit: 10,
-      // ...(Object.keys(query).length > 1 && {
       ...query
-      // })
     },
     context: {
       headers: {
@@ -134,13 +136,12 @@ property.getInitialProps = async ctx => {
     },
     fetchPolicy: "network-only"
   });
-  const res = await apolloClient.query({
+
+  await apolloClient.query({
     query: FETCH_PROPERTIES_COUNT,
     variables: {
       filter: ctx.query.property,
-      // ...(Object.keys(query).length > 1 && {
       ...query
-      //  })
     },
     context: {
       headers: {
@@ -149,10 +150,10 @@ property.getInitialProps = async ctx => {
     },
     fetchPolicy: "network-only"
   });
-  // console.log(res.data);
+
   return {
     initialApolloState: apolloClient.cache.extract(),
-    variables: { filter: ctx.query.property }
+    variables: { filter: ctx.query.property, ...query }
   };
 };
 

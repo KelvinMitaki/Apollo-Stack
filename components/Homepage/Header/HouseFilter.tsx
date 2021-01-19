@@ -95,7 +95,6 @@ const HouseFilter: React.FC<Props> = props => {
       search.minPrice = search.maxPrice;
       search.maxPrice = greaterPrice;
     }
-    console.log(search);
     let query = "";
     for (let prop in search) {
       query = query.includes("?")
@@ -107,7 +106,6 @@ const HouseFilter: React.FC<Props> = props => {
     if (query[query.length - 1] === "&") {
       query = query.slice(0, -1);
     }
-    // console.log(query);
     if (search.type) {
       Router.push(`/properties/${search.type}${query}`);
     }
