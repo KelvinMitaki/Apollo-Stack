@@ -43,6 +43,7 @@ const expired = () => {
           btnContent="Search"
           width="100%"
           agent
+          component="expired"
         />
         <div style={{ width: "100%" }}>
           <table className={styles.exp_table} cellSpacing="0">

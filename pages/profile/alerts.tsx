@@ -45,6 +45,7 @@ const alerts = () => {
             alternate
             btnContent="Add Alert"
             width={`${num?.toString()}vw` || "60vw"}
+            component="alerts"
           />
           <SavedAlerts />
         </div>

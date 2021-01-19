@@ -86,6 +86,7 @@ const listings: NextPage = () => {
           btnContent="Search"
           width="100%"
           agent
+          component="listings"
         />
         <div style={{ width: "100%", overflowX: "scroll" }}>
           <table className={styles.table} cellSpacing="0">

@@ -20,6 +20,7 @@ const Header = () => {
         alternate={false}
         btnContent="Search"
         width="90vw"
+        component="header"
       />
     </div>
   );

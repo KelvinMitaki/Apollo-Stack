@@ -22,8 +22,30 @@ export const LOGOUT_USER = gql`
 `;
 
 export const FETCH_AGENT_PROPERTIES = gql`
-  query FetchAgentProperties($offset: Int!, $limit: Int!) {
-    fetchAgentProperties(offset: $offset, limit: $limit) {
+  query FetchAgentProperties(
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+    $offset: Int!
+    $limit: Int!
+  ) {
+    fetchAgentProperties(
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+      }
+      offset: $offset
+      limit: $limit
+    ) {
       _id
       reference
       images

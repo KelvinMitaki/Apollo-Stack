@@ -14,6 +14,7 @@ interface Props {
   bedrooms: number[];
   bathrooms: number[];
   categories: { name: string; subCats?: boolean }[];
+  component: "header" | "expired" | "listings" | "alerts";
 }
 
 const HouseFilter: React.FC<Props> = props => {
@@ -106,7 +107,7 @@ const HouseFilter: React.FC<Props> = props => {
     if (query[query.length - 1] === "&") {
       query = query.slice(0, -1);
     }
-    if (search.type) {
+    if (search.type && props.component === "header") {
       Router.push(`/properties/${search.type}${query}`);
     }
   };
