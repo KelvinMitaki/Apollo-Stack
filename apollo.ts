@@ -86,6 +86,41 @@ const createApolloClient = () =>
               ) {
                 return existing && existing.slice(offset, offset + limit);
               }
+            },
+            fetchExpiredListings: {
+              merge(
+                existing,
+                incoming,
+                {
+                  args: {
+                    // @ts-ignore
+                    offset = 0,
+                    ...props
+                  }
+                }
+              ) {
+                if (!Object.values(props.values).find(val => !undefined)) {
+                  const merged = existing ? existing.slice(0) : [];
+                  for (let i = 0; i < incoming.length; ++i) {
+                    merged[offset + i] = incoming[i];
+                  }
+                  return merged;
+                }
+                return incoming;
+              },
+              read(
+                existing: any[],
+                {
+                  args: {
+                    // @ts-ignore
+                    offset = 0,
+                    // @ts-ignore
+                    limit = existing?.length
+                  } = {}
+                }
+              ) {
+                return existing && existing.slice(offset, offset + limit);
+              }
             }
           }
         }
