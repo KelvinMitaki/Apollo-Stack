@@ -36,6 +36,14 @@ interface Props {
         }>
       | undefined
   ) => void;
+  fetchExpiredListings?: (
+    options?: QueryLazyOptions<Record<string, any>> | undefined
+  ) => void;
+  expiredListingsCount?: (
+    options?: QueryLazyOptions<Record<string, any>> | undefined
+  ) => void;
+  offset?: number;
+  limit?: number;
 }
 
 const HouseFilter: React.FC<Props> = props => {
@@ -141,6 +149,19 @@ const HouseFilter: React.FC<Props> = props => {
       props.setFilter(search);
       props.agentPropertyCount();
       props.fetchAgentProperties();
+    }
+    if (
+      search.type &&
+      props.component === "expired" &&
+      props.fetchExpiredListings &&
+      props.expiredListingsCount &&
+      typeof props.offset === "number" &&
+      typeof props.limit === "number"
+    ) {
+      props.fetchExpiredListings({
+        variables: { ...search, offset: props.offset, limit: props.limit }
+      });
+      props.expiredListingsCount({ variables: search });
     }
   };
   return (

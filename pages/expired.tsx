@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import { BiCheck } from "react-icons/bi";
@@ -33,6 +33,12 @@ const expired: NextPage = () => {
     fetchPolicy: "cache-only",
     notifyOnNetworkStatusChange: true
   });
+  const [fetchExpiredListings, args] = useLazyQuery(FETCH_EXPIRED_LISTINGS, {
+    fetchPolicy: "network-only"
+  });
+  const [expiredListingsCount, args1] = useLazyQuery(EXPIRED_LISTINGS_COUNT, {
+    fetchPolicy: "network-only"
+  });
   let nums = [1, 2, 3, 4, 5, 6];
   const lastPage = Math.ceil(
     // args1.data
@@ -65,7 +71,9 @@ const expired: NextPage = () => {
   return (
     <Layout title="Expired Listings">
       <div className={styles.container}>
-        {(loading || countData.loading) && <Loading />}
+        {(loading || countData.loading || args.loading || args1.loading) && (
+          <Loading />
+        )}
         <div className={styles.action_btns}>
           <button disabled={!checkExpired}>extend expiry date</button>
           <button disabled={!checkExpired}>mark as sold / rented</button>
@@ -88,6 +96,10 @@ const expired: NextPage = () => {
           width="100%"
           agent
           component="expired"
+          expiredListingsCount={expiredListingsCount}
+          fetchExpiredListings={fetchExpiredListings}
+          offset={skip}
+          limit={limit}
         />
         <div style={{ width: "100%" }}>
           <table className={styles.exp_table} cellSpacing="0">
