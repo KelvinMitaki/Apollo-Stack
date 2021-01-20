@@ -6,6 +6,7 @@ import styles from "../../styles/listings.module.css";
 interface Props {
   className?: string;
   checked: boolean;
+  setCheckExpired: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ExpiredListing: React.FC<Props> = props => {
@@ -13,6 +14,9 @@ const ExpiredListing: React.FC<Props> = props => {
   useEffect(() => {
     setCheck(props.checked);
   }, [props.checked]);
+  useEffect(() => {
+    props.setCheckExpired(check);
+  }, [check]);
   return (
     <tr
       className={`${styles.listing} ${

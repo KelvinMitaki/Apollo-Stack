@@ -10,6 +10,8 @@ import styles from "../styles/listings.module.css";
 
 const expired = () => {
   const [check, setCheck] = useState<boolean>(false);
+  const [checkExpired, setCheckExpired] = useState<boolean>(false);
+
   const listings = [];
   for (let i = 0; i < 50; i++) {
     listings.push(
@@ -17,6 +19,7 @@ const expired = () => {
         key={i}
         className={`${i % 2 === 0 ? "active" : ""}`}
         checked={check}
+        setCheckExpired={setCheckExpired}
       />
     );
   }
@@ -25,8 +28,13 @@ const expired = () => {
     mobileListings.push(<ExpiredMobileListing key={i} />);
   }
   return (
-    <Layout title="Listings">
+    <Layout title="Expired Listings">
       <div className={styles.container}>
+        <div className={styles.action_btns}>
+          <button disabled={!checkExpired}>extend expiry date</button>
+          <button disabled={!checkExpired}>mark as sold / rented</button>
+          <button disabled={!checkExpired}>withdraw listings</button>
+        </div>
         <HouseFilter
           bathrooms={[1, 2, 3, 4, 5]}
           bedrooms={[1, 2, 3, 4, 5]}

@@ -147,6 +147,51 @@
   opacity: 1;
   visibility: visible;
 }
+.action_btns {
+  margin-bottom: 2rem;
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.action_btns button {
+  height: 3.5rem;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #f2f4f5;
+  border-radius: 0.3rem;
+}
+
+.action_btns button:first-child {
+  background-color: rgba(1, 2, 78, 0.76);
+}
+.action_btns button:nth-child(2) {
+  background-color: rgb(51, 51, 51);
+}
+.action_btns button:last-child {
+  background-color: rgb(207, 33, 15);
+}
+.action_btns button:disabled {
+  cursor: not-allowed;
+}
+.action_btns button:first-child:hover {
+  background-color: rgba(1, 2, 78);
+}
+.action_btns button:nth-child(2):hover {
+  background-color: rgb(36, 35, 35);
+}
+.action_btns button:last-child:hover {
+  background-color: #9f190c;
+}
+.action_btns button:first-child:disabled {
+  background-color: rgba(1, 2, 78, 0.5);
+}
+.action_btns button:nth-child(2):disabled {
+  background-color: rgba(51, 51, 51, 0.5);
+}
+.action_btns button:last-child:disabled {
+  background-color: rgba(207, 33, 15, 0.5);
+}
 @media only screen and (max-width: 1024px) {
   .MobileListing {
     display: block;
