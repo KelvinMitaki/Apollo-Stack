@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { BiCheck } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { initializeApollo } from "../apollo";
 import ExpiredListing from "../components/Expired/ExpiredListing";
 import ExpiredMobileListing from "../components/Expired/ExpiredMobileListing";
@@ -20,6 +20,7 @@ import {
   FETCH_EXPIRED_LISTINGS
 } from "../graphql/queries/queries";
 import withAgent from "../HOCs/withAgent";
+import { Redux } from "../interfaces/Redux";
 import { ActionTypes } from "../redux/types/types";
 import styles from "../styles/listings.module.css";
 
@@ -31,6 +32,9 @@ const expired: NextPage = () => {
   const [checkExpired, setCheckExpired] = useState<
     { _id: string; type: string }[]
   >([]);
+  const expiredListingsModal = useSelector(
+    (state: Redux) => state.styling.expiredListingsModal
+  );
   const dispatch = useDispatch();
   const { data, fetchMore, loading } = useQuery(FETCH_EXPIRED_LISTINGS, {
     fetchPolicy: "cache-only",
@@ -96,14 +100,23 @@ const expired: NextPage = () => {
         {(loading || countData.loading || args.loading || args1.loading) && (
           <Loading />
         )}
-        <ExpiredListingsModalComponent content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat suscipit a quis sed perspiciatis similique, repellat nobis officiis labore. Est, quod. Asperiores impedit expedita accusamus neque praesentium officiis, ad enim!" />
+        <ExpiredListingsModalComponent
+          content={`${
+            expiredListingsModal === "expiry"
+              ? "The selected listing(s) will be reactivated and have their expiry date set to 6 months from today, do you wish to proceed?"
+              : expiredListingsModal === "mark"
+              ? "The selected listing(s) will be marked as Sold/Rented, do you wish to proceed?"
+              : "The selected listing(s) will be marked as Withdrawn, do you wish to proceed?"
+          }`}
+          checkExpired={checkExpired}
+        />
         <div className={styles.action_btns}>
           <button
             disabled={checkExpired.length === 0}
             onClick={() =>
               dispatch<ExpiredListingsModal>({
                 type: ActionTypes.expiredListingsModal,
-                payload: true
+                payload: "expiry"
               })
             }
           >
@@ -114,7 +127,7 @@ const expired: NextPage = () => {
             onClick={() =>
               dispatch<ExpiredListingsModal>({
                 type: ActionTypes.expiredListingsModal,
-                payload: true
+                payload: "mark"
               })
             }
           >
@@ -125,7 +138,7 @@ const expired: NextPage = () => {
             onClick={() =>
               dispatch<ExpiredListingsModal>({
                 type: ActionTypes.expiredListingsModal,
-                payload: true
+                payload: "withdraw"
               })
             }
           >

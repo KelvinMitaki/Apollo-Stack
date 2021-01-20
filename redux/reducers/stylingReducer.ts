@@ -12,7 +12,7 @@ export interface StylingState {
   toggleLogin: boolean;
   toggleLoginHeader: "register" | "login" | "agent";
   fetchType: "header" | "sidebar";
-  expiredListingsModal: boolean;
+  expiredListingsModal: "expiry" | "mark" | "withdraw" | null;
 }
 
 const INITIAL_STATE: StylingState = {
@@ -20,7 +20,7 @@ const INITIAL_STATE: StylingState = {
   toggleLogin: false,
   toggleLoginHeader: "login",
   fetchType: "header",
-  expiredListingsModal: false
+  expiredListingsModal: null
 };
 
 type Action =
