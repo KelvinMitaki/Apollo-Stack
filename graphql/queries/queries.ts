@@ -312,3 +312,29 @@ export const FETCH_EXPIRED_LISTINGS = gql`
     }
   }
 `;
+
+export const EXPIRED_LISTINGS_COUNT = gql`
+  query ExpiredListingsCount(
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+  ) {
+    expiredListingsCount(
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+      }
+    ) {
+      count
+    }
+  }
+`;
