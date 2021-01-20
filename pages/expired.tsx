@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { BiCheck } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi";
+import { useDispatch } from "react-redux";
 import { initializeApollo } from "../apollo";
 import ExpiredListing from "../components/Expired/ExpiredListing";
 import ExpiredMobileListing from "../components/Expired/ExpiredMobileListing";
@@ -10,13 +11,16 @@ import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import { ListingProperty } from "../components/listings/Listing";
 import Loading from "../components/loading/Loading";
-import ExpiredListingsModal from "../components/modals/ExpiredListingsModal";
+import ExpiredListingsModalComponent, {
+  ExpiredListingsModal
+} from "../components/modals/ExpiredListingsModal";
 import Pagination from "../components/properties/Pagination";
 import {
   EXPIRED_LISTINGS_COUNT,
   FETCH_EXPIRED_LISTINGS
 } from "../graphql/queries/queries";
 import withAgent from "../HOCs/withAgent";
+import { ActionTypes } from "../redux/types/types";
 import styles from "../styles/listings.module.css";
 
 const expired: NextPage = () => {
@@ -27,6 +31,7 @@ const expired: NextPage = () => {
   const [checkExpired, setCheckExpired] = useState<
     { _id: string; type: string }[]
   >([]);
+  const dispatch = useDispatch();
   const { data, fetchMore, loading } = useQuery(FETCH_EXPIRED_LISTINGS, {
     fetchPolicy: "cache-only",
     notifyOnNetworkStatusChange: true,
@@ -91,15 +96,39 @@ const expired: NextPage = () => {
         {(loading || countData.loading || args.loading || args1.loading) && (
           <Loading />
         )}
-        <ExpiredListingsModal content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat suscipit a quis sed perspiciatis similique, repellat nobis officiis labore. Est, quod. Asperiores impedit expedita accusamus neque praesentium officiis, ad enim!" />
+        <ExpiredListingsModalComponent content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat suscipit a quis sed perspiciatis similique, repellat nobis officiis labore. Est, quod. Asperiores impedit expedita accusamus neque praesentium officiis, ad enim!" />
         <div className={styles.action_btns}>
-          <button disabled={checkExpired.length === 0}>
+          <button
+            disabled={checkExpired.length === 0}
+            onClick={() =>
+              dispatch<ExpiredListingsModal>({
+                type: ActionTypes.expiredListingsModal,
+                payload: true
+              })
+            }
+          >
             extend expiry date
           </button>
-          <button disabled={checkExpired.length === 0}>
+          <button
+            disabled={checkExpired.length === 0}
+            onClick={() =>
+              dispatch<ExpiredListingsModal>({
+                type: ActionTypes.expiredListingsModal,
+                payload: true
+              })
+            }
+          >
             mark as sold / rented
           </button>
-          <button disabled={checkExpired.length === 0}>
+          <button
+            disabled={checkExpired.length === 0}
+            onClick={() =>
+              dispatch<ExpiredListingsModal>({
+                type: ActionTypes.expiredListingsModal,
+                payload: true
+              })
+            }
+          >
             withdraw listings
           </button>
         </div>
