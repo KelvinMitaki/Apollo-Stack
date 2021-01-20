@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/listings.module.css";
 import Router from "next/router";
+import { format } from "date-fns";
 
 interface Props {
   className?: string;
@@ -46,7 +47,7 @@ const Listing: React.FC<Props & ListingProperty> = props => {
       <td>
         {new Date(props.expiryDate) > new Date() ? props.status : "expired"}
       </td>
-      <td>{new Date(props.updatedAt).toLocaleDateString()}</td>
+      <td>{format(new Date(props.updatedAt), "dd/MM/yyyy")}</td>
     </tr>
   );
 };

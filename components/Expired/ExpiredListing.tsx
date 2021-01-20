@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BiCheck } from "react-icons/bi";
+import { format } from "date-fns";
 import { FiCheck } from "react-icons/fi";
 import styles from "../../styles/listings.module.css";
 import { ListingProperty } from "../listings/Listing";
@@ -52,8 +52,8 @@ const ExpiredListing: React.FC<Props> = props => {
       <td>{property.bedrooms.toLocaleString()}</td>
       <td>{property.bathrooms.toLocaleString()}</td>
       <td>{property.type}</td>
-      <td>{new Date(property.expiryDate).toLocaleDateString()}</td>
-      <td>{new Date(property.updatedAt).toLocaleDateString()}</td>
+      <td>{format(new Date(property.expiryDate), "dd/MM/yyyy")}</td>
+      <td>{format(new Date(property.updatedAt), "dd/MM/yyyy")}</td>
     </tr>
   );
 };
