@@ -10,6 +10,7 @@ import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import { ListingProperty } from "../components/listings/Listing";
 import Loading from "../components/loading/Loading";
+import ExpiredListingsModal from "../components/modals/ExpiredListingsModal";
 import Pagination from "../components/properties/Pagination";
 import {
   EXPIRED_LISTINGS_COUNT,
@@ -90,6 +91,7 @@ const expired: NextPage = () => {
         {(loading || countData.loading || args.loading || args1.loading) && (
           <Loading />
         )}
+        <ExpiredListingsModal content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat suscipit a quis sed perspiciatis similique, repellat nobis officiis labore. Est, quod. Asperiores impedit expedita accusamus neque praesentium officiis, ad enim!" />
         <div className={styles.action_btns}>
           <button disabled={checkExpired.length === 0}>
             extend expiry date
