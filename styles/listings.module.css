@@ -200,4 +200,10 @@
   .exp_table {
     display: none;
   }
+  .action_btns {
+    flex-direction: column;
+  }
+  .action_btns > * {
+    margin-top: 1rem;
+  }
 }
