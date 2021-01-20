@@ -9,6 +9,7 @@ import ExpiredMobileListing from "../components/Expired/ExpiredMobileListing";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import { ListingProperty } from "../components/listings/Listing";
+import Loading from "../components/loading/Loading";
 import Pagination from "../components/properties/Pagination";
 import {
   EXPIRED_LISTINGS_COUNT,
@@ -23,13 +24,15 @@ const expired: NextPage = () => {
   const [selectedNum, setSelectedNum] = useState<number>(1);
   const [check, setCheck] = useState<boolean>(false);
   const [checkExpired, setCheckExpired] = useState<boolean>(false);
-  const { data, fetchMore } = useQuery(FETCH_EXPIRED_LISTINGS, {
-    fetchPolicy: "cache-only"
+  const { data, fetchMore, loading } = useQuery(FETCH_EXPIRED_LISTINGS, {
+    fetchPolicy: "cache-only",
+    notifyOnNetworkStatusChange: true,
+    variables: { offset: skip, limit }
   });
   const countData = useQuery(EXPIRED_LISTINGS_COUNT, {
-    fetchPolicy: "cache-only"
+    fetchPolicy: "cache-only",
+    notifyOnNetworkStatusChange: true
   });
-  console.log(data);
   let nums = [1, 2, 3, 4, 5, 6];
   const lastPage = Math.ceil(
     // args1.data
@@ -62,6 +65,7 @@ const expired: NextPage = () => {
   return (
     <Layout title="Expired Listings">
       <div className={styles.container}>
+        {(loading || countData.loading) && <Loading />}
         <div className={styles.action_btns}>
           <button disabled={!checkExpired}>extend expiry date</button>
           <button disabled={!checkExpired}>mark as sold / rented</button>
