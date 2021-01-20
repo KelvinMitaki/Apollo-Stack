@@ -9,6 +9,7 @@ import ExpiredMobileListing from "../components/Expired/ExpiredMobileListing";
 import HouseFilter from "../components/Homepage/Header/HouseFilter";
 import Layout from "../components/Layout/Layout";
 import { ListingProperty } from "../components/listings/Listing";
+import Pagination from "../components/properties/Pagination";
 import {
   EXPIRED_LISTINGS_COUNT,
   FETCH_EXPIRED_LISTINGS
@@ -17,16 +18,47 @@ import withAgent from "../HOCs/withAgent";
 import styles from "../styles/listings.module.css";
 
 const expired: NextPage = () => {
+  const [limit, setLimit] = useState<number>(10);
+  const [skip, setSkip] = useState<number>(0);
+  const [selectedNum, setSelectedNum] = useState<number>(1);
   const [check, setCheck] = useState<boolean>(false);
   const [checkExpired, setCheckExpired] = useState<boolean>(false);
-  const { data } = useQuery(FETCH_EXPIRED_LISTINGS, {
+  const { data, fetchMore } = useQuery(FETCH_EXPIRED_LISTINGS, {
     fetchPolicy: "cache-only"
   });
   const countData = useQuery(EXPIRED_LISTINGS_COUNT, {
     fetchPolicy: "cache-only"
   });
   console.log(data);
-
+  let nums = [1, 2, 3, 4, 5, 6];
+  const lastPage = Math.ceil(
+    // args1.data
+    //   ? args1.data.agentPropertiesCount.count / 10
+    //   :
+    countData.data.expiredListingsCount.count / 10
+  );
+  if (selectedNum > 3) {
+    nums = [
+      selectedNum - 2,
+      selectedNum - 1,
+      selectedNum,
+      selectedNum + 1,
+      selectedNum + 2
+    ];
+  }
+  if (selectedNum === lastPage) {
+    nums = [
+      selectedNum - 5,
+      selectedNum - 4,
+      selectedNum - 3,
+      selectedNum - 2,
+      selectedNum - 1,
+      selectedNum
+    ];
+  }
+  if (nums.find(num => num < 1)) {
+    nums = nums.filter(num => num > 0);
+  }
   return (
     <Layout title="Expired Listings">
       <div className={styles.container}>
@@ -123,6 +155,16 @@ const expired: NextPage = () => {
             .map((prop, i) => (
               <ExpiredMobileListing key={i} property={prop} />
             ))}
+          <Pagination
+            setSkip={setSkip}
+            fetchMore={fetchMore}
+            lastPage={lastPage}
+            nums={nums}
+            properties={data.fetchExpiredListings}
+            selectedNum={selectedNum}
+            setLimit={setLimit}
+            setSelectedNum={setSelectedNum}
+          />
         </div>
       </div>
     </Layout>
