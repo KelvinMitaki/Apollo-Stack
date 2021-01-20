@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { BiCheck } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi";
 import styles from "../../styles/listings.module.css";
+import { ListingProperty } from "../listings/Listing";
 
 interface Props {
   className?: string;
   checked: boolean;
   setCheckExpired: React.Dispatch<React.SetStateAction<boolean>>;
+  property: ListingProperty;
 }
 
 const ExpiredListing: React.FC<Props> = props => {
@@ -17,6 +19,7 @@ const ExpiredListing: React.FC<Props> = props => {
   useEffect(() => {
     props.setCheckExpired(check);
   }, [check]);
+  const { property } = props;
   return (
     <tr
       className={`${styles.listing} ${
@@ -33,24 +36,24 @@ const ExpiredListing: React.FC<Props> = props => {
           </p>
         </span>
       </td>
-      <td>123</td>
-      <td>12373625681269798</td>
+      <td>{property.reference}</td>
+      <td>{property._id}</td>
       <td>
         <div className={styles.img}>
           <div
             className={styles.bg_image}
-            style={{ backgroundImage: "url(/image-3.jpg)" }}
+            style={{ backgroundImage: `url(${property.images[0]})` }}
           ></div>
         </div>
       </td>
-      <td>townhouse</td>
-      <td>Ongata Rongai, Nairobi</td>
-      <td>32,000,000</td>
-      <td>3</td>
-      <td>2</td>
-      <td>rent</td>
-      <td>3/3/2021</td>
-      <td>31/12/2020</td>
+      <td>{property.category}</td>
+      <td>{property.streetAddress}</td>
+      <td>{property.price.toLocaleString()}</td>
+      <td>{property.bedrooms.toLocaleString()}</td>
+      <td>{property.bathrooms.toLocaleString()}</td>
+      <td>{property.type}</td>
+      <td>{new Date(property.expiryDate).toLocaleDateString()}</td>
+      <td>{new Date(property.updatedAt).toLocaleDateString()}</td>
     </tr>
   );
 };

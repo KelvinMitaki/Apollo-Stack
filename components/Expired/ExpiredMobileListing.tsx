@@ -1,53 +1,56 @@
 import Link from "next/link";
 import React from "react";
 import styles from "../../styles/listings.module.css";
-
-const ExpiredMobileListing = () => {
+import { ListingProperty } from "../listings/Listing";
+interface Props {
+  property: ListingProperty;
+}
+const ExpiredMobileListing: React.FC<Props> = ({ property }) => {
   return (
     <div className={styles.MobileListing}>
       <div className={styles.header}>
         <div>
           <p>list no:</p>
-          <p>982378632687437683709</p>
+          <p>{property._id}</p>
         </div>
         <div>
           <p>reference:</p>
-          <p>123</p>
+          <p>{property.reference}</p>
         </div>
         <div>
           <p>expiry date:</p>
-          <p>3/3/2020</p>
+          <p>{new Date(property.expiryDate).toLocaleDateString()}</p>
         </div>
       </div>
       <div className={styles.mb_body}>
         <div
           className={styles.mb_img}
-          style={{ backgroundImage: "url(/image-3.jpg)" }}
+          style={{ backgroundImage: `url(${property.images[0]})` }}
         ></div>
         <div className={styles.content}>
           <div>
-            <p>for rent:</p>
-            <p>townhouse</p>
+            {property.type === "rent" ? <p>to rent:</p> : <p>for sale:</p>}
+            <p>{property.category}</p>
           </div>
           <div>
             <p>price:</p>
-            <p>ksh 2,000,000</p>
+            <p>ksh {property.price.toLocaleString()}</p>
           </div>
           <div>
             <p>address:</p>
-            <p>Ongata Rongai</p>
+            <p>{property.streetAddress}</p>
           </div>
           <div>
             <p>bedrooms:</p>
-            <p>3</p>
+            <p>{property.bedrooms.toLocaleString()}</p>
           </div>
           <div>
             <p>bathrooms:</p>
-            <p>2</p>
+            <p>{property.bathrooms.toLocaleString()}</p>
           </div>
         </div>
       </div>
-      <Link href="/listing/edit/123">
+      <Link href={`/listing/edit/${property._id}`}>
         <a>
           <div className={styles.btn}>
             <button>edit</button>

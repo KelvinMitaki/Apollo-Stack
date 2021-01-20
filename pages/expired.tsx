@@ -113,6 +113,7 @@ const expired: NextPage = () => {
                     className={`${i % 2 === 0 ? "active" : ""}`}
                     checked={check}
                     setCheckExpired={setCheckExpired}
+                    property={prop}
                   />
                 ))}
             </tbody>
@@ -120,7 +121,7 @@ const expired: NextPage = () => {
           {(data.fetchExpiredListings as ListingProperty[])
             .filter((l, i, s) => s.findIndex(pr => pr._id === l._id) === i)
             .map((prop, i) => (
-              <ExpiredMobileListing key={i} />
+              <ExpiredMobileListing key={i} property={prop} />
             ))}
         </div>
       </div>
