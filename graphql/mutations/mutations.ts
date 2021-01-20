@@ -226,3 +226,21 @@ export const EDIT_PROFILE = gql`
     }
   }
 `;
+
+export const UPDATE_EXPIRED_LISTINGS = gql`
+  mutation UpdateExpiredListings(
+    $values: [ExpiredListingsID!]!
+    $expiryDate: Boolean
+    $mark: Boolean
+    $withdraw: Boolean
+  ) {
+    updateExpiredListings(
+      values: $values
+      expiryDate: $expiryDate
+      mark: $mark
+      withdraw: $withdraw
+    ) {
+      _id
+    }
+  }
+`;

@@ -1,6 +1,6 @@
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiCheck } from "react-icons/bi";
 import { FiCheck } from "react-icons/fi";
 import { initializeApollo } from "../apollo";
@@ -23,7 +23,9 @@ const expired: NextPage = () => {
   const [skip, setSkip] = useState<number>(0);
   const [selectedNum, setSelectedNum] = useState<number>(1);
   const [check, setCheck] = useState<boolean>(false);
-  const [checkExpired, setCheckExpired] = useState<boolean>(false);
+  const [checkExpired, setCheckExpired] = useState<
+    { _id: string; type: string }[]
+  >([]);
   const { data, fetchMore, loading } = useQuery(FETCH_EXPIRED_LISTINGS, {
     fetchPolicy: "cache-only",
     notifyOnNetworkStatusChange: true,
@@ -39,6 +41,18 @@ const expired: NextPage = () => {
   const [expiredListingsCount, args1] = useLazyQuery(EXPIRED_LISTINGS_COUNT, {
     fetchPolicy: "network-only"
   });
+  useEffect(() => {
+    if (check) {
+      setCheckExpired(
+        (data.fetchExpiredListings as ListingProperty[]).map(pr => ({
+          _id: pr._id,
+          type: pr.type
+        }))
+      );
+    } else {
+      setCheckExpired([]);
+    }
+  }, [check]);
   let nums = [1, 2, 3, 4, 5, 6];
   const lastPage = Math.ceil(
     args1.data
@@ -67,6 +81,9 @@ const expired: NextPage = () => {
   if (nums.find(num => num < 1)) {
     nums = nums.filter(num => num > 0);
   }
+  // console.log(
+  //   checkExpired.filter((p, i, s) => s.findIndex(pr => pr._id === p._id) === i)
+  // );
   return (
     <Layout title="Expired Listings">
       <div className={styles.container}>
@@ -74,9 +91,15 @@ const expired: NextPage = () => {
           <Loading />
         )}
         <div className={styles.action_btns}>
-          <button disabled={!checkExpired}>extend expiry date</button>
-          <button disabled={!checkExpired}>mark as sold / rented</button>
-          <button disabled={!checkExpired}>withdraw listings</button>
+          <button disabled={checkExpired.length === 0}>
+            extend expiry date
+          </button>
+          <button disabled={checkExpired.length === 0}>
+            mark as sold / rented
+          </button>
+          <button disabled={checkExpired.length === 0}>
+            withdraw listings
+          </button>
         </div>
         <HouseFilter
           bathrooms={[1, 2, 3, 4, 5]}
@@ -160,6 +183,7 @@ const expired: NextPage = () => {
                     className={`${i % 2 === 0 ? "active" : ""}`}
                     checked={check}
                     setCheckExpired={setCheckExpired}
+                    checkExpired={checkExpired}
                     property={prop}
                   />
                 ))}

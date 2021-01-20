@@ -7,7 +7,18 @@ import { ListingProperty } from "../listings/Listing";
 interface Props {
   className?: string;
   checked: boolean;
-  setCheckExpired: React.Dispatch<React.SetStateAction<boolean>>;
+  setCheckExpired: React.Dispatch<
+    React.SetStateAction<
+      {
+        _id: string;
+        type: string;
+      }[]
+    >
+  >;
+  checkExpired: {
+    _id: string;
+    type: string;
+  }[];
   property: ListingProperty;
 }
 
@@ -17,7 +28,16 @@ const ExpiredListing: React.FC<Props> = props => {
     setCheck(props.checked);
   }, [props.checked]);
   useEffect(() => {
-    props.setCheckExpired(check);
+    check &&
+      props.setCheckExpired([
+        ...props.checkExpired,
+        { _id: props.property._id, type: props.property.type }
+      ]);
+    !check &&
+      props.checkExpired.find(pr => pr._id === props.property._id) &&
+      props.setCheckExpired(
+        props.checkExpired.filter(pr => pr._id !== props.property._id)
+      );
   }, [check]);
   const { property } = props;
   return (
