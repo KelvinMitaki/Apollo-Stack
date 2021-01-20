@@ -109,6 +109,8 @@ const expired: NextPage = () => {
               : "The selected listing(s) will be marked as Withdrawn, do you wish to proceed?"
           }`}
           checkExpired={checkExpired}
+          setCheck={setCheck}
+          setCheckExpired={setCheckExpired}
         />
         <div className={styles.action_btns}>
           <button

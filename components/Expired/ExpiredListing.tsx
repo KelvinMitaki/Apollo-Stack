@@ -49,7 +49,11 @@ const ExpiredListing: React.FC<Props> = props => {
       <td>
         <span className={styles.icon}>
           <p
-            className={`${styles.BiCheck} ${check ? styles.checked : ""}`}
+            className={`${styles.BiCheck} ${
+              !!props.checkExpired.find(pr => pr._id === property._id)
+                ? styles.checked
+                : ""
+            }`}
             onClick={() => setCheck(ck => !ck)}
           >
             <FiCheck />

@@ -11,6 +11,7 @@ import {
   FETCH_EXPIRED_LISTINGS
 } from "../../graphql/queries/queries";
 import Loading from "../loading/Loading";
+import Router from "next/router";
 
 interface Props {
   content: string;
@@ -18,6 +19,15 @@ interface Props {
     _id: string;
     type: string;
   }[];
+  setCheck: React.Dispatch<React.SetStateAction<boolean>>;
+  setCheckExpired: React.Dispatch<
+    React.SetStateAction<
+      {
+        _id: string;
+        type: string;
+      }[]
+    >
+  >;
 }
 
 export interface ExpiredListingsModal {
@@ -96,6 +106,9 @@ const ExpiredListingsModal: React.FC<Props> = props => {
                 type: ActionTypes.expiredListingsModal,
                 payload: null
               });
+              Router.push("/expired");
+              props.setCheck(false);
+              props.setCheckExpired([]);
             }}
           >
             confirm
