@@ -269,3 +269,46 @@ export const SEARCH_PROPERTIES = gql`
     }
   }
 `;
+
+export const FETCH_EXPIRED_LISTINGS = gql`
+  query FetchExpiredListings(
+    $type: String
+    $category: String
+    $location: String
+    $minPrice: Int
+    $maxPrice: Int
+    $bedrooms: Int
+    $bathrooms: Int
+    $furnished: Boolean
+    $offset: Int!
+    $limit: Int!
+  ) {
+    fetchExpiredListings(
+      values: {
+        type: $type
+        category: $category
+        location: $location
+        minPrice: $minPrice
+        maxPrice: $maxPrice
+        bedrooms: $bedrooms
+        bathrooms: $bathrooms
+        furnished: $furnished
+      }
+      offset: $offset
+      limit: $limit
+    ) {
+      _id
+      reference
+      images
+      category
+      streetAddress
+      price
+      bedrooms
+      bathrooms
+      type
+      status
+      updatedAt
+      expiryDate
+    }
+  }
+`;
