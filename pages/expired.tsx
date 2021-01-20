@@ -41,10 +41,9 @@ const expired: NextPage = () => {
   });
   let nums = [1, 2, 3, 4, 5, 6];
   const lastPage = Math.ceil(
-    // args1.data
-    //   ? args1.data.agentPropertiesCount.count / 10
-    //   :
-    countData.data.expiredListingsCount.count / 10
+    args1.data
+      ? args1.data.expiredListingsCount.count / 10
+      : countData.data.expiredListingsCount.count / 10
   );
   if (selectedNum > 3) {
     nums = [
