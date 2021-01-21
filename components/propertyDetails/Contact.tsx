@@ -37,7 +37,7 @@ const Contact: React.FC<PropertyDetails> = props => {
         <div className={styles.input}>
           <input type="text" placeholder="Name" />
           <input type="text" placeholder="Email" />
-          <input type="text" placeholder="Phone Number" />
+          <input type="number" placeholder="Phone Number" />
           <input type="text" placeholder="Message" />
           <button>Send Message</button>
         </div>

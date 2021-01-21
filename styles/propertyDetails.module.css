@@ -125,6 +125,14 @@
   width: 20vw;
   cursor: pointer;
 }
+.input input::-webkit-outer-spin-button,
+.input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input input[type="number"] {
+  -moz-appearance: textfield;
+}
 
 @media only screen and (max-width: 1000px) {
   .container {
