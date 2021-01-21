@@ -1,10 +1,20 @@
 import React from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import validator from "validator";
 import { PropertyDetails } from "../../pages/property/[id]";
 import styles from "../../styles/propertyDetails.module.css";
-
-const Contact: React.FC<PropertyDetails> = props => {
+import ContactInput from "./ContactInput";
+interface FormValues {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+}
+const Contact: React.FC<
+  InjectedFormProps<FormValues, PropertyDetails> & PropertyDetails
+> = props => {
   const formatPhoneNumber = (phoneNumber: number): string => {
     if (phoneNumber.toString().length === 8) {
       return `+2547${phoneNumber}`;
@@ -34,16 +44,65 @@ const Contact: React.FC<PropertyDetails> = props => {
             <h4>{props.agent.email}</h4>
           </div>
         </div>
-        <div className={styles.input}>
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Email" />
-          <input type="number" placeholder="Phone Number" />
-          <input type="text" placeholder="Message" />
-          <button>Send Message</button>
-        </div>
+        <form
+          onSubmit={props.handleSubmit(formValues => console.log(formValues))}
+        >
+          <div className={styles.input}>
+            <Field
+              component={ContactInput}
+              type="text"
+              name="fullName"
+              placeholder="Name"
+            />
+            <Field
+              component={ContactInput}
+              type="text"
+              name="email"
+              placeholder="Email"
+            />
+            <Field
+              component={ContactInput}
+              type="number"
+              name="phoneNumber"
+              placeholder="Phone Number"
+            />
+            <Field
+              component={ContactInput}
+              type="text"
+              name="message"
+              placeholder="Message"
+            />
+            <button type="submit" disabled={props.invalid}>
+              Send Message
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
 };
-
-export default Contact;
+const validate = (formValues: FormValues) => {
+  const { email, fullName, message, phoneNumber } = formValues;
+  const errors = {} as FormValues;
+  if (!email || (email && !validator.isEmail(email))) {
+    errors.email = "Invalid email";
+  }
+  if (!fullName || (fullName && fullName.trim().length === 0)) {
+    errors.fullName = "Invalid name";
+  }
+  if (!message || (message && message.trim().length === 0)) {
+    errors.message = "Invalid Message";
+  }
+  if (
+    !phoneNumber ||
+    (phoneNumber && !validator.isNumeric(phoneNumber)) ||
+    (phoneNumber && phoneNumber.length < 8)
+  ) {
+    errors.phoneNumber = "invalid phone number";
+  }
+  return errors;
+};
+export default reduxForm<FormValues, PropertyDetails>({
+  form: "Contact",
+  validate
+})(Contact);

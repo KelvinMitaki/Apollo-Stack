@@ -125,6 +125,9 @@
   width: 20vw;
   cursor: pointer;
 }
+.input button:disabled {
+  background-color: rgba(1, 2, 78, 0.5);
+}
 .input input::-webkit-outer-spin-button,
 .input input::-webkit-inner-spin-button {
   -webkit-appearance: none;
