@@ -116,6 +116,7 @@ const leads: NextPage = () => {
             selectedNum={selectedNum}
             setSelectedNum={setSelectedNum}
             setSkip={setSkip}
+            style={{ width: "95%" }}
           />
         </div>
       </div>

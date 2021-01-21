@@ -28,13 +28,14 @@ interface Props {
   setSelectedNum: React.Dispatch<React.SetStateAction<number>>;
   nums: number[];
   lastPage: number;
+  style?: React.CSSProperties;
 }
 
 const Pagination: React.FC<Props> = props => {
   let { selectedNum, setSelectedNum, nums, lastPage } = props;
   lastPage = Math.ceil(lastPage);
   return (
-    <div className={styles.pagination}>
+    <div className={styles.pagination} style={props.style}>
       {selectedNum > 3 && !nums.find(num => num === 1) && (
         <>
           <p
