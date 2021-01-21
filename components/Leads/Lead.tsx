@@ -11,7 +11,7 @@ const Lead: React.FC<Props> = props => {
       className={`${styles.table_body} ${props.className ? styles.active : ""}`}
     >
       <td>16/12/2020 21:16:33</td>
-      <td>91729871298747869817</td>
+      <td className={styles.link}>91729871298747869817</td>
       <td>Ongata Rongai, Kajiado</td>
       <td>john doe</td>
       <td className={styles.email}>john@gmail.com</td>
