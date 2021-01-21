@@ -1,20 +1,30 @@
+import { useQuery } from "@apollo/client";
 import { NextPage } from "next";
 import React from "react";
 import { initializeApollo } from "../apollo";
 import Layout from "../components/Layout/Layout";
 import Lead from "../components/Leads/Lead";
-import { FETCH_LEADS } from "../graphql/queries/queries";
+import { FETCH_LEADS, FETCH_LEADS_COUNT } from "../graphql/queries/queries";
 import withAgent from "../HOCs/withAgent";
 import styles from "../styles/leads.module.css";
 
-const leads: NextPage = () => {
-  const genLeads = () => {
-    const lead = [];
-    for (let i = 0; i < 10; i++) {
-      lead.push(<Lead key={i} className={`${i % 2 === 0 ? "active" : ""}`} />);
-    }
-    return lead;
+export interface FetchedLead {
+  createdAt: string;
+  property: {
+    _id: string;
+    streetAddress: string;
   };
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+}
+
+const leads: NextPage = () => {
+  const { data } = useQuery(FETCH_LEADS, {
+    variables: { offset: 0, limit: 10 },
+    fetchPolicy: "cache-only"
+  });
   return (
     <Layout title="Leads">
       <div className={styles.container}>
@@ -54,7 +64,15 @@ const leads: NextPage = () => {
                 </th>
               </tr>
             </thead>
-            <tbody>{genLeads()}</tbody>
+            <tbody>
+              {(data.fetchLeads as FetchedLead[]).map((lead, i) => (
+                <Lead
+                  key={i}
+                  className={`${i % 2 === 0 ? "active" : ""}`}
+                  lead={lead}
+                />
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
@@ -65,9 +83,17 @@ const leads: NextPage = () => {
 leads.getInitialProps = async ctx => {
   try {
     const apolloClient = initializeApollo();
-    apolloClient.query({
+    await apolloClient.query({
       query: FETCH_LEADS,
       variables: { offset: 0, limit: 10 },
+      context: {
+        headers: {
+          cookie: ctx.req?.headers.cookie
+        }
+      }
+    });
+    await apolloClient.query({
+      query: FETCH_LEADS_COUNT,
       context: {
         headers: {
           cookie: ctx.req?.headers.cookie

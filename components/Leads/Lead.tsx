@@ -1,27 +1,34 @@
 import React from "react";
+import { FetchedLead } from "../../pages/leads";
 import styles from "../../styles/leads.module.css";
-
+import { format } from "date-fns";
 interface Props {
   className?: string;
+  lead: FetchedLead;
 }
 
 const Lead: React.FC<Props> = props => {
+  const formatPhoneNumber = (phoneNumber: number): string => {
+    if (phoneNumber.toString().length === 8) {
+      return `+2547${phoneNumber}`;
+    }
+    if (phoneNumber.toString().length === 9) {
+      return `+254${phoneNumber}`;
+    }
+    return phoneNumber.toString();
+  };
+  const { lead } = props;
   return (
     <tr
       className={`${styles.table_body} ${props.className ? styles.active : ""}`}
     >
-      <td>16/12/2020 21:16:33</td>
-      <td className={styles.link}>91729871298747869817</td>
-      <td>Ongata Rongai, Kajiado</td>
-      <td>john doe</td>
-      <td className={styles.email}>john@gmail.com</td>
-      <td>0712345678</td>
-      <td className={styles.message}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel impedit
-        libero earum similique nam consequatur ut. Aspernatur adipisci ullam
-        officiis at optio sapiente tempora repellendus! Mollitia ex sunt eos
-        velit.
-      </td>
+      <td>{format(new Date(lead.createdAt), "yyyy-MM-dd'T'HH:mm")}</td>
+      <td className={styles.link}>{lead.property._id}</td>
+      <td>{lead.property.streetAddress}</td>
+      <td>{lead.fullName}</td>
+      <td className={styles.email}>{lead.email}</td>
+      <td>{formatPhoneNumber(parseInt(lead.phoneNumber))}</td>
+      <td className={styles.message}>{lead.message}</td>
     </tr>
   );
 };

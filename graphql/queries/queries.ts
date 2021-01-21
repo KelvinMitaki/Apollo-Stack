@@ -356,3 +356,11 @@ export const FETCH_LEADS = gql`
     }
   }
 `;
+
+export const FETCH_LEADS_COUNT = gql`
+  query {
+    fetchLeadsCount {
+      count
+    }
+  }
+`;
