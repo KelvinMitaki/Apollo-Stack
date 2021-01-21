@@ -10,12 +10,21 @@ interface Props {
 
 const ContactInput: React.FC<WrappedFieldProps & Props> = props => {
   return (
-    <input
-      {...props.input}
-      type={props.type}
-      placeholder={props.placeholder}
-      className={styles[props.className || ""]}
-    />
+    <>
+      {props.className ? (
+        <textarea
+          {...props.input}
+          placeholder={props.placeholder}
+          className={styles[props.className]}
+        ></textarea>
+      ) : (
+        <input
+          {...props.input}
+          type={props.type}
+          placeholder={props.placeholder}
+        />
+      )}
+    </>
   );
 };
 

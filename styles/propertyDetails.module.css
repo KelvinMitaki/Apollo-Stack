@@ -110,12 +110,20 @@
   align-items: center;
 }
 
-.input input {
+.input input,
+.message {
   height: 4rem;
   width: 20vw;
   border: 1px solid #ebebeb;
   margin-bottom: 1rem;
   padding-left: 1rem;
+}
+.message {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  resize: none;
+  height: 8rem;
 }
 .input button {
   background-color: rgba(1, 2, 78, 0.76);

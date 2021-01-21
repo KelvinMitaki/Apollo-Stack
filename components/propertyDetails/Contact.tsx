@@ -71,6 +71,7 @@ const Contact: React.FC<
               type="text"
               name="message"
               placeholder="Message"
+              className="message"
             />
             <button type="submit" disabled={props.invalid}>
               Send Message
