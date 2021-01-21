@@ -244,3 +244,25 @@ export const UPDATE_EXPIRED_LISTINGS = gql`
     }
   }
 `;
+
+export const CREATE_LEAD = gql`
+  mutation CreateLead(
+    $email: String!
+    $fullName: String!
+    $phoneNumber: Int!
+    $message: String!
+    $property: String!
+  ) {
+    createLead(
+      values: {
+        email: $email
+        fullName: $fullName
+        phoneNumber: $phoneNumber
+        message: $message
+        property: $property
+      }
+    ) {
+      _id
+    }
+  }
+`;
