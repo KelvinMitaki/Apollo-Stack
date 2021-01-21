@@ -340,3 +340,19 @@ export const EXPIRED_LISTINGS_COUNT = gql`
     }
   }
 `;
+
+export const FETCH_LEADS = gql`
+  query FetchLeads($offset: Int!, $limit: Int!) {
+    fetchLeads(offset: $offset, limit: $limit) {
+      createdAt
+      property {
+        _id
+        streetAddress
+      }
+      fullName
+      email
+      phoneNumber
+      message
+    }
+  }
+`;
