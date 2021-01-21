@@ -18,6 +18,7 @@
 }
 .table_body td {
   text-align: center;
+  height: 5rem;
 }
 
 .email,

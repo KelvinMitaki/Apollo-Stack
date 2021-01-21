@@ -21,7 +21,7 @@ const Contact: React.FC<
 > = props => {
   const [createLead, { loading, called }] = useMutation(CREATE_LEAD, {
     onCompleted() {
-      Router.push("/");
+      Router.back();
     }
   });
   const formatPhoneNumber = (phoneNumber: number): string => {
