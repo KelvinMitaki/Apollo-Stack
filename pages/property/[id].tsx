@@ -52,7 +52,7 @@ const propertyDetails: NextPage<{
         <Contact
           {...data.fetchPropertyDetails}
           initialValues={
-            user.data
+            user.data.currentUser
               ? {
                   ...user.data.currentUser,
                   ...(user.data.currentUser.phoneNumber && {
@@ -61,7 +61,9 @@ const propertyDetails: NextPage<{
                   message: `Please contact me regarding web reference ${data.fetchPropertyDetails.reference}`,
                   fullName: `${user.data.currentUser.firstName} ${user.data.currentUser.lastName}`
                 }
-              : {}
+              : {
+                  message: `Please contact me regarding web reference ${data.fetchPropertyDetails.reference}`
+                }
           }
         />
       </div>

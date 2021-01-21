@@ -1,10 +1,14 @@
+import { useMutation } from "@apollo/client";
+import Router from "next/router";
 import React from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import validator from "validator";
+import { CREATE_LEAD } from "../../graphql/mutations/mutations";
 import { PropertyDetails } from "../../pages/property/[id]";
 import styles from "../../styles/propertyDetails.module.css";
+import Loading from "../loading/Loading";
 import ContactInput from "./ContactInput";
 interface FormValues {
   fullName: string;
@@ -15,6 +19,11 @@ interface FormValues {
 const Contact: React.FC<
   InjectedFormProps<FormValues, PropertyDetails> & PropertyDetails
 > = props => {
+  const [createLead, { loading, called }] = useMutation(CREATE_LEAD, {
+    onCompleted() {
+      Router.push("/");
+    }
+  });
   const formatPhoneNumber = (phoneNumber: number): string => {
     if (phoneNumber.toString().length === 8) {
       return `+2547${phoneNumber}`;
@@ -27,6 +36,7 @@ const Contact: React.FC<
   return (
     <div>
       <div className={styles.contact}>
+        {loading && <Loading />}
         <div className={styles.contact_header}>
           <h3>Contact Agent</h3>
           <div className={styles.phone}>
@@ -45,7 +55,13 @@ const Contact: React.FC<
           </div>
         </div>
         <form
-          onSubmit={props.handleSubmit(formValues => console.log(formValues))}
+          onSubmit={props.handleSubmit(formValues => {
+            // @ts-ignore
+            formValues.phoneNumber = parseInt(formValues.phoneNumber);
+            if (!called) {
+              createLead({ variables: { ...formValues, property: props._id } });
+            }
+          })}
         >
           <div className={styles.input}>
             <Field
@@ -74,7 +90,7 @@ const Contact: React.FC<
               className="message"
               reference={props.reference}
             />
-            <button type="submit" disabled={props.invalid}>
+            <button type="submit" disabled={props.invalid || called}>
               Send Message
             </button>
           </div>
