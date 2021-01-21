@@ -5,7 +5,10 @@ import { initializeApollo } from "../../apollo";
 import Layout from "../../components/Layout/Layout";
 import Contact from "../../components/propertyDetails/Contact";
 import Details from "../../components/propertyDetails/Details";
-import { FETCH_PROPERTY_DETAILS } from "../../graphql/queries/queries";
+import {
+  FETCH_CURRENT_USER,
+  FETCH_PROPERTY_DETAILS
+} from "../../graphql/queries/queries";
 import styles from "../../styles/propertyDetails.module.css";
 
 export interface PropertyDetails {
@@ -23,6 +26,7 @@ export interface PropertyDetails {
   status: string;
   location: string;
   streetAddress: string;
+  reference: number;
   agent: {
     firstName: string;
     lastName: string;
@@ -40,12 +44,24 @@ const propertyDetails: NextPage<{
     fetchPolicy: "cache-only",
     variables: props.variables
   });
-
+  const user = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
   return (
     <Layout title="Property Details">
       <div className={styles.container}>
         <Details {...data.fetchPropertyDetails} />
-        <Contact {...data.fetchPropertyDetails} />
+        <Contact
+          {...data.fetchPropertyDetails}
+          initialValues={
+            user.data
+              ? {
+                  ...user.data.currentUser,
+                  ...(user.data.currentUser.phoneNumber && {
+                    phoneNumber: user.data.currentUser.phoneNumber.toString()
+                  })
+                }
+              : {}
+          }
+        />
       </div>
     </Layout>
   );

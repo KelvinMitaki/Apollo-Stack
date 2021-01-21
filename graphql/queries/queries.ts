@@ -188,6 +188,7 @@ export const FETCH_PROPERTY_DETAILS = gql`
       status
       location
       streetAddress
+      reference
       agent {
         firstName
         lastName
