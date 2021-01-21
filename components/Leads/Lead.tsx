@@ -22,7 +22,9 @@ const Lead: React.FC<Props> = props => {
     <tr
       className={`${styles.table_body} ${props.className ? styles.active : ""}`}
     >
-      <td>{format(new Date(lead.createdAt), "yyyy-MM-dd'T'HH:mm")}</td>
+      <td style={{ textTransform: "none" }}>
+        {format(new Date(lead.createdAt), "dd/MM/yyyy 'at' HH:mm")}
+      </td>
       <td className={styles.link}>{lead.property._id}</td>
       <td>{lead.property.streetAddress}</td>
       <td>{lead.fullName}</td>
