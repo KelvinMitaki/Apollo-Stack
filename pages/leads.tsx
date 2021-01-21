@@ -7,7 +7,7 @@ const leads = () => {
   const genLeads = () => {
     const lead = [];
     for (let i = 0; i < 10; i++) {
-      lead.push(<Lead key={i} />);
+      lead.push(<Lead key={i} className={`${i % 2 === 0 ? "active" : ""}`} />);
     }
     return lead;
   };
@@ -15,6 +15,15 @@ const leads = () => {
     <Layout title="Leads">
       <div className={styles.container}>
         <table cellSpacing="0">
+          <colgroup>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col style={{ width: "30%" }} />
+          </colgroup>
           <thead>
             <tr>
               <th>

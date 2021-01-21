@@ -1,3 +1,27 @@
 .container {
   font-size: 1.6rem;
+  margin: 7rem 0;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+}
+.container table {
+  width: 95%;
+  border: 1px solid #bebdbd;
+  border-radius: 0.3rem;
+}
+.container td,
+.container th {
+  border-bottom: 1px solid #bebdbd;
+}
+.table_body td {
+  text-align: center;
+}
+
+.email,
+.message {
+  text-transform: none;
+}
+.active {
+  background-color: rgba(255, 255, 255, 0.525);
 }
