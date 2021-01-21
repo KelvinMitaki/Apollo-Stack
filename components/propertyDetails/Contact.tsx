@@ -89,6 +89,7 @@ const validate = (formValues: FormValues) => {
   if (!email || (email && !validator.isEmail(email))) {
     errors.email = "Invalid email";
   }
+  // console
   if (!fullName || (fullName && fullName.trim().length === 0)) {
     errors.fullName = "Invalid name";
   }

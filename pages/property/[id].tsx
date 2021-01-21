@@ -57,7 +57,9 @@ const propertyDetails: NextPage<{
                   ...user.data.currentUser,
                   ...(user.data.currentUser.phoneNumber && {
                     phoneNumber: user.data.currentUser.phoneNumber.toString()
-                  })
+                  }),
+                  message: `Please contact me regarding web reference ${data.fetchPropertyDetails.reference}`,
+                  fullName: `${user.data.currentUser.firstName} ${user.data.currentUser.lastName}`
                 }
               : {}
           }
