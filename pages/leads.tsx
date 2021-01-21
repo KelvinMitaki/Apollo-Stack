@@ -1,9 +1,11 @@
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { NextPage } from "next";
-import React from "react";
+import React, { useState } from "react";
 import { initializeApollo } from "../apollo";
 import Layout from "../components/Layout/Layout";
 import Lead from "../components/Leads/Lead";
+import Loading from "../components/loading/Loading";
+import Pagination from "../components/properties/Pagination";
 import { FETCH_LEADS, FETCH_LEADS_COUNT } from "../graphql/queries/queries";
 import withAgent from "../HOCs/withAgent";
 import styles from "../styles/leads.module.css";
@@ -21,13 +23,44 @@ export interface FetchedLead {
 }
 
 const leads: NextPage = () => {
-  const { data } = useQuery(FETCH_LEADS, {
-    variables: { offset: 0, limit: 10 },
+  const [limit, setLimit] = useState<number>(10);
+  const [skip, setSkip] = useState<number>(0);
+  const [selectedNum, setSelectedNum] = useState<number>(1);
+  const { data, loading, fetchMore } = useQuery(FETCH_LEADS, {
+    variables: { offset: skip, limit },
+    notifyOnNetworkStatusChange: true,
     fetchPolicy: "cache-only"
   });
+  const countData = useQuery(FETCH_LEADS_COUNT, { fetchPolicy: "cache-only" });
+
+  let nums = [1, 2, 3, 4, 5, 6];
+  const lastPage = Math.ceil(countData.data.fetchLeadsCount.count / 10);
+  if (selectedNum > 3) {
+    nums = [
+      selectedNum - 2,
+      selectedNum - 1,
+      selectedNum,
+      selectedNum + 1,
+      selectedNum + 2
+    ];
+  }
+  if (selectedNum === lastPage) {
+    nums = [
+      selectedNum - 5,
+      selectedNum - 4,
+      selectedNum - 3,
+      selectedNum - 2,
+      selectedNum - 1,
+      selectedNum
+    ];
+  }
+  if (nums.find(num => num < 1)) {
+    nums = nums.filter(num => num > 0);
+  }
   return (
     <Layout title="Leads">
       <div className={styles.container}>
+        {loading && <Loading />}
         <div className={styles.inner}>
           <table cellSpacing="0">
             <colgroup>
@@ -74,6 +107,16 @@ const leads: NextPage = () => {
               ))}
             </tbody>
           </table>
+          <Pagination
+            setLimit={setLimit}
+            fetchMore={fetchMore}
+            lastPage={lastPage}
+            nums={nums}
+            properties={data.fetchLeads}
+            selectedNum={selectedNum}
+            setSelectedNum={setSelectedNum}
+            setSkip={setSkip}
+          />
         </div>
       </div>
     </Layout>
