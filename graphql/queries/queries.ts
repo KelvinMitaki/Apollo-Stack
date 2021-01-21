@@ -194,6 +194,7 @@ export const FETCH_PROPERTY_DETAILS = gql`
         lastName
         email
         phoneNumber
+        _id
       }
       category
       images

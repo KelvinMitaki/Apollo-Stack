@@ -59,7 +59,13 @@ const Contact: React.FC<
             // @ts-ignore
             formValues.phoneNumber = parseInt(formValues.phoneNumber);
             if (!called) {
-              createLead({ variables: { ...formValues, property: props._id } });
+              createLead({
+                variables: {
+                  ...formValues,
+                  property: props._id,
+                  agent: props.agent._id
+                }
+              });
             }
           })}
         >

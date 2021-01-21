@@ -32,6 +32,7 @@ export interface PropertyDetails {
     lastName: string;
     email: string;
     phoneNumber: number;
+    _id: string;
   };
   category: string;
   images: string[];

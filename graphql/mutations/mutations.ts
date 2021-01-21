@@ -252,6 +252,7 @@ export const CREATE_LEAD = gql`
     $phoneNumber: Int!
     $message: String!
     $property: String!
+    $agent: String!
   ) {
     createLead(
       values: {
@@ -260,6 +261,7 @@ export const CREATE_LEAD = gql`
         phoneNumber: $phoneNumber
         message: $message
         property: $property
+        agent: $agent
       }
     ) {
       _id
