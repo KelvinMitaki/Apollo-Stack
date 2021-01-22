@@ -28,7 +28,27 @@ const statistics: NextPage = () => {
   const { data } = useQuery(FETCH_VIEWS_AND_LEADS_COUNT, {
     fetchPolicy: "cache-only"
   });
-  console.log(data.countViewsAndLeadsCount);
+  const sixth = getMonth(6);
+  const fifth = getMonth(5);
+  const forth = getMonth(4);
+  const third = getMonth(3);
+  const second = getMonth(2);
+  const first = getMonth(1);
+  const current = getMonth(0);
+  const genViews = (month: string) => {
+    const d = (data.countViewsAndLeadsCount.views as {
+      month: string;
+      count: number;
+    }[]).find(d => d.month === month);
+    return d ? d.count.toLocaleString() : "-";
+  };
+  const genLeads = (month: string) => {
+    const d = (data.countViewsAndLeadsCount.leads as {
+      month: string;
+      count: number;
+    }[]).find(d => d.month === month);
+    return d ? d.count.toLocaleString() : "-";
+  };
   return (
     <Layout title="Agency Statistics">
       <div className={styles.container}>
@@ -48,23 +68,23 @@ const statistics: NextPage = () => {
           <tbody>
             <tr>
               <td className={styles.views}>Views</td>
-              <td>8721781</td>
-              <td>873268</td>
-              <td>1628768</td>
-              <td>72197</td>
-              <td>092180</td>
-              <td>726156</td>
-              <td>6752176</td>
+              <td>{genViews(sixth)}</td>
+              <td>{genViews(fifth)}</td>
+              <td>{genViews(forth)}</td>
+              <td>{genViews(third)}</td>
+              <td>{genViews(second)}</td>
+              <td>{genViews(first)}</td>
+              <td>{genViews(current)}</td>
             </tr>
             <tr className={styles.active}>
               <td className={styles.leads}>Leads</td>
-              <td>8721781</td>
-              <td>873268</td>
-              <td>1628768</td>
-              <td>72197</td>
-              <td>092180</td>
-              <td>726156</td>
-              <td>6752176</td>
+              <td>{genLeads(sixth)}</td>
+              <td>{genLeads(fifth)}</td>
+              <td>{genLeads(forth)}</td>
+              <td>{genLeads(third)}</td>
+              <td>{genLeads(second)}</td>
+              <td>{genLeads(first)}</td>
+              <td>{genLeads(current)}</td>
             </tr>
           </tbody>
         </table>
