@@ -22,7 +22,8 @@ const ProfileSidebar = () => {
   const [logoutUser] = useLazyQuery(LOGOUT_USER, {
     onCompleted() {
       Router.replace("/");
-    }
+    },
+    fetchPolicy: "network-only"
   });
   const { data } = useQuery(FETCH_CURRENT_USER, {
     fetchPolicy: "cache-only"
