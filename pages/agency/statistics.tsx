@@ -6,9 +6,9 @@ const statistics = () => {
   return (
     <Layout title="Agency Statistics">
       <div className={styles.container}>
-        <table>
+        <table cellSpacing="0">
           <thead>
-            <tr>
+            <tr className={styles.active}>
               <th></th>
               <th>Jul</th>
               <th>Aug</th>
@@ -21,7 +21,7 @@ const statistics = () => {
           </thead>
           <tbody>
             <tr>
-              <td>Views</td>
+              <td className={styles.views}>Views</td>
               <td>8721781</td>
               <td>873268</td>
               <td>1628768</td>
@@ -30,8 +30,8 @@ const statistics = () => {
               <td>726156</td>
               <td>6752176</td>
             </tr>
-            <tr>
-              <td>Leads</td>
+            <tr className={styles.active}>
+              <td className={styles.leads}>Leads</td>
               <td>8721781</td>
               <td>873268</td>
               <td>1628768</td>
