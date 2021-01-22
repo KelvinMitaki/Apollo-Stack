@@ -11,7 +11,9 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  Bar
+  Bar,
+  AreaChart,
+  Area
 } from "recharts";
 import styles from "../../styles/agencyStatistics.module.css";
 const months = [
@@ -61,19 +63,13 @@ const statistics: NextPage = () => {
   const sortMonths = (month: number) => {
     const date = new Date();
     date.setMonth(date.getMonth() - month);
-    const d = (data.countViewsAndLeadsCount.views as {
+    const d = (data.countViewsAndLeadsCount.leads as {
       month: string;
       count: number;
     }[]).find(d => d.month === months[date.getMonth()]);
-
     return d ? d : { month: months[date.getMonth()], count: 0 };
   };
-  console.log(
-    (data.countViewsAndLeadsCount.leads as {
-      month: string;
-      count: number;
-    }[]).map(doc => ({ name: doc.month, count: doc.count }))
-  );
+
   return (
     <Layout title="Agency Statistics">
       <div className={styles.container}>
@@ -113,6 +109,38 @@ const statistics: NextPage = () => {
             </tr>
           </tbody>
         </table>
+        <AreaChart
+          width={730}
+          height={250}
+          data={[
+            sortMonths(6),
+            sortMonths(5),
+            sortMonths(4),
+            sortMonths(3),
+            sortMonths(2),
+            sortMonths(1),
+            sortMonths(0)
+          ]}
+          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+        >
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis dataKey="month" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Area
+            type="monotone"
+            dataKey="count"
+            stroke="#8884d8"
+            fillOpacity={1}
+            fill="url(#colorUv)"
+          />
+        </AreaChart>
         <BarChart
           width={730}
           height={250}
