@@ -58,6 +58,16 @@ const statistics: NextPage = () => {
     }[]).find(d => d.month === month);
     return d ? d.count.toLocaleString() : "-";
   };
+  const sortMonths = (month: number) => {
+    const date = new Date();
+    date.setMonth(date.getMonth() - month);
+    const d = (data.countViewsAndLeadsCount.views as {
+      month: string;
+      count: number;
+    }[]).find(d => d.month === months[date.getMonth()]);
+
+    return d ? d : { month: months[date.getMonth()], count: 0 };
+  };
   console.log(
     (data.countViewsAndLeadsCount.leads as {
       month: string;
@@ -106,7 +116,15 @@ const statistics: NextPage = () => {
         <BarChart
           width={730}
           height={250}
-          data={data.countViewsAndLeadsCount.leads}
+          data={[
+            sortMonths(6),
+            sortMonths(5),
+            sortMonths(4),
+            sortMonths(3),
+            sortMonths(2),
+            sortMonths(1),
+            sortMonths(0)
+          ]}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
