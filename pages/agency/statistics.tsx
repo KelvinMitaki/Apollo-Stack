@@ -4,6 +4,15 @@ import React from "react";
 import { initializeApollo } from "../../apollo";
 import Layout from "../../components/Layout/Layout";
 import { FETCH_VIEWS_AND_LEADS_COUNT } from "../../graphql/queries/queries";
+import {
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  Bar
+} from "recharts";
 import styles from "../../styles/agencyStatistics.module.css";
 const months = [
   "Jan",
@@ -49,6 +58,12 @@ const statistics: NextPage = () => {
     }[]).find(d => d.month === month);
     return d ? d.count.toLocaleString() : "-";
   };
+  console.log(
+    (data.countViewsAndLeadsCount.leads as {
+      month: string;
+      count: number;
+    }[]).map(doc => ({ name: doc.month, count: doc.count }))
+  );
   return (
     <Layout title="Agency Statistics">
       <div className={styles.container}>
@@ -88,6 +103,19 @@ const statistics: NextPage = () => {
             </tr>
           </tbody>
         </table>
+        <BarChart
+          width={730}
+          height={250}
+          data={data.countViewsAndLeadsCount.leads}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="count" fill="#8884d8" />
+          {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
+        </BarChart>
       </div>
     </Layout>
   );
