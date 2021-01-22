@@ -12,6 +12,7 @@ const withAuth = (WrappedComponent: NextPage) => {
       },
       fetchPolicy: "cache-only"
     });
+    console.log(data);
     if (typeof window !== "undefined") {
       if (data.currentUser) {
         return <WrappedComponent {...props} />;
