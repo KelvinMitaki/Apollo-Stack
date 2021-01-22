@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import { initializeApollo } from "../../apollo";
 import Layout from "../../components/Layout/Layout";
 import Contact from "../../components/propertyDetails/Contact";
@@ -36,6 +36,7 @@ export interface PropertyDetails {
   };
   category: string;
   images: string[];
+  visitor?: string;
 }
 
 const propertyDetails: NextPage<{
@@ -46,6 +47,16 @@ const propertyDetails: NextPage<{
     variables: props.variables
   });
   const user = useQuery(FETCH_CURRENT_USER, { fetchPolicy: "cache-only" });
+  useEffect(() => {
+    if (data.fetchPropertyDetails && data.fetchPropertyDetails.visitor) {
+      document.cookie = `client_visitor=${
+        data.fetchPropertyDetails.visitor
+      }; Path=/; Expires=${new Date(
+        Date.now() + 1000 * 60 * 60 * 24 * 365 * 5000
+      )};`;
+    }
+  }, []);
+
   return (
     <Layout title="Property Details">
       <div className={styles.container}>

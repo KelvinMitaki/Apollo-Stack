@@ -198,6 +198,7 @@ export const FETCH_PROPERTY_DETAILS = gql`
       }
       category
       images
+      visitor
     }
   }
 `;
