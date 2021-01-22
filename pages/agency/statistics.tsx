@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { NextPage } from "next";
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { initializeApollo } from "../../apollo";
 import Layout from "../../components/Layout/Layout";
 import { FETCH_VIEWS_AND_LEADS_COUNT } from "../../graphql/queries/queries";
@@ -36,6 +36,24 @@ const getMonth = (month: number) => {
   return months[d.getMonth()];
 };
 const statistics: NextPage = () => {
+  const [num, setNum] = useState<number>(750);
+  if (typeof window !== "undefined") {
+    useLayoutEffect(() => {
+      window.addEventListener("resize", resize);
+      resize();
+      return () => {
+        window.removeEventListener("resize", resize);
+      };
+    }, []);
+  }
+  const resize = () => {
+    if (window.innerWidth < 768 && num !== window.innerWidth) {
+      setNum(window.innerWidth);
+    }
+    if (window.innerWidth < 505 && num !== window.innerWidth) {
+      setNum(window.innerWidth - 50);
+    }
+  };
   const { data } = useQuery(FETCH_VIEWS_AND_LEADS_COUNT, {
     fetchPolicy: "cache-only"
   });
@@ -112,7 +130,7 @@ const statistics: NextPage = () => {
         <div className={styles.views_data}>
           <h4>Views</h4>
           <AreaChart
-            width={730}
+            width={num}
             height={250}
             data={[
               sortMonths(6, "views"),
@@ -146,9 +164,8 @@ const statistics: NextPage = () => {
         </div>
         <div className={styles.leads_data}>
           <h4>Leads</h4>
-
           <BarChart
-            width={730}
+            width={num}
             height={250}
             data={[
               sortMonths(6, "leads"),
@@ -166,7 +183,6 @@ const statistics: NextPage = () => {
             <Tooltip />
             <Legend />
             <Bar dataKey="count" fill="#8884d8" />
-            {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
           </BarChart>
         </div>
       </div>
