@@ -1,7 +1,25 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 import styles from "../../styles/agencyStatistics.module.css";
-
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "July",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+const getMonth = (month: number) => {
+  const d = new Date();
+  d.setMonth(d.getMonth() - month);
+  return months[d.getMonth()];
+};
 const statistics = () => {
   return (
     <Layout title="Agency Statistics">
@@ -10,13 +28,13 @@ const statistics = () => {
           <thead>
             <tr className={styles.active}>
               <th></th>
-              <th>Jul</th>
-              <th>Aug</th>
-              <th>Sep</th>
-              <th>Oct</th>
-              <th>Nov</th>
-              <th>Dec</th>
-              <th>Jan</th>
+              <th>{getMonth(6)}</th>
+              <th>{getMonth(5)}</th>
+              <th>{getMonth(4)}</th>
+              <th>{getMonth(3)}</th>
+              <th>{getMonth(2)}</th>
+              <th>{getMonth(1)}</th>
+              <th>{getMonth(0)}</th>
             </tr>
           </thead>
           <tbody>
