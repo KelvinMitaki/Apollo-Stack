@@ -365,3 +365,18 @@ export const FETCH_LEADS_COUNT = gql`
     }
   }
 `;
+
+export const FETCH_VIEWS_AND_LEADS_COUNT = gql`
+  query {
+    countViewsAndLeadsCount {
+      views {
+        month
+        count
+      }
+      leads {
+        month
+        count
+      }
+    }
+  }
+`;
