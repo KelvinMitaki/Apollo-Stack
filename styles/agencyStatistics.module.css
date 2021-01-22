@@ -29,3 +29,8 @@
 .leads {
   font-weight: bold;
 }
+
+.views_data,
+.leads_data {
+  margin-top: 4rem;
+}
