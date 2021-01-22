@@ -1,0 +1,12 @@
+.container {
+  font-size: 1.6rem;
+  margin-top: 7rem;
+}
+
+.container table {
+  width: 50%;
+}
+
+.container table td {
+  text-align: center;
+}
