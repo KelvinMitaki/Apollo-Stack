@@ -8,9 +8,13 @@
   align-items: center;
 }
 
-.container table {
+.prt {
   width: 90%;
+}
+
+.container table {
   border: 1px solid #bebdbd;
+  width: 100%;
 }
 
 .container table td {
@@ -30,4 +34,14 @@
 
 .active {
   background-color: rgba(255, 255, 255, 0.527);
+}
+
+@media only screen and (max-width: 600px) {
+  .prt {
+    width: 100%;
+    overflow-x: scroll;
+  }
+  .container table {
+    width: 600px;
+  }
 }

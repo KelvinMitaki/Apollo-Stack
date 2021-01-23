@@ -11,17 +11,19 @@ const statistics = () => {
   return (
     <Layout title="Listing Statistics">
       <div className={styles.container}>
-        <table cellSpacing="0">
-          <thead>
-            <tr>
-              <th>list no</th>
-              <th>street address</th>
-              <th>category</th>
-              <th>type</th>
-            </tr>
-          </thead>
-          <tbody>{body}</tbody>
-        </table>
+        <div className={styles.prt}>
+          <table cellSpacing="0">
+            <thead>
+              <tr>
+                <th>list no</th>
+                <th>street address</th>
+                <th>category</th>
+                <th>type</th>
+              </tr>
+            </thead>
+            <tbody>{body}</tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );
