@@ -67,18 +67,48 @@ const AgentSidebar: React.FC<Props> = props => {
           </div>
         </a>
       </Link>
-      <div>
-        <p>leads</p>
-      </div>
-      <div>
-        <p>agents</p>
-      </div>
-      <div>
-        <p>agency statistics</p>
-      </div>
-      <div>
-        <p>listing statistics</p>
-      </div>
+      <Link href="/leads">
+        <a>
+          <div
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
+            <p>leads</p>
+          </div>
+        </a>
+      </Link>
+      <Link href="/agency/statistics">
+        <a>
+          <div
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
+            <p>agency statistics</p>
+          </div>
+        </a>
+      </Link>
+      <Link href="/listing/statistics">
+        <a>
+          <div
+            onClick={() => {
+              dispatch<SetToggleNavbar>({
+                type: ActionTypes.toggleNavbar,
+                payload: false
+              });
+            }}
+          >
+            <p>listing statistics</p>
+          </div>
+        </a>
+      </Link>
       <Link href="/profile/edit">
         <a>
           <div
