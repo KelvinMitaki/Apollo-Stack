@@ -1,8 +1,13 @@
 import React from "react";
+import styles from "../../styles/listingStatistics.module.css";
 
-const ListingStatisticsBody = () => {
+interface Props {
+  className?: boolean;
+}
+
+const ListingStatisticsBody: React.FC<Props> = props => {
   return (
-    <tr>
+    <tr className={props.className ? styles.active : ""}>
       <td>9198712991827</td>
       <td>nairobi</td>
       <td>apartment</td>

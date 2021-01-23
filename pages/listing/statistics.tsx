@@ -6,12 +6,12 @@ import styles from "../../styles/listingStatistics.module.css";
 const statistics = () => {
   const body = [];
   for (let i = 0; i < 10; i++) {
-    body.push(<ListingStatisticsBody key={i} />);
+    body.push(<ListingStatisticsBody key={i} className={i % 2 === 0} />);
   }
   return (
     <Layout title="Listing Statistics">
       <div className={styles.container}>
-        <table>
+        <table cellSpacing="0">
           <thead>
             <tr>
               <th>list no</th>
