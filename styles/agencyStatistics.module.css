@@ -34,3 +34,11 @@
 .leads_data {
   margin-top: 4rem;
 }
+
+@media only screen and (max-width: 1000px) {
+  .views_data,
+  .leads_data {
+    width: 100%;
+    overflow-x: scroll;
+  }
+}
