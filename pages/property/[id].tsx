@@ -38,11 +38,11 @@ export interface PropertyDetails {
   images: string[];
   visitor?: string;
 }
-function toTitleCase(str: string) {
+export const toTitleCase = (str: string) => {
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
-}
+};
 const propertyDetails: NextPage<{
   variables: { _id: string | string[] | undefined };
 }> = props => {

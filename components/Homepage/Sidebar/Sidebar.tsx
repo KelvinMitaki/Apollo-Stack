@@ -82,13 +82,10 @@ const Sidebar: React.FC<Props> = props => {
               type: ActionTypes.toggleNavbar,
               payload: false
             });
+            window.location.replace("/properties/sale");
           }}
         >
-          <Link href="/properties/sale">
-            <a>
-              <p>for sale</p>
-            </a>
-          </Link>
+          <p>for sale</p>
         </div>
         <div
           className={styles.opts_item}
@@ -97,13 +94,10 @@ const Sidebar: React.FC<Props> = props => {
               type: ActionTypes.toggleNavbar,
               payload: false
             });
+            window.location.replace("/properties/rent");
           }}
         >
-          <Link href="/properties/rent">
-            <a>
-              <p>to rent</p>
-            </a>
-          </Link>
+          <p>to rent</p>
         </div>
         <div
           className={styles.opts_item}
@@ -112,13 +106,10 @@ const Sidebar: React.FC<Props> = props => {
               type: ActionTypes.toggleNavbar,
               payload: false
             });
+            window.location.replace("/properties/furnished");
           }}
         >
-          <Link href="/properties/furnished">
-            <a>
-              <p>furnished</p>
-            </a>
-          </Link>
+          <p>furnished</p>
         </div>
         {!data.currentUser ? (
           <>
