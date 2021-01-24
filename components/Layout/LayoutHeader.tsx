@@ -26,6 +26,21 @@ const LayoutHeader: React.FC<Props> = props => {
   );
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    document.addEventListener("mouseover", onHover);
+    return () => {
+      document.removeEventListener("mouseover", onHover);
+    };
+  }, []);
+  const onHover = (e: Event) => {
+    if (
+      agentDropDownRef.current &&
+      // @ts-ignore
+      !agentDropDownRef.current.contains(e.target)
+    ) {
+      setHover(false);
+    }
+  };
   const { toggleRef } = props;
   return (
     <div>
