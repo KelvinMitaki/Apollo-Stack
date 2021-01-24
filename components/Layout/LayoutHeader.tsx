@@ -10,7 +10,6 @@ import AgentDropDown from "./AgentDropDown";
 import { useQuery } from "@apollo/client";
 import { FETCH_CURRENT_USER } from "../../graphql/queries/queries";
 import { FetchType } from "../../pages/properties/[property]";
-import Router from "next/router";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -109,8 +108,7 @@ const LayoutHeader: React.FC<Props> = props => {
                 type: ActionTypes.fetchType,
                 payload: "header"
               });
-              await Router.replace("/properties/sale");
-              Router.reload();
+              window.location.replace("/properties/sale");
             }}
           >
             <p>for sale</p>
@@ -122,8 +120,7 @@ const LayoutHeader: React.FC<Props> = props => {
                 type: ActionTypes.fetchType,
                 payload: "header"
               });
-              await Router.replace("/properties/rent");
-              Router.reload();
+              window.location.replace("/properties/rent");
             }}
           >
             <p>to rent</p>
@@ -135,8 +132,7 @@ const LayoutHeader: React.FC<Props> = props => {
                 type: ActionTypes.fetchType,
                 payload: "header"
               });
-              await Router.replace("/properties/furnished");
-              Router.reload();
+              window.location.replace("/properties/furnished");
             }}
           >
             <p>furnished</p>
