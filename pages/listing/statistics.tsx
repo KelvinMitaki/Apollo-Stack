@@ -67,6 +67,12 @@ const statistics: NextPage = () => {
         {loading && <Loading />}
         <div className={styles.prt}>
           <table cellSpacing="0">
+            <colgroup>
+              <col width="25%" />
+              <col width="25%" />
+              <col width="25%" />
+              <col width="25%" />
+            </colgroup>
             <thead>
               <tr>
                 <th>list no</th>
