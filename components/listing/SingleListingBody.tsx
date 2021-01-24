@@ -10,9 +10,11 @@ const SingleListingBody: React.FC<Props> = props => {
     <tr className={`${props.active ? styles.active : ""} ${styles.msg_row}`}>
       <td>16/12/2020 21:16:33</td>
       <td>john doe</td>
-      <td>john@gmail.com</td>
+      <td className={styles.email}>john@gmail.com</td>
       <td>0712345678</td>
-      <td>Please contact me regarding web reference 2028</td>
+      <td className={styles.msg}>
+        Please contact me regarding web reference 2028
+      </td>
     </tr>
   );
 };

@@ -33,3 +33,18 @@
 .msg_row {
   text-align: center;
 }
+
+.email,
+.msg {
+  text-transform: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .prt {
+    width: 100%;
+    overflow-x: scroll;
+  }
+  .container table {
+    width: 1000px;
+  }
+}

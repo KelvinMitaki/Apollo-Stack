@@ -65,14 +65,14 @@ const statistics: NextPage = () => {
   const first = getMonth(1);
   const current = getMonth(0);
   const genViews = (month: string) => {
-    const d = (data.countViewsAndLeadsCount.views as {
+    const d = (data.viewsAndLeadsCount.views as {
       month: string;
       count: number;
     }[]).find(d => d.month === month);
     return d ? d.count.toLocaleString() : "-";
   };
   const genLeads = (month: string) => {
-    const d = (data.countViewsAndLeadsCount.leads as {
+    const d = (data.viewsAndLeadsCount.leads as {
       month: string;
       count: number;
     }[]).find(d => d.month === month);
@@ -81,7 +81,7 @@ const statistics: NextPage = () => {
   const sortMonths = (month: number, determinant: "leads" | "views") => {
     const date = new Date();
     date.setMonth(date.getMonth() - month);
-    const d = (data.countViewsAndLeadsCount[determinant] as {
+    const d = (data.viewsAndLeadsCount[determinant] as {
       month: string;
       count: number;
     }[]).find(d => d.month === months[date.getMonth()]);
