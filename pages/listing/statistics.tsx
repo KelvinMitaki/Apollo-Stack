@@ -5,6 +5,7 @@ import { initializeApollo } from "../../apollo";
 import Layout from "../../components/Layout/Layout";
 import ListingStatisticsBody from "../../components/listing/ListingStatisticsBody";
 import { ListingProperty } from "../../components/listings/Listing";
+import Pagination from "../../components/properties/Pagination";
 import {
   AGENT_PROPERTY_COUNT,
   FETCH_AGENT_PROPERTIES
@@ -14,9 +15,6 @@ import styles from "../../styles/listingStatistics.module.css";
 const statistics: NextPage = () => {
   const [limit, setLimit] = useState<number>(10);
   const [skip, setSkip] = useState<number>(0);
-  const [filter, setFilter] = useState<{
-    [key: string]: string | number | boolean;
-  }>({});
   const [selectedNum, setSelectedNum] = useState<number>(1);
   const scrollDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -87,6 +85,16 @@ const statistics: NextPage = () => {
               )}
             </tbody>
           </table>
+          <Pagination
+            selectedNum={selectedNum}
+            setSelectedNum={setSelectedNum}
+            nums={nums}
+            properties={data.fetchAgentProperties}
+            setLimit={setLimit}
+            lastPage={lastPage}
+            fetchMore={fetchMore}
+            setSkip={setSkip}
+          />
         </div>
       </div>
     </Layout>
