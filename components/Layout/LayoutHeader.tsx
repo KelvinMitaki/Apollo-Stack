@@ -10,6 +10,7 @@ import AgentDropDown from "./AgentDropDown";
 import { useQuery } from "@apollo/client";
 import { FETCH_CURRENT_USER } from "../../graphql/queries/queries";
 import { FetchType } from "../../pages/properties/[property]";
+import Router from "next/router";
 
 interface Props {
   toggleRef: React.RefObject<HTMLDivElement>;
@@ -101,48 +102,45 @@ const LayoutHeader: React.FC<Props> = props => {
               />
             </div>
           )}
-          <Link href="/properties/sale">
-            <a
-              onClick={() =>
-                dispatch<FetchType>({
-                  type: ActionTypes.fetchType,
-                  payload: "header"
-                })
-              }
-            >
-              <div className={styles.opts_item}>
-                <p>for sale</p>
-              </div>
-            </a>
-          </Link>
-          <Link href="/properties/rent">
-            <a
-              onClick={() =>
-                dispatch<FetchType>({
-                  type: ActionTypes.fetchType,
-                  payload: "header"
-                })
-              }
-            >
-              <div className={styles.opts_item}>
-                <p>to rent</p>
-              </div>
-            </a>
-          </Link>
-          <Link href="/properties/furnished">
-            <a
-              onClick={() =>
-                dispatch<FetchType>({
-                  type: ActionTypes.fetchType,
-                  payload: "header"
-                })
-              }
-            >
-              <div className={styles.opts_item}>
-                <p>furnished</p>
-              </div>
-            </a>
-          </Link>{" "}
+          <div
+            className={styles.opts_item}
+            onClick={async () => {
+              dispatch<FetchType>({
+                type: ActionTypes.fetchType,
+                payload: "header"
+              });
+              await Router.replace("/properties/sale");
+              Router.reload();
+            }}
+          >
+            <p>for sale</p>
+          </div>
+          <div
+            className={styles.opts_item}
+            onClick={async () => {
+              dispatch<FetchType>({
+                type: ActionTypes.fetchType,
+                payload: "header"
+              });
+              await Router.replace("/properties/rent");
+              Router.reload();
+            }}
+          >
+            <p>to rent</p>
+          </div>
+          <div
+            className={styles.opts_item}
+            onClick={async () => {
+              dispatch<FetchType>({
+                type: ActionTypes.fetchType,
+                payload: "header"
+              });
+              await Router.replace("/properties/furnished");
+              Router.reload();
+            }}
+          >
+            <p>furnished</p>
+          </div>{" "}
           {!data.currentUser ? (
             <>
               <div

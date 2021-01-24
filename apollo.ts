@@ -46,7 +46,8 @@ const createApolloClient = () =>
                     offset = 0,
                     // @ts-ignore
                     limit = existing?.length
-                  } = {}
+                  } = {},
+                  ...options
                 }
               ) {
                 return existing && existing.slice(offset, offset + limit);
