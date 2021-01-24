@@ -11,6 +11,7 @@ import {
   AGENT_PROPERTY_COUNT,
   FETCH_AGENT_PROPERTIES
 } from "../../graphql/queries/queries";
+import withAgent from "../../HOCs/withAgent";
 import styles from "../../styles/listingStatistics.module.css";
 
 const statistics: NextPage = () => {
@@ -141,4 +142,4 @@ statistics.getInitialProps = async ctx => {
   }
 };
 
-export default statistics;
+export default withAgent(statistics);

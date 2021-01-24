@@ -16,6 +16,7 @@ import {
   Area
 } from "recharts";
 import styles from "../../styles/agencyStatistics.module.css";
+import withAgent from "../../HOCs/withAgent";
 const months = [
   "Jan",
   "Feb",
@@ -212,4 +213,4 @@ statistics.getInitialProps = async ctx => {
   }
 };
 
-export default statistics;
+export default withAgent(statistics);

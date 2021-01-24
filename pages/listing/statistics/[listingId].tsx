@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../../components/Layout/Layout";
 import SingleListingBody from "../../../components/listing/SingleListingBody";
+import withAgent from "../../../HOCs/withAgent";
 import styles from "../../../styles/singleListing.module.css";
 
 const singleListing = () => {
@@ -40,4 +41,4 @@ const singleListing = () => {
   );
 };
 
-export default singleListing;
+export default withAgent(singleListing);
