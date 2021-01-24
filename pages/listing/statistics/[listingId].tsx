@@ -13,9 +13,16 @@ const singleListing = () => {
       <div className={styles.container}>
         <div>views graph</div>
         <div>leads graph</div>
-        <div>
+        <div className={styles.prt}>
           <p>contact form messages</p>
-          <table>
+          <table cellSpacing="0">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+              <col />
+              <col width="30%" />
+            </colgroup>
             <thead>
               <tr>
                 <th>date</th>
