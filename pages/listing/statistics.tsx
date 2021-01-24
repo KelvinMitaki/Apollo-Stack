@@ -5,6 +5,7 @@ import { initializeApollo } from "../../apollo";
 import Layout from "../../components/Layout/Layout";
 import ListingStatisticsBody from "../../components/listing/ListingStatisticsBody";
 import { ListingProperty } from "../../components/listings/Listing";
+import Loading from "../../components/loading/Loading";
 import Pagination from "../../components/properties/Pagination";
 import {
   AGENT_PROPERTY_COUNT,
@@ -63,6 +64,7 @@ const statistics: NextPage = () => {
   return (
     <Layout title="Listing Statistics">
       <div className={styles.container}>
+        {loading && <Loading />}
         <div className={styles.prt}>
           <table cellSpacing="0">
             <thead>

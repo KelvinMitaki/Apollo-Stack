@@ -20,45 +20,12 @@ const LayoutHeader: React.FC<Props> = props => {
     fetchPolicy: "cache-only"
   });
   const [hover, setHover] = useState<boolean>(false);
-  const [saleHover, setSaleHover] = useState<boolean>(false);
-  const [rentHover, setRentHover] = useState<boolean>(false);
   const agentDropDownRef = useRef<HTMLDivElement>(null);
-  const saleDropDownRef = useRef<HTMLDivElement>(null);
-  const rentDropDownRef = useRef<HTMLDivElement>(null);
   const toggleNavbar = useSelector(
     (state: Redux) => state.styling.toggleNavbar
   );
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    document.addEventListener("mouseover", onHover);
-    return () => {
-      document.removeEventListener("mouseover", onHover);
-    };
-  }, []);
-  const onHover = (e: Event) => {
-    if (
-      agentDropDownRef.current &&
-      // @ts-ignore
-      !agentDropDownRef.current.contains(e.target)
-    ) {
-      setHover(false);
-    }
-    if (
-      saleDropDownRef.current &&
-      // @ts-ignore
-      !saleDropDownRef.current.contains(e.target)
-    ) {
-      setSaleHover(false);
-    }
-    if (
-      rentDropDownRef.current &&
-      // @ts-ignore
-      !rentDropDownRef.current.contains(e.target)
-    ) {
-      setRentHover(false);
-    }
-  };
   const { toggleRef } = props;
   return (
     <div>
