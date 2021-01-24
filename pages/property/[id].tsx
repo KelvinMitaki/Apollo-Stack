@@ -38,7 +38,11 @@ export interface PropertyDetails {
   images: string[];
   visitor?: string;
 }
-
+function toTitleCase(str: string) {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
 const propertyDetails: NextPage<{
   variables: { _id: string | string[] | undefined };
 }> = props => {
@@ -58,7 +62,11 @@ const propertyDetails: NextPage<{
   }, []);
 
   return (
-    <Layout title="Property Details">
+    <Layout
+      title={`${toTitleCase(
+        data.fetchPropertyDetails.streetAddress
+      )}, ${toTitleCase(data.fetchPropertyDetails.location)}`}
+    >
       <div className={styles.container}>
         <Details {...data.fetchPropertyDetails} />
         <Contact
