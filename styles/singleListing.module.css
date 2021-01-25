@@ -39,6 +39,11 @@
   text-transform: none;
 }
 
+.views_data,
+.leads_data {
+  margin-top: 4rem;
+}
+
 @media only screen and (max-width: 1000px) {
   .prt {
     width: 100%;
@@ -46,5 +51,10 @@
   }
   .container table {
     width: 1000px;
+  }
+  .views_data,
+  .leads_data {
+    width: 100%;
+    overflow-x: scroll;
   }
 }
