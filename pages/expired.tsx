@@ -91,9 +91,6 @@ const expired: NextPage = () => {
   if (nums.find(num => num < 1)) {
     nums = nums.filter(num => num > 0);
   }
-  // console.log(
-  //   checkExpired.filter((p, i, s) => s.findIndex(pr => pr._id === p._id) === i)
-  // );
   return (
     <Layout title="Expired Listings">
       <div className={styles.container}>
