@@ -69,16 +69,18 @@ const singleListing: NextPage<Props> = props => {
         {loading && <Loading />}
         <SingleListingGraphs variables={props.variables} />
         <ContactFormMessages />
-        <Pagination
-          setLimit={setLimit}
-          nums={nums}
-          lastPage={lastPage}
-          fetchMore={fetchMore}
-          properties={data.fetchAgentProperties}
-          selectedNum={selectedNum}
-          setSelectedNum={setSelectedNum}
-          setSkip={setSkip}
-        />
+        <div className={styles.pagination}>
+          <Pagination
+            setLimit={setLimit}
+            nums={nums}
+            lastPage={lastPage}
+            fetchMore={fetchMore}
+            properties={data.fetchAgentProperties}
+            selectedNum={selectedNum}
+            setSelectedNum={setSelectedNum}
+            setSkip={setSkip}
+          />
+        </div>
       </div>
     </Layout>
   );

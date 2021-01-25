@@ -11,6 +11,11 @@
 .prt {
   width: 90%;
 }
+.prt p {
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+}
 .container table {
   width: 100%;
   border: 1px solid #bebdbd;
@@ -42,6 +47,11 @@
 .views_data,
 .leads_data {
   margin-top: 4rem;
+}
+
+.pagination {
+  display: flex;
+  width: 90%;
 }
 
 @media only screen and (max-width: 1000px) {
