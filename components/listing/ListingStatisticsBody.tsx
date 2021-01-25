@@ -15,7 +15,7 @@ const ListingStatisticsBody: React.FC<Props> = props => {
   return (
     <tr
       className={props.className ? styles.active : ""}
-      onClick={() => Router.push("/listing/statistics/123")}
+      onClick={() => Router.push(`/listing/statistics/${_id}`)}
     >
       <td>{_id}</td>
       <td>{streetAddress}</td>

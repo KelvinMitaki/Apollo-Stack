@@ -380,3 +380,19 @@ export const FETCH_VIEWS_AND_LEADS_COUNT = gql`
     }
   }
 `;
+
+export const PROPERTY_STATISTICS = gql`
+  query PropertyStatistics($_id: ID!) {
+    propertyStatistics(_id: $_id) {
+      views {
+        month
+        count
+      }
+
+      leads {
+        month
+        count
+      }
+    }
+  }
+`;
