@@ -4,49 +4,88 @@ import { ImLocation } from "react-icons/im";
 import { BsArrowsMove } from "react-icons/bs";
 import { FaBath, FaBed, FaCarAlt } from "react-icons/fa";
 
-const Card = () => {
+interface Props {
+  property: FeaturedProp;
+}
+export interface FeaturedProp {
+  images: string;
+  type: string;
+  category: string;
+  agent: {
+    firstName: string;
+    lastName: string;
+  };
+  price: number;
+  parkingLots: number;
+  plinthArea: number;
+  bedrooms: number;
+  bathrooms: number;
+  location: string;
+  streetAddress: string;
+}
+const Card: React.FC<Props> = ({
+  property: {
+    images,
+    type,
+    category,
+    agent: { firstName, lastName },
+    price,
+    parkingLots,
+    plinthArea,
+    bedrooms,
+    bathrooms,
+    location,
+    streetAddress
+  }
+}) => {
   return (
     <div className={styles.card}>
       <div className={styles.card_header}>
         <div
           style={{
-            backgroundImage: "url(/image-2.jpg)"
+            backgroundImage: `url(${images[0]})`
           }}
           className={styles.image}
         />
         <div className={styles.f_s}>
           <p>feature</p>
-          <p>for sale</p>
+          <p>{type === "sale" ? "for sale" : "to rent"}</p>
         </div>
         <div className={styles.avatar}>
           <img src="/image-1.jpeg" alt="" />
-          <h5>Kelvin Mitaki</h5>
+          <h5>
+            {firstName} {lastName}
+          </h5>
         </div>
       </div>
       <div className={styles.card_body}>
-        <h4>french villa</h4>
+        <h4>{category}</h4>
         <div>
           <ImLocation />
-          <p>180 New Stret, Nairobi, KE</p>
+          <p>
+            {streetAddress}, {location}
+          </p>
         </div>
-        <p>From Ksh 20,000,000</p>
+        <p>From Ksh {price.toLocaleString()}</p>
       </div>
       <div className={styles.card_footer}>
         <div>
           <BsArrowsMove size="3rem" />
-          <p>780 sqft</p>
+          <p style={{ textTransform: "none" }}>
+            {plinthArea?.toLocaleString()} m<sup>2</sup>{" "}
+          </p>
         </div>
         <div>
           <FaBed />
-          <p>4</p>
+          <p>{bedrooms.toLocaleString()}</p>
         </div>
         <div>
           <FaBath />
-          <p>3</p>
+          <p>{bathrooms.toLocaleString()}</p>
         </div>
         <div>
           <FaCarAlt />
-          <p>2</p>
+          <p>{parkingLots?.toLocaleString()}</p>
         </div>
       </div>
     </div>

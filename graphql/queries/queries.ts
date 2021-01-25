@@ -417,3 +417,24 @@ export const PROPERTY_STATISTICS_MESSAGES_COUNT = gql`
     }
   }
 `;
+
+export const FEATURED_PROPERTIES = gql`
+  query {
+    fetchFeaturedProperties {
+      type
+      images
+      category
+      streetAddress
+      location
+      price
+      plinthArea
+      bedrooms
+      bathrooms
+      parkingLots
+      agent {
+        firstName
+        lastName
+      }
+    }
+  }
+`;
