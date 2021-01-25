@@ -2,13 +2,20 @@ import React from "react";
 import styles from "../../styles/singleListing.module.css";
 import SingleListingBody from "./SingleListingBody";
 
-interface Props {}
+interface Props {
+  contactFormMessages: ContactFormMessagesI[];
+}
+
+export interface ContactFormMessagesI {
+  _id: string;
+  email: string;
+  fullName: string;
+  phoneNumber: number;
+  message: string;
+  createdAt: string;
+}
 
 const ContactFormMessages: React.FC<Props> = props => {
-  const messages = [];
-  for (let i = 0; i < 10; i++) {
-    messages.push(<SingleListingBody key={i} active={i % 2 === 0} />);
-  }
   return (
     <div className={styles.prt}>
       <p>contact form messages</p>
@@ -29,7 +36,15 @@ const ContactFormMessages: React.FC<Props> = props => {
             <th>message</th>
           </tr>
         </thead>
-        <tbody>{messages}</tbody>
+        <tbody>
+          {props.contactFormMessages.map((msg, i) => (
+            <SingleListingBody
+              key={i}
+              active={i % 2 === 0}
+              contactFormMessage={msg}
+            />
+          ))}
+        </tbody>
       </table>
     </div>
   );

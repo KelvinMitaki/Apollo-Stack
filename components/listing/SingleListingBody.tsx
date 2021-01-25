@@ -1,20 +1,30 @@
 import React from "react";
 import styles from "../../styles/singleListing.module.css";
+import { ContactFormMessagesI } from "./ContactFormMessages";
 
 interface Props {
   active: boolean;
+  contactFormMessage: ContactFormMessagesI;
 }
 
 const SingleListingBody: React.FC<Props> = props => {
+  const {
+    contactFormMessage: {
+      _id,
+      createdAt,
+      email,
+      fullName,
+      message,
+      phoneNumber
+    }
+  } = props;
   return (
     <tr className={`${props.active ? styles.active : ""} ${styles.msg_row}`}>
-      <td>16/12/2020 21:16:33</td>
-      <td>john doe</td>
-      <td className={styles.email}>john@gmail.com</td>
-      <td>0712345678</td>
-      <td className={styles.msg}>
-        Please contact me regarding web reference 2028
-      </td>
+      <td>{new Date(createdAt).toLocaleDateString()}</td>
+      <td>{fullName}</td>
+      <td className={styles.email}>{email}</td>
+      <td>07{phoneNumber.toString().slice(-8)}</td>
+      <td className={styles.msg}>{message}</td>
     </tr>
   );
 };
