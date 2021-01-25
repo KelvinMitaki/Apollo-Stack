@@ -98,7 +98,8 @@ singleListing.getInitialProps = async ctx => {
         headers: {
           cookie: ctx.req?.headers.cookie
         }
-      }
+      },
+      fetchPolicy: "network-only"
     });
     await apolloClient.query({
       query: PROPERTY_STATISTICS_MESSAGES,
@@ -107,7 +108,8 @@ singleListing.getInitialProps = async ctx => {
         headers: {
           cookie: ctx.req?.headers.cookie
         }
-      }
+      },
+      fetchPolicy: "network-only"
     });
     await apolloClient.query({
       query: PROPERTY_STATISTICS_MESSAGES_COUNT,
