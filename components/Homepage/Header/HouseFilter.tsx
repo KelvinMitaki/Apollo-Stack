@@ -4,8 +4,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiFillAlert, AiOutlineSearch } from "react-icons/ai";
 import { BsHouseFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { ActionTypes } from "../../../redux/types/types";
 import styles from "../../../styles/home.module.css";
-import RequestModal from "../../modals/RequestModal";
+import RequestModal, { RequestModalI } from "../../modals/RequestModal";
 import Dropdown from "./Dropdown";
 
 interface Props {
@@ -60,6 +62,7 @@ const HouseFilter: React.FC<Props> = props => {
     min: "",
     max: ""
   });
+  const dispatch = useDispatch();
   const searchDiv = useRef<HTMLDivElement>(null);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -163,6 +166,12 @@ const HouseFilter: React.FC<Props> = props => {
         variables: { ...search, offset: props.offset, limit: props.limit }
       });
       props.expiredListingsCount({ variables: search });
+    }
+    if (!selection) {
+      dispatch<RequestModalI>({
+        type: ActionTypes.requestModal,
+        payload: true
+      });
     }
   };
   return (

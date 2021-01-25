@@ -3,5 +3,6 @@ export enum ActionTypes {
   toggleLogin,
   toggleLoginHeader,
   fetchType,
-  expiredListingsModal
+  expiredListingsModal,
+  requestModal
 }

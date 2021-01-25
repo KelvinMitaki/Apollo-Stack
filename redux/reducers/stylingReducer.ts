@@ -3,6 +3,7 @@ import {
   SetToggleNavbar
 } from "../../components/Layout/Layout";
 import { ExpiredListingsModal } from "../../components/modals/ExpiredListingsModal";
+import { RequestModalI } from "../../components/modals/RequestModal";
 import { ToggleLoginHeader } from "../../components/RegisterLogin/RegisterLoginModal";
 import { FetchType } from "../../pages/properties/[property]";
 import { ActionTypes } from "../types/types";
@@ -13,6 +14,7 @@ export interface StylingState {
   toggleLoginHeader: "register" | "login" | "agent";
   fetchType: "header" | "sidebar";
   expiredListingsModal: "expiry" | "mark" | "withdraw" | null;
+  requestModal: boolean;
 }
 
 const INITIAL_STATE: StylingState = {
@@ -20,7 +22,8 @@ const INITIAL_STATE: StylingState = {
   toggleLogin: false,
   toggleLoginHeader: "login",
   fetchType: "header",
-  expiredListingsModal: null
+  expiredListingsModal: null,
+  requestModal: false
 };
 
 type Action =
@@ -28,7 +31,8 @@ type Action =
   | SetToggleLogin
   | ToggleLoginHeader
   | FetchType
-  | ExpiredListingsModal;
+  | ExpiredListingsModal
+  | RequestModalI;
 
 export const stylingReducer = (
   state = INITIAL_STATE,
@@ -45,6 +49,8 @@ export const stylingReducer = (
       return { ...state, fetchType: action.payload };
     case ActionTypes.expiredListingsModal:
       return { ...state, expiredListingsModal: action.payload };
+    case ActionTypes.requestModal:
+      return { ...state, requestModal: action.payload };
     default:
       return state;
   }
