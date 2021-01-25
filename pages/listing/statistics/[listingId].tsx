@@ -62,7 +62,9 @@ singleListing.getInitialProps = async ctx => {
       query: PROPERTY_STATISTICS,
       variables: { _id: ctx.query.listingId },
       context: {
-        cookie: ctx.req?.headers.cookie
+        headers: {
+          cookie: ctx.req?.headers.cookie
+        }
       }
     });
     return {
