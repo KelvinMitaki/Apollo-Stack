@@ -5,6 +5,7 @@ import { AiFillAlert, AiOutlineSearch } from "react-icons/ai";
 import { BsHouseFill } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import styles from "../../../styles/home.module.css";
+import RequestModal from "../../modals/RequestModal";
 import Dropdown from "./Dropdown";
 
 interface Props {
@@ -198,6 +199,7 @@ const HouseFilter: React.FC<Props> = props => {
         </div>
       )}
       <div className={styles.search_body}>
+        <RequestModal />
         <div className={styles.upper}>
           <Dropdown
             name={name}
