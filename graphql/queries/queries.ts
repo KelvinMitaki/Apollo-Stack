@@ -408,3 +408,11 @@ export const PROPERTY_STATISTICS_MESSAGES = gql`
     }
   }
 `;
+
+export const PROPERTY_STATISTICS_MESSAGES_COUNT = gql`
+  query propertyStatisticsMessagesCount($_id: ID!) {
+    propertyStatisticsMessagesCount(_id: $_id) {
+      count
+    }
+  }
+`;

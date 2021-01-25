@@ -15,7 +15,11 @@ import {
 import { initializeApollo } from "../../../apollo";
 import Layout from "../../../components/Layout/Layout";
 import SingleListingBody from "../../../components/listing/SingleListingBody";
-import { PROPERTY_STATISTICS } from "../../../graphql/queries/queries";
+import {
+  PROPERTY_STATISTICS,
+  PROPERTY_STATISTICS_MESSAGES,
+  PROPERTY_STATISTICS_MESSAGES_COUNT
+} from "../../../graphql/queries/queries";
 import withAgent from "../../../HOCs/withAgent";
 import styles from "../../../styles/singleListing.module.css";
 
@@ -173,9 +177,27 @@ singleListing.getInitialProps = async ctx => {
         }
       }
     });
+    await apolloClient.query({
+      query: PROPERTY_STATISTICS_MESSAGES,
+      variables: { _id: ctx.query.listingId, offset: 0, limit: 10 },
+      context: {
+        headers: {
+          cookie: ctx.req?.headers.cookie
+        }
+      }
+    });
+    await apolloClient.query({
+      query: PROPERTY_STATISTICS_MESSAGES_COUNT,
+      variables: { _id: ctx.query.listingId },
+      context: {
+        headers: {
+          cookie: ctx.req?.headers.cookie
+        }
+      }
+    });
     return {
       initialApolloState: apolloClient.cache.extract(),
-      variables: { _id: ctx.query.listingId }
+      variables: { _id: ctx.query.listingId, offset: 0, limit: 10 }
     };
   } catch (error) {
     console.log(error);
