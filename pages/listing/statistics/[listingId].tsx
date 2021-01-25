@@ -64,7 +64,7 @@ const singleListing: NextPage<Props> = props => {
     nums = nums.filter(num => num > 0);
   }
   return (
-    <Layout title="Lavington, Nairobi">
+    <Layout title="Listing Statistics">
       <div className={styles.container}>
         {loading && <Loading />}
         <SingleListingGraphs variables={props.variables} />
