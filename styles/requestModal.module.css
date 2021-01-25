@@ -15,7 +15,6 @@
 
 .container {
   background-color: #f2f4f5;
-  height: 10rem;
   width: 50rem;
   margin: 0% auto;
   transition: all 0.2s;
@@ -46,4 +45,10 @@
   padding: 2rem;
   font-weight: bold;
   color: #222;
+}
+
+@media only screen and (max-width: 550px) {
+  .container {
+    width: 90%;
+  }
 }
