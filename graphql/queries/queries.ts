@@ -396,3 +396,15 @@ export const PROPERTY_STATISTICS = gql`
     }
   }
 `;
+
+export const PROPERTY_STATISTICS_MESSAGES = gql`
+  query PropertyStatisticsMessages($_id: ID!, $offset: Int!, $limit: Int!) {
+    propertyStatisticsMessages(_id: $_id, offset: $offset, limit: $limit) {
+      createdAt
+      email
+      fullName
+      message
+      phoneNumber
+    }
+  }
+`;
