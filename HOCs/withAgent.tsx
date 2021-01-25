@@ -4,7 +4,7 @@ import Router from "next/router";
 import React from "react";
 import { FETCH_CURRENT_USER } from "../graphql/queries/queries";
 
-const withAgent = (WrappedComponent: NextPage) => {
+const withAgent = (WrappedComponent: NextPage<any>) => {
   const HocComponent: NextPage = props => {
     const { data } = useQuery(FETCH_CURRENT_USER, {
       onError(err) {
